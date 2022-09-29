@@ -3,8 +3,51 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:c="http://www.springframework.org/schema/c"
 	xmlns:p="http://www.springframework.org/schema/p"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-
- 	<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/security
+		http://www.springframework.org/schema/security/spring-security.xsd">
+		
+	<bean id="CustomAuthenticationProvider" class="com.kh.ogg.security.CustomAuthenticationProvider" />
+	<bean id="CustomUserDetailsService" class="com.kh.ogg.security.CustomUserDetailsService" />
+	<bean id="CustomLoginSuccessHandler" class="com.kh.ogg.security.CustomLoginSuccessHandler"/>
+	<bean id="CustomLoginFailHandler" class="com.kh.ogg.security.CustomLoginFailHandler"/>
+	<bean id="CusomAccessDeniedHandler" class="com.kh.ogg.security.CusomAccessDeniedHandler" />
+	<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+	
+	<security:http auto-config="true" use-expressions="true">
+	<!--  
+		<security:intercept-url pattern="/board/**" access="hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')"/>
+		<security:intercept-url pattern="/admin/**" access="hasAuthority('ROLE_ADMIN')"/>
+	-->
+		<security:intercept-url pattern="/**" access="permitAll"/>
+	
+		<security:form-login login-page="/member/goCutomLogin.do"
+							 login-processing-url="/member/login.do"
+							 username-parameter="m_id"
+							 password-parameter="m_pwd"
+							 authentication-success-handler-ref="CustomLoginSuccessHandler"
+							 authentication-failure-handler-ref="CustomLoginFailHandler"/>
+		
+		<security:access-denied-handler ref="CusomAccessDeniedHandler"/>
+		
+		<security:logout logout-url="/member/goLogout.do"
+						 logout-success-url="/"
+						 delete-cookies="remember-me, JSESSIONID"
+						 invalidate-session="true"/>
+						 
+		<security:csrf disabled="true"/>
+		
+		<security:remember-me data-source-ref="dataSource" token-validity-seconds="604800" />
+		
+	</security:http>
+	
+	<security:authentication-manager>
+		<security:authentication-provider ref="CustomAuthenticationProvider"/>
+		<security:authentication-provider user-service-ref="CustomUserDetailsService">
+			<security:password-encoder ref="bcryptPasswordEncoder"/>
+		</security:authentication-provider>
+	</security:authentication-manager>
 
 </beans>

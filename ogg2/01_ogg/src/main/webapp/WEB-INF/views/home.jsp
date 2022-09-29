@@ -10,15 +10,18 @@
 </head>
 <body>
 <h1>
-	Hello world!  
+	예비 메인화면
 </h1>
-
-<P>  The time on the server is ${serverTime}. </P>
 
 <p>
 	<a href="${ path }/review/film_list">작품 리스트 페이지 </a><br><br>
 	<a href="${ path }/review/review_list">리뷰 리스트 페이지 </a><br><br>
 </p>
+
+	<input type="button" value="로그인" onclick="location.href='${ path }/member/goLogin.do'">
+	<input type="button" value="회원가입" onclick="location.href='${ path }/member/goAgreementBeforJoin.do'">
+	<br><br><br>
+	<a href="${ path }/member/goLogout.do">로그아웃</a>
 
 </body>
 </html>
