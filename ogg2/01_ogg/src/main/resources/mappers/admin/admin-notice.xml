@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.kh.ogg.admin.model.mapper.AdminMapper">
+
+<resultMap type="Notice" id="noticeListResultMap">
+	<result column="ROWNUM" property="n_rno"/>
+	<result column="M_NAME" property="n_m_name"/>
+</resultMap>
+
+<resultMap type="Question" id="questionListResultMap">
+	<result column="ROWNUM" property="q_rno"/>
+	<result column="M_NAME" property="q_m_name"/>
+</resultMap>
+<resultMap type="Answer" id="answerResultMap">
+	<result column="M_NAME" property="a_m_name"/>
+</resultMap>
+
+<select id="getNoticeCount" resultType="_int">
+	SELECT COUNT(*)
+	FROM NOTICE
+	WHERE N_STATUS = 'Y'
+</select>
+
+<select id="getQuestionCount" resultType="_int">
+	SELECT COUNT(*)
+	FROM QUESTION
+</select>
+
+<select id="selectNoticeList" resultMap="noticeListResultMap">
+	SELECT ROWNUM,
+	       N.* 
+	FROM (
+	SELECT N_NO,
+	       N_TITLE,
+	       M.M_NAME,
+	       N_CREATE_DATE,
+	       N_READCOUNT
+	       
+	FROM NOTICE N
+	JOIN MEMBER M ON(N.N_M_NO = M.M_NO)
+	WHERE N_STATUS = 'Y'
+	) N
+	ORDER BY N_NO DESC
+</select>
+
+<select id="getQuestionList" resultMap="questionListResultMap">
+	SELECT ROWNUM,
+	       Q.* 
+	FROM (
+	SELECT Q_NO,
+	       Q_TITLE,
+	       M.M_NAME,
+	       Q_ENROLLDATE,
+	       Q_STATUS
+	FROM QUESTION Q
+	JOIN MEMBER M ON(Q.Q_M_NO = M.M_NO)
+    ORDER BY Q_NO DESC
+	) Q
+	ORDER BY Q_STATUS
+</select>
+
+<select id="getNoticeView" resultMap="noticeListResultMap" parameterType="_int">
+	SELECT  ROWNUM,
+			N.*
+			FROM (
+			SELECT N_NO,
+			N_TITLE,
+			N_CONTENT,
+			M.M_NAME,
+			N_CREATE_DATE,
+			N_PATH,
+			N_READCOUNT
+	FROM NOTICE N
+	JOIN MEMBER M ON(N.N_M_NO = M.M_NO)
+	WHERE N_STATUS = 'Y' AND N_NO = #{page}
+	) N
+	ORDER BY N_NO
+</select>
+
+<select id="getQuestionView" resultMap="questionListResultMap" parameterType="_int">
+	SELECT ROWNUM,
+		   Q.*
+	FROM (
+	SELECT  Q_NO,
+			Q_TITLE,
+			Q_CONTENT,
+			M.M_NAME,
+			Q_ENROLLDATE,
+			Q_STATUS
+	FROM QUESTION Q
+	JOIN MEMBER M ON(Q.Q_M_NO = M.M_NO)
+	WHERE Q_NO =#{no}
+	) Q 
+</select>
+
+<select id="getAnswer" parameterType="_int" resultMap="answerResultMap">
+SELECT A_TITLE, A_DATE,A_CONTENT,M.M_NAME
+FROM ANSWER A
+JOIN MEMBER M ON(M.M_NO=A.A_M_NO)
+WHERE Q_NO = #{no}
+</select>
+
+
+	<insert id="insertNotice" parameterType="Notice"
+		useGeneratedKeys="true" keyProperty="n_no" keyColumn="N_NO">
+		INSERT INTO NOTICE(
+					N_NO,
+					N_TITLE,
+					N_CONTENT,
+					N_PATH,
+					N_M_NO)
+		VALUES(
+					SEQ_NOTICE.NEXTVAL,
+					#{n_title},
+					#{n_content},
+					#{n_path},
+					12
+					)
+	</insert>
+
+	<update id="updateNotice" parameterType="Notice">
+	UPDATE NOTICE
+	SET N_TITLE = #{n_title},
+	N_CONTENT = #{n_content},
+	N_PATH = #{n_path}
+	WHERE N_NO = #{n_no}
+	</update>
+	
+	<update id="deleteNotice" parameterType="_int">
+	UPDATE NOTICE
+	SET N_STATUS = 'N'
+	WHERE N_NO=#{no}
+	</update>
+	
+	<update id="updateReadCount" parameterType="Notice">
+	UPDATE NOTICE 
+	SET N_READCOUNT=#{n_readcount}+1
+	WHERE N_NO=#{n_no}
+	</update>
+
+</mapper>
