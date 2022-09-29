@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- mybatis mapper 설정 파일임을 선언한다. -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+	<!-- MemberMapper 인터페이스의 패키지를 포함한 이름으로 변경함 -->
+	<mapper namespace="com.kh.mvc.member.model.mapper.MemberMapper">
+	
+	<select id="selectCount" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER
+	</select>
+	
+</mapper>

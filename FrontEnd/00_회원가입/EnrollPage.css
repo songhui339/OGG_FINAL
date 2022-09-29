@@ -1,0 +1,218 @@
+/* 
+====================================================
+OGG EnrollPage CSS
+====================================================
+*/
+body {
+    font-family: 'Noto Sans KR', 'NanumGothic', '나눔고딕', ng, 'Malgun Gothic', Gulim, Dotum, Sans-Serif !important;
+}
+.enrollPage01,
+.enrollPage02 {
+    min-height: 600px;
+    padding: 100px 0;
+}
+
+.enrollPage01 .contentWrap,
+.enrollPage02 .contentWrap {
+    position: relative;
+    max-width: 1280px;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.enrollPage01 .contentWrap .formBox,
+.enrollPage02 .contentWrap .formBox {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.enrollPage01 .contentWrap .formBox h3,
+.enrollPage02 .contentWrap .formBox h3 {
+    position: relative;
+    margin-top: 56px;
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: 400;
+    color: #333333;
+} 
+
+.c_purple {
+    color: #7e69fe;
+}
+
+.enrollPage01 .contentWrap .formBox .sns-join-box {
+    position: relative;
+    font-size: 0;
+}
+
+.enrollPage01 .contentWrap .formBox .sns-join-box a {
+    display: inline-block;
+    width: calc(50% - 10px);
+    height: 70px;
+    margin-left: 20px;
+    font-size: 18px;
+    font-weight: 300;
+    text-align: center;
+    line-height: 70px;
+    border-radius: 10px;
+    text-decoration: none;
+}
+
+.enrollPage01 .contentWrap .formBox .sns-join-box a:first-child {
+    margin-left: 0;
+}
+
+.enrollPage01 .contentWrap .formBox .sns-join-box a img {
+    position: relative;
+    top: -2px;
+}
+
+.enrollPage01 .contentWrap .formBox .sns-join-box a.naver {
+    color: #ffffff;
+    background-color: #1fc800;
+}
+
+.enrollPage01 .contentWrap .formBox .sns-join-box a.kakao {
+    color: #331420;
+    background-color: #f9e000;
+}
+
+.enrollPage01 .contentWrap .formBox .form-round {
+    position: relative;
+    padding: 25px 40px;
+    border: solid 1px #cec8f1;
+    border-radius: 20px;
+}
+
+.enrollPage01 .contentWrap .formBox .form-round.scroll {
+    height: 260px;
+    font-size: 13px;
+    color: #989797;
+    line-height: 18px;
+    overflow: hidden;
+    overflow-y: auto;
+    background-color: #f9f9f9;
+}
+.enrollPage01 .contentWrap .formBox .input-check {
+    position: relative;
+    display: inline-block;
+}
+
+.enrollPage01 .contentWrap .formBox .form-checkbox {
+    margin-top: 20px;
+}
+
+.enrollPage01 .contentWrap .formBox .input-check input[type='checkbox'] + label {
+    display: inline-block;
+    position: relative;
+    margin-bottom: 0;
+    cursor: pointer;
+    font-size: 14px;
+    color: #666;
+    font-weight: 400;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+/* .enrollPage01 .contentWrap .formBox .input-check input[type='checkbox'] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+} */
+
+
+/* 회원 정보 입력 페이지 */
+.enrollPage02 .contentWrap .formBox .form-round-box {
+    position: relative;
+    padding: 25px 40px;
+    border: solid 1px #cec8f1;
+    border-radius: 20px;
+}
+
+.enrollPage02 .contentWrap .formBox .form-round-box ul.form-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.enrollPage02 .contentWrap .formBox .form-round-box ul.form-list li {
+    position: relative;
+    min-height: 42px;
+    padding: 2px 0 2px 120px;
+    font-size: 14px;
+    color: #333333;
+}
+
+.enrollPage02 .contentWrap .formBox .form-round-box ul.form-list li .subject {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-block;
+    width: 120px;
+    padding: 10px 0;
+}
+
+.form-list input[type='text'], .form-list input[type='password'], .form-list input[type='tel'] {
+    width: 180px;
+    height: 38px;
+    margin-right: 10px;
+    padding: 0 15px;
+    font-size: 14px;
+    color: #333;
+    border: solid 1px #dddddd;
+    background-color: white;
+    outline: none;
+
+}
+
+.enrollPage01 .contentWrap .formBox .buttonBox,
+.enrollPage02 .contentWrap .formBox .buttonBox  {
+    position: relative;
+    min-height: 53px;
+    margin-top: 60px;
+    text-align: center;
+}
+
+.enrollPage01 .contentWrap .formBox .buttonBox .button,
+.enrollPage02 .contentWrap .formBox .buttonBox .button {
+    position: relative;
+    display: inline-block;
+    min-width: 240px;
+    height: 70px;
+    margin: 1px 0;
+    padding: 0 10px;
+    font-size: 18px;
+    color: white;
+    text-align: center;
+    line-height: 68px;
+    border: 0;
+    border-radius: 5px;
+    background-color: #cecdd4;
+    border: 1px solid #cecdd4;
+    overflow: hidden;
+}
+
+.enrollPage01 .contentWrap .formBox .buttonBox .button:hover,
+.enrollPage02 .contentWrap .formBox .buttonBox .button:hover {
+    background-color: #ffffff;
+    color: #cecdd4;
+}
+
+.enrollPage01 .contentWrap .formBox .buttonBox .button.button-purple,
+.enrollPage02 .contentWrap .formBox .buttonBox .button.button-purple {
+    background-color: #7e69fe;
+    border: 1px solid #7e69fe;
+}
+
+.enrollPage01 .contentWrap .formBox .buttonBox .button.button-purple:hover,
+.enrollPage02 .contentWrap .formBox .buttonBox .button.button-purple:hover {
+    color: #7e69fe;
+    background-color: #ffffff;
+}
+

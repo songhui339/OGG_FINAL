@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta charset="utf-8">
+        <!-- meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0"/ -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title></title>
+        <!-- Bootstrap -->
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <style>
+            th{
+                background-color: aliceblue;
+                text-align: center;
+                
+            }
+            td{
+                text-indent: 5px;
+            }
+            table{
+                border: 1px #dddddd solid;
+            }
+        </style>
+
+    </head>
+    <body>
+        <!-- 좌우측의 공간 확보 -->
+        <div class="container">
+            <br><br>
+            <div class="row">
+                <div class="col-md-10">
+                    <table class="table table-condensed">
+                        <span>Q. 문의</span>
+                        <thead>
+                            <tr>
+                                <th width="20%">제목</th>
+                                <td colspan="2" width="60%">문의 합니다.</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>작성일</th>
+                                <td>2022-09-20</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th>글쓴이</th>
+                                <td width="60%" >test1</td>
+                                <th >답변 상태 : &nbspN</th>
+                            </tr>
+                            <tr>
+                                <th>내용</th>
+                                <td colspan="2" style="height: 250px; ">
+                                    <p>문의 합니다.</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br>
+                    <table class="table table-condensed">
+                        <span>A. 답변</span>
+                        <thead>
+                            <tr>
+                                <th width="20%">내용</th>
+                                <td colspan="2" width="60%" >답변 드립니다.</td>
+                            </tr>
+                        </thead>
+                        <!-- <tbody>
+                            <tr>
+                                <td>작성일</td>
+                                <td>2022-09-20</td>
+                            </tr>
+                            <tr>
+                                <td>답변자</td>
+                                <td width="60%" >admin1</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" style="height: 250px; ">
+                                    <p>문의 합니다.</p>
+                                </td>
+                            </tr>
+                        </tbody> -->
+                    </table>
+                    
+                            <tr>
+                                <td>
+                                    <div style='text-align: center;'>
+                                        <button type="button" id="list" class="btn btn-default">목록</button>
+                                        <button type="button" id="modify" class="btn btn-default">수정</button>
+                                        <button type="button" id="delete" class="btn btn-default">삭제</button>
+                                    </div>
+                                </td>
+                            </tr>
+                
+                </div>
+            </div>
+            <br>
+        </div>    
+    </body>
+</html>
