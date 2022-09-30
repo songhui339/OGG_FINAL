@@ -22,6 +22,7 @@
 	<input type="button" value="회원가입" onclick="location.href='${ path }/member/goAgreementBeforJoin.do'">
 	<br><br><br>
 	<a href="${ path }/member/goLogout.do">로그아웃</a>
+	<a href="${ path }/party/ottlist">파티 만들기</a>
 	
 	<button onclick="location.assign('${path}/admin/home')">관리자 페이지</button>
 
