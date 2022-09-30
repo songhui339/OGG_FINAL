@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
-<mapper namespace="com.kh.ogg.member.model.mapper.MemberMapper">
+<mapper namespace="com.project.ogg.member.model.mapper.MemberMapper">
 
-	<resultMap type="com.kh.ogg.member.model.vo.Member" id="memberResultMap">
+	<resultMap type="com.project.ogg.member.model.vo.Member" id="memberResultMap">
 		<id property="m_no" column="M_NO" />
 		<result property="m_id" column="M_ID"/>
 		<result property="m_pwd" column="M_PWD" />

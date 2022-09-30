@@ -20,7 +20,7 @@
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" 
 		  p:dataSource-ref="dataSource" 
 		  p:configuration-ref="mybatisConfig"
-		  p:typeAliasesPackage="com.kh.ogg.*.model.vo"
+		  p:typeAliasesPackage="com.project.ogg.*.model.vo"
 		  p:mapperLocations="classpath:mappers/**/*.xml"
 	/>
 
@@ -29,7 +29,7 @@
 	/>
 	
 	<bean id="mapperScanner" class="org.mybatis.spring.mapper.MapperScannerConfigurer" 
-		  p:basePackage="com.kh.ogg.*.model.mapper"
+		  p:basePackage="com.project.ogg.*.model.mapper"
 	/>
 	
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" 
