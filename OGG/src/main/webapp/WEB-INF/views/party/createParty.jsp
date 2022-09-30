@@ -14,8 +14,8 @@
     <title>파티 만들기</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="${ path }/resources/css/common/ogg_common.css">
-    <link rel="stylesheet" href="${ path }/resources/css/party/ogg_party.css">
+    <link rel="stylesheet" href="${ path }/css/common/ogg_common.css">
+    <link rel="stylesheet" href="${ path }/css/party/ogg_party.css">
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 </head>
 <body>
@@ -190,13 +190,13 @@
                     	<c:if test="${ not empty list }">
                     		<c:forEach var="list" items="${ list }">
                     			<div class="itemBox ${ list.ott_class }" data-bs-toggle="modal" data-bs-target="#modalWindow" !hidden>
-		                            <img src="${ path }/resources/images/${ list.ott_thumb }.png" alt="logoImg" class="logoImg">
+		                            <img src="${ path }/images/party/${ list.ott_thumb }.png" alt="logoImg" class="logoImg">
 		                            <span class="serviceNameText">${ list.ott_name }</span>
 		                            <p class="saveText">매달 세이브!</p>
 		                            <div class="priceWrap">
 		                                ~ ${ list.plan_price }원
 		                                <c:if test="${ not empty list.plan_status }">
-		                            		<img src="${ path }/resources/images/${ list.plan_status }.png" alt="badge_hot" class="badgeIcon">
+		                            		<img src="${ path }/images/party/${ list.plan_status }.png" alt="badge_hot" class="badgeIcon">
 		                            	</c:if>
                             		</div>
                         		</div>
@@ -251,6 +251,6 @@
         </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="${ path }/resources/js/ogg_party.js"></script>
+    <script src="${ path }/js/party/ogg_party.js"></script>
 </body>
 </html>
