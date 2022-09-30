@@ -5,9 +5,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <c:set var="path" value="${ pageContext.request.contextPath }"/>
 
+<script src="${ path }/js/jquery-3.6.0.min.js"></script>
+
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
 <link rel="stylesheet" href="${ path }/css/party/ogg_party.css">
+
+<script src="${ path }/js/party/ott_menu.js"></script>
 
 <div style="height: 100px;"></div>
 
@@ -82,7 +86,7 @@
                     </div>
 
                     <div class="checkBox">
-                        <img src="../파이널 UI 설계 이미지/icon_partynotice_check_gray.png" alt="check Icon" class="checkIcon">
+                        <img src="" alt="check Icon" class="checkIcon">
                         <span class="text">위 파티장 가이드를 모두 확인했습니다.</span>
                     </div>
                 </div>
@@ -147,6 +151,7 @@
                     	<c:if test="${ not empty list }">
                     		<c:forEach var="list" items="${ list }">
                     			<div class="itemBox ${ list.ott_class }" data-bs-toggle="modal" data-bs-target="#modalWindow" !hidden>
+                    				<input type=hidden value="${ list.ott_no }">
 		                            <img src="${ path }/images/party/${ list.ott_thumb }.png" alt="logoImg" class="logoImg">
 		                            <span class="serviceNameText">${ list.ott_name }</span>
 		                            <p class="saveText">매달 세이브!</p>
@@ -164,12 +169,32 @@
                 </section>
         </div>
     </section>
-
-<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
-
+ 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 
-<script src="${ path }/js/party/ogg_party.js"></script>
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+<script>
+$(document).ready(() => {
+	$(".itembox").on("click", () => {
+		let ottno = this.input.val();
+		console.log(ottNo);
+		$.ajax({
+			type: "GET",
+			url: "${ path }/member/idCheck",
+			dataType: "json",
+			data: {
+				ottno
+			},
+			success: (obj) => {
+				console.log(obj);
+			},
+			error: (error) => {
+				console.log(error);
+			}
+		});
+	});
+});
+</script>
 
 </body>
 </html>
