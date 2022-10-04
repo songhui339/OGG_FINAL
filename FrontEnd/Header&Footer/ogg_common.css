@@ -71,6 +71,49 @@ header .width-container .btnBox a.loginBtn:hover {
     color: #7e69fe;
 }
 
+header .width-container .btnBox a.logoutBtn {
+    position: relative;
+    display: inline-block;
+    width: 116px;
+    height: 34px;
+    margin-top: 35px;
+    font-size: 16px;
+    color: #ffffff;
+    text-align: center;
+    line-height: 32px;
+    text-decoration: none;
+    border-radius: 17px;
+    border: 1px solid tomato;
+    background-color: tomato;
+}
+
+header .width-container .btnBox a.logoutBtn:hover {
+    background-color: #ffffff;
+    color: tomato;
+}
+
+header .width-container .btnBox a.myPageBtn {
+    position: relative;
+    display: inline-block;
+    width: 150px;
+    height: 34px;
+    margin-top: 35px;
+    font-size: 16px;
+    color: #ffffff;
+    text-align: center;
+    line-height: 32px;
+    text-decoration: none;
+    border-radius: 17px;
+    border: 1px solid #7e69fe;
+    background-color: #7e69fe;
+} 
+
+header .width-container .btnBox a.myPageBtn:hover {
+    background-color: #ffffff;
+    color: #7e69fe;
+}
+
+
 /* 로그인 후 나오는 버튼 */
 header .width-container .btnBox img {
     cursor: pointer;
