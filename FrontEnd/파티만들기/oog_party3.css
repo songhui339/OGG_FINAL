@@ -511,3 +511,72 @@ OGG 파티 만들기 입력 페이지CSS
     color: #7e69fe;
     background-color: #ffffff;
 }
+
+/* 
+====================================================
+OGG 파티 만들기 완료 페이지CSS
+====================================================
+*/
+
+.createPartyThxU_section {
+    padding: 150px 0;
+    background-color: rgb(244, 244, 250);
+}
+
+.createPartyThxU_section .mainTextContainer {
+    width: 70%;
+    margin: 0 auto 40px auto;
+}
+
+.createPartyThxU_section .mainTextContainer .iconBox {
+    text-align: right;
+}
+.createPartyThxU_section .mainTextContainer .iconBox img {
+    width: 150px;
+}
+
+.createPartyThxU_section .mainTextContainer .textBox p {
+    font-size: 1.7rem;
+    font-weight: 600;
+    line-height: 2;
+    margin-bottom: 0;
+    padding-top: 5%;
+}
+
+.createPartyThxU_section .mainTextContainer .textBox p span img {
+    width: 30px;
+    transform: translateY(-10%);
+}
+
+.createPartyThxU_section .buttonContainer {
+    width: 70%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.createPartyThxU_section .buttonContainer p {
+    font-size: 1.5rem;
+    font-size: 500;
+}
+
+.createPartyThxU_section .buttonContainer .buttonBox button{
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 1.2rem;
+    background-color: #7e69fe;
+    padding: 10px 40px;
+    border-radius: 10px;
+    border: 1px solid #7e69fe;
+    -webkit-apperance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.createPartyThxU_section .buttonContainer .buttonBox button.gotoMain {
+    margin-right: 10px;
+}
+
+.createPartyThxU_section .buttonContainer .buttonBox button:hover {
+    color: #7e69fe;
+    background-color: #ffffff;
+}
