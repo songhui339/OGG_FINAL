@@ -8,7 +8,7 @@ OGG Common CSS
 /* ****** 상단 메뉴 ****** */
 /* ********************* */
 header {
-    position: absolute;
+    /* position: absolute; */
     /* top: 35px; */
     left: 0;
     width: 100%;
