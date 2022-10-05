@@ -18,8 +18,6 @@ public class CusomAccessDeniedHandler implements AccessDeniedHandler {
 	public void handle(HttpServletRequest request, HttpServletResponse response,
 			AccessDeniedException accessDeniedException) throws IOException, ServletException {
 		
-		System.out.println("AccessDeniedHandler 들어옴");
-		
 		String accessDeniedMessage = null;
 		
 		if(accessDeniedException instanceof AccessDeniedException) {
@@ -27,9 +25,7 @@ public class CusomAccessDeniedHandler implements AccessDeniedHandler {
 			request.setAttribute("accessDeniedMessage", "접근 권한이 없는 계정입니다.");
 			request.getRequestDispatcher("/member/accessDenied.do").forward(request, response);
 		}
-
-		
+	
 	}
 	
-
 }

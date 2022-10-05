@@ -20,8 +20,6 @@ public class CustomLoginFailHandler implements AuthenticationFailureHandler {
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException exception) throws IOException, ServletException {
 		
-		System.out.println("AuthenticationFailureHandler ����");
-		
 		String errorMessage;
 		
 		if (exception instanceof BadCredentialsException) {
@@ -35,9 +33,7 @@ public class CustomLoginFailHandler implements AuthenticationFailureHandler {
 		} else {
 			errorMessage = "알 수 없는 이유로 로그인에 실패하였습니다 관리자에게 문의하세요.";
 		}
-		
-		System.out.println(errorMessage);
-		
+
 		request.setAttribute("errorMessage", errorMessage);
 		request.getRequestDispatcher("/member/errorlogin.do").forward(request, response);
 	}

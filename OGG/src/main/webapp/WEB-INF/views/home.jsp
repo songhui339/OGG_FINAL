@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <c:set var="path" value="${ pageContext.request.contextPath }"/>
 <html>
 <head>
@@ -21,7 +22,10 @@
 	<input type="button" value="로그인" onclick="location.href='${ path }/member/goLogin.do'">
 	<input type="button" value="회원가입" onclick="location.href='${ path }/member/goAgreementBeforJoin.do'">
 	<br><br><br>
-	<a href="${ path }/member/goLogout.do">로그아웃</a>
+	<security:authorize access="isAuthenticated()">
+		<a href="${ path }/member/goLogout.do">로그아웃</a>
+	</security:authorize>
+	<br><br><br>
 	<a href="${ path }/party/ottlist">파티 만들기</a>
 	
 	<button onclick="location.assign('${path}/admin/home')">관리자 페이지</button>
