@@ -19,15 +19,13 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
-		
-		
+
 		List<String> authName = new ArrayList<String>();
 		
 		for(GrantedAuthority auth : authentication.getAuthorities()) {
 			authName.add(auth.getAuthority());
 		}
-		
-		System.out.println("AuthenticationSuccessHandler : " + authName);
+
 		
 		if(authName.contains("ROLE_ADMIN")) {
 			response.sendRedirect("/admin/admin.do");

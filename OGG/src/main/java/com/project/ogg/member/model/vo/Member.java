@@ -1,5 +1,12 @@
 package com.project.ogg.member.model.vo;
+
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Member {
+public class Member implements UserDetails {
 	
 	private int m_no; // 회원번호
 	private String m_id; // 아이디
@@ -32,5 +39,50 @@ public class Member {
 	private int m_point; // 포인트
 	
 	private String M_snsId; // SNS 로그인
+	
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		Collection<GrantedAuthority> collection = new ArrayList<GrantedAuthority>();
+		
+		collection.add( new SimpleGrantedAuthority(this.m_authority));
+		
+		return collection;
+	}
+
+	@Override
+	public String getPassword() {
+
+		return this.m_pwd;
+	}
+
+	@Override
+	public String getUsername() {
+
+		return this.m_id;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+
+		return this.m_status.equals("Y");
+	}
 
 }

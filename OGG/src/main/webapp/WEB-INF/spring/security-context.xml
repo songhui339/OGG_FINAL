@@ -44,7 +44,6 @@
 	</security:http>
 	
 	<security:authentication-manager>
-		<security:authentication-provider ref="CustomAuthenticationProvider"/>
 		<security:authentication-provider user-service-ref="CustomUserDetailsService">
 			<security:password-encoder ref="bcryptPasswordEncoder"/>
 		</security:authentication-provider>
