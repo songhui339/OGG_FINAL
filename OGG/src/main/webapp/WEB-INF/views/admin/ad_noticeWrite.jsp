@@ -19,7 +19,7 @@
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="${path }/css/admin/noticeWrite.css">
         <script type="text/javascript" src="${path}/js/jquery-3.6.0.min.js"></script>
-        <script type="text/javascript" src="${path}/resources/smarteditor2/js/HuskyEZCreator.js" charset="utf-8"></script>
+        <script type="text/javascript" src="${path}/smarteditor2/js/HuskyEZCreator.js" charset="utf-8"></script>
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -160,7 +160,7 @@
         		nhn.husky.EZCreator.createInIFrame({
         		oAppRef: oEditors,
         		elPlaceHolder: "n_content",
-        		sSkinURI: "${path}/resources/smarteditor2/SmartEditor2Skin.html",
+        		sSkinURI: "${path}/smarteditor2/SmartEditor2Skin.html",
         		fCreator: "createSEditor2"
         		});
         		
