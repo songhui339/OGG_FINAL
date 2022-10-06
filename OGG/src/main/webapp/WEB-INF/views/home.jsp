@@ -23,6 +23,7 @@
 	<br><br><br>
 	<a href="${ path }/member/goLogout.do">로그아웃</a>
 	<a href="${ path }/party/ottlist">파티 만들기</a>
+	<a href="${ path }/party/write">파티 만들기(작성페이지)</a>
 	
 	<button onclick="location.assign('${path}/admin/home')">관리자 페이지</button>
 

@@ -35,22 +35,9 @@
                     srcset="https://buts.co.kr/thema/Buts/colorset/Basic/img/2x/small-butslogo.png 2x" alt="loogo" title=""></a>
             </div>
 
-			<!-- 로그인 전 btnBox -->
             <div class="btnBox">
                 <a href="javascript:" class="loginBtn">로그인</a>
             </div>
-            
-            <!-- 로그인 후 btnBox -->
-            <%-- <div class="btnBox">
-               <a href="javascript:" class="myPageBtn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">${m_name} 님</a>
-               
-              <ul class="dropdown-menu">
-               	<li><a class="dropdown-item" href="#">마이페이지</a></li>
-               	<li><hr class="dropdown-divider"></li>
-               	<li><a class="dropdown-item" href="#">로그아웃</a></li>
-              </ul>
-            </div> --%>
-            
         </div>
 
         <div class="menu-container">

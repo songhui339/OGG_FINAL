@@ -1,5 +1,4 @@
 @charset "UTF-8";
-
 /* 
 ====================================================
 OGG Party Page CSS
@@ -36,7 +35,7 @@ OGG Party Page CSS
 .createPartyTab_row_01 .btn_container section {
     display: flex;
     justify-content: space-evenly;
-    width: 800px;
+    width: 50%;
     margin: 32px auto 0 auto;
     position: relative;
 }
@@ -341,8 +340,8 @@ OGG 파티 만들기 입력 페이지CSS
 */
 
 .enrollPage02 {
-    min-height: 600px;
-    padding: 100px 0;
+    min-height: 1750px;
+    padding: 50px 0 100px 0;
 }
 
 .enrollPage02 .contentWrap {
@@ -356,6 +355,30 @@ OGG 파티 만들기 입력 페이지CSS
     max-width: 800px;
     margin: 0 auto;
 }
+
+.enrollPage02 .contentWrap .serviceInfoBox {
+    border-radius: 20px;
+    border: solid 1px #cec8f1;
+    width: max-content;
+}
+
+.enrollPage02 .contentWrap .serviceInfoBox .text {
+    font-size: 1rem;
+    color: #333333;
+    margin-bottom: 0;
+    padding: 5px 20px;
+}
+.enrollPage02 .contentWrap .serviceInfoBox .text .logoImg {
+    width: 40px;
+    height: 40px;
+    margin: 0 15px 0 30px;
+}
+
+.enrollPage02 .contentWrap .serviceInfoBox .text .nameText {
+    font-weight: 500;
+    color: #1f1f1f;
+}
+
 
 .enrollPage02 .contentWrap .formBox h3 {
     position: relative;
@@ -400,18 +423,50 @@ OGG 파티 만들기 입력 페이지CSS
     padding: 10px 0;
 }
 
-.form-list input[type='text'], .form-list input[type='password'] {
-    width: 180px;
+.form-list input[type='text'], .form-list input[type='password'], .form-list input[type='date'] {
+    width: 300px;
     height: 38px;
     margin-right: 10px;
     padding: 0 15px;
     font-size: 14px;
     color: #333;
     border: solid 1px #dddddd;
+    border-radius: 0.375rem;
     background-color: white;
     outline: none;
-
 }
+
+.enrollPage02 .contentWrap .formBox .form-round-box .subInfoText {
+    font-size: 0.75rem;
+    line-height: 1.8;
+    color: #333333;
+    font-weight: 300;
+    margin: 10px 0;
+}
+
+.enrollPage02 .contentWrap .formBox .form-round-box .linkText {
+    color: #333333;
+    font-size: 0.8rem;
+}
+
+.enrollPage02 .contentWrap .formBox .form-round-box .ruleBox {}
+
+.enrollPage02 .contentWrap .formBox .form-round-box .ruleBox .titleText {
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+.enrollPage02 .contentWrap .formBox .form-round-box .ruleBox .ruleText {
+    border: solid 1px #dddddd;
+    border-radius: 20px;
+    padding: 10px 20px;
+    width: 500px;
+    font-size: 0.9rem;
+    margin-bottom: 0;
+    color: #333333;
+}
+
+
 
 .enrollPage01 .contentWrap .formBox .buttonBox,
 .enrollPage02 .contentWrap .formBox .buttonBox  {
@@ -443,7 +498,7 @@ OGG 파티 만들기 입력 페이지CSS
 .enrollPage01 .contentWrap .formBox .buttonBox .button:hover,
 .enrollPage02 .contentWrap .formBox .buttonBox .button:hover {
     background-color: #ffffff;
-    color: #cecdd4;
+    color: #333333;
 }
 
 .enrollPage01 .contentWrap .formBox .buttonBox .button.button-purple,
@@ -456,8 +511,4 @@ OGG 파티 만들기 입력 페이지CSS
 .enrollPage02 .contentWrap .formBox .buttonBox .button.button-purple:hover {
     color: #7e69fe;
     background-color: #ffffff;
-}
-
-.itemBoxCover {
-	z-index: 999;
 }

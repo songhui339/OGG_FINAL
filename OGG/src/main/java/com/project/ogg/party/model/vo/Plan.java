@@ -7,18 +7,20 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Ott {
+public class Plan {
+	private int plan_no;
+	
+	private int plan_price;
+	
 	private int ott_no;
 	
 	private String ott_name;
-	
-	private String ott_thumb;
-	
-	private String ott_class;
 	
 	private int ott_max_member;
 	
 	private String plan_price_output;
 	
-	private String ott_status;
+	private String ott_thumb;
+	
+	private String plan_name;
 }
