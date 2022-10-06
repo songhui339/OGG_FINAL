@@ -12,9 +12,19 @@
 	<result column="ROWNUM" property="q_rno"/>
 	<result column="M_NAME" property="q_m_name"/>
 </resultMap>
+
 <resultMap type="Answer" id="answerResultMap">
 	<result column="M_NAME" property="a_m_name"/>
 </resultMap>
+
+<select id="getMemberList" resultType="MemberAD">
+	SELECT ROWNUM
+	,M.*
+	FROM (
+	SELECT M_NAME, M_JOINDATE, M_AUTHORITY, M_POINT,R_TIME,m_status
+	FROM MEMBER
+	ORDER BY M_NAME) M
+</select>
 
 <select id="getNoticeCount" resultType="_int">
 	SELECT COUNT(*)
@@ -55,9 +65,8 @@
 	       Q_STATUS
 	FROM QUESTION Q
 	JOIN MEMBER M ON(Q.Q_M_NO = M.M_NO)
-    ORDER BY Q_NO DESC
+    ORDER BY Q_STATUS
 	) Q
-	ORDER BY Q_STATUS
 </select>
 
 <select id="getNoticeView" resultMap="noticeListResultMap" parameterType="_int">
@@ -95,7 +104,7 @@
 </select>
 
 <select id="getAnswer" parameterType="_int" resultMap="answerResultMap">
-SELECT A_TITLE, A_DATE,A_CONTENT,M.M_NAME
+SELECT A_NO,A_TITLE, A_DATE,A_CONTENT,M.M_NAME
 FROM ANSWER A
 JOIN MEMBER M ON(M.M_NO=A.A_M_NO)
 WHERE Q_NO = #{no}
@@ -118,6 +127,52 @@ WHERE Q_NO = #{no}
 					12
 					)
 	</insert>
+	
+	<insert id="writeQuestion" parameterType="Question"
+	useGeneratedKeys="true" keyProperty="q_no" keyColumn="Q_NO">
+	INSERT INTO QUESTION(
+				Q_NO,
+				Q_TITLE,
+				Q_CONTENT,
+				Q_ENROLLDATE,
+				Q_M_NO)
+	VALUES(SEQ_QUESTIONS.NEXTVAL,
+			#{q_title},
+			#{q_content},
+			SYSDATE,
+			12)
+	</insert>
+	
+	<insert id="insertAnswer" parameterType="Answer"
+		useGeneratedKeys="true" keyProperty="a_no" keyColumn="A_NO">
+	INSERT INTO
+	ANSWER( A_NO,
+			A_TITLE,
+			A_CONTENT,
+			A_DATE,
+			A_M_NO,
+			Q_NO)
+	VALUES( SEQ_ANSWER.NEXTVAL,
+			#{a_title},
+			#{a_content},
+			SYSDATE,
+			11,
+			#{q_no})
+	</insert>
+	<update id="updateQuestion" parameterType="Question">
+	UPDATE QUESTION
+	SET Q_TITLE = #{q_title},
+	Q_CONTENT = #{q_content},
+	Q_ENROLLDATE = SYSDATE
+	WHERE Q_NO = #{q_no}
+	</update>
+	
+	<update id="updateQnA" parameterType="Answer">
+	UPDATE QUESTION
+	SET QUESTION.Q_STATUS='Y',
+	QUESTION.Q_A_NO = #{a_no}
+	WHERE QUESTION.Q_NO = #{q_no}
+	</update>
 
 	<update id="updateNotice" parameterType="Notice">
 	UPDATE NOTICE
@@ -127,16 +182,23 @@ WHERE Q_NO = #{no}
 	WHERE N_NO = #{n_no}
 	</update>
 	
-	<update id="deleteNotice" parameterType="_int">
-	UPDATE NOTICE
-	SET N_STATUS = 'N'
-	WHERE N_NO=#{no}
+	<update id="answerUpdate" parameterType="Answer">
+	UPDATE ANSWER
+	SET A_TITLE = #{a_title},
+	A_CONTENT = #{a_content}
+	WHERE A_NO = #{a_no}
 	</update>
 	
 	<update id="updateReadCount" parameterType="Notice">
 	UPDATE NOTICE 
 	SET N_READCOUNT=#{n_readcount}+1
 	WHERE N_NO=#{n_no}
+	</update>
+	
+	<update id="deleteNotice" parameterType="_int">
+	UPDATE NOTICE
+	SET N_STATUS = 'N'
+	WHERE N_NO=#{no}
 	</update>
 
 </mapper>

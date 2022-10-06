@@ -24,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.project.ogg.admin.model.mapper.AdminMapper;
 import com.project.ogg.admin.model.service.AdminService;
 import com.project.ogg.admin.model.vo.Answer;
+import com.project.ogg.admin.model.vo.MemberAD;
 import com.project.ogg.admin.model.vo.Notice;
 import com.project.ogg.admin.model.vo.PhotoVo;
 import com.project.ogg.admin.model.vo.Question;
@@ -44,23 +45,14 @@ public class AdminController {
 	
 	
 	@GetMapping("/admin/home")
-	public String goAdmin() {
-//		List<MemberAD> list = service.getMemberList();
+	public ModelAndView goAdmin(ModelAndView model) {
+		List<MemberAD> list = service.getMemberList();
+
+		model.addObject("list", list);
+		model.setViewName("admin/ad_main");
 		
-//		model.addObject("list",list);
-//		model.setViewName("admin/ad_main");
-		
-		return "admin/ad_main";
+		return model;
 	}
-//	@GetMapping("/admin/home")
-//	public ModelAndView goAdmin(ModelAndView model) {
-////		List<MemberAD> list = service.getMemberList();
-//		
-////		model.addObject("list",list);
-//		model.setViewName("admin/ad_main");
-//		
-//		return model;
-//	}
 	
 	@GetMapping("/admin/OTT")
 	public String goOTT() {
@@ -69,9 +61,13 @@ public class AdminController {
 	}
 	
 	@GetMapping("/admin/member")
-	public String goMember() {
+	public ModelAndView goMember(ModelAndView model) {
 		
-		return "admin/ad_member";
+		List<MemberAD> list = service.getMemberList();
+		
+		model.addObject("list",list);
+		model.setViewName("admin/ad_member");
+		return model;
 	}
 	
 	@GetMapping("/admin/notice")
@@ -151,10 +147,16 @@ public class AdminController {
 	@PostMapping("/notice/write")
 	public ModelAndView noticeWrite(@ModelAttribute Notice notice,ModelAndView model) {
 		
-		System.out.println(notice);
-		int result = service.noticeSave(notice);
-		System.out.println(notice.getN_no());
 		
+		String content = notice.getN_content();
+		
+		if(content.indexOf("/img/smarteditor/") != -1) {
+			String path = content.substring(content.indexOf("/img/smarteditor/")+17,content.indexOf("/img/smarteditor/")+(17+36));
+			System.out.println(path);
+			notice.setN_path(path);
+			}
+		
+		int result = service.noticeSave(notice);
 		if(result > 0) {
 			model.addObject("msg","공지사항 작성 성공");
 			model.addObject("location","/admin/notice/view?no="+notice.getN_no());
@@ -180,7 +182,9 @@ public class AdminController {
 	}
 	
 	@PostMapping("/notice/update")
-	public ModelAndView noticeUpdate(@ModelAttribute Notice notice,ModelAndView model, HttpServletRequest rq) {
+	public ModelAndView noticeUpdate(@ModelAttribute Notice notice,
+									ModelAndView model,
+									HttpServletRequest rq) {
 		
 		System.out.println(notice);
 		
@@ -263,6 +267,7 @@ public class AdminController {
 
 		Question question = service.getQuestionView(no);
 
+		//답변상태가 Y이면 답변을 찾는 로직
 		if(question.getQ_status().equals("Y")) {
 			Answer answer = service.getAnswer(question.getQ_no());
 			model.addObject("answer",answer);
@@ -274,6 +279,139 @@ public class AdminController {
 		return model;
 	}
 	
+	@GetMapping("/question/write")
+	public String questionWriting() {
+		return "admin/ad_questionWrite";
+	}
+	
+	@PostMapping("/question/write")
+	public ModelAndView questionWriting(@ModelAttribute Question question,
+										ModelAndView model) {
+		
+		int result = service.writeQuestion(question);
+		int no = question.getQ_no();
+		System.out.println("no : "+no);
+		
+		if(result > 0) {
+			model.addObject("msg","문의 작성 완료");
+			model.addObject("location","/admin/question/view?no="+no);
+		}else{
+			model.addObject("msg","문의 작성 실패");
+			model.addObject("location","/admin/question/view?no="+no);
+		}
+
+		
+		model.setViewName("common/msg");
+		
+		return model;
+	}
+	@GetMapping("/admin/question/update")
+	public ModelAndView questionUpdate(@RequestParam int no,
+										ModelAndView model) {
+		
+		Question question = service.getQuestionView(no);
+		Answer answer = service.getAnswer(question.getQ_no());
+		
+		if(answer != null) {
+			model.addObject("msg","답변이 있을 경우 질문 수정이 불가능합니다.");
+			model.addObject("location","/admin/question/view?no="+no);
+			model.setViewName("common/msg");
+			return model;
+		}
+		
+		model.addObject("question",question);
+		model.setViewName("admin/ad_questionUpdate");
+		
+		return model;
+	}
+	@PostMapping("/admin/question/update")
+	public ModelAndView questionUpdate(@RequestParam int no,
+									ModelAndView model,
+									@ModelAttribute Question question) {
+		
+		System.out.println(question);
+		int result = service.updateQuestion(question);
+		
+		if(result > 0) {
+			model.addObject("msg","문의 수정 완료");
+			model.addObject("location","/admin/question/view?no="+no);
+		}else{
+			model.addObject("msg","문의 수정 실패");
+			model.addObject("location","/admin/question/view?no="+no);
+		}
+		model.setViewName("common/msg");
+		return model;
+	}
+		
+	@GetMapping("/admin/answer")
+	public ModelAndView answering(@RequestParam("no")int no,ModelAndView model) {
+		
+		Question question = service.getQuestionView(no);
+		model.addObject("question", question);
+		model.setViewName("admin/ad_questionAnswer");
+		
+		return model;
+	}
+	
+	@PostMapping("/admin/answer")
+	public ModelAndView answering(@RequestParam("no")int no,
+							ModelAndView model,
+							@ModelAttribute Answer answer) {
+		
+		answer.setQ_no(no);
+		int result = service.insertAnswer(answer);
+		
+		if(answer.getA_no() != 0) {
+			int updateQs = service.updateQnA(answer);
+		}
+		
+		if(result > 0) {
+			model.addObject("msg","답변 작성 완료");
+			model.addObject("location","/admin/question/view?no="+no);
+		}else{
+			model.addObject("msg","답변 작성 실패");
+			model.addObject("location","/admin/question/view?no="+no);
+		}
+		
+		model.setViewName("common/msg");
+		return model;
+	}
+	
+	@GetMapping("/admin/answer/update")
+	public ModelAndView answerUpdate(@RequestParam("no") int no, ModelAndView model) {
+
+		Question question = service.getQuestionView(no);
+
+		if (question.getQ_status().equals("Y")) {
+			Answer answer = service.getAnswer(question.getQ_no());
+			model.addObject("answer", answer);
+		}
+
+		model.addObject("question", question);
+		model.setViewName("admin/ad_answerUpdate");
+
+		return model;
+	}
+	
+	@PostMapping("/admin/answer/update")
+	public ModelAndView answerUpdate(@RequestParam("no") int no,
+									ModelAndView model,
+									@ModelAttribute Answer answer) {
+		System.out.println(answer);
+		
+		int result = service.answerUpdate(answer);
+		
+		if(result > 0) {
+			model.addObject("msg","답변 수정 완료");
+			model.addObject("location","/admin/question/view?no="+no);
+		}else{
+			model.addObject("msg","답변 수정 실패");
+			model.addObject("location","/admin/question/view?no="+no);
+		}
+		
+		model.setViewName("common/msg");
+		return model;
+	}
 	
 	
 	

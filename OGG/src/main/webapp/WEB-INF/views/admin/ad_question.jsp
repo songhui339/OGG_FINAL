@@ -38,8 +38,12 @@
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
-                            <a class="nav-link" href="${path}/admin/home">
+                            <a class="nav-link" href="${path}">
                                 <div class="sb-nav-link-icon"><i class="fa-sharp fa-solid fa-house"></i></div>
+                                홈으로
+                            </a>
+                            <a class="nav-link" href="${path}/admin/home">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-toolbox"></i></div>
                                 메인
                             </a>
                             <a class="nav-link" href="${path}/admin/OTT">
@@ -89,9 +93,7 @@
                                 <!-- board seach area -->
                                 <div id="board-search">
                                     <div class="container">
-                                    <c:if test='${member.authority=="M" }'>
-                                        <button id="goWrite" onclick="location='${path}/notice/write'">글쓰기</button>
-                                    </c:if>
+                                        <button id="goWrite" onclick="location='${path }/question/write'">글쓰기</button>
                                         <div class="search-window">
                                                 <div class="search-wrap">
                                                 </div>

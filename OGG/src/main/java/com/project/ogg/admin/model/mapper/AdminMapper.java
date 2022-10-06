@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.RowBounds;
 
 import com.project.ogg.admin.model.vo.Answer;
+import com.project.ogg.admin.model.vo.MemberAD;
 import com.project.ogg.admin.model.vo.Notice;
 import com.project.ogg.admin.model.vo.Question;
 
@@ -35,6 +36,18 @@ public interface AdminMapper {
 	Question getQuestionView(int no);
 
 	Answer getAnswer(int no);
+
+	int insertAnswer(Answer answer);
+
+	int updateQnA(Answer answer);
+
+	int answerUpdate(Answer answer);
+
+	int writeQuestion(Question question);
+
+	List<MemberAD> getMemberList();
+
+	int updateQuestion(Question question);
 
 
 }

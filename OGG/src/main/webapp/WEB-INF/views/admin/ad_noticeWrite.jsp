@@ -19,7 +19,7 @@
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="${path }/css/admin/noticeWrite.css">
         <script type="text/javascript" src="${path}/js/jquery-3.6.0.min.js"></script>
-        <script type="text/javascript" src="${path}/smarteditor2/js/HuskyEZCreator.js" charset="utf-8"></script>
+        <script type="text/javascript" src="${path}/resources/smarteditor2/js/HuskyEZCreator.js" charset="utf-8"></script>
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -41,8 +41,12 @@
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
-                            <a class="nav-link" href="${path}/admin/home">
+                            <a class="nav-link" href="${path}">
                                 <div class="sb-nav-link-icon"><i class="fa-sharp fa-solid fa-house"></i></div>
+                                홈으로
+                            </a>
+                            <a class="nav-link" href="${path}/admin/home">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-toolbox"></i></div>
                                 메인
                             </a>
                             <a class="nav-link" href="${path}/admin/OTT">
@@ -79,8 +83,7 @@
                         </div>
                         <div class="card mb-4">
                             <div class="card-header">
-                                <i class="fa-sharp fa-solid fa-bell"></i>
-                                &nbsp;공지 사항
+                                <i class="fa-sharp fa-solid fa-bell"></i>&nbsp;공지 사항
                             </div>
                             <div class="card-body">
                                 <div class="page-title">
@@ -105,31 +108,30 @@
                             <!-- board list area -->
                                 <div id="board-list">
                                     <div class="container">
-                                        <table class="board-table">
-                                            <thead>
-                                            <!-- enctype="multipart/form-data" -->
-                                            <form action="${path }/notice/write" method="POST" >
-                                            <!-- 
+									<form action="${path }/notice/write" method="POST">
+										<table class="board-table">
+											<thead>
+												<!-- enctype="multipart/form-data" -->
+												<!-- 
                                                 <input type="hidden" name = "n_M_No" value = ${member.id }>
                                              -->
-                    
-                                                <tr>
-                                                    <th>
-                                                        <input type="text" placeholder="제목을 입력하세요" name="n_title" id="writingName" >
-                                                    </th>
-                                                    
-                                                </tr>
-                                            </thead>
-                                        </table>
-                                        <br>
-                                        <textarea name="n_content" id="n_content" cols="30" rows="10"></textarea>
-                                        <br>
-                                        <div id="btn1">
-                                            <input type="submit" value="작성완료" id="subBtn">
-                                            <input type="button" value="작성취소" id="goBack" onclick="location.href='${path}/admin/notice?page=1'">
-                                        </div>
-                                    </form>
-                                    </div>
+
+												<tr>
+													<th><input type="text" placeholder="제목을 입력하세요"
+														name="n_title" id="writingName"></th>
+
+												</tr>
+											</thead>
+										</table>
+										<br>
+										<textarea name="n_content" id="n_content" cols="30" rows="10"></textarea>
+										<br>
+										<div id="btn1">
+											<input type="submit" value="작성완료" id="subBtn"> 
+											<input type="button" value="작성취소" id="goBack" onclick="location.href='${path}/admin/notice?page=1'">
+										</div>
+									</form>
+								</div>
                                     </div>
                                 </div>
 
@@ -158,7 +160,7 @@
         		nhn.husky.EZCreator.createInIFrame({
         		oAppRef: oEditors,
         		elPlaceHolder: "n_content",
-        		sSkinURI: "${path}/smarteditor2/SmartEditor2Skin.html",
+        		sSkinURI: "${path}/resources/smarteditor2/SmartEditor2Skin.html",
         		fCreator: "createSEditor2"
         		});
         		

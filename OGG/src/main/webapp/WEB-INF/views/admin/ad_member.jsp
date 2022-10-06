@@ -38,8 +38,12 @@
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
-                            <a class="nav-link" href="${path}/admin/home">
+                            <a class="nav-link" href="${path}">
                                 <div class="sb-nav-link-icon"><i class="fa-sharp fa-solid fa-house"></i></div>
+                                홈으로
+                            </a>
+                            <a class="nav-link" href="${path}/admin/home">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-toolbox"></i></div>
                                 메인
                             </a>
                             <a class="nav-link" href="${path}/admin/OTT">
@@ -88,38 +92,34 @@
                                     <thead>
                                         <tr>
                                             <th>이름</th>
-                                            <th>나이</th>
                                             <th>이용 OTT 종류</th>
                                             <th>가입일</th>
                                             <th>권한</th>
+                                            <th>포인트</th>
                                             <th>신고횟수</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    <c:if test="${not empty list }">
+                                    <c:forEach var="member" items="${list}">
                                         <tr>
-                                            <td><a href="javascript:del()">오성균</a></td>
-                                            <td>28</td>
+                                            <td><a href="javascript:del()">${member.m_name }</a></td>
                                             <td>넷플릭스, 디즈니 플러스</td>
-                                            <td>2022.09.07</td>
-                                            <td>관리자</td>
-                                            <td>0</td>
+                                            <td><fmt:formatDate type="date" value="${ member.m_joindate }" /></td>
+                                            <td>${member.m_authority}</td>
+                                            <td>${member.m_point}</td>
+                                            <td>${member.r_time}</td>
                                         </tr>
-                                        <tr>
-                                            <td>오성균</td>
-                                            <td>27</td>
-                                            <td>유튜브 프리미엄, 왓챠</td>
-                                            <td>2022.09.06</td>
-                                            <td>회원</td>
-                                            <td>0</td>
-                                        </tr>
+                                    </c:forEach>
+                                    </c:if>
                                     </tbody>
                                     <tfoot>
                                         <tr>
                                             <th>이름</th>
-                                            <th>나이</th>
                                             <th>이용 OTT 종류</th>
                                             <th>가입일</th>
                                             <th>권한</th>
+                                            <th>포인트</th>
                                             <th>신고횟수</th>
                                         </tr>
                                     </tfoot>
