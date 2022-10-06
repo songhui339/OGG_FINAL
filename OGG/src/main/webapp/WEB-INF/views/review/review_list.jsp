@@ -29,19 +29,19 @@
             <!-- 리뷰 내용 -->
 			<c:if test="${ empty list }">
 				<br>
-				<center>조회된 리뷰가 없습니다. </center>
+				<center>작성된 리뷰가 없습니다. </center>
 				<br><br>
 			</c:if>
 			
 			<c:if test="${ not empty list }">
 				<c:forEach var="review" items="${ list }">
 					<div id="div_review">
-						<a href="${ path }/review/review_detail?no=${ review.rvNo }">
-						    <p id="board-text1">${ review.rvNickname }</p>
+						<a href="${ path }/review/review_detail?no=${ review.rvNo }&fcode=${fcode}&ftype=${ftype}">
+						    <span id="board-text1">${ review.rvNickname }</span>
 						    <hr>
-						    <p id="board-text3">
+						    <span id="board-text3">
 								${ review.rvContent }
-						    </p>
+						    </span>
 						    <hr>
 						</a>
 					    <div class="row" id="detail-text">
@@ -51,7 +51,7 @@
 					        </div>
 					        <div class="col-sm-8">
 					            <img src="${path}/images/review/comment2.png"  height="30px;">
-					            13
+					            ${ review.rvCmtCount }
 					        </div>
 					        <!--<div class="col-sm-1"><button class="btn btn-primary" type="button">수정</button></div>
 					        <div class="col-sm-1"><button class="btn btn-primary" type="button">삭제</button></div> -->
@@ -79,10 +79,10 @@
         <div class="col-4">
             <ul class="pagination justify-content-center">
             	<!-- 맨 처음으로 -->
-                <li class="page-item"><a class="page-link" href="${ path }/review/review_list?page=1">&lt;&lt;</a></li>
+                <li class="page-item"><a class="page-link" href="${ path }/review/review_list?page=1&fcode=${ fcode }">&lt;&lt;</a></li>
                 
                 <!-- 이전 페이지로 -->
-                <li class="page-item"><a class="page-link" href="${ path }/review/review_list?page=${ pageInfo.prevPage }">&lt;</a></li>
+                <li class="page-item"><a class="page-link" href="${ path }/review/review_list?page=${ pageInfo.prevPage }&fcode=${ fcode }">&lt;</a></li>
                 
                 <!--  10개 페이지 목록 -->
 				<c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" varStatus="status">
@@ -90,13 +90,13 @@
                   		<li class="page-item disabled"><a class="page-link" href="#">${ status.current }</a></li>
 					</c:if>
 					<c:if test="${ status.current != pageInfo.currentPage }">
-                  		<li class="page-item"><a class="page-link" href="${ path }/review/review_list?page=${ status.current }">${ status.current }</a></li>
+                  		<li class="page-item"><a class="page-link" href="${ path }/review/review_list?page=${ status.current }&fcode=${ fcode }">${ status.current }</a></li>
 					</c:if>
 				</c:forEach>
 				  <!-- 다음 페이지로 -->
-				  <li class="page-item"><a class="page-link" href="${ path }/review/review_list?page=${ pageInfo.nextPage }">&gt;</a></li>
+				  <li class="page-item"><a class="page-link" href="${ path }/review/review_list?page=${ pageInfo.nextPage }&fcode=${ fcode }">&gt;</a></li>
                   <!-- 맨 끝으로 -->
-                  <li class="page-item"><a class="page-link" href="${ path }/review/review_list?page=${ pageInfo.maxPage }">&gt;&gt;</a></li>
+                  <li class="page-item"><a class="page-link" href="${ path }/review/review_list?page=${ pageInfo.maxPage }&fcode=${ fcode }">&gt;&gt;</a></li>
             </ul>
         </div>
     </div>
@@ -104,6 +104,11 @@
 
     </div>
     <!-- 내용 전체 컨테이너 끝 -->
+    
+	<script>
+		var fcode = "${fcode}";
+		var ftype = "${ftype}";
+	</script>	
 
     <!-- footer -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

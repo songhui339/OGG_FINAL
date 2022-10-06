@@ -9,12 +9,17 @@ import com.project.ogg.review.model.vo.ReviewCmt;
 
 public interface ReviewService {
 
-	int getBoardCount();
+	int getBoardCount(int fcode);
 
-	List<Review> getBoardList(PageInfo pageInfo);
+	List<Review> getBoardListAll(PageInfo pageInfo);
+
+	List<Review> getBoardListByFilm(PageInfo pageInfo, int fcode);
 
 	Review findReviewByNo(int no);
 
+	int getCmtCountByNo(int no);
+
 	List<ReviewCmt> findReviewCmtByNo(int no);
+
 
 }

@@ -5,14 +5,14 @@
         border-top-left-radius: 15px; 
         border-top-right-radius: 15px; 
         width: 100%;
-        height: 254px;
+        height: 265px;
     } 
     #card_film{
-        width: 14rem; 
+        width: 13rem; 
         border-radius: 15px;
     } 
     #card_film3{
-        width: 14rem; 
+        width: 13rem; 
         border-radius: 15px;
         margin-bottom: 15px;
     } 
@@ -23,7 +23,7 @@
         border-top-left-radius: 15px; 
         border-top-right-radius: 15px; 
         width: 100%;
-        height: 254px;
+        height: 265px;
     } 
     #card_film2{
         /* border: 2px solid rgb(21, 182, 182); */
@@ -38,11 +38,19 @@
         border-radius: 15px; 
         /* border-top-right-radius: 15px;  */
         width: 12rem;
-        height: 254px;
+        height: 265px;
     } 
 
     /* 전체 div 스타일 */
     #div_review{
+        border-radius: 15px;
+        border: 1px solid lightgray;
+        /* border: 1px solid #cfc9f6; */
+        height: 100%; 
+        padding: 20px;
+    }
+
+    #div_film{
         border-radius: 15px;
         border: 1px solid lightgray;
         /* border: 1px solid #cfc9f6; */

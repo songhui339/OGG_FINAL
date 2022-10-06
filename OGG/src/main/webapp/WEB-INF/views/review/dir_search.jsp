@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="${path}/css/review/ogg_review.css">
     
     <!-- my JS -->
-    <script defer src="${path}/js/review/film_search.js"></script>
+    <script defer src="${path}/js/review/dir_search.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     
     <!-- 내용 전체 컨테이너 -->
@@ -44,10 +44,12 @@
     <!-- 내용 전체 컨테이너 끝 -->
     
     <script>
+		var name = "$ {name }";
+	
 		$("#searchBtn").on("click", () => {
 			var keyword = $("#searchInput").val();
 			
-		    location.href="${path}/review/film_search?keyword=" + keyword;
+		    location.href="${path}/review/dir_search?keyword=" + keyword;
 		});
 	
 		let searchkeyword = "[[${searchkeyword}]]";

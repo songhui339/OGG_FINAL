@@ -1,7 +1,8 @@
 $(document).ready(function() {
 
     const key = "afb1dcfbf52dedf12c2a78edaec38830";
-	let url = "https://api.themoviedb.org/3/"+ftype+"/"+fcode+"?api_key=" + key + "&language=ko";
+    const id = "60098";
+	let url = "https://api.themoviedb.org/3/" + ftype + "/" + fcode + "?api_key=" + key + "&language=ko";
 	let poster = 'https://image.tmdb.org/t/p/w500/';
 
     $.ajax({
@@ -69,11 +70,86 @@ $(document).ready(function() {
                 html += "<br>";
                 html += overview;
                 html += "</p>";
-
-            $("#filmDetail2").append(html2);
+                
+            console.log(result);
+            $("#filmDetail2").append(html);
         },
         error: function (error) {
             alert("서버호출 실패")
+        }
+    });
+
+    $.ajax({
+        async: true, 
+
+        url: "https://api.themoviedb.org/3/movie/" + id + "/credits?api_key=" + key + "&language=ko" ,
+        async: false,
+        type: "GET",
+        timeout: 3000,
+        dataType: "json", 
+        success: function (result) { 
+            
+            var name;
+
+            for (let i = 0; i < result.crew.length; i++) {
+                let job = result.crew[i].job;
+                
+                if(job == 'Director'){
+                    name = result.crew[i].name;
+                }
+            }
+
+            let html = "";
+                html += "<input type='text' id='dir' value='" + name +"' hidden>";
+            
+            $("#detail-text1").append(html);
+            
+        },
+        error: function (error) {
+            alert("서버호출 실패4")
+        }
+    });
+    
+    var dirname = $("#dir").val();
+    console.log(dirname);
+	
+    $.ajax({
+        async: true, 
+
+        url: "https://api.themoviedb.org/3/search/person?api_key=" + key + "&language=ko&query=" + dirname + "&page=1&include_adult=false" ,
+
+        type: "GET",
+        timeout: 3000,
+        dataType: "json", 
+        success: function (result) { 
+
+            let html = "<div class='row row-cols-1 row-cols-sm-2 row-cols-md-4' id='carousel01'>";
+            for (let i = 0; i<result.results[0].known_for.length; i++) {  
+                let poster = 'https://image.tmdb.org/t/p/w500/';
+                let img = poster + result.results[0].known_for[i].poster_path;
+                let title = result.results[0].known_for[i].title;
+                let orig_title = result.results[0].known_for[i].original_title;
+                let date = result.results[0].known_for[i].release_date.replace(/-/gi, "").slice(0,-4);
+                let vote_average = result.results[0].known_for[i].vote_average;
+
+                html += "<div class='col'>";
+                html += "<div class='card' id='card_film2'>";
+                html += "<img src='" + img + "' id='img_film2'>";
+                html += "<div class='card-body'>";
+                html += "<div id='card-text1'>" + title + "</div>";
+                html += "<div id='card-text2'>" + orig_title + " " + date + "</div>";
+                html += "<div id='card-text3'> 평점 : " + vote_average + "</div>";
+                html += "</div></div></div>";
+            }
+            
+            console.log(result);
+
+            $("#carousel1").append(html);
+        },
+        error: function (error) {
+
+            console.log(dirname);
+            alert("서버호출 실패5")
         }
     });
 });

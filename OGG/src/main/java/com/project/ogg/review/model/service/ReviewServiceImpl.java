@@ -18,18 +18,27 @@ public class ReviewServiceImpl implements ReviewService {
 	private ReviewMapper mapper;
 	
 	@Override
-	public int getBoardCount() {
+	public int getBoardCount(int fcode) {
 		
-		return mapper.selectBoardCount();
+		return mapper.selectBoardCount(fcode);
 	}
 
 	@Override
-	public List<Review> getBoardList(PageInfo pageInfo) {
+	public List<Review> getBoardListAll(PageInfo pageInfo) {
 	    int offset = (pageInfo.getCurrentPage() - 1) * pageInfo.getListLimit();
 	    int limit = pageInfo.getListLimit();
 	    RowBounds rowBounds = new RowBounds(offset, limit);   
 		
 		return mapper.selectAll(rowBounds);
+	}
+
+	@Override
+	public List<Review> getBoardListByFilm(PageInfo pageInfo, int fcode) {
+	    int offset = (pageInfo.getCurrentPage() - 1) * pageInfo.getListLimit();
+	    int limit = pageInfo.getListLimit();
+	    RowBounds rowBounds = new RowBounds(offset, limit);   
+		
+		return mapper.selectReviewByFilm(rowBounds, fcode);
 	}
 
 	@Override
@@ -39,9 +48,17 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
+	public int getCmtCountByNo(int no) {
+		
+		return mapper.selectCmtCount(no);
+	}
+	
+	@Override
 	public List<ReviewCmt> findReviewCmtByNo(int no) {
 		
-		return mapper.selectReviewCmtByNo(no);
+		return mapper.selectCmtByNo(no);
 	}
+
+
 
 }

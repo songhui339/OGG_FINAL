@@ -41,7 +41,7 @@
 	                <div class="col-3 col-sm-3">
 	                    <a href="">
 	                		<img src="${path}/images/review/pen.png" height="30px;">
-	                        코멘트
+	                        리뷰
 	                    </a>
 	                </div>
 	                <div class="col-3 col-sm-3"></div>

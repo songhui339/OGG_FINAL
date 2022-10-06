@@ -41,7 +41,7 @@
 			        </div>
 			        <div class="col-sm-8">
 			            <img src="${path}/images/review/comment2.png"  height="30px;">
-			            13
+			            ${ cmtCount }
 			        </div>
  			        <div class="col-sm-3">
 			            <div class="btn-group" role="group" aria-label="Basic mixed styles example" style="padding-left: 55%;">
@@ -91,7 +91,9 @@
     <!-- 내용 전체 컨테이너 끝 -->    
     
 	<script>
-	</script>    
+		var fcode = "${fcode}";
+		var ftype = "${ftype}";
+	</script>	  
 
 	<!-- footer -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

@@ -15,7 +15,7 @@
 		       RV_STATUS, 
 		       RV_LIKES,
 		       RV_READCOUNT,
-		       M.M_NICKNAME
+		       M.M_NICKNAME		
 		FROM REVIEW R
 		JOIN MEMBER M ON (M.M_NO = R.RV_WRITER_NO)
 	</sql>
@@ -47,6 +47,7 @@
 		<result property="rvLikes" column="RV_LIKES" />
 		<result property="rvReadCount" column="RV_READCOUNT" />
 		<result property="rvNickname" column="M_NICKNAME" />
+		<result property="rvCmtCount" column="CNT" />
 	</resultMap>	
 
 	<!-- REVIEW-CMTS resultMap-->
@@ -65,14 +66,45 @@
 	</resultMap>	
 	
 	<!-- 리뷰 개수 조회 -->
-	<select id="selectBoardCount" resultType="_int">
-		SELECT COUNT(*) FROM REVIEW
+	<select id="selectBoardCount" parameterType="_int" resultType="_int">
+		SELECT COUNT(*) FROM REVIEW 
+		WHERE F_CODE = #{fcode}
 	</select>
 
 	<!-- 리뷰 전체 조회 -->
 	<select id="selectAll" resultMap="reviewResultMap">
 		<include refid="reviewSql"></include>
 		ORDER BY RV_LIKES DESC
+	</select>
+
+	<!-- 특정 필름 리뷰 조회 -->
+	<select id="selectReviewByFilm" parameterType="_int" resultMap="reviewResultMap">
+		SELECT R.RV_NO, 
+		       R.F_CODE, 
+			   R.RV_WRITER_NO, 
+			   R.RV_DATE, 
+			   R.RV_UPDATE, 
+			   R.RV_CONTENT, 
+			   R.RV_STATUS, 
+			   R.RV_LIKES,
+			   R.RV_READCOUNT,
+		       M.M_NICKNAME,
+		       COUNT(*) AS CNT
+		FROM REVIEW_CMT RC
+		JOIN REVIEW R ON (R.RV_NO = RC.RV_NO)
+		JOIN MEMBER M ON (M.M_NO = R.RV_WRITER_NO)
+		WHERE F_CODE = #{fcode}
+		GROUP BY R.RV_NO, 
+		         R.F_CODE, 
+				 R.RV_WRITER_NO, 
+				 R.RV_DATE, 
+				 R.RV_UPDATE, 
+				 R.RV_CONTENT, 
+				 R.RV_STATUS, 
+				 R.RV_LIKES,
+				 R.RV_READCOUNT,
+		         M.M_NICKNAME
+		ORDER BY R.RV_LIKES DESC
 	</select>
 	
 	<!-- 리뷰 상세 조회 -->
@@ -81,22 +113,27 @@
 		WHERE RV_STATUS = 'Y' AND RV_NO = #{no}
 	</select>
 	
+	<!-- 리뷰별 댓글 개수 조회 -->
+	<select id="selectCmtCount" parameterType="_int" resultType="_int">
+		SELECT COUNT(*) FROM REVIEW_CMT WHERE RV_NO= #{no}
+	</select>
+	
 	<!-- 댓글 조회 -->
-	<select id="selectReviewCmtByNo" parameterType="_int" resultMap="reviewCmtResultMap">
-	SELECT CMT_NO, 
-	       RV_NO, 
-	       CMT_WRITER_NO, 
-	       CMT_DATE, 
-	       CMT_UPDATE, 
-	       CMT_CONTENT, 
-	       CMT_STATUS, 
-	       CMT_LIKES, 
-	       CMT_GROUP, 
-	       CMT_DEPTH, 
-	       M.M_NICKNAME
-	FROM REVIEW_CMT R
-	JOIN MEMBER M ON (M.M_NO = R.CMT_WRITER_NO)
-	WHERE CMT_STATUS = 'Y' AND RV_NO = #{no}
-	ORDER BY CMT_LIKES DESC
+	<select id="selectCmtByNo" parameterType="_int" resultMap="reviewCmtResultMap">
+		SELECT CMT_NO, 
+		       RV_NO, 
+		       CMT_WRITER_NO, 
+		       CMT_DATE, 
+		       CMT_UPDATE, 
+		       CMT_CONTENT, 
+		       CMT_STATUS, 
+		       CMT_LIKES, 
+		       CMT_GROUP, 
+		       CMT_DEPTH, 
+		       M.M_NICKNAME
+		FROM REVIEW_CMT R
+		JOIN MEMBER M ON (M.M_NO = R.CMT_WRITER_NO)
+		WHERE CMT_STATUS = 'Y' AND RV_NO = #{no}
+		ORDER BY CMT_LIKES DESC
 	</select>
 </mapper>

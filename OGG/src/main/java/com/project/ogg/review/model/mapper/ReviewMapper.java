@@ -11,12 +11,17 @@ import com.project.ogg.review.model.vo.ReviewCmt;
 @Mapper
 public interface ReviewMapper {
 
-	int selectBoardCount();
+	int selectBoardCount(int fcode);
 
 	List<Review> selectAll(RowBounds rowBounds);
 
+	List<Review> selectReviewByFilm(RowBounds rowBounds, int fcode);
+
 	Review selectReviewByNo(int no);
 
-	List<ReviewCmt> selectReviewCmtByNo(int no);
+	int selectCmtCount(int no);
+
+	List<ReviewCmt> selectCmtByNo(int no);
+
 	
 }
