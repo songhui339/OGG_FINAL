@@ -34,14 +34,14 @@
                 </div>
                 
                 <div class="modal-footer nextBtnBox">
-                    <input data-bs-target="#modalWindow2" data-bs-toggle="modal" type="button" value="다음" class="nextBtn" id="modal_next">
+                    <input data-bs-target="#modalWindow2" data-bs-toggle="modal" type="button" value="다음" class="nextBtn" id="modal_next" disabled>
                 </div>
             </div>
         </div>
     </div>
     
     <!-- 두번째 모달 div -->
-    <form action="${ path }/party/write" method="POST" style="margin:0">
+    <form action="${ path }/party/modalCheck" method="POST" style="margin:0">
     <div class="modal" id="modalWindow2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
@@ -50,7 +50,6 @@
                     <p class="serviceText" id="serviceText"></p>
                 </div>
                 <div class="partyModal_content_02">
-                    <!-- @철환님 noticeBox div를 c:if로 묶어서 반복되게 설정하면 될 것 같아요..! -->
                     <div class="noticeBox">
                         <p class="titleText" id="titleText">
                         </p>
@@ -77,12 +76,13 @@
                     </div>
 
                     <div class="checkBox">
-                        <img src="${ path }/images/party/icon_partynotice_check_gray.png" alt="check Icon" class="checkIcon">
+                    	<div style="visibility:hidden"><input type=checkbox id="hiddenCheck"></div>
+                        <img src="${ path }/images/party/icon_partynotice_check_gray.png" alt="check Icon" class="checkIcon" id="checkImg">
                         <span class="text">위 파티장 가이드를 모두 확인했습니다.</span>
                     </div>
                 </div>
                 <div class="modal-footer nextBtnBox">
-                    <input type="submit" value="다음" class="nextBtn" data-bs-dismiss="modal" id="modal_submit">
+                    <input type="submit" value="다음" class="nextBtn" data-bs-dismiss="modal" id="modal_submit" disabled>
                     <input type="hidden" name="modal_plan_no" id="modal_plan_no">
                 </div>
             </div>
@@ -172,15 +172,14 @@ $(document).ready(() => {
 	let path = sessionStorage.getItem("contextpath");
 	
 	$(".itemBox").on("click", (e) => {
-		function getOttNo() {
+		
+		let ottNo = () => {
 			if($(e.target).find('input').val() != null) {
 				return $(e.target).find('input').val();
 			} else {
 				return $(e.target).siblings('input').val();
 			}
 		};
-		
-		let ottNo = getOttNo();
 		
 		$("#plan_select").empty();
 		
@@ -199,7 +198,7 @@ $(document).ready(() => {
 					let price = item.plan_price / item.ott_max_member
 					
 			        html += "<div class='serviceName_gray'>";
-			        html += "<label for='' class='text' id='modal_ott_name'><i class='bi bi-check-lg' ></i>" + item.plan_name + "</label>";
+			        html += "<label for='' class='text'><i class='bi bi-check-lg'></i>" + item.plan_name + "</label>";
        				html += "<ul class='infoText'>";
 			        html += "<input type=hidden value="+ item.plan_no +">";
 					html += "<li>파티원 1~" + item.ott_max_member + " 모집 가능!</li>"                            
@@ -221,18 +220,22 @@ $(document).ready(() => {
 				console.log(error);
 			}
 		});
+		
+		document.querySelector('#modal_next').disabled = true;
+		document.querySelector('#hiddenCheck').checked = false;
+		document.querySelector('#checkImg').src = "${ path }/images/party/icon_partynotice_check_gray.png";
+		document.querySelector('#modal_submit').disabled = true;
 	});
 	
 	$(document).on("click",".serviceName_gray", (e) =>{
-		function getPlanNo() {
+		
+		let planNo = () => {
 			if($(e.target).find('input').val() != null) {
 				return $(e.target).find('input').val();
 			} else {
 				return $(e.target).siblings('input').val();
 			}
 		};
-		
-		let planNo = getPlanNo();
 		
 		$.ajax({
 			type: "POST",
@@ -251,6 +254,21 @@ $(document).ready(() => {
 				console.log(error);
 			}
 		});
+		
+		document.querySelector('.serviceName_gray').className = "serviceName_purple";
+		document.querySelector('#modal_next').disabled = false;
+	});
+	
+	$('.checkBox').on('click', () => {
+		if(document.querySelector('#hiddenCheck').checked) {
+			document.querySelector('#hiddenCheck').checked = false;
+			document.querySelector('#checkImg').src = "${ path }/images/party/icon_partynotice_check_gray.png";
+			document.querySelector('#modal_submit').disabled = true;
+		} else {
+			document.querySelector('#hiddenCheck').checked = true;
+			document.querySelector('#checkImg').src = "${ path }/images/party/icon_partynotice_check_purple.png";
+			document.querySelector('#modal_submit').disabled = false;
+		}
 	});
 });
 /*

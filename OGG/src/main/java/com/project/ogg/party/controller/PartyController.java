@@ -65,8 +65,8 @@ public class PartyController {
 		
 	}
 	
-	@PostMapping("/write")
-	public ModelAndView write(ModelAndView model, @RequestParam int modal_plan_no) {
+	@PostMapping("/modalCheck")
+	public ModelAndView modalCheck(ModelAndView model, @RequestParam int modal_plan_no) {
 		System.out.println(modal_plan_no);
 		
 		Plan plan = null;
@@ -77,5 +77,17 @@ public class PartyController {
 		model.setViewName("party/createPartyWrite");
 		
 		return model;
+	}
+	
+	@PostMapping("/createParty")
+	public String createParty() {
+		
+		return "party/createPartyThxPage";
+	}
+	
+	@GetMapping("/prevPartyPage")
+	public String prevPartyPage() {
+		
+		return "forward:/party/ottlist";
 	}
 }

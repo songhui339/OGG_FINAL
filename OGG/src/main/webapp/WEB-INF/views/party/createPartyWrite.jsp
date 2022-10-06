@@ -23,7 +23,7 @@
                         <span class="nameText">${ plan.plan_name }</span>
                     </p>
                 </div>
-                <form name="fregister" id="fregister" method="POST" autocomplete="off" class="form" role="form">
+                <form name="fregister" id="fregister" method="POST" autocomplete="off" class="form" role="form" action="${ path }/party/createParty">
                     <h3><span class="c_purple">로그인 정보</span> 입력</h3>
                     <div class="form-round-box">
                         <ul class="form-list">
@@ -124,7 +124,7 @@
                     </div>
 
                     <div class="buttonBox">
-                        <button type="submit" class="button" onclick="location('')">취소</button>
+                        <button type="button" class="button" onclick="location.href='${path}/party/prevPartyPage'">취소</button>
                         <button type="submit" class="button button-purple">파티 만들기</button>
                     </div>
 

@@ -234,6 +234,10 @@ body.modal-open {
     appearance: none;
 }
 
+.nextBtn:disabled {
+    background: #F0F0F0 !important;
+}
+
 .partyModal_content_01 .serviceName_gray {
     cursor: pointer;
     width: 100%;
