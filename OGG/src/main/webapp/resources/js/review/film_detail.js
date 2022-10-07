@@ -1,8 +1,9 @@
 $(document).ready(function() {
 
     const key = "afb1dcfbf52dedf12c2a78edaec38830";
-    const id = "60098";
 	let url = "https://api.themoviedb.org/3/" + ftype + "/" + fcode + "?api_key=" + key + "&language=ko";
+	const type1 = "movie";
+    const type2 = "tv";
 	let poster = 'https://image.tmdb.org/t/p/w500/';
 
     $.ajax({
@@ -82,7 +83,7 @@ $(document).ready(function() {
     $.ajax({
         async: true, 
 
-        url: "https://api.themoviedb.org/3/movie/" + id + "/credits?api_key=" + key + "&language=ko" ,
+        url: "https://api.themoviedb.org/3/movie/" + fcode + "/credits?api_key=" + key + "&language=ko" ,
         async: false,
         type: "GET",
         timeout: 3000,
@@ -90,6 +91,7 @@ $(document).ready(function() {
         success: function (result) { 
             
             var name;
+			console.log(result);
 
             for (let i = 0; i < result.crew.length; i++) {
                 let job = result.crew[i].job;
@@ -103,7 +105,6 @@ $(document).ready(function() {
                 html += "<input type='text' id='dir' value='" + name +"' hidden>";
             
             $("#detail-text1").append(html);
-            
         },
         error: function (error) {
             alert("서버호출 실패4")
@@ -111,7 +112,7 @@ $(document).ready(function() {
     });
     
     var dirname = $("#dir").val();
-    console.log(dirname);
+    console.log('감독이름 : ' + dirname);
 	
     $.ajax({
         async: true, 
@@ -125,21 +126,27 @@ $(document).ready(function() {
 
             let html = "<div class='row row-cols-1 row-cols-sm-2 row-cols-md-4' id='carousel01'>";
             for (let i = 0; i<result.results[0].known_for.length; i++) {  
-                let poster = 'https://image.tmdb.org/t/p/w500/';
-                let img = poster + result.results[0].known_for[i].poster_path;
-                let title = result.results[0].known_for[i].title;
-                let orig_title = result.results[0].known_for[i].original_title;
-                let date = result.results[0].known_for[i].release_date.replace(/-/gi, "").slice(0,-4);
-                let vote_average = result.results[0].known_for[i].vote_average;
-
-                html += "<div class='col'>";
-                html += "<div class='card' id='card_film2'>";
-                html += "<img src='" + img + "' id='img_film2'>";
-                html += "<div class='card-body'>";
-                html += "<div id='card-text1'>" + title + "</div>";
-                html += "<div id='card-text2'>" + orig_title + " " + date + "</div>";
-                html += "<div id='card-text3'> 평점 : " + vote_average + "</div>";
-                html += "</div></div></div>";
+            
+            	if (result.results[0].known_for[i].media_type == 'movie'){
+            	
+	                let poster = 'https://image.tmdb.org/t/p/w500/';
+	                let img = poster + result.results[0].known_for[i].poster_path;
+	                let title = result.results[0].known_for[i].title;
+	                let orig_title = result.results[0].known_for[i].original_title;
+	                //let date = result.results[0].known_for[i].release_date.replace(/-/gi, "").slice(0,-4);
+	                let vote_average = result.results[0].known_for[i].vote_average;
+	                let id = result.results[0].known_for[i].id;
+	
+	                html += "<div class='col'>";
+	                html += "<a href='"+ contextpath +"/review/film_detail?fcode="+ id +"&ftype="+ type1 +"'>";
+	                html += "<div class='card' id='card_film2'>";
+	                html += "<img src='" + img + "' id='img_film2'>";
+	                html += "<div class='card-body'>";
+	                html += "<div id='card-text1'>" + title + "</div>";
+	                //html += "<div id='card-text2'>" + orig_title + " " + date + "</div>";
+	                html += "<div id='card-text3'> 평점 : " + vote_average + "</div>";
+	                html += "</div></div></a></div>";
+                }
             }
             
             console.log(result);
