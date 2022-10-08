@@ -26,8 +26,10 @@ $(document).ready(function() {
         }
     });
     
+    var title;
+    
     $.ajax({
-        async: true, 
+        async: false, 
         url: url ,
         type: "GET",
         timeout: 3000,
@@ -35,18 +37,22 @@ $(document).ready(function() {
         success: function (result) { 
         
 		    let orig_title = (ftype=='movie' ? result.original_title : result.original_name);
-		    let title = (ftype=='movie' ? result.title : result.name);
+		    title = (ftype=='movie' ? result.title : result.name);
 		    let runtime = (ftype=='movie' ? result.runtime : result.episode_run_time);
 		    let date = (ftype=='movie' ? result.release_date : result.first_air_date);
 		    let vote_average = result.vote_average;
+		    let id = result.id;
 
             let html = "";
+                html += "<a href='" + contextpath + "/review/film_detail?fcode=" + id + "&ftype=" + type1 + "'>";
                 html += "<div class='row' style='font-size: 2em; font-weight: 700; margin-top: 35px; margin-bottom: 1px; margin-left: 1px;'>";
                 html += title;
                 html += "</div>";
+                html += "</a>";
                 html += "<div class='row' style='font-size: 1em; color: grey; margin-bottom: 15px; margin-left: 1px;'>";
                 html += orig_title + " " + date + "<br>" + "평점 : " + vote_average 
                 html += "</div>";
+ 	   
 
             $("#filmDetail1").append(html);
         },
@@ -54,6 +60,34 @@ $(document).ready(function() {
             alert("서버호출 실패")
         }
     })
+    
+ 	  console.log('타이틀 : ' + title);
+    
+        $('#leavecomment').on("click", function() {
+        let message = document.getElementById('message-text').value
+        let fcodes = fcode;
+        console.log(message);
+        
+		$.ajax({
+	        async: true,
+			type : 'POST',
+			url : contextpath + '/review/review_write',
+			data : {
+				'fTitle' : title, 
+				'rvContent' : message, 
+				'fCode' : fcodes,
+				'ftype' : ftype
+			},
+			success : (data) => {
+				console.log(data);
+				
+			},
+			error : (error) => {
+				console.log(error);
+			}
+		});
+        
+    });
     
     $.ajax({
         async: true, 
@@ -82,8 +116,6 @@ $(document).ready(function() {
     });
 
     $.ajax({
-        async: true, 
-
         url: "https://api.themoviedb.org/3/movie/" + fcode + "/credits?api_key=" + key + "&language=ko" ,
         async: false,
         type: "GET",
@@ -147,7 +179,9 @@ $(document).ready(function() {
 	                //html += "<div id='card-text2'>" + orig_title + " " + date + "</div>";
 	                html += "<div id='card-text3'> 평점 : " + vote_average + "</div>";
 	                html += "</div></div></a></div>";
-                }
+                } else {
+                	html += "추천 작품이 존재하지 않습니다";
+                } 
             }
             
             console.log(result);

@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.project.ogg.common.util.PageInfo;
 import com.project.ogg.member.model.vo.Member;
 import com.project.ogg.review.model.service.ReviewService;
+import com.project.ogg.review.model.vo.Film;
 import com.project.ogg.review.model.vo.Review;
 import com.project.ogg.review.model.vo.ReviewCmt;
 
@@ -31,6 +32,7 @@ public class ReviewController {
 	@GetMapping("/film_list")
 	public ModelAndView filmList(ModelAndView model) {
 		model.setViewName("review/film_list");
+		
 		return model;
 	}
 	
@@ -38,10 +40,7 @@ public class ReviewController {
 	public ModelAndView filmSearch(ModelAndView model,
 			@RequestParam("keyword") String keyword)  {
 		
-		System.out.println(keyword);
-	
 		if(keyword != null) {
-			
 			model.addObject("searchkeyword", keyword);
 		}
 		model.setViewName("review/film_search");
@@ -53,13 +52,9 @@ public class ReviewController {
 	public ModelAndView dirSearch(ModelAndView model,
 			@RequestParam("name") String name)  {
 		
-		System.out.println(name);
-		
 		if(name != null) {
-			
 			model.addObject("searchkeyword", name);
 		}
-		
 		model.setViewName("review/dir_search");
 		
 		return model;
@@ -75,14 +70,11 @@ public class ReviewController {
 		List<Review> list = null;
 		PageInfo pageInfo = null;
 		int fcode = Integer.parseInt(fcodes);
-
-		System.out.println("hello");
-		System.out.println(member);
 		
 		pageInfo = new PageInfo(page, 10, service.getBoardCount(fcode), 10);
 		list = service.getBoardListByFilm(pageInfo, fcode);
 		
-		model.addObject("list", list); // 게시글 표시
+		model.addObject("list", list); 
 		model.addObject("fcode", fcode);
 		model.addObject("ftype", ftype);
 		model.addObject("pageInfo", pageInfo);
@@ -100,11 +92,11 @@ public class ReviewController {
 		List<Review> list = null;
 		PageInfo pageInfo = null;
 		int fcode = Integer.parseInt(fcodes);
-
+		
 		pageInfo = new PageInfo(page, 10, service.getBoardCount(fcode), 10);
 		list = service.getBoardListByFilm(pageInfo, fcode);
 		
-		model.addObject("list", list); // 게시글 표시
+		model.addObject("list", list);
 		model.addObject("fcode", fcode);
 		model.addObject("ftype", ftype);
 		model.addObject("pageInfo", pageInfo);
@@ -125,11 +117,11 @@ public class ReviewController {
 		review = service.findReviewByNo(no);
 		reviewCmt = service.findReviewCmtByNo(no);
 		cmtCount = service.getCmtCountByNo(no);
-		
-		System.out.println(member);
+//		cmtReview = service.updateCmtCount(no);
 		
 		model.addObject("fcode", fcode);
 		model.addObject("ftype", ftype);
+		model.addObject("member", member);
 		model.addObject("review", review);
 		model.addObject("cmtCount", cmtCount);
 		model.addObject("reviewCmt", reviewCmt);
@@ -139,28 +131,51 @@ public class ReviewController {
 	}
 	
 	@PostMapping("/review_write")
-	public ModelAndView reviewWrite(
-			ModelAndView model,
+	public ModelAndView reviewWrite(ModelAndView model,
+			@AuthenticationPrincipal Member member,
+			@RequestParam("ftype") String ftype,
 			@ModelAttribute Review review,
-			@AuthenticationPrincipal Member member) {
+			@ModelAttribute Film film) {
 
-		int result = 0;
+		Film checkFilm = null;
+		int insertFilm = 0;
+		int writeReview = 0;
+		review.setRvWriterNo(member.getM_no());
+		int fcode = Integer.parseInt(review.getFCode());
 		
-		System.out.println("리뷰 : " + review);
-		System.out.println("멤버 : " + member);
+		System.out.println("리셋");
+		System.out.println(review);
+		System.out.println(film);
+
+		checkFilm = service.filmcheck(fcode);
 		
-//		result = service.reviewSave(review);
-		
-		if(result>0) {
-			model.addObject("msg", "게시글이 정상적으로 등록되었습니다.");
-			model.addObject("location", "review/review_detail" + review.getRvNo());
+		if(checkFilm == null) {
+			insertFilm = service.filmSave(film);
+			
+			if(insertFilm > 0) {
+				writeReview = service.reviewSave(review);
+				
+				if(writeReview > 0) {
+					System.out.println("리뷰까지 성공");
+		//			model.addObject("msg", "리뷰가 정상적으로 등록되었습니다.");
+		//			model.addObject("location", "/review/review_detail?no=" + review.getRvNo() + "&fcode=" + fcode +  "&ftype=" + ftype );
+				} else {
+					System.out.println("리뷰 실패");
+		//			model.addObject("msg", "리뷰 등록을 실패하였습니다.");
+		//			model.addObject("location", "/review/film_detail?fcode=" + fcode + "&ftype=" + ftype );
+				}
+			} else {
+				System.out.println("필름 인서트 실패");
+			}
 		} else {
-			model.addObject("msg", "게시글 등록을 실패하였습니다.");
-			model.addObject("location", "review/review_detail");
+			writeReview = service.reviewSave(review);
+			if(writeReview > 0) {
+				System.out.println("존재하는 필름 리뷰 성공");
+			} else {
+				System.out.println("존재하는 필름 리뷰 실패");
+			}
 		}
-
-		model.setViewName("common/msg");
-		model.setViewName("/home");
+		model.setViewName("/review/film_detail?fcode=" + fcode + "&ftype=" + ftype);
 		
 		return model;
 	}

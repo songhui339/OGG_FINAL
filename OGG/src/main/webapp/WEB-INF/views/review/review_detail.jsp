@@ -93,6 +93,7 @@
 	<script>
 		var fcode = "${fcode}";
 		var ftype = "${ftype}";
+		var contextpath = "${ pageContext.request.contextPath }";
 	</script>	  
 
 	<!-- footer -->

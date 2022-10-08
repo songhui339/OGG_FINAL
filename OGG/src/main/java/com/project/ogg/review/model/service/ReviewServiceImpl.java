@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.ogg.common.util.PageInfo;
 import com.project.ogg.review.model.mapper.ReviewMapper;
+import com.project.ogg.review.model.vo.Film;
 import com.project.ogg.review.model.vo.Review;
 import com.project.ogg.review.model.vo.ReviewCmt;
 
@@ -57,6 +58,30 @@ public class ReviewServiceImpl implements ReviewService {
 	public List<ReviewCmt> findReviewCmtByNo(int no) {
 		
 		return mapper.selectCmtByNo(no);
+	}
+
+	@Override
+	public int reviewSave(Review review) {
+		
+		return mapper.insertReview(review);
+	}
+
+	@Override
+	public Review updateCmtCount(int no) {
+	
+		return mapper.updateCmtCount(no);
+	}
+
+	@Override
+	public int filmSave(Film film) {
+		
+		return mapper.insertFilm(film);
+	}
+
+	@Override
+	public Film filmcheck(int fCode) {
+		
+		return mapper.checkFilm(fCode);
 	}
 
 

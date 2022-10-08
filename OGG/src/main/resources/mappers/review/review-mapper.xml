@@ -15,7 +15,8 @@
 		       RV_STATUS, 
 		       RV_LIKES,
 		       RV_READCOUNT,
-		       M.M_NICKNAME		
+		       M.M_NICKNAME,
+		       CMT_COUNT		
 		FROM REVIEW R
 		JOIN MEMBER M ON (M.M_NO = R.RV_WRITER_NO)
 	</sql>
@@ -34,7 +35,7 @@
 			   RV_CMT_DEPTH
 		FROM REVIEW_CMT
 	</sql>
-
+	
 	<!-- REVIEW resultMap-->
 	<resultMap type="Review" id="reviewResultMap">
 		<id property="rvNo" column="RV_NO" />
@@ -47,7 +48,7 @@
 		<result property="rvLikes" column="RV_LIKES" />
 		<result property="rvReadCount" column="RV_READCOUNT" />
 		<result property="rvNickname" column="M_NICKNAME" />
-		<result property="rvCmtCount" column="CNT" />
+		<result property="rvCmtCount" column="CMT_COUNT" />
 	</resultMap>	
 
 	<!-- REVIEW-CMTS resultMap-->
@@ -64,6 +65,14 @@
 		<result property="cmtDepth" column="CMT_DEPTH" />
 		<result property="cmtNickname" column="M_NICKNAME" />
 	</resultMap>	
+
+	<!-- FILM resultMap-->
+	<resultMap type="Film" id="filmResultMap">
+		<id property="fCode" column="F_CODE" />
+		<result property="fTitle" column="F_TITLE" />
+		<result property="fStarred" column="F_STARRED" />
+		<result property="fDib" column="F_DIB" />
+	</resultMap>	
 	
 	<!-- 리뷰 개수 조회 -->
 	<select id="selectBoardCount" parameterType="_int" resultType="_int">
@@ -79,31 +88,8 @@
 
 	<!-- 특정 필름 리뷰 조회 -->
 	<select id="selectReviewByFilm" parameterType="_int" resultMap="reviewResultMap">
-		SELECT R.RV_NO, 
-		       R.F_CODE, 
-			   R.RV_WRITER_NO, 
-			   R.RV_DATE, 
-			   R.RV_UPDATE, 
-			   R.RV_CONTENT, 
-			   R.RV_STATUS, 
-			   R.RV_LIKES,
-			   R.RV_READCOUNT,
-		       M.M_NICKNAME,
-		       COUNT(*) AS CNT
-		FROM REVIEW_CMT RC
-		JOIN REVIEW R ON (R.RV_NO = RC.RV_NO)
-		JOIN MEMBER M ON (M.M_NO = R.RV_WRITER_NO)
+		<include refid="reviewSql"></include>
 		WHERE F_CODE = #{fcode}
-		GROUP BY R.RV_NO, 
-		         R.F_CODE, 
-				 R.RV_WRITER_NO, 
-				 R.RV_DATE, 
-				 R.RV_UPDATE, 
-				 R.RV_CONTENT, 
-				 R.RV_STATUS, 
-				 R.RV_LIKES,
-				 R.RV_READCOUNT,
-		         M.M_NICKNAME
 		ORDER BY R.RV_LIKES DESC
 	</select>
 	
@@ -136,4 +122,64 @@
 		WHERE CMT_STATUS = 'Y' AND RV_NO = #{no}
 		ORDER BY CMT_LIKES DESC
 	</select>
+
+	<!-- 영화 체크 -->		
+	<select id="checkFilm" parameterType="_int" resultMap="filmResultMap">
+		SELECT *
+		FROM FILM
+		WHERE F_CODE = #{fCode}
+		
+	</select>
+	
+	<!-- 영화 인서트 -->
+	<insert id="insertFilm" parameterType="Film"
+		useGeneratedKeys="true" keyProperty="fCode" keyColumn="F_CODE">
+		INSERT INTO FILM (
+	            F_CODE, 
+	            F_TITLE 
+			)
+			VALUES(
+				#{fCode},
+				#{fTitle}
+	      	)	
+	</insert>
+	
+	<!-- 리뷰 등록 -->
+	<insert id="insertReview" parameterType="Review"
+		useGeneratedKeys="true" keyProperty="rvNo" keyColumn="RV_NO">
+		INSERT INTO REVIEW (
+			    RV_NO, 
+		        F_CODE, 
+		        RV_WRITER_NO, 
+		        RV_DATE, 
+		        RV_UPDATE, 
+		        RV_CONTENT, 
+		        RV_STATUS, 
+		        RV_LIKES, 
+		        RV_READCOUNT,
+		        CMT_COUNT
+			)
+			VALUES(
+				SEQ_RV_NO.NEXTVAL,
+				#{fCode},
+				#{rvWriterNo},
+				DEFAULT,
+				DEFAULT,
+				#{rvContent},
+				DEFAULT,
+				DEFAULT,
+				DEFAULT,
+				DEFAULT
+			)
+	</insert>	
+	
+	<!-- 댓글수 업데이트 -->
+	<update id="updateCmtCount" parameterType="int">
+		UPDATE REVIEW R
+		SET R.CMT_COUNT = (SELECT COUNT(CMT_NO)
+		                  FROM REVIEW_CMT
+		                  WHERE RV_NO = #{RV_NO})
+		WHERE R.RV_NO = #{RV_NO}
+	</update>
+	
 </mapper>

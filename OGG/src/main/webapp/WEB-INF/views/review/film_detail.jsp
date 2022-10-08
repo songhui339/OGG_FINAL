@@ -54,7 +54,7 @@
                     <div class="modal-footer">
                         <span id="textLengthCheck">(0 / 2000)</span>
                         <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button> -->
-                        <button type="button" class="btn btn-primary" id="leavecomment">저장</button>
+                        <button type="button" class="btn btn-primary" id="leavecomment" data-bs-dismiss="modal">저장</button>
                     </div>
                 </div>
             </div>
@@ -90,7 +90,7 @@
                 
                 <c:if test="${ not empty list }">
 					<!-- 기준으로 반복 -->
-					<c:forEach var="review" begin="1" end="4" items="${ list }">
+					<c:forEach var="review" begin="0" end="3" items="${ list }">
                     <div class="col">
                     	<a href="${ path }/review/review_detail?no=${ review.rvNo }&fcode=${ fcode }&ftype=${ ftype }">
                         <div class="card" id="card_review">
@@ -153,28 +153,7 @@
 	    }
 	});
 	      
-    $('#leavecomment').on("click", function() {
-        let message = document.getElementById('message-text').value
-        console.log(message);
-        
-		$.ajax({
-			type : 'POST',
-			url : '${path}/review/review_write',
-			data : {
-				'rvContent' : message, 
-				'fCode' : fcode,
-				'rvWriterNo' : m_no
-			},
-			success : (data) => {
-				console.log(data);
-				
-			},
-			error : (error) => {
-				console.log(error);
-			}
-		});
-    });
-    
+	        
 	</script>
 	
 	<script>
