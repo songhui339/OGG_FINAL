@@ -67,6 +67,7 @@ public class ReviewController {
 	
 	@GetMapping("/film_detail")
 	public ModelAndView filmDetail(ModelAndView model,
+			@AuthenticationPrincipal Member member,
 			@RequestParam(value = "page", defaultValue = "1") int page,
 			@RequestParam("fcode") String fcodes,
 			@RequestParam("ftype") String ftype)  {
@@ -75,6 +76,9 @@ public class ReviewController {
 		PageInfo pageInfo = null;
 		int fcode = Integer.parseInt(fcodes);
 
+		System.out.println("hello");
+		System.out.println(member);
+		
 		pageInfo = new PageInfo(page, 10, service.getBoardCount(fcode), 10);
 		list = service.getBoardListByFilm(pageInfo, fcode);
 		
@@ -110,7 +114,8 @@ public class ReviewController {
 	}
 	
 	@GetMapping("/review_detail")
-	public ModelAndView reviewDetail(ModelAndView model, 
+	public ModelAndView reviewDetail(ModelAndView model,
+			@AuthenticationPrincipal Member member,
 			@RequestParam("fcode") String fcode,
 			@RequestParam("ftype") String ftype,
 			@RequestParam int no) {
@@ -120,6 +125,8 @@ public class ReviewController {
 		review = service.findReviewByNo(no);
 		reviewCmt = service.findReviewCmtByNo(no);
 		cmtCount = service.getCmtCountByNo(no);
+		
+		System.out.println(member);
 		
 		model.addObject("fcode", fcode);
 		model.addObject("ftype", ftype);
@@ -139,8 +146,9 @@ public class ReviewController {
 
 		int result = 0;
 		
-		System.out.println(review);
-		System.out.println(member);
+		System.out.println("리뷰 : " + review);
+		System.out.println("멤버 : " + member);
+		
 //		result = service.reviewSave(review);
 		
 		if(result>0) {

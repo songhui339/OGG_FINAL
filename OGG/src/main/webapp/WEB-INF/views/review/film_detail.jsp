@@ -27,7 +27,7 @@
 
         <!-- 2nd row -->
         <div id="div_review">
-            <div class="row" id="detail-text3">
+            <div class="row" id="detail-text0">
                 <div class="col-3">이 작품에 대한 평가를 남겨보세요</div>
                 <!-- <div class="col-9"><button class="btn btn-primary" type="button">코멘트 남기기</button></div> -->
                 <div class="col-9"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever=" 남기기">리뷰 남기기</button></div>
@@ -126,18 +126,11 @@
         <!-- 6th row -->
         <div class="col-4 col-sm-12" id="div_film">
 		<p id='detail-text1'>이 감독의 추천 작품</p>
-            <hr>
-
-	            <div class="carousel-inner">
-	            <!-- 첫번째 슬라이드 -->
-	            <div class="carousel-item active" id="carousel1">
-	            </div>
-	
-	            <!-- 두번째 슬라이드 -->
-	            <div class="carousel-item" id="carousel2">
-	            </div>
-	        </div>
-	        
+           <hr>
+	       <div class="carousel-inner">
+		        <!-- 첫번째 슬라이드 -->
+		        <div class="carousel-item active" id="carousel1"></div>
+	       </div>
         </div>
         <!-- 6th row 끝 -->
 
@@ -147,6 +140,7 @@
 	<script>
 	var fcode = "${ fcode }";
 	var ftype = "${ ftype }";
+	var m_no = "${ m_no }";
 	var contextpath = "${ pageContext.request.contextPath }";
 
 	    $("#message-text").keyup(function(e) {
@@ -168,7 +162,8 @@
 			url : '${path}/review/review_write',
 			data : {
 				'rvContent' : message, 
-				'fCode' : fcode 
+				'fCode' : fcode,
+				'rvWriterNo' : m_no
 			},
 			success : (data) => {
 				console.log(data);

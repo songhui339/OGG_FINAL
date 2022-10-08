@@ -75,10 +75,16 @@
     }
 
     /* 전체 텍스트 스타일 */
+    #detail-text0{
+        margin-left: 10px;
+        margin-top: 3px;
+        font-size: 0.9em;
+    }
     #detail-text1{
         margin-left: 10px;
         font-weight: 600;
         font-size: 1em;
+        line-height: 20px;
     }
     #detail-text2{
         margin-left: 10px;
@@ -89,12 +95,24 @@
         margin-left: 10px;
         margin-top: 3px;
         font-size: 0.9em;
+        display: -webkit-box;
+	    -webkit-line-clamp: 5 ;
+	    -webkit-box-orient: vertical;
+	    overflow: hidden;
+        text-overflow: ellipsis;
     }
     #detail-text4{
         font-size: 0.9em;
     }
     #detail-text5{
         font-size: 0.9em;
+    }
+    #detail-text6{
+        margin-left: 10px;
+        font-size: 1em;
+        line-height: 30px;
+        word-break: keep-all;
+        width: 850px;
     }
     #detail-text{
         margin-top: 3px;
@@ -302,7 +320,19 @@
     }
 
     #carousel01 {
-        /* border: 2px solid blue;  */
+        /* border: 2px solid blue; */
         padding-left: 50px; 
         padding-right: 60px;
+    }
+
+    #carousel00 {
+       /*  border: 2px solid blue; */
+		height: 400px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+    }
+    
+    #dir_film{
+    	padding: 50px;
     }

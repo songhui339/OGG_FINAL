@@ -69,8 +69,9 @@ $(document).ready(function() {
                 html += "<p id='detail-text1'>기본 정보</p>";
                 html += "<hr>";
                 html += "<br>";
+                html += "<p id='detail-text6'>";
                 html += overview;
-                html += "</p>";
+                html += "</p></p>";
                 
             console.log(result);
             $("#filmDetail2").append(html);
@@ -124,7 +125,7 @@ $(document).ready(function() {
         dataType: "json", 
         success: function (result) { 
 
-            let html = "<div class='row row-cols-1 row-cols-sm-2 row-cols-md-4' id='carousel01'>";
+            let html = "<div class='container' id='carousel00'><div class='row row-cols-auto'>";
             for (let i = 0; i<result.results[0].known_for.length; i++) {  
             
             	if (result.results[0].known_for[i].media_type == 'movie'){
@@ -137,7 +138,7 @@ $(document).ready(function() {
 	                let vote_average = result.results[0].known_for[i].vote_average;
 	                let id = result.results[0].known_for[i].id;
 	
-	                html += "<div class='col'>";
+	                html += "<div class='col' id='dir_film'>";
 	                html += "<a href='"+ contextpath +"/review/film_detail?fcode="+ id +"&ftype="+ type1 +"'>";
 	                html += "<div class='card' id='card_film2'>";
 	                html += "<img src='" + img + "' id='img_film2'>";
