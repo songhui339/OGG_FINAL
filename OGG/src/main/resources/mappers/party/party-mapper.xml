@@ -29,7 +29,7 @@
 		<result property="ott_class" column="OTT_CLASS"/>
 		<result property="ott_max_member" column="OTT_MAX_MEMBER"/>
 		<result property="plan_price" column="PLAN_PRICE"/>
-		<result property="plan_status" column="PLAN_STATUS"/>
+		<result property="ott_status" column="OTT_STATUS"/>
 	</resultMap>
 	
 	<select id="selectOttList" resultMap="ottListResultMap">
@@ -39,7 +39,7 @@
 			   I.OTT_CLASS,
 			   I.OTT_MAX_MEMBER,
 			   P.PLAN_PRICE,
-			   P.PLAN_STATUS
+			   I.OTT_STATUS
 		FROM OTT_INFO I
 		JOIN PLAN P ON(I.OTT_NO = P.OTT_NO)
 	</select>

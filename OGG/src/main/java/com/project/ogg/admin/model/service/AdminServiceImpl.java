@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.project.ogg.admin.model.mapper.AdminMapper;
 import com.project.ogg.admin.model.vo.Answer;
+import com.project.ogg.admin.model.vo.MemberAD;
 import com.project.ogg.admin.model.vo.Notice;
 import com.project.ogg.admin.model.vo.Question;
 import com.project.ogg.common.util.PageInfo;
@@ -62,13 +63,13 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
+	@Transactional
 	public int deleteNotice(int no) {
 		return mapper.deleteNotice(no);
 	}
 
 	@Override
 	public int getQuestionCount() {
-		// TODO Auto-generated method stub
 		return mapper.getQuestionCount();
 	}
 
@@ -93,6 +94,43 @@ public class AdminServiceImpl implements AdminService {
 	public Answer getAnswer(int no) {
 
 		return mapper.getAnswer(no);
+	}
+
+	@Override
+	@Transactional
+	public int insertAnswer(Answer answer) {
+
+		return mapper.insertAnswer(answer);
+	}
+
+	@Override
+	@Transactional
+	public int updateQnA(Answer answer) {
+		return mapper.updateQnA(answer);
+	}
+
+	@Override
+	@Transactional
+	public int answerUpdate(Answer answer) {
+		return mapper.answerUpdate(answer);
+	}
+
+	@Override
+	@Transactional
+	public int writeQuestion(Question question) {
+
+		return mapper.writeQuestion(question);
+	}
+
+	@Override
+	public List<MemberAD> getMemberList() {
+		return mapper.getMemberList();
+	}
+
+	@Override
+	@Transactional
+	public int updateQuestion(Question question) {
+		return mapper.updateQuestion(question);
 	}
 
 }

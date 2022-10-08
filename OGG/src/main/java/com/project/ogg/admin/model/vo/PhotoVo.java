@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PhotoVo {
-	private MultipartFile filedata;//callback URL혻혻혻혻
-	private String callback;//肄쒕갚�븿�닔??혻혻혻혻
+	private MultipartFile filedata;//callback URL    
+	private String callback;//콜백함수??    
 	private String callback_func;
 }

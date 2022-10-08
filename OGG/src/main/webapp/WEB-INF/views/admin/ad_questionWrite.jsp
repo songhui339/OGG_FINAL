@@ -13,11 +13,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>공지사항 상세</title>
+        <title>공지사항 작성</title>
 		<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="${path }/css/admin/admin.css" rel="stylesheet" />
-        <link rel="stylesheet" href="${path }/css/admin/noticeView.css">
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="${path }/css/admin/noticeWrite.css">
         <script type="text/javascript" src="${path}/js/jquery-3.6.0.min.js"></script>
     </head>
     <body class="sb-nav-fixed">
@@ -75,20 +75,21 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">공지 사항</h1>
+                        <h1 class="mt-4">문의 하기</h1>
                         <br>
                         <div class="card mb-4">
                             
                         </div>
                         <div class="card mb-4">
                             <div class="card-header">
-                                <i class="fa-sharp fa-solid fa-bell"></i>&nbsp;공지 사항
+                                <i class="fa-sharp fa-solid fa-bell"></i>
+                                &nbsp;문의 하기
                             </div>
                             <div class="card-body">
                                 <div class="page-title">
                                     <div class="container">
                                         <br>
-                                        <h3>공지사항</h3>
+                                        <h3>문의 하기</h3>
                                     </div>
                                 </div>
                             
@@ -107,33 +108,23 @@
                             <!-- board list area -->
                                 <div id="board-list">
                                     <div class="container">
-                                        <table class="board-table">
-                                            <thead>
-                                            <tr>
-                                                <th scope="col" class="th-num">${notice.n_no} </th>
-                                                <th scope="col" class="th-title">${notice.n_title}</th>
-                                                <th scope="col" class="th-writer">${notice.n_m_name}</th>
-                                                <th scope="col" class="th-date"><fmt:formatDate type="date" value="${ notice.n_Create_Date }" /></th>
-                                                <th scope="col" class="th-count">${notice.n_readcount}</th>
-                                            </tr>
-                                            </thead>
-                                        </table>
-                                        <br>
-                                       <!-- 
-                                         <textarea name="content" id="writing" readonly="readonly">${notice.n_content}</textarea>
-                                        -->
-                                        <div name="content" id="writing">${notice.n_content}</div>
-                                        
-                                        <br>
-                                        <div id="btn1">
-                                        <c:if test="${not empty member && member.id == notice.writerId }">
-                                        </c:if>
-                                        <button type="button" id="btnUpdate" onclick = "location.href ='${path}/notice/update?no=${notice.n_no}'">수정</button>
-                                        <button type="button" id="btnDelete" >삭제</button>
-                                        <button onclick="location.href='${path}/admin/notice?page=1'" id="goBack">목록으로</button>
-                                        
-                                        </div>
-                                    </div>
+									<form action="${path }/question/write" method="POST">
+										<table class="board-table">
+											<thead>
+												<tr>
+													<th><input type="text" placeholder="제목을 입력하세요" name="q_title" id="writingName"></th>
+												</tr>
+											</thead>
+										</table>
+												<br>
+												<textarea name="q_content" id="n_content" cols="30" rows="10"></textarea>
+												<br>
+												<div id="btn1">
+													<input type="submit" value="작성완료" id="subBtn"> 
+													<input type="button" value="작성취소" id="goBack" onclick="location.href='${path}/admin/question?page=1'">
+												</div>
+									</form>
+								</div>
                                     </div>
                                 </div>
 
@@ -154,17 +145,6 @@
                 </footer>
             </div>
         </div>
-        <script type="text/javascript">
-        $(document).ready(() => {
-        	$("#btnDelete").on("click",()=>{
-        		if(window.confirm("정말로 삭제하시겠습니까?")){
-        			location.replace("${path}/notice/delete?no=${notice.n_no}");
-        		}        			
-        	})
-        });
-        
-      
-        </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="${path}/js/admin/script.js"></script>
     </body>

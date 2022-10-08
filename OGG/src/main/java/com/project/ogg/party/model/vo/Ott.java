@@ -20,5 +20,5 @@ public class Ott {
 	
 	private String plan_price;
 	
-	private String plan_status;
+	private String ott_status;
 }
