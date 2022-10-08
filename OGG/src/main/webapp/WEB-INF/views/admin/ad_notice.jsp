@@ -15,10 +15,13 @@
 <meta name="description" content="" />
 <meta name="author" content="" />
 <title>공지사항 리스트</title>
-<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+<link
+	href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css"
+	rel="stylesheet" />
 <link href="${path }/css/admin/admin.css" rel="stylesheet" />
 <link rel="stylesheet" href="${path }/css/admin/notice.css">
-<script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+<script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js"
+	crossorigin="anonymous"></script>
 </head>
 <body class="sb-nav-fixed">
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -48,27 +51,30 @@
 				id="sidenavAccordion">
 				<div class="sb-sidenav-menu">
 					<div class="nav">
-						<a class="nav-link" href="${path}/admin/home">
-							<div class="sb-nav-link-icon">
-								<i class="fa-sharp fa-solid fa-house"></i>
-							</div> 메인
-						</a> <a class="nav-link" href="${path}/admin/OTT">
-							<div class="sb-nav-link-icon">
-								<i class="fa-sharp fa-solid fa-video"></i>
-							</div> OTT관리
-						</a> <a class="nav-link" href="${path}/admin/member">
-							<div class="sb-nav-link-icon">
-								<i class="fa-sharp fa-solid fa-user"></i>
-							</div> 회원관리
-						</a> <a class="nav-link" href="${path}/admin/notice">
-							<div class="sb-nav-link-icon">
-								<i class="fa-sharp fa-solid fa-bell"></i>
-							</div> 공지사항
-						</a> <a class="nav-link" href="${path}/admin/question">
-							<div class="sb-nav-link-icon">
-								<i class="fa-sharp fa-solid fa-envelope"></i>
-							</div> 문의/신고
-						</a>
+						<a class="nav-link" href="${path}">
+                                <div class="sb-nav-link-icon"><i class="fa-sharp fa-solid fa-house"></i></div>
+                                홈으로
+                            </a>
+                            <a class="nav-link" href="${path}/admin/home">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-toolbox"></i></div>
+                                메인
+                            </a>
+                            <a class="nav-link" href="${path}/admin/OTT">
+                                <div class="sb-nav-link-icon"><i class="fa-sharp fa-solid fa-video"></i></div>
+                                OTT관리
+                            </a>
+                            <a class="nav-link" href="${path}/admin/member">
+                                <div class="sb-nav-link-icon"><i class="fa-sharp fa-solid fa-user"></i></div>
+                                회원관리
+                            </a>
+                            <a class="nav-link" href="${path}/admin/notice">
+                                <div class="sb-nav-link-icon"><i class="fa-sharp fa-solid fa-bell"></i></div>
+                                공지사항
+                            </a>
+                            <a class="nav-link" href="${path}/admin/question">
+                                <div class="sb-nav-link-icon"><i class="fa-sharp fa-solid fa-envelope"></i></div>
+                                문의/신고
+                            </a>
 					</div>
 				</div>
 				<div class="sb-sidenav-footer">
@@ -85,7 +91,7 @@
 					<div class="card mb-4"></div>
 					<div class="card mb-4">
 						<div class="card-header">
-							<i class="fa-sharp fa-solid fa-bell"></i> &nbsp;공지 사항
+							<i class="fa-sharp fa-solid fa-bell"></i>&nbsp;공지 사항
 						</div>
 						<div class="card-body">
 							<div class="page-title">
@@ -142,8 +148,7 @@
 															href="${path}/admin/notice/view?no=${notice.n_no}">
 																${notice.n_title}</a></th>
 														<td>${notice.n_m_name}</td>
-														<td><fmt:formatDate type="date"
-																value="${ notice.n_Create_Date }" /></td>
+														<td><fmt:formatDate type="date" value="${ notice.n_Create_Date }" /></td>
 														<td>${notice.n_readcount}</td>
 													</tr>
 

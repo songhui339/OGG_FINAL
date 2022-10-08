@@ -39,8 +39,12 @@
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
-                            <a class="nav-link" href="${path}/admin/home">
+                            <a class="nav-link" href="${path}">
                                 <div class="sb-nav-link-icon"><i class="fa-sharp fa-solid fa-house"></i></div>
+                                홈으로
+                            </a>
+                            <a class="nav-link" href="${path}/admin/home">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-toolbox"></i></div>
                                 메인
                             </a>
                             <a class="nav-link" href="${path}/admin/OTT">
@@ -70,7 +74,7 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">공지 사항</h1>
+                        <h1 class="mt-4">문의 사항</h1>
                         <br>
                         <div class="card mb-4">
                             
@@ -78,13 +82,13 @@
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fa-sharp fa-solid fa-bell"></i>
-                                &nbsp;공지 사항
+                                &nbsp;문의 사항
                             </div>
                             <div class="card-body">
                                 <div class="page-title">
                                     <div class="container">
                                         <br>
-                                        <h3>공지사항</h3>
+                                        <h3>문의사항</h3>
                                     </div>
                                 </div>
                             
@@ -129,12 +133,18 @@
                                         </c:if>
                                         <br>
                                         <div id="btn1">
-                                        <c:if test="${not empty member && member.id == notice.writerId }">
+                                        <!-- 
                                         <button type="button" id="btnUpdate" onclick = "location.href ='${path}/notice/update?no=${notice.no}'">수정</button>
                                         <button type="button" id="btnDelete">삭제</button>
-                                        <button type="button" id="btnDelete">답변하기</button>
-                                        </c:if>
-                                        <!-- <button onclick="location.href='${path}/notice/list?page=1'" id="goBack">목록으로</button> -->
+                                         -->
+                                        <button type="button" onclick="location.href='${path}/admin/question/update?no=${question.q_no}'" id="btnDelete">질문수정</button>
+                                         <c:if test="${empty answer}">
+                                        	<button type="button" onclick="location.href='${path}/admin/answer?no=${question.q_no}'" id="btnDelete">답변하기</button>
+                                         </c:if>
+                                         <c:if test="${not empty answer}">
+                                        	<button type="button" onclick="location.href='${path}/admin/answer/update?no=${question.q_no}'" id="btnDelete">답변수정</button>
+                                         </c:if>
+                                       	<button onclick="location.href='${path}/admin/question?page=1'" id="goBack">목록으로</button>
                                         
                                         </div>
                                     </div>
