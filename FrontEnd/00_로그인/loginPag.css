@@ -224,7 +224,8 @@ OGG LoginPage CSS
     border-radius: 10px;
 }
 
-.email-input input[type='email'] {
+.email-input input[type='email'],
+.email-input input[type='text'] {
     width: 500px;
     height: 60px;
     font-size: 14px;
