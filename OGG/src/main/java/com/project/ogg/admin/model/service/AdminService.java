@@ -45,5 +45,13 @@ public interface AdminService {
 
 	List<OttAdmin> getOTTList();
 	
+	int getMarchUserCount();
+
+	int getJuneUserCount();
+
+	int getSepUserCount();
+
+	int getDecUserCount();
+	
 
 }

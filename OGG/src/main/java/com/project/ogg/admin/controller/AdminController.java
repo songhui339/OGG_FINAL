@@ -24,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.project.ogg.admin.model.mapper.AdminMapper;
 import com.project.ogg.admin.model.service.AdminService;
 import com.project.ogg.admin.model.vo.Answer;
+import com.project.ogg.admin.model.vo.MUser;
 import com.project.ogg.admin.model.vo.MemberAD;
 import com.project.ogg.admin.model.vo.Notice;
 import com.project.ogg.admin.model.vo.OttAdmin;
@@ -48,6 +49,14 @@ public class AdminController {
 	@GetMapping("/admin/home")
 	public ModelAndView goAdmin(ModelAndView model) {
 		List<MemberAD> list = service.getMemberList();
+		MUser muser = new MUser();
+		muser.setMarchUser(service.getMarchUserCount());
+		muser.setJuneUser(service.getJuneUserCount());
+		muser.setSepUser(service.getSepUserCount());
+		muser.setDecUser(service.getDecUserCount());
+		
+		System.out.println(muser);
+		model.addObject("muser",muser);
 
 		model.addObject("list", list);
 		model.setViewName("admin/ad_main");
@@ -59,6 +68,13 @@ public class AdminController {
 	public ModelAndView goOTT(ModelAndView model) {
 		List<OttAdmin> list = service.getOTTList();
 		
+		MUser muser = new MUser();
+		muser.setMarchUser(service.getMarchUserCount());
+		muser.setJuneUser(service.getJuneUserCount());
+		muser.setSepUser(service.getSepUserCount());
+		muser.setDecUser(service.getDecUserCount());
+		
+		model.addObject("muser",muser);
 		model.addObject("list",list);
 		model.setViewName("admin/ad_OTT");
 		return model;

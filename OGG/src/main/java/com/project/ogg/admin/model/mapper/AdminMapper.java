@@ -51,6 +51,14 @@ public interface AdminMapper {
 	int updateQuestion(Question question);
 
 	List<OttAdmin> getOTTList();
+	
+	int getMarchUserCount();
+
+	int getJuneUserCount();
+
+	int getSepUserCount();
+
+	int getDecUserCount();
 
 
 }

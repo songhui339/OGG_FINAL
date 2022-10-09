@@ -138,5 +138,25 @@ public class AdminServiceImpl implements AdminService {
 	public List<OttAdmin> getOTTList() {
 		return mapper.getOTTList();
 	}
+	
+	@Override
+	public int getMarchUserCount() {
+		return mapper.getMarchUserCount();
+	}
+
+	@Override
+	public int getJuneUserCount() {
+		return mapper.getJuneUserCount();
+	}
+
+	@Override
+	public int getSepUserCount() {
+		return mapper.getSepUserCount();
+	}
+
+	@Override
+	public int getDecUserCount() {
+		return mapper.getDecUserCount();
+	}
 
 }

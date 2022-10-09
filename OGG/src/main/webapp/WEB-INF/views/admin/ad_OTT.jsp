@@ -166,6 +166,12 @@
                 </footer>
             </div>
         </div>
+         <script>
+        var a = ${muser.marchUser};
+        var b = ${muser.juneUser};
+        var c = ${muser.sepUser};
+        var d = ${muser.decUser};
+		</script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="${path}/js/admin/script.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
@@ -174,13 +180,5 @@
         <script src="${path}/js/admin/ottTable.js"></script>
         <script src="${path}/js/admin/bar.js"></script>
         <script src="${path}/js/admin/pie.js"></script>
-
-<script>
-            $(document).ready(function() {
-        $('#datatablesSimple2').DataTable();
-
-
-});
-        </script>
     </body>
 </html>
