@@ -11,6 +11,7 @@ import com.project.ogg.admin.model.mapper.AdminMapper;
 import com.project.ogg.admin.model.vo.Answer;
 import com.project.ogg.admin.model.vo.MemberAD;
 import com.project.ogg.admin.model.vo.Notice;
+import com.project.ogg.admin.model.vo.OttAdmin;
 import com.project.ogg.admin.model.vo.Question;
 import com.project.ogg.common.util.PageInfo;
 
@@ -131,6 +132,11 @@ public class AdminServiceImpl implements AdminService {
 	@Transactional
 	public int updateQuestion(Question question) {
 		return mapper.updateQuestion(question);
+	}
+
+	@Override
+	public List<OttAdmin> getOTTList() {
+		return mapper.getOTTList();
 	}
 
 }

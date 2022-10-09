@@ -103,49 +103,16 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    <c:forEach var="ott" items="${list}">
                                         <tr>
-                                            <td>1</td>
-                                            <td>유튜브</td>
-                                            <td>미디어</td>
-                                            <td>4명</td>
+                                            <td>${ott.ott_no }</td>
+                                            <td>${ott.ott_name }</td>
+                                            <td>${ott.ott_class }</td>
+                                            <td>${ott.ott_max_member }명</td>
                                             <td>20개</td>
                                             <td><a href="assets/img/유튜브.png">유튜브이미지</a></td>
                                         </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>왓챠</td>
-                                            <td>미디어</td>
-                                            <td>4명</td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>닌텐도</td>
-                                            <td>게임</td>
-                                            <td>2명</td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td>케이크</td>
-                                            <td>교육/도서</td>
-                                            <td>4명</td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>5</td>
-                                            <td>오피스365</td>
-                                            <td>유틸리티</td>
-                                            <td>4명</td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>6</td>
-                                            <td>네이버플러스</td>
-                                            <td>멤버쉽</td>
-                                            <td>4명</td>
-                                            <td></td>
-                                        </tr>
+                                    </c:forEach>
                                     </tbody>
                                     <tfoot>
                                         <tr>

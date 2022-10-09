@@ -8,6 +8,7 @@ import org.apache.ibatis.session.RowBounds;
 import com.project.ogg.admin.model.vo.Answer;
 import com.project.ogg.admin.model.vo.MemberAD;
 import com.project.ogg.admin.model.vo.Notice;
+import com.project.ogg.admin.model.vo.OttAdmin;
 import com.project.ogg.admin.model.vo.Question;
 
 @Mapper
@@ -48,6 +49,8 @@ public interface AdminMapper {
 	List<MemberAD> getMemberList();
 
 	int updateQuestion(Question question);
+
+	List<OttAdmin> getOTTList();
 
 
 }

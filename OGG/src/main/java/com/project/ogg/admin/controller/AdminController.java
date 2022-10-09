@@ -26,6 +26,7 @@ import com.project.ogg.admin.model.service.AdminService;
 import com.project.ogg.admin.model.vo.Answer;
 import com.project.ogg.admin.model.vo.MemberAD;
 import com.project.ogg.admin.model.vo.Notice;
+import com.project.ogg.admin.model.vo.OttAdmin;
 import com.project.ogg.admin.model.vo.PhotoVo;
 import com.project.ogg.admin.model.vo.Question;
 import com.project.ogg.common.util.MultipartFileUtil;
@@ -55,9 +56,12 @@ public class AdminController {
 	}
 	
 	@GetMapping("/admin/OTT")
-	public String goOTT() {
+	public ModelAndView goOTT(ModelAndView model) {
+		List<OttAdmin> list = service.getOTTList();
 		
-		return "admin/ad_OTT";
+		model.addObject("list",list);
+		model.setViewName("admin/ad_OTT");
+		return model;
 	}
 	
 	@GetMapping("/admin/member")
