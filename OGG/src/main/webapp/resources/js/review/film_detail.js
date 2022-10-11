@@ -5,6 +5,8 @@ $(document).ready(function() {
 	const type1 = "movie";
     const type2 = "tv";
 	let poster = 'https://image.tmdb.org/t/p/w500/';
+    var title;
+    var name;
 
     $.ajax({
         async: true, 
@@ -26,7 +28,6 @@ $(document).ready(function() {
         }
     });
     
-    var title;
     
     $.ajax({
         async: false, 
@@ -52,7 +53,6 @@ $(document).ready(function() {
                 html += "<div class='row' style='font-size: 1em; color: grey; margin-bottom: 15px; margin-left: 1px;'>";
                 html += orig_title + " " + date + "<br>" + "평점 : " + vote_average 
                 html += "</div>";
- 	   
 
             $("#filmDetail1").append(html);
         },
@@ -61,12 +61,8 @@ $(document).ready(function() {
         }
     })
     
- 	  console.log('타이틀 : ' + title);
-    
-        $('#leavecomment').on("click", function() {
+    $('#writerv').on("click", function() {
         let message = document.getElementById('message-text').value
-        let fcodes = fcode;
-        console.log(message);
         
 		$.ajax({
 	        async: true,
@@ -75,7 +71,7 @@ $(document).ready(function() {
 			data : {
 				'fTitle' : title, 
 				'rvContent' : message, 
-				'fCode' : fcodes,
+				'fCode' : fcode,
 				'ftype' : ftype
 			},
 			success : (data) => {
@@ -87,6 +83,56 @@ $(document).ready(function() {
 			}
 		});
         
+    });
+    
+    $('#updaterv').on("click", function() {
+        let message = document.getElementById('message-text').value
+        
+		$.ajax({
+	        async: true,
+			type : 'POST',
+			url : contextpath + '/review/review_update',
+			data : {
+				'fTitle' : title, 
+				'rvContent' : message, 
+				'fCode' : fcode,
+				'ftype' : ftype
+			},
+			success : (data) => {
+				console.log(data);
+				
+			},
+			error : (error) => {
+				console.log(error);
+			}
+		});
+        
+    });
+    
+    $('#deleterv').on("click", function() {
+        let message = document.getElementById('message-text').value
+        
+        if(confirm('리뷰를 삭제하시겠습니까?')){
+        	
+			$.ajax({
+		        async: true,
+				type : 'POST',
+				url : contextpath + '/review/review_delete',
+				data : {
+					'fTitle' : title, 
+					'rvContent' : message, 
+					'fCode' : fcode,
+					'ftype' : ftype
+				},
+				success : (data) => {
+					console.log(data);
+					
+				},
+				error : (error) => {
+					console.log(error);
+				}
+			});
+        }
     });
     
     $.ajax({
@@ -107,7 +153,6 @@ $(document).ready(function() {
                 html += overview;
                 html += "</p></p>";
                 
-            console.log(result);
             $("#filmDetail2").append(html);
         },
         error: function (error) {
@@ -123,9 +168,6 @@ $(document).ready(function() {
         dataType: "json", 
         success: function (result) { 
             
-            var name;
-			console.log(result);
-
             for (let i = 0; i < result.crew.length; i++) {
                 let job = result.crew[i].job;
                 
@@ -145,8 +187,7 @@ $(document).ready(function() {
     });
     
     var dirname = $("#dir").val();
-    console.log('감독이름 : ' + dirname);
-	
+    
     $.ajax({
         async: true, 
 
@@ -183,14 +224,10 @@ $(document).ready(function() {
                 	html += "추천 작품이 존재하지 않습니다";
                 } 
             }
-            
-            console.log(result);
 
             $("#carousel1").append(html);
         },
         error: function (error) {
-
-            console.log(dirname);
             alert("서버호출 실패5")
         }
     });

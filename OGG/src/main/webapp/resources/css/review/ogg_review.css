@@ -142,13 +142,18 @@
         color: grey;
     }
 
-    /* 코멘트 리뷰 카드 */
+    /* 리뷰 카드 */
     #card_review{
         border-radius: 15px;
         width: 16em;
         margin: auto;
     }
-
+    #card_review2{
+        border-radius: 15px;
+        width: 16em;
+        height: 16em;
+        margin: auto;
+    }
     #card_review_row{
         /* border: 2px solid blue;  */
         padding-left: 30px; 

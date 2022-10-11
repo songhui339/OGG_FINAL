@@ -30,4 +30,8 @@ public interface ReviewService {
 
 	Film filmcheck(int fcode);
 
+	int reviewUpdate(Review review);
+
+	int reviewDelete(Review review);
+
 }

@@ -9,16 +9,16 @@
 	<div class="container" style="height: 250px;">
 	    <div class="row" style="height: 100%;"> 
 	        <div class="col-sm-3" style="height: 100%; width: 13em;">
-	            <div class="card" id="filmDetail0" style="height: 100%; border: none">
+	            <div class="card" id="filmDetail0" style="height: 100%; border: none;">
 	
 	            </div>
 	        </div>
-	        <div class="col-sm-9" style="margin-top: 5%;" >
+	        <div class="col-sm-9" style="margin-top: 5%; z-index:999;" >
 	            <div id="filmDetail1">
 	
 	            </div>
 	            <div class="row">
-	                <div class="col-3 col-sm-3" style="margin-bottom: 10px;">
+	                <div class="col-3 col-sm-3" style="margin-bottom: 10px; z-index:999;">
 	                    <div class="star-rating space-x-4 mx-auto">
 	                        <input type="radio" id="5-stars" name="rating" value="5" v-model="ratings"/>
 	                        <label for="5-stars" class="star pr-4">★&nbsp;</label>
@@ -32,13 +32,13 @@
 	                        <label for="1-star" class="star">★&nbsp;</label>
 	                    </div>
 	                </div>
-	                <div class="col-3 col-sm-2">
+	                <div class="col-3 col-sm-2" style="z-index:999;">
 	                    <a href="">
 	                		<img src="${path}/images/review/plus.png" height="30px;">
 	                        보고싶어요
 	                    </a>
 	                </div>
-	                <div class="col-3 col-sm-3">
+	                <div class="col-3 col-sm-3" style="z-index:999;">
 	                    <a href="">
 	                		<img src="${path}/images/review/pen.png" height="30px;">
 	                        리뷰

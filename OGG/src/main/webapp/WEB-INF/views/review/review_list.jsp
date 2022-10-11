@@ -16,34 +16,33 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
     <!-- 내용 전체 컨테이너 -->
-    <br><br><br><br><br>
-    <div class="container" style="margin-bottom: 100px; padding-left: 60px; padding-right: 60px;">
+    <div class="container" style="margin-bottom: 100px; margin-top: 40px; padding-left: 60px; padding-right: 60px;">
     
 		<!-- 1st row -->
 		<jsp:include page="/WEB-INF/views/review/film_header.jsp"/>
         
         <!-- 2nd row -->
-        <div class="col-3 col-sm-12" id="div_review" >
-            <p class="detail-text1" style="margin-left: 10px;">코멘트</p><hr>
+        <div class="col-3 col-sm-12" id="div_review">
+            <p class="detail-text1" style="margin-left: 10px;">리뷰</p><hr>
 
             <!-- 리뷰 내용 -->
 			<c:if test="${ empty list }">
 				<br>
-				<center>작성된 리뷰가 없습니다. </center>
+				<center> 작성된 리뷰가 없습니다. </center>
 				<br><br>
 			</c:if>
 			
 			<c:if test="${ not empty list }">
 				<c:forEach var="review" items="${ list }">
 					<div id="div_review">
-						<a href="${ path }/review/review_detail?no=${ review.rvNo }&fcode=${ fcode }&ftype=${ ftype }">
+						<a style="z-index:9999;" href="${ path }/review/review_detail?no=${ review.rvNo }&fcode=${ fcode }&ftype=${ ftype }">
 						    <span id="board-text1">${ review.rvNickname }</span>
 						    <hr>
 						    <span id="board-text3">
 								${ review.rvContent }
 						    </span>
-						    <hr>
 						</a>
+						<hr>
 					    <div class="row" id="detail-text">
 					        <div class="col-sm-1">
 					            <img src="${ path }/images/review/heart2.png" style="margin-left: 10px;" height="30px;">

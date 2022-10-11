@@ -32,5 +32,9 @@ public interface ReviewMapper {
 	int insertFilm(Film film);
 
 	Film checkFilm(int fCode);
+
+	int updateReview(Review review);
+
+	int deleteReview(Review review);
 	
 }

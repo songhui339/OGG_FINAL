@@ -77,31 +77,32 @@
 	<!-- 리뷰 개수 조회 -->
 	<select id="selectBoardCount" parameterType="_int" resultType="_int">
 		SELECT COUNT(*) FROM REVIEW 
-		WHERE F_CODE = #{fcode}
+		WHERE F_CODE = #{fcode} AND RV_STATUS = 'Y'
 	</select>
 
 	<!-- 리뷰 전체 조회 -->
 	<select id="selectAll" resultMap="reviewResultMap">
 		<include refid="reviewSql"></include>
+		WHERE RV_STATUS = 'Y'
 		ORDER BY RV_LIKES DESC
 	</select>
 
 	<!-- 특정 필름 리뷰 조회 -->
 	<select id="selectReviewByFilm" parameterType="_int" resultMap="reviewResultMap">
 		<include refid="reviewSql"></include>
-		WHERE F_CODE = #{fcode}
+		WHERE F_CODE = #{fcode} AND RV_STATUS = 'Y'
 		ORDER BY R.RV_LIKES DESC
 	</select>
 	
 	<!-- 리뷰 상세 조회 -->
 	<select id="selectReviewByNo" parameterType="_int" resultMap="reviewResultMap">
 		<include refid="reviewSql"></include>
-		WHERE RV_STATUS = 'Y' AND RV_NO = #{no}
+		WHERE RV_STATUS = 'Y' AND RV_NO = #{no} 
 	</select>
 	
 	<!-- 리뷰별 댓글 개수 조회 -->
 	<select id="selectCmtCount" parameterType="_int" resultType="_int">
-		SELECT COUNT(*) FROM REVIEW_CMT WHERE RV_NO= #{no}
+		SELECT COUNT(*) FROM REVIEW_CMT WHERE CMT_STATUS = 'Y' AND RV_NO= #{no}
 	</select>
 	
 	<!-- 댓글 조회 -->
@@ -128,7 +129,6 @@
 		SELECT *
 		FROM FILM
 		WHERE F_CODE = #{fCode}
-		
 	</select>
 	
 	<!-- 영화 인서트 -->
@@ -173,10 +173,29 @@
 			)
 	</insert>	
 	
+	<!-- 리뷰 수정 -->
+	<update id="updateReview" parameterType="Review">
+		UPDATE REVIEW
+		SET 
+			RV_CONTENT = #{rvContent},
+		    RV_UPDATE = SYSDATE
+		WHERE F_CODE = #{fCode} AND RV_WRITER_NO = #{rvWriterNo}
+	</update>	
+	
+	<!-- 리뷰 삭제 -->
+	<update id="deleteReview" parameterType="Review">
+		UPDATE REVIEW
+		SET 
+		    RV_UPDATE = SYSDATE,
+		    RV_STATUS = 'N'
+		WHERE F_CODE = #{fCode} AND RV_WRITER_NO = #{rvWriterNo}
+	</update>	
+	
 	<!-- 댓글수 업데이트 -->
 	<update id="updateCmtCount" parameterType="int">
 		UPDATE REVIEW R
-		SET R.CMT_COUNT = (SELECT COUNT(CMT_NO)
+		SET 
+			R.CMT_COUNT = (SELECT COUNT(CMT_NO)
 		                  FROM REVIEW_CMT
 		                  WHERE RV_NO = #{RV_NO})
 		WHERE R.RV_NO = #{RV_NO}

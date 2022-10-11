@@ -137,9 +137,9 @@ public class ReviewController {
 			@ModelAttribute Review review,
 			@ModelAttribute Film film) {
 
-		Film checkFilm = null;
-		int insertFilm = 0;
-		int writeReview = 0;
+		Film filmCheck = null;
+		int filmSave = 0;
+		int reviewWrite = 0;
 		review.setRvWriterNo(member.getM_no());
 		int fcode = Integer.parseInt(review.getFCode());
 		
@@ -147,15 +147,15 @@ public class ReviewController {
 		System.out.println(review);
 		System.out.println(film);
 
-		checkFilm = service.filmcheck(fcode);
+		filmCheck = service.filmcheck(fcode);
 		
-		if(checkFilm == null) {
-			insertFilm = service.filmSave(film);
+		if(filmCheck == null) {
+			filmSave = service.filmSave(film);
 			
-			if(insertFilm > 0) {
-				writeReview = service.reviewSave(review);
+			if(filmSave > 0) {
+				reviewWrite = service.reviewSave(review);
 				
-				if(writeReview > 0) {
+				if(reviewWrite > 0) {
 					System.out.println("리뷰까지 성공");
 		//			model.addObject("msg", "리뷰가 정상적으로 등록되었습니다.");
 		//			model.addObject("location", "/review/review_detail?no=" + review.getRvNo() + "&fcode=" + fcode +  "&ftype=" + ftype );
@@ -168,14 +168,62 @@ public class ReviewController {
 				System.out.println("필름 인서트 실패");
 			}
 		} else {
-			writeReview = service.reviewSave(review);
-			if(writeReview > 0) {
+			reviewWrite = service.reviewSave(review);
+			if(reviewWrite > 0) {
 				System.out.println("존재하는 필름 리뷰 성공");
 			} else {
 				System.out.println("존재하는 필름 리뷰 실패");
 			}
 		}
-		model.setViewName("/review/film_detail?fcode=" + fcode + "&ftype=" + ftype);
+		model.setViewName("review/film_detail?fcode=" + fcode + "&ftype=" + ftype);
+		
+		return model;
+	}
+	
+	@PostMapping("/review_update")
+	public ModelAndView reviewUpdate(ModelAndView model,
+			@AuthenticationPrincipal Member member,
+			@RequestParam("fCode") String fCode,
+			@RequestParam("ftype") String ftype,
+			@ModelAttribute Review review) {
+		
+		int reviewUpdate = 0;
+		review.setRvWriterNo(member.getM_no());
+		int fcode = Integer.parseInt(review.getFCode());
+
+		reviewUpdate = service.reviewUpdate(review);
+		
+		if(reviewUpdate > 0) {
+			System.out.println("리뷰 수정 성공");
+		}else {
+			System.out.println("리뷰 수정 실패");
+		}
+		
+		model.setViewName("review/review_list");
+
+		return model;
+	}
+	
+	@PostMapping("/review_delete")
+	public ModelAndView reviewDelete(ModelAndView model,
+			@AuthenticationPrincipal Member member,
+			@RequestParam("fCode") String fCode,
+			@RequestParam("ftype") String ftype,
+			@ModelAttribute Review review) {
+		
+		int reviewDelete = 0;
+		review.setRvWriterNo(member.getM_no());
+		int fcode = Integer.parseInt(review.getFCode());
+		
+		reviewDelete = service.reviewDelete(review);
+		
+		if(reviewDelete > 0) {
+			System.out.println("리뷰 삭제 성공");
+		}else {
+			System.out.println("리뷰 삭제 실패");
+		}
+		
+		model.setViewName("review/review_list");
 		
 		return model;
 	}

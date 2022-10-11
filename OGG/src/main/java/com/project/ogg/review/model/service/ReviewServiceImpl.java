@@ -84,6 +84,18 @@ public class ReviewServiceImpl implements ReviewService {
 		return mapper.checkFilm(fCode);
 	}
 
+	@Override
+	public int reviewUpdate(Review review) {
+		
+		return mapper.updateReview(review);
+	}
+
+	@Override
+	public int reviewDelete(Review review) {
+		
+		return mapper.deleteReview(review);
+	}
+
 
 
 }

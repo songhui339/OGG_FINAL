@@ -16,8 +16,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     
     <!-- 내용 전체 컨테이너 -->
-    <br><br><br><br><br>
-    <div class="container" style="margin-bottom: 100px; padding-left: 60px; padding-right: 60px;">
+    <div class="container" style="margin-bottom: 100px; margin-top: 40px; padding-left: 60px; padding-right: 60px; ">
 		
 		<!-- 1st row -->
 		<jsp:include page="/WEB-INF/views/review/film_header.jsp"/>
@@ -45,14 +44,41 @@
 			        </div>
  			        <div class="col-sm-3">
 			            <div class="btn-group" role="group" aria-label="Basic mixed styles example" style="padding-left: 55%;">
-			                <button class="btn btn-primary" type="button">수정</button>
-			                <button class="btn btn-primary" type="button">삭제</button>
+			                <!-- <button class="btn btn-primary" type="button" id="updaterv">수정</button> -->
+			                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever=" 남기기">수정</button>
+			                <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever=" 남기기"> -->
+			                <button class="btn btn-primary" type="button" id="deleterv">삭제</button>
 			            </div>        
 			        </div> 
 			    </div>
 			</div>
 			<br>
             <!-- 리뷰 내용 끝-->
+            
+            <!-- 모달 -->
+	        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+	                <div class="modal-content">
+	                    <div class="modal-header"id="modal-header">
+	                        <h5 class="modal-title" id="exampleModalLabel">리뷰 수정</h5>
+	                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	                    </div>
+	                    <div class="modal-body">
+	                        <form>
+	                        <div class="mb-3">
+	                            <label for="message-text" class="col-form-label"></label>
+	                            <textarea class="form-control" id="message-text" style="height: 300px;">${ review.rvContent }</textarea>
+	                        </div>
+	                        </form>
+	                    </div>
+	                    <div class="modal-footer">
+	                        <span id="textLengthCheck">(0 / 2000)</span>
+	                        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button> -->
+	                        <button type="button" class="btn btn-primary" id="updaterv" data-bs-dismiss="modal">저장</button>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
             
             <!-- 댓글 테이블 -->
             <div id="div_review">
@@ -91,10 +117,22 @@
     <!-- 내용 전체 컨테이너 끝 -->    
     
 	<script>
-		var fcode = "${fcode}";
-		var ftype = "${ftype}";
-		var contextpath = "${ pageContext.request.contextPath }";
-	</script>	  
+	var fcode = "${ fcode }";
+	var ftype = "${ ftype }";
+	var m_no = "${ m_no }";
+	var contextpath = "${ pageContext.request.contextPath }";
+
+	    $("#message-text").keyup(function(e) {
+	    var content = $(this).val();
+	    $("#textLengthCheck").text("(" + content.length + " / 2000)"); //실시간 글자수 카운팅
+	    if (content.length > 2000) {
+	        alert("최대 2000자까지 입력 가능합니다.");
+	        $(this).val(content.substring(0, 2000));
+	        $('#textLengthCheck').text("(2000 / 2000");
+	    }
+	});
+	        
+	</script>  
 
 	<!-- footer -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

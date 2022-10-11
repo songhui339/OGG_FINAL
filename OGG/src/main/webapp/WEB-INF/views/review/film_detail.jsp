@@ -19,8 +19,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
     <!-- 내용 전체 컨테이너 -->
-    <br><br><br><br><br>
-    <div class="container" style="margin-bottom: 100px; padding-left: 60px; padding-right: 60px;">
+    <div class="container" style="margin-bottom: 100px; margin-top: 40px; padding-left: 60px; padding-right: 60px; ">
 		
 		<!-- 1st row -->
 		<jsp:include page="/WEB-INF/views/review/film_header.jsp"/>
@@ -29,8 +28,8 @@
         <div id="div_review">
             <div class="row" id="detail-text0">
                 <div class="col-3">이 작품에 대한 평가를 남겨보세요</div>
-                <!-- <div class="col-9"><button class="btn btn-primary" type="button">코멘트 남기기</button></div> -->
-                <div class="col-9"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever=" 남기기">리뷰 남기기</button></div>
+                <!-- <div class="col-style="z-index:9999;"9"><button class="btn btn-primary" type="button">코멘트 남기기</button></div> -->
+                <div class="col-9" style="z-index:999;"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever=" 남기기">리뷰 남기기</button></div>
             </div>
         </div>
         <br>
@@ -54,7 +53,7 @@
                     <div class="modal-footer">
                         <span id="textLengthCheck">(0 / 2000)</span>
                         <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button> -->
-                        <button type="button" class="btn btn-primary" id="leavecomment" data-bs-dismiss="modal">저장</button>
+                        <button type="button" class="btn btn-primary" id="writerv" data-bs-dismiss="modal">저장</button>
                     </div>
                 </div>
             </div>
@@ -92,27 +91,26 @@
 					<!-- 기준으로 반복 -->
 					<c:forEach var="review" begin="0" end="3" items="${ list }">
                     <div class="col">
-                    	<a href="${ path }/review/review_detail?no=${ review.rvNo }&fcode=${ fcode }&ftype=${ ftype }">
-                        <div class="card" id="card_review">
-                            <div class="card-body">
+                        <div class="card" id="card_review2">
+                            <div class="card-body" style="position: relative;">
                                 <p id="detail-text1">${ review.rvNickname }</p>
                                 <hr>
-                                <p id="detail-text3">
-                                    ${ review.rvContent }
-                                </p><hr>
-                                <div class="row" id="detail-text">
+                    				<a id="detail-text3" href="${ path }/review/review_detail?no=${ review.rvNo }&fcode=${ fcode }&ftype=${ ftype }">
+		                            	${ review.rvContent }
+                       				</a>
+                                <div class="row" id="detail-text" style="position: absolute; width: 98%; left: 15px; bottom: 10px;">
+		                        <hr>
                                     <div class="col">
-                                        <img src="${ path }/images/review/heart2.png" style="margin-left: 10px;" height="26px;">
+                                        <img src="${ path }/images/review/heart2.png" style="margin-left: 10px; height: 26px;">
                                        	${ review.rvLikes }
                                     </div>
                                     <div class="col">
-                                        <img src="${ path }/images/review/comment2.png"  height="26px;">
+                                        <img src="${ path }/images/review/comment2.png" style="height: 26px;">
                                         ${ review.rvCmtCount }
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        </a>
                     </div>
 					</c:forEach>
                 </c:if>
@@ -143,45 +141,43 @@
 	var m_no = "${ m_no }";
 	var contextpath = "${ pageContext.request.contextPath }";
 
-	    $("#message-text").keyup(function(e) {
+	$("#message-text").keyup(function(e) {
 	    var content = $(this).val();
-	    $("#textLengthCheck").text("(" + content.length + " / 2000)"); //실시간 글자수 카운팅
+	    $("#textLengthCheck").text("(" + content.length + " / 2000)");
 	    if (content.length > 2000) {
 	        alert("최대 2000자까지 입력 가능합니다.");
 	        $(this).val(content.substring(0, 2000));
 	        $('#textLengthCheck').text("(2000 / 2000");
 	    }
 	});
-	      
-	        
 	</script>
 	
 	<script>
-	    var chart = c3.generate({
-	    bindto: "#linechart",
-	    data: {
-	        columns: [
-	        ['data1', 30, 200, 100, 400, 150, 250],
-	        ['data2', 50, 20, 10, 40, 15, 25]
-	        ]
-	    }
-	    });
+	var chart = c3.generate({
+	bindto: "#linechart",
+	data: {
+	    columns: [
+	    ['data1', 30, 200, 100, 400, 150, 250],
+	    ['data2', 50, 20, 10, 40, 15, 25]
+	    ]
+	}
+	});
 	
-	    var exampleModal = document.getElementById('exampleModal')
-	    exampleModal.addEventListener('show.bs.modal', function (event) {
-	    // Button that triggered the modal
-	    var button = event.relatedTarget
-	    // Extract info from data-bs-* attributes
-	    var recipient = button.getAttribute('data-bs-whatever')
-	    // If necessary, you could initiate an AJAX request here
-	    // and then do the updating in a callback.
-	    // Update the modal's content.
-	    var modalTitle = exampleModal.querySelector('.modal-title')
-	    var modalBodyInput = exampleModal.querySelector('.modal-body input')
+	var exampleModal = document.getElementById('exampleModal')
+	exampleModal.addEventListener('show.bs.modal', function (event) {
+	// Button that triggered the modal
+	var button = event.relatedTarget
+	// Extract info from data-bs-* attributes
+	var recipient = button.getAttribute('data-bs-whatever')
+	// If necessary, you could initiate an AJAX request here
+	// and then do the updating in a callback.
+	// Update the modal's content.
+	var modalTitle = exampleModal.querySelector('.modal-title')
+	var modalBodyInput = exampleModal.querySelector('.modal-body input')
 	
-	    modalTitle.textContent = '리뷰' + recipient
-	    modalBodyInput.value = recipient
-	    });
+	modalTitle.textContent = '리뷰' + recipient
+	modalBodyInput.value = recipient
+	});
     </script>
     
     <!-- footer -->
