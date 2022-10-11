@@ -13,7 +13,7 @@
 
 <script src="${ path }/js/party/ott_menu.js"></script>
 
-<div style="height: 100px;"></div>
+<!-- <div style="height: 100px;"></div> -->
 
     <!-- 모달 div -->
     <!-- 첫번째 모달 div -->

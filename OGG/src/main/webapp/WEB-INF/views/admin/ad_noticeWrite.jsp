@@ -47,7 +47,7 @@
                             </a>
                             <a class="nav-link" href="${path}/admin/home">
                                 <div class="sb-nav-link-icon"><i class="fa-solid fa-toolbox"></i></div>
-                                메인
+                                관리자 메인
                             </a>
                             <a class="nav-link" href="${path}/admin/OTT">
                                 <div class="sb-nav-link-icon"><i class="fa-sharp fa-solid fa-video"></i></div>

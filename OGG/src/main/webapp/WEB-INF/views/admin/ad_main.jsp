@@ -44,7 +44,7 @@
                             </a>
                             <a class="nav-link" href="${path}/admin/home">
                                 <div class="sb-nav-link-icon"><i class="fa-solid fa-toolbox"></i></div>
-                                메인
+                                관리자 메인
                             </a>
                             <a class="nav-link" href="${path}/admin/OTT">
                                 <div class="sb-nav-link-icon"><i class="fa-sharp fa-solid fa-video"></i></div>
@@ -157,6 +157,12 @@
                 </footer>
             </div>
         </div>
+         <script>
+        var a = ${muser.marchUser};
+        var b = ${muser.juneUser};
+        var c = ${muser.sepUser};
+        var d = ${muser.decUser};
+		</script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="${path}/js/admin/script.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>

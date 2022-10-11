@@ -25,7 +25,10 @@
 	FROM MEMBER
 	ORDER BY M_NAME) M
 </select>
-
+<select id="getOTTList" resultType="OttAdmin">
+SELECT OTT_NO, OTT_NAME,OTT_CLASS, OTT_MAX_MEMBER
+FROM OTT_INFO
+</select>
 <select id="getNoticeCount" resultType="_int">
 	SELECT COUNT(*)
 	FROM NOTICE
@@ -36,6 +39,29 @@
 	SELECT COUNT(*)
 	FROM QUESTION
 </select>
+<select id="getMarchUserCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM MEMBER
+		<![CDATA[WHERE M_JOINDATE < TO_DATE(20220301)]]>
+	</select>
+	
+	<select id="getJuneUserCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM MEMBER
+		<![CDATA[WHERE M_JOINDATE < TO_DATE(20220601)]]>
+	</select>
+	
+	<select id="getSepUserCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM MEMBER
+		<![CDATA[WHERE M_JOINDATE < TO_DATE(20220901)]]>
+	</select>
+	
+	<select id="getDecUserCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM MEMBER
+		<![CDATA[WHERE M_JOINDATE < TO_DATE(20221201)]]>
+	</select>
 
 <select id="selectNoticeList" resultMap="noticeListResultMap">
 	SELECT ROWNUM,
