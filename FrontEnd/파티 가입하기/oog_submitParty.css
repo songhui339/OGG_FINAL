@@ -4,8 +4,8 @@ OGG Party Page CSS
 ====================================================
 */
 
-/* ****** 파티 만들기 Page ****** */
-.createParty_section {
+/* ****** 파티 가입하기 Page #01 ****** */
+.submitParty_section {
     background-color: rgb(244, 244, 250);
     width: 100vw;
     /* min-height: 100vh; */
@@ -18,7 +18,7 @@ OGG Party Page CSS
     padding: 80px 0;
 }
 
-.createParty_section .titleBox h2 {
+.submitParty_section .titleBox h2 {
     font-size: 28px;
     font-weight: bold;
     line-height: 42px;
@@ -163,225 +163,200 @@ OGG Party Page CSS
     margin-left: 2px;
 }
 
-body.modal-open {
-    overflow-y: scroll !important;
+/* ****** 파티 가입하기 Page #02 ****** */
+.submitParty_section .itemListWrap {
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
-/* ****** 파티 만들기 모달 창 ****** */
-
-.partyModal_title {
-    border-bottom: none !important;
-    /* padding: var(--bs-modal-header-padding); */
-    padding: 30px 20px 10px 20px;
+.submitParty_section .itemListWrap h2.titleText{
+    font-size: 1.8rem;
+    font-weight: 500;
+    margin-bottom: 50px;
+    z-index: 9999;
 }
 
-.partyModal_title h2.titleText {
-    height: auto;
-    font-size: 21px;
-    line-height: 31.5px;
-    margin-bottom: 8px;
-}
-
-.partyModal_title h2.titleText span.subText {
-    height: 17px;
-    font-size: 14px;
-    text-align: left;
-    color: rgb(101, 101, 101);
-}
-
-.partyModal_title p.serviceText {
-    display: inline-block;
-    width: auto;
-    border-radius: 5px;
-    padding: 4px 8px;
-    background-color: rgb(0, 0, 0);
-    font-size: 12px;
-    font-weight: bold;
-    text-align: left;
-    margin: 0;
-    color: rgb(255, 255, 255);
-}
-
-.partyModal_content_01,
-.partyModal_content_02 {
-    /* position: relative; */
-    flex: 1 1 auto;
-    /* padding: var(--bs-modal-padding); */
-    padding: 10px 20px 30px 20px;
-}
-
-.nextBtnBox {
-    margin-top: 20px;
-    border-top: none !important;
-    padding-bottom: 30px;
-}
-
-.nextBtnBox input.nextBtn {
-    cursor: pointer;
-    width: 100%;
-    height: 56px;
-    border-radius: 10px;
-    background-color: rgb(64, 64, 204);
-    font-size: 16px;
-    line-height: 19px;
-    border: none;
-    text-align: center;
-    color: rgb(255, 255, 255);
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-}
-
-.partyModal_content_01 .serviceName_gray {
-    cursor: pointer;
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    border: 1px solid rgb(211, 211, 211);
-    background-color: rgb(255, 255, 255);
-    padding: 15px 20px;
-    margin-bottom: 10px;
-}
-
-.partyModal_content_01 .serviceName_gray label.text{
-    font-size: 16px;
-    font-weight: bold;
-    line-height: 24px;
-    text-align: left;
-    color: rgb(34, 34, 34);
-}
-
-.partyModal_content_01 .serviceName_purple {
-    cursor: pointer;
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    border: 1.5px solid rgb(64, 64, 204);
-    background-color: rgb(255, 255, 255);
-    padding: 15px 20px;
-    margin-bottom: 10px;
-}
-
-.partyModal_content_01 .serviceName_purple label.text {
-    margin-left: 4px;
-    font-size: 16px;
-    font-weight: bold;
-    line-height: 24px;
-    text-align: left;
-    color: rgb(64, 64, 204);
-}
-
-.partyModal_content_01 .serviceName_purple ul.infoText {
-    margin-top: 18px;
-    font-size: 14px;
-    line-height: 21px;
-    text-align: left;
-    color: rgb(34, 34, 34);
-    padding-left: 1rem;
-}
-
-.partyModal_content_01 .serviceName_purple ul.infoText li:last-child {
+.submitParty_section .itemListWrap a.titleText {
+    color: #1f1f1f;
     text-decoration: none;
 }
 
-/* ****** 2번째 모달창 파티장 가이드 ****** */
-.partyModal_content_02 .noticeBox {}
-
-.partyModal_content_02 .noticeBox .titleText {
-    font-size: 16px;
-    font-weight: bold;
-    line-height: 24px;
-    text-align: left;
-    color: rgb(74, 74, 74);
-    margin: 0;
+.submitParty_section .itemListWrap .itemBoxWrap {
+    width: calc(100% + 26px);
+    margin-top: -13px;
+    margin-left: -13px;
+    font-size: 0;
+    position: relative;
+    /* height: 1567.94px; */
 }
 
-.partyModal_content_02 .noticeBox .infoText {
-    margin-top: 12px;
-    margin-bottom: 32px;
-    width: 100%;
-    padding: 16px 18px;
-    border-radius: 10px;
-    background-color: rgb(246, 246, 246);
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 21px;
-    text-align: left;
-    color: rgb(101, 101, 101);
-}
-
-.partyModal_content_02 .checkBox {
+.submitParty_section .itemListWrap .itemBoxWrap .itemBox {
+    position: relative;
+    display: inline-block;
+    width: calc(45% - 26px);
+    margin: 13px;
+    padding: 22px 30px;
+    font-size: 13px;
+    color: #666666;
+    vertical-align: top;
+    border-radius: 20px;
+    border: solid 1px #dddddd;
+    background-color: white;
+    overflow: hidden;
     cursor: pointer;
-    display: flex;
-    -webkit-box-align: center;
-    align-items: center;
-    margin-bottom: 20px;
 }
 
-.partyModal_content_02 .checkBox img.checkIcon {
-    width: 24px;
-    height: 24px;
-    margin-right: 8px;
+.submitParty_section .itemListWrap .itemBoxWrap .itemBox:hover {
+    border: solid 1px #7e69fe;
 }
 
-.partyModal_content_02 .checkBox span.text {
-    font-size: 14px;
-    line-height: 21px;
-    text-align: left;
-    color: rgb(74, 74, 74);
+.submitParty_section .itemListWrap .itemBoxWrap .itemBox .title {}
+
+.submitParty_section .itemListWrap .itemBoxWrap .itemBox .title .logoImg {
+    display: inline-block;
+}
+.submitParty_section .itemListWrap .itemBoxWrap .itemBox .title .logoImg img {
+    width: 60px;
+    height: 60px;
+    margin-right: 15px;
+    vertical-align: bottom;
+}
+
+.submitParty_section .itemListWrap .itemBoxWrap .itemBox .title .titleText {
+    display: inline-block;
+}
+
+.submitParty_section .itemListWrap .itemBoxWrap .itemBox .title .titleText p.text {
+    margin-bottom: 5px;
+    font-size: 22px;
+    font-weight: 500;
+    color: #333333;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.submitParty_section .itemListWrap .itemBoxWrap .itemBox:hover .title .titleText p.text {
+    color: #7e69fe !important;
+}
+
+.submitParty_section .itemListWrap .itemBoxWrap .itemBox .title .titleText p.subText {
+    margin-bottom: 0;
+    font-size: 0.9rem;
+    color: #666666;
+}
+
+.submitParty_section .itemListWrap .itemBoxWrap .itemBox .item-members {
+    position: relative;
+    margin: 15px 0;
+    /* font-size: 0; */
+    white-space: nowrap;
+}
+
+.submitParty_section .itemListWrap .itemBoxWrap .itemBox .item-info {
+    position: relative;
+    font-size: 13px;
+    color: #666666;
+}
+
+.submitParty_section .itemListWrap .itemBoxWrap .itemBox .item-info .item-price {
+    position: absolute;
+    bottom: 0;
+    right: 26px;
+    color: #999;
+}
+
+.submitParty_section .itemListWrap .itemBoxWrap .itemBox .item-info .item-price .price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #252525;
+    vertical-align: -2px;
+    margin-right: 5px;
+}
+
+.submitParty_section .bannerWrap {
+    max-width: 1000px;
+    margin: 50px auto 0 auto;
+}
+
+.submitParty_section .bannerWrap .bannerBox {
+    background-color: #ffffff;
+    width: calc(100% + 26px);
+    margin: 0 auto;
+    border-radius: 20px;
+    padding: 30px 0;
+}
+
+.submitParty_section .bannerWrap .bannerBox .titleText {
+    font-size: 1.6rem;
+    text-align: center;
+}
+
+.submitParty_section .bannerWrap .bannerBox .button {
+    text-align: center;
+}
+
+.submitParty_section .bannerWrap .bannerBox .button a {
+    position: relative;
+    display: inline-block;
+    font-size: 16px;
+    color: #ffffff;
+    text-align: center;
+    padding: 10px 60px;
+    text-decoration: none;
+    border-radius: 17px;
+    border: 1px solid #7e69fe;
+    background-color: #7e69fe;
 }
 
 
-/* 
-====================================================
-OGG 파티 만들기 입력 페이지CSS
-====================================================
-*/
 
-.enrollPage02 {
+/* ****** 파티 가입하기 Page #03 ****** */
+.submitPartyDetail_section {
     min-height: 600px;
     padding: 50px 0 100px 0;
+    background-color: rgb(244, 244, 250);
 }
 
-.enrollPage02 .contentWrap {
+.submitPartyDetail_section .contentWrap {
     position: relative;
     max-width: 1280px;
     height: 100%;
     margin: 0 auto;
 }
 
-.enrollPage02 .contentWrap .formBox {
+.submitPartyDetail_section .contentWrap .formBox {
     max-width: 800px;
     margin: 0 auto;
 }
 
-.enrollPage02 .contentWrap .serviceInfoBox {
+.submitPartyDetail_section .contentWrap .serviceInfoBox {
     border-radius: 20px;
+    background-color: #ffffff;
     border: solid 1px #cec8f1;
     width: max-content;
 }
 
-.enrollPage02 .contentWrap .serviceInfoBox .text {
+.submitPartyDetail_section .contentWrap .serviceInfoBox .text {
     font-size: 1rem;
     color: #333333;
     margin-bottom: 0;
     padding: 5px 20px;
 }
-.enrollPage02 .contentWrap .serviceInfoBox .text .logoImg {
+.submitPartyDetail_section .contentWrap .serviceInfoBox .text .logoImg {
     width: 40px;
     height: 40px;
     margin: 0 15px 0 30px;
 }
 
-.enrollPage02 .contentWrap .serviceInfoBox .text .nameText {
+.submitPartyDetail_section .contentWrap .serviceInfoBox .text .nameText {
     font-weight: 500;
     color: #1f1f1f;
 }
 
 
-.enrollPage02 .contentWrap .formBox h3 {
+.submitPartyDetail_section .contentWrap .formBox h3 {
     position: relative;
-    margin-top: 56px;
+    margin-top: 30px;
     margin-bottom: 20px;
     font-size: 18px;
     font-weight: 400;
@@ -392,34 +367,45 @@ OGG 파티 만들기 입력 페이지CSS
     color: #7e69fe;
 }
 
-.enrollPage02 .contentWrap .formBox .form-round-box {
+.submitPartyDetail_section .contentWrap .formBox .form-round-box {
     position: relative;
     padding: 25px 40px;
+    background-color: #ffffff;
     border: solid 1px #cec8f1;
     border-radius: 20px;
 }
 
-.enrollPage02 .contentWrap .formBox .form-round-box ul.form-list {
+.submitPartyDetail_section .contentWrap .formBox .form-round-box ul.form-list {
     margin: 0;
     padding: 0;
     list-style: none;
 }
 
-.enrollPage02 .contentWrap .formBox .form-round-box ul.form-list li {
+.submitPartyDetail_section .contentWrap .formBox .form-round-box ul.form-list li {
     position: relative;
     min-height: 42px;
-    padding: 2px 0 2px 120px;
+    padding: 2px 0 2px 160px;
     font-size: 14px;
     color: #333333;
 }
 
-.enrollPage02 .contentWrap .formBox .form-round-box ul.form-list li .subject {
+.submitPartyDetail_section .contentWrap .formBox .form-round-box ul.form-list li .subject {
     position: absolute;
     top: 0;
     left: 0;
     display: inline-block;
-    width: 120px;
+    width: 160px;
     padding: 10px 0;
+}
+
+.submitPartyDetail_section .contentWrap .formBox .form-round-box ul.form-list li .subject.price {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.submitPartyDetail_section .contentWrap .formBox .form-round-box ul.form-list li a {
+    color: #666;
+    text-decoration: none;
 }
 
 .form-list input[type='text'], .form-list input[type='password'], .form-list input[type='date'] {
@@ -428,14 +414,21 @@ OGG 파티 만들기 입력 페이지CSS
     margin-right: 10px;
     padding: 0 15px;
     font-size: 14px;
+    font-weight: 600;
     color: #333;
-    border: solid 1px #dddddd;
+    border: solid 0px #dddddd;
     border-radius: 0.375rem;
     background-color: white;
     outline: none;
 }
 
-.enrollPage02 .contentWrap .formBox .form-round-box .subInfoText {
+.form-list input[type='text'].priceValue {
+    font-size: 1.2rem;
+    color: #7e69fe;
+    font-weight: 600;
+}
+
+.submitPartyDetail_section .contentWrap .formBox .form-round-box .subInfoText {
     font-size: 0.75rem;
     line-height: 1.8;
     color: #333333;
@@ -443,19 +436,19 @@ OGG 파티 만들기 입력 페이지CSS
     margin: 10px 0;
 }
 
-.enrollPage02 .contentWrap .formBox .form-round-box .linkText {
+.submitPartyDetail_section .contentWrap .formBox .form-round-box .linkText {
     color: #333333;
     font-size: 0.8rem;
 }
 
-.enrollPage02 .contentWrap .formBox .form-round-box .ruleBox {}
+.submitPartyDetail_section .contentWrap .formBox .form-round-box .ruleBox {}
 
-.enrollPage02 .contentWrap .formBox .form-round-box .ruleBox .titleText {
+.submitPartyDetail_section .contentWrap .formBox .form-round-box .ruleBox .titleText {
     font-size: 1rem;
     margin-bottom: 10px;
 }
 
-.enrollPage02 .contentWrap .formBox .form-round-box .ruleBox .ruleText {
+.submitPartyDetail_section .contentWrap .formBox .form-round-box .ruleBox .ruleText {
     border: solid 1px #dddddd;
     border-radius: 20px;
     padding: 10px 20px;
@@ -465,18 +458,14 @@ OGG 파티 만들기 입력 페이지CSS
     color: #333333;
 }
 
-
-
-.enrollPage01 .contentWrap .formBox .buttonBox,
-.enrollPage02 .contentWrap .formBox .buttonBox  {
+.submitPartyDetail_section .contentWrap .formBox .buttonBox  {
     position: relative;
     min-height: 53px;
     margin-top: 60px;
     text-align: center;
 }
 
-.enrollPage01 .contentWrap .formBox .buttonBox .button,
-.enrollPage02 .contentWrap .formBox .buttonBox .button {
+.submitPartyDetail_section .contentWrap .formBox .buttonBox .button {
     position: relative;
     display: inline-block;
     min-width: 240px;
@@ -494,48 +483,42 @@ OGG 파티 만들기 입력 페이지CSS
     overflow: hidden;
 }
 
-.enrollPage01 .contentWrap .formBox .buttonBox .button:hover,
-.enrollPage02 .contentWrap .formBox .buttonBox .button:hover {
+.submitPartyDetail_section .contentWrap .formBox .buttonBox .button:hover {
     background-color: #ffffff;
     color: #333333;
 }
 
-.enrollPage01 .contentWrap .formBox .buttonBox .button.button-purple,
-.enrollPage02 .contentWrap .formBox .buttonBox .button.button-purple {
+.submitPartyDetail_section .contentWrap .formBox .buttonBox .button.button-purple {
     background-color: #7e69fe;
     border: 1px solid #7e69fe;
 }
 
-.enrollPage01 .contentWrap .formBox .buttonBox .button.button-purple:hover,
-.enrollPage02 .contentWrap .formBox .buttonBox .button.button-purple:hover {
+.submitPartyDetail_section .contentWrap .formBox .buttonBox .button.button-purple:hover {
     color: #7e69fe;
     background-color: #ffffff;
 }
 
-/* 
-====================================================
-OGG 파티 만들기 완료 페이지CSS
-====================================================
-*/
 
-.createPartyThxU_section {
+
+/* ****** 파티 가입하기 완료 페이지 ***** */
+.submitPartyThxU_section {
     padding: 150px 0;
     background-color: rgb(244, 244, 250);
 }
 
-.createPartyThxU_section .mainTextContainer {
+.submitPartyThxU_section .mainTextContainer {
     width: 70%;
     margin: 0 auto 40px auto;
 }
 
-.createPartyThxU_section .mainTextContainer .iconBox {
+.submitPartyThxU_section .mainTextContainer .iconBox {
     text-align: right;
 }
-.createPartyThxU_section .mainTextContainer .iconBox img {
+.submitPartyThxU_section .mainTextContainer .iconBox img {
     width: 150px;
 }
 
-.createPartyThxU_section .mainTextContainer .textBox p {
+.submitPartyThxU_section .mainTextContainer .textBox p {
     font-size: 1.7rem;
     font-weight: 600;
     line-height: 2;
@@ -543,23 +526,23 @@ OGG 파티 만들기 완료 페이지CSS
     padding-top: 5%;
 }
 
-.createPartyThxU_section .mainTextContainer .textBox p span img {
+.submitPartyThxU_section .mainTextContainer .textBox p span img {
     width: 30px;
     transform: translateY(-10%);
 }
 
-.createPartyThxU_section .buttonContainer {
+.submitPartyThxU_section .buttonContainer {
     width: 70%;
     margin: 0 auto;
     text-align: center;
 }
 
-.createPartyThxU_section .buttonContainer p {
+.submitPartyThxU_section .buttonContainer p {
     font-size: 1.5rem;
     font-size: 500;
 }
 
-.createPartyThxU_section .buttonContainer .buttonBox button{
+.submitPartyThxU_section .buttonContainer .buttonBox button{
     text-decoration: none;
     color: #ffffff;
     font-size: 1.2rem;
@@ -572,11 +555,11 @@ OGG 파티 만들기 완료 페이지CSS
     appearance: none;
 }
 
-.createPartyThxU_section .buttonContainer .buttonBox button.gotoMain {
+.submitPartyThxU_section .buttonContainer .buttonBox button.gotoMain {
     margin-right: 10px;
 }
 
-.createPartyThxU_section .buttonContainer .buttonBox button:hover {
+.submitPartyThxU_section .buttonContainer .buttonBox button:hover {
     color: #7e69fe;
     background-color: #ffffff;
 }
