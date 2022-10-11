@@ -164,8 +164,149 @@ OGG Party Page CSS
 }
 
 /* ****** 파티 가입하기 Page #02 ****** */
+.submitParty_section .itemListWrap {
+    max-width: 1000px;
+    margin: 0 auto;
+}
 
+.submitParty_section .itemListWrap h2.titleText{
+    font-size: 1.8rem;
+    font-weight: 500;
+    margin-bottom: 50px;
+    z-index: 9999;
+}
 
+.submitParty_section .itemListWrap a.titleText {
+    color: #1f1f1f;
+    text-decoration: none;
+}
+
+.submitParty_section .itemListWrap .itemBoxWrap {
+    width: calc(100% + 26px);
+    margin-top: -13px;
+    margin-left: -13px;
+    font-size: 0;
+    position: relative;
+    /* height: 1567.94px; */
+}
+
+.submitParty_section .itemListWrap .itemBoxWrap .itemBox {
+    position: relative;
+    display: inline-block;
+    width: calc(45% - 26px);
+    margin: 13px;
+    padding: 22px 30px;
+    font-size: 13px;
+    color: #666666;
+    vertical-align: top;
+    border-radius: 20px;
+    border: solid 1px #dddddd;
+    background-color: white;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.submitParty_section .itemListWrap .itemBoxWrap .itemBox:hover {
+    border: solid 1px #7e69fe;
+}
+
+.submitParty_section .itemListWrap .itemBoxWrap .itemBox .title {}
+
+.submitParty_section .itemListWrap .itemBoxWrap .itemBox .title .logoImg {
+    display: inline-block;
+}
+.submitParty_section .itemListWrap .itemBoxWrap .itemBox .title .logoImg img {
+    width: 60px;
+    height: 60px;
+    margin-right: 15px;
+    vertical-align: bottom;
+}
+
+.submitParty_section .itemListWrap .itemBoxWrap .itemBox .title .titleText {
+    display: inline-block;
+}
+
+.submitParty_section .itemListWrap .itemBoxWrap .itemBox .title .titleText p.text {
+    margin-bottom: 5px;
+    font-size: 22px;
+    font-weight: 500;
+    color: #333333;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.submitParty_section .itemListWrap .itemBoxWrap .itemBox:hover .title .titleText p.text {
+    color: #7e69fe !important;
+}
+
+.submitParty_section .itemListWrap .itemBoxWrap .itemBox .title .titleText p.subText {
+    margin-bottom: 0;
+    font-size: 0.9rem;
+    color: #666666;
+}
+
+.submitParty_section .itemListWrap .itemBoxWrap .itemBox .item-members {
+    position: relative;
+    margin: 15px 0;
+    /* font-size: 0; */
+    white-space: nowrap;
+}
+
+.submitParty_section .itemListWrap .itemBoxWrap .itemBox .item-info {
+    position: relative;
+    font-size: 13px;
+    color: #666666;
+}
+
+.submitParty_section .itemListWrap .itemBoxWrap .itemBox .item-info .item-price {
+    position: absolute;
+    bottom: 0;
+    right: 26px;
+    color: #999;
+}
+
+.submitParty_section .itemListWrap .itemBoxWrap .itemBox .item-info .item-price .price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #252525;
+    vertical-align: -2px;
+    margin-right: 5px;
+}
+
+.submitParty_section .bannerWrap {
+    max-width: 1000px;
+    margin: 50px auto 0 auto;
+}
+
+.submitParty_section .bannerWrap .bannerBox {
+    background-color: #ffffff;
+    width: calc(100% + 26px);
+    margin: 0 auto;
+    border-radius: 20px;
+    padding: 30px 0;
+}
+
+.submitParty_section .bannerWrap .bannerBox .titleText {
+    font-size: 1.6rem;
+    text-align: center;
+}
+
+.submitParty_section .bannerWrap .bannerBox .button {
+    text-align: center;
+}
+
+.submitParty_section .bannerWrap .bannerBox .button a {
+    position: relative;
+    display: inline-block;
+    font-size: 16px;
+    color: #ffffff;
+    text-align: center;
+    padding: 10px 60px;
+    text-decoration: none;
+    border-radius: 17px;
+    border: 1px solid #7e69fe;
+    background-color: #7e69fe;
+}
 
 
 
