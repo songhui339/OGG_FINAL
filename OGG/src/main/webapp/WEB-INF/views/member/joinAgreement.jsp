@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     
     <link rel="stylesheet" href="${path}/css/member/join.css">
-    <link rel="stylesheet" href="${path}/css/common/headerFooter.css" class="css">
+    <link rel="stylesheet" href="${path}/css/member/headerFooter.css" class="css">
     
     <script src="${ path }/js/jquery-3.6.0.min.js"></script>
 </head>
@@ -28,7 +28,7 @@
             </div>
 
             <div class="btnBox">
-                <a href="${ path }/member/goLogin.do" class="loginBtn" >로그인</a>
+                <a href="${ path }/member/goLoginPage.do" class="loginBtn" >로그인</a>
             </div>
         </div>
 
@@ -56,18 +56,9 @@
     <section class="enrollPage01">
         <div class="contentWrap">
             <div class="formBox">
-                <h3><span class="c_purple">SNS</span> 가입하기</h3>
-                <div class="sns-join-box">
-                    <a href="javascrip:;" class="naver sns-naver" title="네이버">
-                        <img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-sns-never-on.png" alt="Naver Icon">
-                        네이버로 회원가입 하기
-                    </a>
-                    <a href="javascrip:;" class="kakao sns-kakao" title="카카오">
-                        <img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-sns-kakao-on.png" alt="Kakao Icon">
-                        카카오톡으로 회원가입 하기
-                    </a>
-                </div>
-                <form name="fregister" id="fregister" action="${ path }/member/goJoin.do" autocomplete="off" class="form" role="form">
+
+
+                <form name="fregister" id="fregister" action="/member/goJoinPage.do" autocomplete="off" class="form" role="form">
                     <h3><span class="c_purple">약관</span> 동의</h3>
                     <div class="form-round scroll">
                         <style>
@@ -571,6 +562,7 @@
 			}
 		});    
 	});
+
 </script>
 
 

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.project.ogg.community.model.mapper.CommunityMapper">
+	
+	<resultMap type="Community" id="CommunityResultMap">
+		<id property="c_no" column="C_NO"/>
+		<result property="c_writerNo" column="C_WRITERNO" />
+		<result property="c_title" column="C_TITLE" />
+		<result property="c_content" column="C_CONTENT" />
+		<result property="c_file" column="C_FILE" />
+		<result property="c_fileModify" column="C_FILEMODIFY" />
+		<result property="c_writeDate" column="C_WRITEDATE" />
+		<result property="c_modifyDate" column="C_MODIFYDATE" />
+		<result property="c_viewCount" column="C_VIEWCOUNT" />
+		<result property="c_status" column="C_STATUS" />
+		<result property="c_like" column="C_LIKE" />
+		<result property="m_nickName" column="M_NICKNAME" />
+	</resultMap>
+	
+	<!-- 게시글 목록 조회 -->
+	<select id="selectCommunityCount" resultType="_int">
+		SELECT COUNT(C_NO) FROM COMMUNITY WHERE C_STATUS='Y'
+	</select>
+	
+	
+</mapper>

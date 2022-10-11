@@ -23,7 +23,7 @@
 	-->
 		<security:intercept-url pattern="/**" access="permitAll"/>
 	
-		<security:form-login login-page="/member/goCutomLogin.do"
+		<security:form-login login-page="/member/cutomLogin.do"
 							 login-processing-url="/member/login.do"
 							 username-parameter="m_id"
 							 password-parameter="m_pwd"
@@ -32,7 +32,7 @@
 		
 		<security:access-denied-handler ref="CusomAccessDeniedHandler"/>
 		
-		<security:logout logout-url="/member/goLogout.do"
+		<security:logout logout-url="/member/doLogout.do"
 						 logout-success-url="/"
 						 delete-cookies="remember-me, JSESSIONID"
 						 invalidate-session="true"/>

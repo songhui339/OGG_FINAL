@@ -19,11 +19,12 @@
 	<a href="${ path }/review/review_list">리뷰 리스트 페이지 </a><br><br>
 </p>
 
-	<input type="button" value="로그인" onclick="location.href='${ path }/member/goLogin.do'">
+	<input type="button" value="로그인" onclick="location.href='${ path }/member/goLoginPage.do'">
 	<input type="button" value="회원가입" onclick="location.href='${ path }/member/goAgreementBeforJoin.do'">
 	<br><br><br>
 	<security:authorize access="isAuthenticated()">
-		<a href="${ path }/member/goLogout.do">로그아웃</a>
+		<a>시큐리티 로그인한 상태</a><br>
+		<a href="${ path }/member/doLogout.do">로그아웃</a>
 	</security:authorize>
 	<br><br><br>
 	<a href="${ path }/party/ottlist">파티 만들기</a>

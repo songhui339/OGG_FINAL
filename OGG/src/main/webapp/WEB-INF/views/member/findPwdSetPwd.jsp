@@ -4,22 +4,19 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <c:set var="path" value="${ pageContext.request.contextPath }"/>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>로그인 페이지</title>
+    <title>비밀번호 찾기</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     
     <link rel="stylesheet" href="${path}/css/member/login.css">
-    <link rel="stylesheet" href="${path}/css/member/headerFooter.css">
-    
-    <!-- 카카오 SDK 로드 -->
-	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-
+    <link rel="stylesheet" href="${path}/css/member/headerFooter.css" class="css">
 </head>
 <body>
     <header>
@@ -46,7 +43,7 @@
                     <a href="javascript:">리뷰</a>
                 </li>
                 <li>
-                    <a href="${ path }/community/list.do">커뮤니티</a>
+                    <a href="javascript:">커뮤니티</a>
                 </li>
                 <li>
                     <a href="javascript:">이벤트</a>
@@ -55,58 +52,29 @@
         </div>
     </header>
 
-    <div class="loginPage_section">
-        <div class="contentWrap">
-            <div class="login-form">
-                <form class="form" role="form" name="flogin" action="/member/login.do" method="POST">
-                    <div class="login-logo">
-                        <img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/big-butslogo.png" alt="">
-                    </div>
-                    <div class="login-input">
-                        <input type="text" name="m_id" id="m_id" required="" maxlength="20" placeholder="아이디를 입력하세요">
-                    </div>
-                    <div class="login-input">
-                        <input type="password" name="m_pwd" id="m_pwd" required="" maxlength="20" placeholder="패스워드를 입력하세요">
-                    </div>
-                    <div class="login-option">
-                        <div class="input-check">
-                            <input type="checkbox" name="remember-me" id="remember-me">
-                            <label for="remember-me">로그인 상태 유지</label>
-                        </div>
-                        <div class="right">
-                            <a href="${ path }/member/goAgreementBeforJoin.do" class="v-bar" >회원가입</a>
-                            <a href="${ path }/member/goFindId.do" id="login_id_lost">아이디 찾기</a>
-                            <a> ｜ </a>
-                            <a href="${ path }/member/goFindPwd.do" id="login_pwd_lost">비밀번호 찾기</a>
-                        </div>
-                    </div>
-                 	<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
-                    <button type="submit" class="form-button button button-purple">로그인</button>
-                 		<c:if test="${ not empty errorMessage }">
-                 		</c:if>
-                    <div class="form-text">
-                        <p>
-                            벗츠 회원이 아닌가요? <br>
-                            첫가입 시 500포인트! <span class="text-purple">추천인 등록 시 추가 500포인트!</span>
-                        </p>
-                    </div>
-                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token }" />
-                </form>
-
-                    <div class="form-sns-join sns-wrap">
-						<div id="kakaoLogin">
-							<a href="javascript:kakaoLogin();">
-								<img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/btn-sns-login-kakao.png">
-								카카오 계정으로 로그인 하기         
-							</a>
-							<input type="hidden" name="kakaoemail" id="kakaoemail" />
-							<input type="hidden" name="kakaoname" id="kakaoname" />
-						</div>
+    <section class="findIDPWD_section">
+        <div class="textBox">
+            <h2 class="titleText"><span class="c_purple">비밀번호</span> 수정</h2>
+            <p class="subText">새로운 비밀번호를 입력하세요.</p>
+            <form action="/member/findPwdSetNewPwd.do" method="POST">
+            	<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
+            	<input type="hidden" name="m_email" value="${m_email}">
+                
+                <div class="email-input">
+                    <input type="password" name="m_pwd" id="m_pwd" maxlength="20" placeholder="비밀번호를 입력하세요.">
+                    <span id="pwd_check"></span>
                 </div>
-            </div>
+                <div class="email-input">
+                    <input type="password" name="m_pwd2" id="m_pwd2" maxlength="20" placeholder="비밀번호를 재확인하세요.">
+                    <span id="pwd_check2"></span>
+                </div>
+                <div class="buttonBox">
+                    <button type="button" class="button" onclick="location.href='${ path }/member/goHome.do'">닫기</button>
+                    <button type="submit" class="button button-purple">확인</button>
+                </div>
+            </form>
         </div>
-    </div>
-
+    </section>
 
     <footer>
         <div class="width-container">
@@ -151,53 +119,64 @@
 </body>
 
 <script type="text/javascript">
-   window.Kakao.init("e127f699354ca9704b0b5501b9c80ff3");
+	
+	$(function(msg){
+		var msg = "<c:out value="${msg}" />";
+		if (msg != "") {
+			alert(msg);
+		}
+	});
+	
+</script>
+	
+<script type="text/javascript">
+	var pwJ = /^[A-Za-z0-9]{4,20}$/; // 비밀번호 정규식 : 4~20자의 소문자, 대문자, 숫자
+	$(document).ready(function() {
+		
+		var isPwCheck = true;
 
-   function kakaoLogin(){
-      window.Kakao.Auth.login({
-         scope:'profile_nickname,account_email',
-         success:function(obj){
-            console.log(obj);
+		$('#m_pwd').blur(function() {
+			if (pwJ.test($('#m_pwd').val())) {
+				$('#pwd_check').text('');
+				
+				isPwCheck = true;
+			} else {
+				$('#pwd_check').text('4~20자의 영문, 숫자 사용 가능합니다.');
+				$('#pwd_check').css('color', 'gray');
+				
+				isPwCheck = false;
+			}
+		});
 
-            window.Kakao.API.request({
-               url:'/v2/user/me',
-               success: function(res){
-                  
-                  let user = {
-                        "kakaoname" :res.kakao_account.profile["nickname"],
-                        "kakaoemail" :res.kakao_account.email
-                  };
+		$('#m_pwd2').blur(function() {
+			if ($('#m_pwd').val() != $(this).val()) {
+				$('#pwd_check2').text('비밀번호가 일치하지 않습니다.');
+				$('#pwd_check2').css('color', 'gray');
+				
+				isPwCheck = false;
+				
+			} else {
+				$('#pwd_check2').text('');
+				
+				isPwCheck = true;
+			}
+		});
 
-                  location.assign('${path}/member/kakao.do?kakaoname='+user.kakaoname
-                                                 +'&kakaoemail='+user.kakaoemail);
+	
+		$('form').on('submit',function(){
+
+			if (($('#m_pwd').val() == ($('#m_pwd2').val())) && pwJ.test($('#m_pwd').val())) {
+				inval_Arr[1] = true;
+			} else {
+				inval_Arr[1] = false;
+				alert('비밀번호를 확인하세요.');
+				return false;
+			}
      
-               }
-               
-            });
-         }
-         
-      });
-   }
+		});
+	});
+
 </script>
 
-<!-- 네이버 -->
-<script type="text/javascript">
-
-
-	$("#naverLogin").on("click",function(){
-	    $.ajax({
-	        url: 'navergo',
-	        type: 'get',
-	        success: function(res){
-		    	 location.href = res;
-		    },
-			error : function(req, status, error){
-                console.log("에러");
-                console.log(req.responseText);
-        	}
-	    
-		});
-	    })
-	    </script>
 
 </html>

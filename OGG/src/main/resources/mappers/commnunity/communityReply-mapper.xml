@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.project.ogg.community.model.mapper.CommunityReplyMapper">
+	
+	<resultMap type="CommunityReply" id="CommunityReplyResultMap">
+		<result property="cr_communityNo" column="CR_COMMUNITYNO" />
+		<result property="cr_no" column="CR_NO" />
+		<result property="cr_writerNo" column="CR_WRITERNO" />
+		<result property="cr_content" column="CR_CONTENT" />
+		<result property="cr_status" column="CR_STATUS" />
+		<result property="cr_writeDate" column="CR_WRITEDATE" />
+		<result property="cr_modifyDate" column="CR_MODIFYDATE" />
+	</resultMap>
+	<!-- 댓글 조회 -->
+	<select id="communityReplyList" parameterType="int" resultType="com.project.ogg.community.model.vo.CommunityReply">
+		SELECT CR_COMMUNITYNO,
+			   CR_NO, 
+			   CR_WRITERNO, 
+			   CR_CONTENT, 
+			   CR_WRITEDATE
+		FROM COMMUNITY_REPLY
+		WHERE CR_COMMUNITYNO = #{cr_communityNo}
+	</select>
+
+	
+</mapper>
