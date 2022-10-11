@@ -45,89 +45,7 @@
         </div>
     </header>
 
-    <!-- 모달 div -->
-    <!-- 첫번째 모달 div -->
-    <div class="modal" id="modalWindow" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="partyModal_title">
-                    <h2 class="titleText">요금제 선택<br><span class="subText">공유할 요금제를 선택해주세요.</span></h2>
-                </div>
-                <div class="partyModal_content_01">
-                    <div class="serviceName_gray">
-                        <label for="" class="text">애플뮤직 패밀리</label>
-                    </div>
-                    <div class="serviceName_gray">
-                        <label for="" class="text">애플뮤직 패밀리</label>
-                    </div>
-                    <div class="serviceName_purple">
-                        <label for="" class="text"><i class="bi bi-check-lg"></i> 넷플릭스 프리미엄</label>
-                        <ul class="infoText">
-                            <li>파티원 1~3명 모집 가능</li>
-                            <li>파티원 1명당 매달 3,925원 적립!<br>(파티 분담금 4,250원 − 링키드 수수료 324원)</li>
-                            <li>최대 인원(3명) 모집하면, 매달 최대 11,775원 적립</li>
-                            <li>파티 기간에 따라 종료 시 최대 5,844원 추가 적립!</li>
-                            <li>⚠️ 원단위 절삭으로 5원 이내 차이가 있을 수 있어요.</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="modal-footer nextBtnBox">
-                    <input data-bs-target="#modalWindow2" data-bs-toggle="modal" type="button" value="다음" class="nextBtn">
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- 두번째 모달 div -->
-    <div class="modal" id="modalWindow2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="partyModal_title">
-                    <h2 class="titleText">파티장 가이드<br></h2>
-                    <p class="serviceText">넷플릭스 프리미엄</p>
-                </div>
-                <div class="partyModal_content_02">
-                    <!-- @철환님 noticeBox div를 c:if로 묶어서 반복되게 설정하면 될 것 같아요..! -->
-                    <div class="noticeBox">
-                        <p class="titleText">
-                            꼭 '한국' 넷플릭스 계정을 사용해 주세요.
-                        </p>
-                        <div class="infoText">
-                            🇰🇷 넷플릭스 정책상 거주/이용중인 국가에 따라 재생 가능한 콘텐츠가 다르기 때문에 꼭 한국 넷플릭스 계정을 공유해 주셔야 해요.
-                        </div>
-                    </div>
-
-                    <div class="noticeBox">
-                        <p class="titleText">
-                            파티장의 로그인 정보는 파티원과 공유됩니다.
-                        </p>
-                        <div class="infoText">
-                            🔐 공유 가능한 안전한 비밀번호를 사용해 주세요.
-                        </div>
-                    </div>
-
-                    <div class="noticeBox">
-                        <p class="titleText">
-                            성인 인증이 완료된 계정만 공유할 수 있어요.
-                        </p>
-                        <div class="infoText">
-                            🔞 성인 인증이 완료되지 않은 계정을 사용할 경우, 파티원의 서비스 이용에 불편을 끼칠 수 있어요.
-                        </div>
-                    </div>
-
-                    <div class="checkBox">
-                        <img src="../파이널 UI 설계 이미지/icon_partynotice_check_gray.png" alt="check Icon" class="checkIcon">
-                        <span class="text">위 파티장 가이드를 모두 확인했습니다.</span>
-                    </div>
-                </div>
-                <div class="modal-footer nextBtnBox">
-                    <input data-bs-target="#modalWindow2" data-bs-toggle="modal" type="button" value="다음" class="nextBtn">
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <section class="createParty_section">
+    <section class="submitParty_section">
         <div class="titleBox">
             <h2>어떤 파티에 가입하시겠어요?</h2>
         </div>
@@ -178,7 +96,7 @@
                 <!-- 전체 서비스  -->
                 <section class="content_container">
                     <div class="contentBox">
-                        <div class="itemBox mediaService" data-bs-toggle="modal" data-bs-target="#modalWindow" !hidden>
+                        <div class="itemBox mediaService" !hidden>
                             <img src="../파이널 UI 설계 이미지/logo_netflix.png" alt="logoImg" class="logoImg">
                             <span class="serviceNameText">넷플릭스</span>
                             <p class="saveText">매달 세이브!</p>
