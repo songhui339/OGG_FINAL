@@ -78,9 +78,35 @@
 
 	<select id="selectOttInfo" resultMap="ottPlanResultMap">
 		SELECT P.PLAN_NAME,
+			   P.OTT_NO,
 			   O.OTT_THUMB
 		FROM OTT_INFO O
 		JOIN PLAN P ON(O.OTT_NO = P.OTT_NO)
 		WHERE P.PLAN_NO=#{modal_plan_no}
 	</select>
+	
+	<select id="insertParty" parameterType="Party">
+		INSERT INTO PARTY(
+			P_NO,
+			OTT_NO,
+			P_SHARE_ID,
+			P_SHARE_PWD,
+			P_MAX_MEMBER,
+			P_START_DATE,
+			P_END_DATE
+		)
+		VALUES(
+			SEQ_PARTY_NO.NEXTVAL,
+			#{ott_no},
+			#{p_share_id},
+			#{p_share_pwd},
+			#{p_max_member},
+			#{p_start_date},
+			#{p_end_date}
+		)
+	</select>
+	
+	
+	
+	
 </mapper>

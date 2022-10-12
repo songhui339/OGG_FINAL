@@ -40,4 +40,10 @@ public class PartyServiceImpl implements PartyService {
 		return mapper.selectOttInfo(modal_plan_no);
 	}
 
+	@Override
+	public Party partyCreate(Party party) {
+		
+		return mapper.insertParty(party);
+	}
+
 }

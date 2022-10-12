@@ -16,5 +16,7 @@ public interface PartyService {
 
 	Plan getOttInfo(int modal_plan_no);
 
+	Party partyCreate(Party party);
+
 
 }

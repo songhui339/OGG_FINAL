@@ -18,5 +18,7 @@ public interface PartyMapper {
 	Plan selectPlan(int planNo);
 
 	Plan selectOttInfo(int modal_plan_no);
+
+	Party insertParty(Party party);
 	
 }
