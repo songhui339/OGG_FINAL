@@ -98,7 +98,7 @@
                                             <th>OTT 이름</th>
                                             <th>분류</th>
                                             <th>파티별 최대 인원</th>
-                                            <th>파티수</th>
+                                            <th>파티 금액</th>
                                             <th>이미지 소스</th>
                                         </tr>
                                     </thead>
@@ -109,8 +109,8 @@
                                             <td>${ott.ott_name }</td>
                                             <td>${ott.ott_class }</td>
                                             <td>${ott.ott_max_member }명</td>
-                                            <td>20개</td>
-                                            <td><a href="assets/img/유튜브.png">유튜브이미지</a></td>
+                                            <td>${ott.plan_price }</td>
+                                            <td><a href='#'onclick="window.open('${path }/images/party/${ott.ott_thumb }.png','??','left=750px,top=300px,width=200px,height=200px')">${ott.ott_thumb }</a></td>
                                         </tr>
                                     </c:forEach>
                                     </tbody>
