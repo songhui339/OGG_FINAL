@@ -26,7 +26,7 @@
 	ORDER BY M_NAME) M
 </select>
 <select id="getOTTList" resultType="OttAdmin">
-SELECT OTT_NO, OTT_NAME,OTT_CLASS, OTT_MAX_MEMBER,PLAN_PRICE, OTT_THUMB
+SELECT OTT_NO, OTT_NAME,OTT_CLASS, OTT_MAX_MEMBER,PLAN_NAME, PLAN_PRICE, OTT_THUMB
 FROM OTT_INFO
 </select>
 <select id="getNoticeCount" resultType="_int">
@@ -167,6 +167,25 @@ WHERE Q_NO = #{no}
 			#{q_content},
 			SYSDATE,
 			12)
+	</insert>
+	
+	<insert id="addOTT" parameterType="OttAdmin"
+	useGeneratedKeys="true" keyProperty="ott_no" keyColumn="OTT_NO">
+	INSERT INTO OTT_INFO(OTT_NO,
+					OTT_NAME,
+					OTT_CLASS,
+					OTT_MAX_MEMBER,
+					PLAN_NAME,
+					PLAN_PRICE,
+					OTT_THUMB
+	)VALUES(SEQ_OTT_NO.NEXTVAL,
+			#{ott_name},
+			#{ott_class},
+			#{ott_max_member},
+			#{plan_name},
+			#{plan_price},
+			#{ott_thumb}
+	)
 	</insert>
 	
 	<insert id="insertAnswer" parameterType="Answer"

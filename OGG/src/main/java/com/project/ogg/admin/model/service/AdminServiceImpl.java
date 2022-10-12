@@ -140,6 +140,12 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	@Override
+	@Transactional
+	public int addOTT(OttAdmin ott) {
+		return mapper.addOTT(ott);
+	}
+	
+	@Override
 	public int getMarchUserCount() {
 		return mapper.getMarchUserCount();
 	}
@@ -158,5 +164,7 @@ public class AdminServiceImpl implements AdminService {
 	public int getDecUserCount() {
 		return mapper.getDecUserCount();
 	}
+
+	
 
 }

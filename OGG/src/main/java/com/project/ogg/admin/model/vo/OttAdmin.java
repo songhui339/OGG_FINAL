@@ -18,6 +18,8 @@ public class OttAdmin {
 	
 	private int ott_max_member;
 	
+	private String plan_name;
+	
 	private String plan_price;
 	
 	private String ott_status;

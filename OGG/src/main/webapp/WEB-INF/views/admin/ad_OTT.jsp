@@ -90,7 +90,7 @@
                             
                             <div class="card-body"> 
                                 <table id="datatablesSimple2">
-                                    <button type="button" class="btn btn-primary" style="float:right;" onclick="window.open('file:///C:/Users/user/programing/frontend/관리자페이지/addOTT.html','','left=500px,top=200px,width=800px,height=100px')" >OTT 추가하기</button>
+                                                                    <button type="button" class="btn btn-primary" style="float:right;" onclick="window.open('${path}/admin/addOTT','','left=500px,top=200px,width=1000px,height=100px')" >OTT 추가하기</button>
                                     <br><br>
                                     <thead>
                                         <tr>
@@ -98,7 +98,8 @@
                                             <th>OTT 이름</th>
                                             <th>분류</th>
                                             <th>파티별 최대 인원</th>
-                                            <th>파티 금액</th>
+                                            <th>플랜 이름</th>
+                                            <th>플랜 금액</th>
                                             <th>이미지 소스</th>
                                         </tr>
                                     </thead>
@@ -109,6 +110,7 @@
                                             <td>${ott.ott_name }</td>
                                             <td>${ott.ott_class }</td>
                                             <td>${ott.ott_max_member }명</td>
+                                            <td>${ott.plan_name }</td>
                                             <td>${ott.plan_price }</td>
                                             <td><a href='#'onclick="window.open('${path }/images/party/${ott.ott_thumb }.png','??','left=750px,top=300px,width=200px,height=200px')">${ott.ott_thumb }</a></td>
                                         </tr>
