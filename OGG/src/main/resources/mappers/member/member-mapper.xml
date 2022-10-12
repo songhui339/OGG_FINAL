@@ -23,7 +23,8 @@
 		<result property="m_card_num" column="M_CARD_NUM" />
 		<result property="m_point" column="M_POINT" />
 	</resultMap>
-
+		
+	<!-- 회원가입 -->
 	<insert id="insertMember" parameterType="Member">
 		INSERT INTO MEMBER (
 			M_NO,
@@ -48,14 +49,69 @@
 		)
 	</insert>
 	
+	<!-- 아이디 유효성 검사 -->
 	<select id="idcheck" resultType="int">
 		SELECT COUNT(*) FROM MEMBER WHERE M_ID=#{m_id}
 	</select>
 	
+	<!-- 시큐리티 -->
 	<select id="read" resultMap="memberResultMap">
 		SELECT *
 		FROM MEMBER
 		WHERE M_ID=#{m_id}
 	</select>
 	
+	<!-- 아이디 찾기 -->
+	<select id="findId" resultMap="memberResultMap">
+		SELECT * FROM MEMBER WHERE M_EMAIL=#{m_email}
+	</select>
+	
+	<select id="findIdCheck" resultType="int">
+		SELECT COUNT(*) FROM MEMBER WHERE M_EMAIL=#{m_email}
+	</select>
+	
+	<!-- 비밀번호 찾기 -->
+	<select id="findPwd" parameterType="String" resultType="Member">
+		SELECT * FROM MEMBER WHERE M_EMAIL=#{m_email}
+	</select>
+	
+	<update id="pwdUpdate" parameterType="Member">
+		UPDATE MEMBER SET M_PWD=#{m_pwd} WHERE M_EMAIL=#{m_email}
+	</update>
+	
+	<!-- 카카오 -->
+	<select id="loginLookup" parameterType="Member" resultType="int">
+		SELECT COUNT(M_ID)
+		FROM MEMBER
+		WHERE M_ID = #{m_id}
+	</select>
+	
+	<select id="kakaoMemberConfirm" parameterType="Member" resultType="Member">
+		SELECT *
+		FROM MEMBER
+		WHERE M_ID = #{m_id}
+	</select>
+	
+	<insert id="insertKakaoMember" parameterType="Member">
+		INSERT INTO MEMBER (
+			M_NO,
+			M_ID,
+			M_NAME,
+			M_NICKNAME,
+			M_PHONENUMBER,
+			M_EMAIL,
+			M_EMAILAGREEMENT,
+			M_RECOMMEND
+		) VALUES (
+			M_NO.NEXTVAL,
+			#{m_id},
+			#{m_name},
+			#{m_nickname},
+			#{m_phonenumber},
+			#{m_email},
+			#{m_emailagreement},
+			#{m_recommend}
+		)
+	</insert>
+
 </mapper>
