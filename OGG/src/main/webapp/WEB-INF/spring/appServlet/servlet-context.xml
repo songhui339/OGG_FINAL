@@ -22,6 +22,7 @@
 	<resources mapping="/js/**" location="/resources/js/" ></resources>
 	<resources mapping="/css/**" location="/resources/css/" ></resources>
 	<resources mapping="/images/**" location="/resources/images/" ></resources>
+	<resources mapping="/summernote/**" location="/resources/summernote/" ></resources>
 	<resources mapping="/smarteditor2/**" location="/resources/smarteditor2/" ></resources>
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->

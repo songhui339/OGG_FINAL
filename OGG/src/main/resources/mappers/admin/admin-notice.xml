@@ -26,7 +26,7 @@
 	ORDER BY M_NAME) M
 </select>
 <select id="getOTTList" resultType="OttAdmin">
-SELECT OTT_NO, OTT_NAME,OTT_CLASS, OTT_MAX_MEMBER
+SELECT OTT_NO, OTT_NAME,OTT_CLASS, OTT_MAX_MEMBER,PLAN_PRICE, OTT_THUMB
 FROM OTT_INFO
 </select>
 <select id="getNoticeCount" resultType="_int">

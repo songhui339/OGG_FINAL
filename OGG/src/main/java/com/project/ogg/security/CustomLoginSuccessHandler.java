@@ -28,7 +28,7 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 
 		
 		if(authName.contains("ROLE_ADMIN")) {
-			response.sendRedirect("/admin/admin.do");
+			response.sendRedirect("/");
 			return;
 		}
 		

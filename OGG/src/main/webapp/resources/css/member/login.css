@@ -185,3 +185,100 @@ OGG LoginPage CSS
     color: #331420;
     background-color: #f9e000;
 }
+
+/* ************************ */
+/* **** 아이디/비밀번호 찾기 *** */
+/* ************************ */
+
+.findIDPWD_section {
+    padding: 100px 0;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.findIDPWD_section span.c_purple {
+    color: #7e69fe !important;
+}
+
+.findIDPWD_section .textBox .titleText {
+    font-size: 1.8rem;
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+
+.findIDPWD_section .textBox .subText {
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+.findIDPWD_section .email-input {
+    position: relative;
+    margin: 8px auto;
+}
+
+.findIDPWD_section .email-input input {
+    height: 60px;
+    padding: 0 20px;
+    font-size: 16px;
+    border-radius: 10px;
+}
+
+.email-input input[type='email'],
+.email-input input[type='password'],
+.email-input input[type='text'] {
+    width: 500px;
+    height: 60px;
+    font-size: 14px;
+    padding: 0 15px;
+    font-size: 14px;
+    color: #333;
+    border: solid 1px #dddddd;
+    background-color: white;
+    outline: none;
+}
+
+.findIDPWD_section .email-input input:active,
+.findIDPWD_section .email-input input:focus {
+    border: solid 1px #7e69fe;
+}
+
+.findIDPWD_section .buttonBox {
+    position: relative;
+    min-height: 53px;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.findIDPWD_section .buttonBox .button {
+    position: relative;
+    display: inline-block;
+    min-width: 240px;
+    height: 70px;
+    margin: 1px 0;
+    padding: 0 10px;
+    font-size: 18px;
+    color: #7e69fe;
+    text-align: center;
+    line-height: 68px;
+    border: 0;
+    border-radius: 5px;
+    background-color: #ffffff;
+    border: 1px solid #7e69fe;
+    overflow: hidden;
+}
+
+/* .findIDPWD_section .buttonBox .button:hover {
+    background-color: #7e69fe;
+    color: #ffffff;
+} */
+
+.findIDPWD_section .buttonBox .button.button-purple {
+    background-color: #7e69fe;
+    color: #ffffff;
+}
+
+/* .findIDPWD_section .buttonBox .button.button-purple:hover {
+    background-color: #ffffff;
+    color: #7e69fe;
+} */

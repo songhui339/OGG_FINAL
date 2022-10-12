@@ -15,7 +15,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     
     <link rel="stylesheet" href="${path}/css/member/login.css">
-    <link rel="stylesheet" href="${path}/css/common/headerFooter.css">
+    <link rel="stylesheet" href="${path}/css/member/headerFooter.css">
+    
+    <!-- 카카오 SDK 로드 -->
+	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+
 </head>
 <body>
     <header>
@@ -42,7 +46,7 @@
                     <a href="javascript:">리뷰</a>
                 </li>
                 <li>
-                    <a href="javascript:">커뮤니티</a>
+                    <a href="${ path }/community/list.do">커뮤니티</a>
                 </li>
                 <li>
                     <a href="javascript:">이벤트</a>
@@ -54,7 +58,7 @@
     <div class="loginPage_section">
         <div class="contentWrap">
             <div class="login-form">
-                <form class="form" role="form" name="flogin" action="${ path }/member/login.do" method="POST">
+                <form class="form" role="form" name="flogin" action="/member/login.do" method="POST">
                     <div class="login-logo">
                         <img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/big-butslogo.png" alt="">
                     </div>
@@ -71,13 +75,14 @@
                         </div>
                         <div class="right">
                             <a href="${ path }/member/goAgreementBeforJoin.do" class="v-bar" >회원가입</a>
-                            <a href="" id="login_password_lost">아이디/비밀번호찾기</a>
+                            <a href="${ path }/member/goFindId.do" id="login_id_lost">아이디 찾기</a>
+                            <a> ｜ </a>
+                            <a href="${ path }/member/goFindPwd.do" id="login_pwd_lost">비밀번호 찾기</a>
                         </div>
                     </div>
                  	<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
                     <button type="submit" class="form-button button button-purple">로그인</button>
                  		<c:if test="${ not empty errorMessage }">
-                 			<p><c:out value="${ errorMessage }"/></p>
                  		</c:if>
                     <div class="form-text">
                         <p>
@@ -89,16 +94,14 @@
                 </form>
 
                     <div class="form-sns-join sns-wrap">
-                        <a href="javascrip:;"  style="margin-top:20px; width:100%;" class="naver sns-naver" title="네이버">
-                        <img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/btn-sns-login-naver.png" alt="" title="">
-                    네이버 계정으로 로그인 하기
-                        </a>
-
-                        <a href="javascrip:;" style="margin-left:0px; margin-top:5px; width:100%;" class="kakao sns-kakao" title="카카오">
-                        <img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/btn-sns-login-kakao.png" alt="" title="">
-                        카카오 계정으로 로그인 하기			
-                        </a>
-    
+						<div id="kakaoLogin">
+							<a href="javascript:kakaoLogin();">
+								<img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/btn-sns-login-kakao.png">
+								카카오 계정으로 로그인 하기         
+							</a>
+							<input type="hidden" name="kakaoemail" id="kakaoemail" />
+							<input type="hidden" name="kakaoname" id="kakaoname" />
+						</div>
                 </div>
             </div>
         </div>
@@ -146,4 +149,55 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
+<script type="text/javascript">
+   window.Kakao.init("e127f699354ca9704b0b5501b9c80ff3");
+
+   function kakaoLogin(){
+      window.Kakao.Auth.login({
+         scope:'profile_nickname,account_email',
+         success:function(obj){
+            console.log(obj);
+
+            window.Kakao.API.request({
+               url:'/v2/user/me',
+               success: function(res){
+                  
+                  let user = {
+                        "kakaoname" :res.kakao_account.profile["nickname"],
+                        "kakaoemail" :res.kakao_account.email
+                  };
+
+                  location.assign('${path}/member/kakao.do?kakaoname='+user.kakaoname
+                                                 +'&kakaoemail='+user.kakaoemail);
+     
+               }
+               
+            });
+         }
+         
+      });
+   }
+</script>
+
+<!-- 네이버 -->
+<script type="text/javascript">
+
+
+	$("#naverLogin").on("click",function(){
+	    $.ajax({
+	        url: 'navergo',
+	        type: 'get',
+	        success: function(res){
+		    	 location.href = res;
+		    },
+			error : function(req, status, error){
+                console.log("에러");
+                console.log(req.responseText);
+        	}
+	    
+		});
+	    })
+	    </script>
+
 </html>

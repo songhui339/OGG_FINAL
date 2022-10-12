@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.project.ogg.community.model.mapper.CommunityReplyMapper">
+	
+	<resultMap type="CommunityReply" id="CommunityReplyResultMap">
+		<result property="cr_communityNo" column="CR_COMMUNITYNO" />
+		<result property="cr_no" column="CR_NO" />
+		<result property="cr_writerNo" column="CR_WRITERNO" />
+		<result property="cr_content" column="CR_CONTENT" />
+		<result property="cr_status" column="CR_STATUS" />
+		<result property="cr_writeDate" column="CR_WRITEDATE" />
+		<result property="cr_modifyDate" column="CR_MODIFYDATE" />
+	</resultMap>
+
+	<!-- 댓글 조회 -->
+	<select id="communityReplyList" parameterType="int" resultType="com.project.ogg.community.model.vo.CommunityReply">
+		SELECT CR_COMMUNITYNO,
+			   CR_NO, 
+			   CR_WRITERNO, 
+			   CR_CONTENT, 
+			   CR_WRITEDATE,
+               M_NICKNAME
+		FROM COMMUNITY_REPLY CR
+        JOIN MEMBER M ON (M.M_NO = CR.CR_WRITERNO)
+		WHERE CR_COMMUNITYNO = #{cr_communityNo}
+	</select>
+
+	<!-- 댓글 작성 -->
+	<insert id="communityReplyWrite" parameterType="com.project.ogg.community.model.vo.CommunityReply">
+		INSERT INTO COMMUNITY_REPLY (
+			CR_COMMUNITYNO,
+			CR_NO,
+			CR_WRITERNO,
+			CR_CONTENT
+		) VALUES (
+			#{cr_communityNo}, 
+			CR_NO.NEXTVAL,
+			#{cr_writerNo}, 
+			#{cr_content}
+		)
+	</insert>
+
+	<!-- 댓글 수정 -->
+	<update id="communityReplutModify" parameterType="com.project.ogg.community.model.vo.CommunityReply">
+		UPDATE COMMUNITY_REPLY SET
+			CR_CONTENT = #{cr_content},
+			CR_MODIFYDATE = SYSDATE
+		WHERE CR_NO = #{cr_no} AND CR_COMMUNITYNO = #{cr_communityNo}
+	</update>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="communityReplyDelete">
+		DELETE FROM COMMUNITY_REPLY WHERE CR_NO = #{cr_no}
+	</delete>
+	
+	<!-- cr_no를 통한 댓글 데이터 조회 -->
+	<select id="selectReplyByNo" parameterType="_int" resultMap="CommunityReplyResultMap">
+		SELECT * FROM COMMUNITY_REPLY WHERE CR_NO=#{cr_no}
+	</select>
+	
+</mapper>
