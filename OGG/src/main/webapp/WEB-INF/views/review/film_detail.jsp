@@ -25,15 +25,24 @@
 		<jsp:include page="/WEB-INF/views/review/film_header.jsp"/>
 
         <!-- 2nd row -->
-        <div id="div_review">
-            <div class="row" id="detail-text0">
-                <div class="col-3">이 작품에 대한 평가를 남겨보세요</div>
-                <!-- <div class="col-style="z-index:9999;"9"><button class="btn btn-primary" type="button">코멘트 남기기</button></div> -->
-                <div class="col-9" style="z-index:999;"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever=" 남기기">리뷰 남기기</button></div>
-            </div>
-        </div>
-        <br>
+        <c:if test="${ loginMember != null }">
+	        <div id="div_review">
+	            <div class="row" id="detail-text0">
+	                <div class="col-3">이 작품에 대한 평가를 남겨보세요</div>
+	                <div class="col-9"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="남기기">리뷰 남기기</button></div>
+	            </div>
+	        </div>
+	        <br>
+        </c:if>
 
+        <c:if test="${ loginMember == null }">
+	        <div id="div_review">
+	            <div class="row" id="detail-text0" style="text-align : center;"> 
+	                <div>로그인 후 평가를 남길 수 있습니다</div>
+	            </div>
+	        </div>
+	        <br>
+		</c:if>
         <!-- 모달 -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -52,8 +61,7 @@
                     </div>
                     <div class="modal-footer">
                         <span id="textLengthCheck">(0 / 2000)</span>
-                        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button> -->
-                        <button type="button" class="btn btn-primary" id="writerv" data-bs-dismiss="modal">저장</button>
+                        <button type="button" class="btn btn-primary" id="writeReview" data-bs-dismiss="modal">저장</button>
                     </div>
                 </div>
             </div>
@@ -140,16 +148,6 @@
 	var ftype = "${ ftype }";
 	var m_no = "${ m_no }";
 	var contextpath = "${ pageContext.request.contextPath }";
-
-	$("#message-text").keyup(function(e) {
-	    var content = $(this).val();
-	    $("#textLengthCheck").text("(" + content.length + " / 2000)");
-	    if (content.length > 2000) {
-	        alert("최대 2000자까지 입력 가능합니다.");
-	        $(this).val(content.substring(0, 2000));
-	        $('#textLengthCheck').text("(2000 / 2000");
-	    }
-	});
 	</script>
 	
 	<script>

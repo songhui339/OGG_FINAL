@@ -17,20 +17,24 @@ public class ReviewServiceImpl implements ReviewService {
 
 	@Autowired
 	private ReviewMapper mapper;
-	
+
 	@Override
-	public int getBoardCount(int fcode) {
-		
-		return mapper.selectBoardCount(fcode);
+	public Film filmcheck(int fCode) {
+		return mapper.checkFilm(fCode);
 	}
 
+	@Override
+	public int filmSave(Film film) {
+		return mapper.insertFilm(film);
+	}
+	
 	@Override
 	public List<Review> getBoardListAll(PageInfo pageInfo) {
 	    int offset = (pageInfo.getCurrentPage() - 1) * pageInfo.getListLimit();
 	    int limit = pageInfo.getListLimit();
 	    RowBounds rowBounds = new RowBounds(offset, limit);   
 		
-		return mapper.selectAll(rowBounds);
+		return mapper.selectReviewAll(rowBounds);
 	}
 
 	@Override
@@ -41,61 +45,64 @@ public class ReviewServiceImpl implements ReviewService {
 		
 		return mapper.selectReviewByFilm(rowBounds, fcode);
 	}
-
+	
 	@Override
-	public Review findReviewByNo(int no) {
-		
+	public Review getReviewByNo(int no) {
 		return mapper.selectReviewByNo(no);
 	}
 
 	@Override
-	public int getCmtCountByNo(int no) {
-		
-		return mapper.selectCmtCount(no);
-	}
-	
-	@Override
-	public List<ReviewCmt> findReviewCmtByNo(int no) {
-		
-		return mapper.selectCmtByNo(no);
+	public int getReviewCount(int fcode) {
+		return mapper.selectReviewCount(fcode);
 	}
 
 	@Override
 	public int reviewSave(Review review) {
-		
-		return mapper.insertReview(review);
-	}
-
-	@Override
-	public Review updateCmtCount(int no) {
-	
-		return mapper.updateCmtCount(no);
-	}
-
-	@Override
-	public int filmSave(Film film) {
-		
-		return mapper.insertFilm(film);
-	}
-
-	@Override
-	public Film filmcheck(int fCode) {
-		
-		return mapper.checkFilm(fCode);
+		return mapper.writeReview(review);
 	}
 
 	@Override
 	public int reviewUpdate(Review review) {
-		
 		return mapper.updateReview(review);
 	}
 
 	@Override
 	public int reviewDelete(Review review) {
-		
 		return mapper.deleteReview(review);
+	}	
+	
+	@Override
+	public List<ReviewCmt> getCmtByReviewNo(int no) {
+		return mapper.selectCmtByReviewNo(no);
+	}
+	
+	@Override
+	public ReviewCmt getCmtByCmtNo(int cmtNo) {
+		return mapper.selectCmtByCmtNo(cmtNo);
+	}
+	
+	@Override
+	public Review updateCmtCount(int no) {
+		return mapper.updateCmtCount(no);
+	}
+	
+	@Override
+	public int getCmtCountByNo(int no) {
+		return mapper.selectCmtCount(no);
 	}
 
+	@Override
+	public int cmtWrite(ReviewCmt cmt) {
+		return mapper.writeCmt(cmt);
+	}
 
+	@Override
+	public int cmtUpdate(ReviewCmt cmt) {
+		return mapper.updateCmt(cmt);
+	}
 
+	@Override
+	public int cmtDelete(ReviewCmt cmt) {
+		return mapper.deleteCmt(cmt);
+	}
 }

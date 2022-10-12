@@ -62,8 +62,8 @@ public class ReviewController {
 	
 	@GetMapping("/film_detail")
 	public ModelAndView filmDetail(ModelAndView model,
-			@AuthenticationPrincipal Member member,
 			@RequestParam(value = "page", defaultValue = "1") int page,
+			@AuthenticationPrincipal Member member,
 			@RequestParam("fcode") String fcodes,
 			@RequestParam("ftype") String ftype)  {
 		
@@ -71,13 +71,14 @@ public class ReviewController {
 		PageInfo pageInfo = null;
 		int fcode = Integer.parseInt(fcodes);
 		
-		pageInfo = new PageInfo(page, 10, service.getBoardCount(fcode), 10);
+		pageInfo = new PageInfo(page, 10, service.getReviewCount(fcode), 10);
 		list = service.getBoardListByFilm(pageInfo, fcode);
 		
 		model.addObject("list", list); 
 		model.addObject("fcode", fcode);
 		model.addObject("ftype", ftype);
 		model.addObject("pageInfo", pageInfo);
+		model.addObject("loginMember", member);
 		model.setViewName("review/film_detail");
 		
 		return model;
@@ -86,6 +87,7 @@ public class ReviewController {
 	@GetMapping("/review_list")
 	public ModelAndView reviewList(ModelAndView model,
 			@RequestParam(value = "page", defaultValue = "1") int page,
+			@AuthenticationPrincipal Member member,
 			@RequestParam("fcode") String fcodes,
 			@RequestParam("ftype") String ftype) {
 		
@@ -93,13 +95,14 @@ public class ReviewController {
 		PageInfo pageInfo = null;
 		int fcode = Integer.parseInt(fcodes);
 		
-		pageInfo = new PageInfo(page, 10, service.getBoardCount(fcode), 10);
+		pageInfo = new PageInfo(page, 10, service.getReviewCount(fcode), 10);
 		list = service.getBoardListByFilm(pageInfo, fcode);
 		
 		model.addObject("list", list);
 		model.addObject("fcode", fcode);
 		model.addObject("ftype", ftype);
 		model.addObject("pageInfo", pageInfo);
+		model.addObject("loginMember", member);
 		model.setViewName("review/review_list");
 		
 		return model;
@@ -114,17 +117,16 @@ public class ReviewController {
 		Review review = null;
 		List<ReviewCmt> reviewCmt = null;
 		int cmtCount = 0;
-		review = service.findReviewByNo(no);
-		reviewCmt = service.findReviewCmtByNo(no);
+		review = service.getReviewByNo(no);
+		reviewCmt = service.getCmtByReviewNo(no);
 		cmtCount = service.getCmtCountByNo(no);
-//		cmtReview = service.updateCmtCount(no);
 		
 		model.addObject("fcode", fcode);
 		model.addObject("ftype", ftype);
-		model.addObject("member", member);
 		model.addObject("review", review);
 		model.addObject("cmtCount", cmtCount);
 		model.addObject("reviewCmt", reviewCmt);
+		model.addObject("loginMember", member);
 		model.setViewName("review/review_detail");
 		
 		return model;
@@ -143,10 +145,6 @@ public class ReviewController {
 		review.setRvWriterNo(member.getM_no());
 		int fcode = Integer.parseInt(review.getFCode());
 		
-		System.out.println("리셋");
-		System.out.println(review);
-		System.out.println(film);
-
 		filmCheck = service.filmcheck(fcode);
 		
 		if(filmCheck == null) {
@@ -154,15 +152,12 @@ public class ReviewController {
 			
 			if(filmSave > 0) {
 				reviewWrite = service.reviewSave(review);
+				System.out.println("필름 인서트 성공");
 				
 				if(reviewWrite > 0) {
-					System.out.println("리뷰까지 성공");
-		//			model.addObject("msg", "리뷰가 정상적으로 등록되었습니다.");
-		//			model.addObject("location", "/review/review_detail?no=" + review.getRvNo() + "&fcode=" + fcode +  "&ftype=" + ftype );
+					System.out.println("리뷰 성공");
 				} else {
 					System.out.println("리뷰 실패");
-		//			model.addObject("msg", "리뷰 등록을 실패하였습니다.");
-		//			model.addObject("location", "/review/film_detail?fcode=" + fcode + "&ftype=" + ftype );
 				}
 			} else {
 				System.out.println("필름 인서트 실패");
@@ -170,12 +165,14 @@ public class ReviewController {
 		} else {
 			reviewWrite = service.reviewSave(review);
 			if(reviewWrite > 0) {
-				System.out.println("존재하는 필름 리뷰 성공");
+				System.out.println("리뷰 성공");
 			} else {
-				System.out.println("존재하는 필름 리뷰 실패");
+				System.out.println("리뷰 실패");
 			}
 		}
-		model.setViewName("review/film_detail?fcode=" + fcode + "&ftype=" + ftype);
+
+		model.addObject("loginMember", member);
+		model.setViewName("review/film_detail");
 		
 		return model;
 	}
@@ -228,15 +225,78 @@ public class ReviewController {
 		return model;
 	}
 	
-	@PostMapping("/review_cmt_write")
+	@PostMapping("/cmt_write")
 	@ResponseBody
-	public Map<String, Boolean> cmtWrite(@RequestParam String userId) {
+	public Map<String, ReviewCmt> cmtWrite(
+			@AuthenticationPrincipal Member member,
+			@RequestParam("fCode") String fCode,
+			@RequestParam("ftype") String ftype,
+			@ModelAttribute ReviewCmt cmt) {
 		
-		Map<String, Boolean> map = new HashMap<>();
+		int cmtWrite = 0;
+		cmt.setCmtWriterNo(member.getM_no());
+		int fcode = Integer.parseInt(fCode);
+		Map<String, ReviewCmt> map = new HashMap<>(); 
 		
-//		map.put("duplicate", service.isDulicateID(userId));
+		cmtWrite = service.cmtWrite(cmt);
+		
+		if(cmtWrite > 0) {
+			System.out.println("댓글 등록 성공");
+			map.put("cmt", service.getCmtByCmtNo(cmt.getCmtNo()));
+		
+		}else {
+			System.out.println("댓글 등록 실패");
+		}
 		
 		return map;
+	}
+	
+	@PostMapping("/cmt_update")
+	public ModelAndView cmtUpdate(ModelAndView model,
+			@AuthenticationPrincipal Member member,
+			@RequestParam("fCode") String fCode,
+			@RequestParam("ftype") String ftype,
+			@ModelAttribute ReviewCmt cmt) {
+		
+		int cmtUpdate = 0;
+		cmt.setCmtWriterNo(member.getM_no());
+		int fcode = Integer.parseInt(fCode);
+		
+		cmtUpdate = service.cmtUpdate(cmt);
+		
+		if(cmtUpdate > 0) {
+			System.out.println("댓글 수정 성공");
+		}else {
+			System.out.println("댓글 수정 실패");
+		}
+		
+		model.setViewName("review/review_list");
+		
+		return model;
+	}
+	
+	@PostMapping("/cmt_delete")
+	public ModelAndView cmtDelete(ModelAndView model,
+			@AuthenticationPrincipal Member member,
+			@RequestParam("fCode") String fCode,
+			@RequestParam("ftype") String ftype,
+			@ModelAttribute ReviewCmt cmt) {
+		
+		int cmtDelete = 0;
+		cmt.setCmtWriterNo(member.getM_no());
+		int fcode = Integer.parseInt(fCode);
+		
+		cmtDelete = service.cmtDelete(cmt);
+		
+		if(cmtDelete > 0) {
+			System.out.println("댓글 삭제 성공");
+		}else {
+			System.out.println("댓글 삭제 실패");
+		}
+		
+		model.setViewName("review/review_list");
+		
+		return model;
 	}
 	
 }

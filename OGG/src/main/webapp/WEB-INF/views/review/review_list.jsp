@@ -23,7 +23,7 @@
         
         <!-- 2nd row -->
         <div class="col-3 col-sm-12" id="div_review">
-            <p class="detail-text1" style="margin-left: 10px;">리뷰</p><hr>
+            <p class="board-text1" style="margin-left: 10px;">리뷰</p><hr>
 
             <!-- 리뷰 내용 -->
 			<c:if test="${ empty list }">
@@ -52,14 +52,6 @@
 					            <img src="${ path }/images/review/comment2.png"  height="30px;">
 					            ${ review.rvCmtCount }
 					        </div>
-					        <!--<div class="col-sm-1"><button class="btn btn-primary" type="button">수정</button></div>
-					        <div class="col-sm-1"><button class="btn btn-primary" type="button">삭제</button></div> -->
-<!-- 					        <div class="col-sm-3">
-					            <div class="btn-group" role="group" aria-label="Basic mixed styles example" style="padding-left: 55%;">
-					                <button class="btn btn-primary" type="button">수정</button>
-					                <button class="btn btn-primary" type="button">삭제</button>
-					            </div>        
-					        </div> -->
 					    </div>
 					</div>
 					<br>

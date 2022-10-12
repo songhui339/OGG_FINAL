@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.RowBounds;
-import org.aspectj.weaver.IntMap;
 
 import com.project.ogg.review.model.vo.Film;
 import com.project.ogg.review.model.vo.Review;
@@ -12,29 +11,36 @@ import com.project.ogg.review.model.vo.ReviewCmt;
 
 @Mapper
 public interface ReviewMapper {
+	
+	Film checkFilm(int fCode);
+	
+	int insertFilm(Film film);
 
-	int selectBoardCount(int fcode);
-
-	List<Review> selectAll(RowBounds rowBounds);
-
+	List<Review> selectReviewAll(RowBounds rowBounds);
+	
 	List<Review> selectReviewByFilm(RowBounds rowBounds, int fcode);
 
 	Review selectReviewByNo(int no);
 
-	int selectCmtCount(int no);
+	int selectReviewCount(int fcode);
 
-	List<ReviewCmt> selectCmtByNo(int no);
+	int writeReview(Review review);
+	
+	int updateReview(Review review);
+	
+	int deleteReview(Review review);
+	
+	List<ReviewCmt> selectCmtByReviewNo(int no);
 
-	int insertReview(Review review);
+	ReviewCmt selectCmtByCmtNo(int cmtNo);
 
 	Review updateCmtCount(int no);
 
-	int insertFilm(Film film);
+	int selectCmtCount(int no);
 
-	Film checkFilm(int fCode);
+	int writeCmt(ReviewCmt cmt);
 
-	int updateReview(Review review);
+	int updateCmt(ReviewCmt cmt);
 
-	int deleteReview(Review review);
-	
+	int deleteCmt(ReviewCmt cmt);
 }

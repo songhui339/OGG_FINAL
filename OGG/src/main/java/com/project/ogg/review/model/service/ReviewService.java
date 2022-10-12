@@ -10,28 +10,35 @@ import com.project.ogg.review.model.vo.ReviewCmt;
 
 public interface ReviewService {
 
-	int getBoardCount(int fcode);
+	Film filmcheck(int fcode);
+	
+	int filmSave(Film film);
 
 	List<Review> getBoardListAll(PageInfo pageInfo);
-
+	
 	List<Review> getBoardListByFilm(PageInfo pageInfo, int fcode);
-
-	Review findReviewByNo(int no);
-
-	int getCmtCountByNo(int no);
-
-	List<ReviewCmt> findReviewCmtByNo(int no);
+	
+	Review getReviewByNo(int no);
+	
+	int getReviewCount(int fcode);
 
 	int reviewSave(Review review);
+	
+	int reviewUpdate(Review review);
+	
+	int reviewDelete(Review review);
+
+	List<ReviewCmt> getCmtByReviewNo(int no);
+
+	ReviewCmt getCmtByCmtNo(int cmtNo);
 
 	Review updateCmtCount(int no);
 
-	int filmSave(Film film);
+	int getCmtCountByNo(int no);
 
-	Film filmcheck(int fcode);
+	int cmtWrite(ReviewCmt cmt);
 
-	int reviewUpdate(Review review);
+	int cmtUpdate(ReviewCmt cmt);
 
-	int reviewDelete(Review review);
-
+	int cmtDelete(ReviewCmt cmt);
 }

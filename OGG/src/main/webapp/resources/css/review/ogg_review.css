@@ -49,7 +49,13 @@
         height: 100%; 
         padding: 20px;
     }
-
+    #div_comment{
+        border-radius: 15px;
+        border: 1px solid lightgray;
+        /* border: 1px solid #cfc9f6; */
+        height: 100%; 
+        padding: 20px;
+    }
     #div_film{
         border-radius: 15px;
         border: 1px solid lightgray;
@@ -195,11 +201,18 @@
     #board-text5{
         font-size: 0.9em;
     }
+    #board-text5-1{
+        font-size: 0.9em;
+    }
     #board-text6{
         width: 5%;
         font-size: 0.9em;
     }
     #board-text7{
+        width: 11%;
+        font-size: 0.9em;
+    }
+    #board-text7-1{
         width: 11%;
         font-size: 0.9em;
     }
@@ -219,6 +232,10 @@
     }
 
     a:link{
+        color: black;
+    }
+
+    a:visited{
         color: black;
     }
     /* ver1 */
@@ -254,7 +271,7 @@
         height: 30px; 
     }
     
-    .btn:hover{
+    .btn:hover, .btn:checked, .btn:focus {
         font-size: 1em;
         border: 1px solid #7e69fe;
         background-color: #7e69fe; 
@@ -262,7 +279,7 @@
         height: 30px; 
         text-align: center;
     }
-
+    
     /* 별점 */
     .star-rating {
         display: flex;

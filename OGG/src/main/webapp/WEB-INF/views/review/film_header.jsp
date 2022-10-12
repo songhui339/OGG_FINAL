@@ -1,4 +1,4 @@
- <%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
@@ -13,12 +13,12 @@
 	
 	            </div>
 	        </div>
-	        <div class="col-sm-9" style="margin-top: 5%; z-index:999;" >
+	        <div class="col-sm-9" style="margin-top: 5%;" >
 	            <div id="filmDetail1">
 	
 	            </div>
 	            <div class="row">
-	                <div class="col-3 col-sm-3" style="margin-bottom: 10px; z-index:999;">
+	                <div class="col-3 col-sm-3" style="margin-bottom: 10px;">
 	                    <div class="star-rating space-x-4 mx-auto">
 	                        <input type="radio" id="5-stars" name="rating" value="5" v-model="ratings"/>
 	                        <label for="5-stars" class="star pr-4">★&nbsp;</label>
@@ -32,17 +32,33 @@
 	                        <label for="1-star" class="star">★&nbsp;</label>
 	                    </div>
 	                </div>
-	                <div class="col-3 col-sm-2" style="z-index:999;">
-	                    <a href="">
-	                		<img src="${path}/images/review/plus.png" height="30px;">
-	                        보고싶어요
-	                    </a>
+	                <div class="col-3 col-sm-2">
+	                    <c:if test="${ loginMember != null }">
+		                    <a href="">
+		                		<img src="${path}/images/review/plus.png" height="30px;">
+		                        보고싶어요
+		                    </a>
+						</c:if>
+	                    <c:if test="${ loginMember == null }">
+		                    <a href="" onclick="alert('로그인 후 이용 가능합니다')">
+		                		<img src="${path}/images/review/plus.png" height="30px;">
+		                        보고싶어요
+		                    </a>
+						</c:if>
 	                </div>
-	                <div class="col-3 col-sm-3" style="z-index:999;">
-	                    <a href="">
-	                		<img src="${path}/images/review/pen.png" height="30px;">
-	                        리뷰
-	                    </a>
+	                <div class="col-3 col-sm-3">
+        				<c:if test="${ loginMember != null }">
+		                    <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="남기기">
+		                		<img src="${path}/images/review/pen.png" height="30px;">
+		                        리뷰
+		                    </a>
+						</c:if>
+						<c:if test="${ loginMember == null }">
+		                    <a href="" onclick="alert('로그인 후 이용 가능합니다')">
+		                		<img src="${path}/images/review/pen.png" height="30px;">
+		                        리뷰
+		                    </a>
+	                    </c:if>
 	                </div>
 	                <div class="col-3 col-sm-3"></div>
 	            </div>

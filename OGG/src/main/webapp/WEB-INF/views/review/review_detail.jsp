@@ -26,6 +26,7 @@
             <!-- 리뷰 내용 -->
 			<div id="div_review">
 				<p id="board-text1">${ review.rvNickname }</p>
+				<input id="rvNo" type="hidden" value="${ review.rvNo}">
 				<hr>
 				<p id="board-text3">
 					<br>
@@ -42,14 +43,14 @@
 			            <img src="${path}/images/review/comment2.png"  height="30px;">
 			            ${ cmtCount }
 			        </div>
+			        <c:if test="${ loginMember.m_no == review.rvWriterNo }">
  			        <div class="col-sm-3">
 			            <div class="btn-group" role="group" aria-label="Basic mixed styles example" style="padding-left: 55%;">
-			                <!-- <button class="btn btn-primary" type="button" id="updaterv">수정</button> -->
 			                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever=" 남기기">수정</button>
-			                <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever=" 남기기"> -->
-			                <button class="btn btn-primary" type="button" id="deleterv">삭제</button>
+			                <button class="btn btn-primary" type="button" id="deleteReview">삭제</button>
 			            </div>        
 			        </div> 
+			    	</c:if>
 			    </div>
 			</div>
 			<br>
@@ -73,25 +74,42 @@
 	                    </div>
 	                    <div class="modal-footer">
 	                        <span id="textLengthCheck">(0 / 2000)</span>
-	                        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button> -->
-	                        <button type="button" class="btn btn-primary" id="updaterv" data-bs-dismiss="modal">저장</button>
+	                        <button type="button" class="btn btn-primary" id="updateReview" data-bs-dismiss="modal">저장</button>
 	                    </div>
 	                </div>
 	            </div>
 	        </div>
             
             <!-- 댓글 테이블 -->
-            <div id="div_review">
+            <div id="div_comment">
             <table class="table table-hover" id="review_reply">
-                <tbody >
+                <tbody id="cmtTbody" >
                 	<c:forEach var="reviewCmt" items="${ reviewCmt }">
-                    <tr>
+                    <tr id="cmtlist">
+						<input id="cmtNo" type="hidden" value="${ reviewCmt.cmtNo }">
+						<input id="cmtWriterNo" type="hidden" value="${reviewCmt.cmtWriterNo }" >
+						<input id="cmtNickname" type="hidden" value="${reviewCmt.cmtNickname }" >
                         <td id="board-text4">${ reviewCmt.cmtNickname }</td>
                         <td id="board-text5">${ reviewCmt.cmtContent }</td>
                         <td id="board-text7">
+                        	<c:if test="${ loginMember.m_no == reviewCmt.cmtWriterNo }">
+	                            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+	                                <button class="btn btn-primary" type="button" onclick="showUpdateCmt(event)">수정</button>
+	                                <button class="btn btn-primary" type="button" onclick="deleteCmt(event)">삭제</button>
+	                            </div>    
+							</c:if>
+                        </td>
+                    </tr>
+                    <tr id="cmtlist2" style="display: none;">
+                        <td id="board-text4">${ reviewCmt.cmtNickname }</td>
+                        <td id="board-text5-1">
+                        	<textarea id="message-cmt-2" style="border: 1px solid lightgrey; resize: none; width: 100%;"
+                            >${ reviewCmt.cmtContent }</textarea>
+                        </td>
+                        <td id="board-text7-1">
                             <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                                <button class="btn btn-primary" type="button">수정</button>
-                                <button class="btn btn-primary" type="button">삭제</button>
+                                <button class="btn btn-primary" type="button" onclick="updateCmt(event)">수정</button>
+                                <button class="btn btn-primary" type="button" onclick="updateCommentsCancel(event)">취소</button>
                             </div>    
                         </td>
                     </tr>
@@ -102,10 +120,10 @@
             <div id="comment-editor" class="mb-3">
                 <div class="form-control" style="height: 85px;">
                     <p id="loginId" style="font-weight: bold; margin: 0px;"></p>
-                    <textarea style="border: none; resize: none; width: 100%;"></textarea>
+                    <textarea id="message-cmt" style="border: none; resize: none; width: 100%;"></textarea>
                 </div>
                 <div class="text-right mt-1">
-                    <button class="btn btn-primary" type="button"
+                    <button class="btn btn-primary" type="button" id="writeCmt"
                     style="margin-left:45%; height: 35px;">등록</button>
                 </div>
             </div>
@@ -120,18 +138,69 @@
 	var fcode = "${ fcode }";
 	var ftype = "${ ftype }";
 	var m_no = "${ m_no }";
+    var rvNo = document.getElementById('rvNo').value;
 	var contextpath = "${ pageContext.request.contextPath }";
 
-	    $("#message-text").keyup(function(e) {
-	    var content = $(this).val();
-	    $("#textLengthCheck").text("(" + content.length + " / 2000)"); //실시간 글자수 카운팅
-	    if (content.length > 2000) {
-	        alert("최대 2000자까지 입력 가능합니다.");
-	        $(this).val(content.substring(0, 2000));
-	        $('#textLengthCheck').text("(2000 / 2000");
-	    }
-	});
-	        
+	function showUpdateCmt(event) {
+		$(event.target).parents('#cmtlist').hide();
+		$(event.target).parents("#cmtlist").next().show();
+		$(event.target).parents("#cmtlist").next().find('#message-cmt-2').val($(event.target).parent().parent().prev().text());
+	}
+
+	function updateCommentsCancel(event) {
+		$(event.target).parents('#cmtlist2').hide();
+		$(event.target).parents("#cmtlist2").prev().show();
+	}
+
+	function updateCmt(event) {
+		let cmtContent = $(event.target).parent().parent().prev().find('#message-cmt-2').val();
+
+		$.ajax({
+			async: true,
+			type : 'POST',
+			url : contextpath + '/review/cmt_update',
+			data : {
+				'rvNo' : rvNo,
+				'cmtNo' : $(event.target).parent().parent().parent().parent().prev().find('#cmtNo').val(),
+				'cmtContent' : cmtContent, 
+				'fCode' : fcode,
+				'ftype' : ftype
+			},
+			success : (data) => {
+				$(event.target).parent().parent().parent().hide();
+				$(event.target).parent().parent().parent().prev().show();
+				$(event.target).parent().parent().parent().prev().find('#board-text5').text(cmtContent);
+			},
+			error : (error) => {
+				alert('댓글 수정에 실패하였습니다');
+			}
+		});
+    }
+
+	function deleteCmt(event) {
+        
+        if(confirm('댓글을 삭제하시겠습니까?')){
+			$.ajax({
+				async: true,
+				type : 'POST',
+				url : contextpath + '/review/cmt_delete',
+				data : {
+					'rvNo' : rvNo,
+					'cmtNo' : $(event.target).parent().parent().parent().parent().find('#cmtNo').val(),
+					'cmtContent' : $(event.target).parent().parent().find('#message-cmt-2').val(), 
+					'fCode' : fcode,
+					'ftype' : ftype
+				},
+				success : (data) => {
+					alert('댓글이 정상적으로 삭제되었습니다.');
+					$(event.target).parents("#cmtlist").remove();
+				},
+				error : (error) => {
+					alert('댓글 삭제에 실패하였습니다');
+				}
+			});
+		};
+    }
 	</script>  
 
 	<!-- footer -->
