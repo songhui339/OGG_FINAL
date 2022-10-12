@@ -110,7 +110,7 @@
                                             <td>${ott.ott_class }</td>
                                             <td>${ott.ott_max_member }명</td>
                                             <td>${ott.plan_price }</td>
-                                            <td>${ott.ott_thumb }</td>
+                                            <td><a href='#'onclick="window.open('${path }/images/party/${ott.ott_thumb }.png','??','left=750px,top=300px,width=200px,height=200px')">${ott.ott_thumb }</a></td>
                                         </tr>
                                     </c:forEach>
                                     </tbody>
