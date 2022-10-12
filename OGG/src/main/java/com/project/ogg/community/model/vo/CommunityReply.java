@@ -17,4 +17,6 @@ public class CommunityReply {
 	private String cr_status; // 댓글 상태 (Y:노출 / N:비노출)
 	private Date cr_writeDate; // 댓글 작성일자
 	private Date cr_modifyDate; // 댓글 수정일자
+	
+	private String m_nickname; // 닉네임
 }

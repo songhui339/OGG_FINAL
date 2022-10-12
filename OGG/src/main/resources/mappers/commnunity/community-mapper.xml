@@ -23,5 +23,99 @@
 		SELECT COUNT(C_NO) FROM COMMUNITY WHERE C_STATUS='Y'
 	</select>
 	
+	<select id="selectAll" resultMap="CommunityResultMap">
+		SELECT C_WRITERNO,
+			   C_NO,
+			   C_TITLE,
+			   C_CONTENT,
+			   C_FILE,
+			   C_WRITEDATE,
+			   C_MODIFYDATE,
+			   C_VIEWCOUNT,
+			   C_STATUS,
+			   C_LIKE,
+			   M_NICKNAME
+		FROM COMMUNITY C
+		JOIN MEMBER M ON (M.M_NO = C.C_WRITERNO)
+		WHERE C.C_STATUS = 'Y'
+		ORDER BY C.C_NO DESC
+	</select>
+
+	<!-- 게시글 상세 조회 (댓글 포함X) -->
+	<select id="findCommunityByNo" parameterType="_int" resultMap="CommunityResultMap">
+		SELECT C.C_NO,
+			   C.C_TITLE,
+			   C.C_WRITERNO,
+			   M.M_NICKNAME,
+			   C.C_VIEWCOUNT,
+			   C.C_FILE,
+			   C.C_FILEMODIFY,
+			   C.C_CONTENT,
+			   C.C_WRITEDATE,
+			   C.C_MODIFYDATE
+		FROM COMMUNITY C
+		LEFT JOIN MEMBER M ON (C.C_WRITERNO = M.M_NO)
+		WHERE C.C_STATUS = 'Y' AND C.C_NO = #{c_no}
+	</select>
+	
+	<!-- 게시글 등록 -->
+	<insert id="insertCommunity" parameterType="Community" useGeneratedKeys="true" keyProperty="c_no" keyColumn="C_NO">
+		INSERT INTO COMMUNITY (
+			C_NO,
+			C_WRITERNO,
+			C_TITLE,
+			C_CONTENT,
+			C_FILE,
+			C_FILEMODIFY,
+			C_WRITEDATE,
+			C_MODIFYDATE,
+			C_VIEWCOUNT,
+			C_STATUS,
+			C_LIKE
+		) VALUES (
+			C_NO.NEXTVAL,
+			#{c_writerNo},
+			#{c_title},
+			#{c_content},
+			#{c_file},
+			#{c_fileModify},
+			DEFAULT,
+			DEFAULT,
+			DEFAULT,
+			DEFAULT,
+			DEFAULT
+		)
+	</insert>
+	
+	<!-- Authentication m_no을 통해서 m_id 선택하는 구문 -->
+	<select id="selectMemberId" parameterType="String" resultType="_int">
+		SELECT M_NO
+		FROM MEMBER
+		WHERE M_ID=#{m_id}
+	</select>
+	
+	<!-- 게시글 삭제 -->
+	<update id="communityDelete" parameterType="map">
+		UPDATE COMMUNITY SET C_STATUS=#{c_status} WHERE C_NO=#{c_no}
+	</update>
+	
+	<!-- 게시글 수정 -->
+	<update id="modifyCommunity" parameterType="Community">
+		UPDATE COMMUNITY
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="c_title != null">C_TITLE = #{c_tile},</if>
+			<if test="c_content != null">C_CONTENT = #{c_content},</if>
+			<if test="c_file != null">C_FILE = #{c_file},</if>
+			<if test="c_fileModify != null">C_FILEMODIFY = #{c_fileModify},</if>
+		</trim>
+		WHERE C_NO = #{c_no}
+	</update>
+	
+	<!-- 게시글 조회수 -->
+	<update id="communityViewcount" parameterType="int">
+		UPDATE COMMUNITY SET
+		C_VIEWCOUNT = C_VIEWCOUNT + 1
+		WHERE C_NO = #{c_no}
+	</update>
 	
 </mapper>

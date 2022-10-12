@@ -27,6 +27,8 @@
 		<a href="${ path }/member/doLogout.do">로그아웃</a>
 	</security:authorize>
 	<br><br><br>
+	<a href="${ path }/community/list.do">커뮤니티</a>
+	<br><br><br>
 	<a href="${ path }/party/ottlist">파티 만들기</a>
 	
 	<button onclick="location.assign('${path}/admin/home')">관리자 페이지</button>
