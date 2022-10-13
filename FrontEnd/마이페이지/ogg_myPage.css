@@ -34,7 +34,7 @@ OGG 마이페이지 CSS
     border-radius: 15px;
     background-color: rgb(255, 255, 255);
     margin-bottom: 20px;
-    padding: 20px 12px;
+    padding: 20px 12px 10px 12px;
     position: relative;
 }
 
@@ -68,4 +68,99 @@ OGG 마이페이지 CSS
     line-height: 24px;
     text-align: left;
     color: rgb(34, 34, 34);
+}
+
+.myPage_section .myPage_Wrap .menuBox .menuList {
+    
+}
+
+.myPage_section .myPage_Wrap .menuBox .menuList .titleText{
+    margin-left: 16px;
+    margin-bottom: 12px;
+    height: 19px;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 24px;
+    text-align: left;
+    color: rgb(34, 34, 34);
+}
+
+.myPage_section .myPage_Wrap .menuBox .menuList a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.myPage_section .myPage_Wrap .menuBox .menuList .item {
+    cursor: pointer;
+    padding: 13.5px 16px;
+    width: 100%;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    margin-bottom: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    text-align: left;
+    color: rgb(34, 34, 34);
+}
+
+.myPage_section .myPage_Wrap .menuBox .menuList .item:hover {
+    background-color: rgb(246, 246, 246);
+}
+
+.myPage_section .myPage_Wrap .infoBox {
+    position: relative;
+    max-width: 580px;
+    min-width: 400px;
+    width: 100%;
+    border-radius: 15px;
+    background-color: rgb(255, 255, 255);
+    margin-left: 20px;
+    height: calc(230px);
+    min-height: 640px;
+    padding: 32px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.myPage_section .myPage_Wrap .infoBox p.titleText {
+    height: 21px;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 27px;
+    text-align: left;
+    color: rgb(34, 34, 34);
+    margin-bottom: 0;
+}
+
+.myPage_section .myPage_Wrap .infoBox .line {
+    width: 100%;
+    margin: 20px 0px;
+    height: 1px;
+    background-color: rgb(227, 227, 227);
+}
+
+.myPage_section .myPage_Wrap .bannerBox {
+    max-width: 280px;
+    width: 100%;
+    margin-left: 20px;
+}
+
+.myPage_section .myPage_Wrap .bannerBox .banner {
+    padding: 40px 24px 28px;
+    max-width: 280px;
+    width: 100%;
+    height: 219px;
+    border-radius: 15px;
+    background-color: rgb(255, 255, 255);
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 27px;
+    text-align: left;
+    color: rgb(34, 34, 34);
+    position: relative;
 }
