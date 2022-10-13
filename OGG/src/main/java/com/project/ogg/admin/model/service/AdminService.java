@@ -52,6 +52,8 @@ public interface AdminService {
 	int getSepUserCount();
 
 	int getDecUserCount();
+
+	int addOTT(OttAdmin ott);
 	
 
 }

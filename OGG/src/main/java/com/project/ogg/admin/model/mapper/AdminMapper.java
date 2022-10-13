@@ -52,6 +52,8 @@ public interface AdminMapper {
 
 	List<OttAdmin> getOTTList();
 	
+	int addOTT(OttAdmin ott);
+
 	int getMarchUserCount();
 
 	int getJuneUserCount();
@@ -59,6 +61,5 @@ public interface AdminMapper {
 	int getSepUserCount();
 
 	int getDecUserCount();
-
 
 }

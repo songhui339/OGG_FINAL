@@ -1,6 +1,7 @@
 package com.project.ogg.admin.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -31,6 +33,7 @@ import com.project.ogg.admin.model.vo.OttAdmin;
 import com.project.ogg.admin.model.vo.PhotoVo;
 import com.project.ogg.admin.model.vo.Question;
 import com.project.ogg.common.util.MultipartFileUtil;
+import com.project.ogg.common.util.MultipartFileUtil2;
 import com.project.ogg.common.util.PageInfo;
 
 import lombok.extern.slf4j.Slf4j;
@@ -45,6 +48,8 @@ public class AdminController {
 	@Autowired
 	private AdminMapper mapper;
 	
+	@Autowired
+	private ResourceLoader resourceLoader;
 	
 	@GetMapping("/admin/home")
 	public ModelAndView goAdmin(ModelAndView model) {
@@ -77,6 +82,55 @@ public class AdminController {
 		model.addObject("muser",muser);
 		model.addObject("list",list);
 		model.setViewName("admin/ad_OTT");
+		return model;
+	}
+	@GetMapping("/admin/addOTT")
+	public String addOTT() {
+		return "admin/addOTT";
+	}
+	
+	@PostMapping("/admin/addOTT")
+	public ModelAndView addOTT(ModelAndView model, 
+								@ModelAttribute OttAdmin ott,
+								@RequestParam("img") MultipartFile upfile) {
+		
+		int result = 0;
+		
+		if(upfile !=null &&  !upfile.isEmpty()) {
+			//파일을 저장하는 로직 작성
+			String location = null;
+			String ott_thumb = null;
+			try {
+				location = resourceLoader.getResource("resources/images/party")
+										 .getFile()
+										 .getPath();
+				
+				ott_thumb = MultipartFileUtil2.save(upfile, location,ott.getOtt_name());
+				
+				System.out.println(location);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			if(ott_thumb != null) {
+				ott.setOtt_thumb(ott_thumb);
+			}
+		}
+		
+		System.out.println("111board.getNo()"+ott.getOtt_no());
+		result = service.addOTT(ott);
+		System.out.println("222board.getNo()"+ott.getOtt_no());
+		
+		if(result > 0) {
+			// 탈퇴 성공
+    		model.addObject("msg", "정상적으로 OTT 추가 되었습니다.");
+    		model.addObject("script", "opener.document.location.reload();self.close()");
+		} else {
+			// 탈퇴 실패
+			model.addObject("msg", "OTT 추가 실패 하였습니다.");
+			model.addObject("location", "/admin/addOTT");		
+		}
+		model.setViewName("common/msg");
+		
 		return model;
 	}
 	

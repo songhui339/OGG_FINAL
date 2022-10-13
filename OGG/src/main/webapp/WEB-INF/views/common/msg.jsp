@@ -21,3 +21,4 @@
 		location.replace("${ pageContext.request.contextPath }${ location }");
 	</script>
 </body>
+</html>
