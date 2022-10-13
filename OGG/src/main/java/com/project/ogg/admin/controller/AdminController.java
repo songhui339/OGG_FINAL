@@ -123,7 +123,7 @@ public class AdminController {
 		if(result > 0) {
 			// 탈퇴 성공
     		model.addObject("msg", "정상적으로 OTT 추가 되었습니다.");
-    		model.addObject("script", "self.close()");
+    		model.addObject("script", "opener.document.location.reload();self.close()");
 		} else {
 			// 탈퇴 실패
 			model.addObject("msg", "OTT 추가 실패 하였습니다.");
