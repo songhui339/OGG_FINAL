@@ -4,17 +4,23 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OGG 상단메뉴&푸터</title>
+    <!-- 파비콘 테스트 -->
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <title>마이페이지</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="../Header&Footer/ogg_common.css">
+    <link rel="stylesheet" href="ogg_myPage.css" class="css">
+    <link rel="stylesheet" href="../Header&Footer/ogg_common.css" class="css">
 </head>
 <body>
     <header>
         <div class="width-container">
             <div class="logoBox">
                 <a href="javascript:">
-                    <img src="OGG_logo_ver3_small.png" alt="loogo" title=""></a>
+                    <img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/small-butslogo.png" srcset="https://buts.co.kr/thema/Buts/colorset/Basic/img/2x/small-butslogo.png 2x" alt="loogo" title=""></a>
             </div>
 
             <div class="btnBox">
@@ -43,40 +49,31 @@
         </div>
     </header>
 
-    <!-- 메인 페이지 이미지 슬라이드 -->
-    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-        </div>
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="https://www.fastfive.co.kr/wp-content/uploads/2022/05/220510_banner_new_highQ.png" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="https://www.fastfive.co.kr/wp-content/uploads/2022/08/ss2EB_banner_pc.png" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="https://www.fastfive.co.kr/wp-content/uploads/2022/05/220510_banner_new_highQ.png" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="https://www.fastfive.co.kr/wp-content/uploads/2022/08/ss2EB_banner_pc.png" class="d-block w-100" alt="...">
-            </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
+        <section class="myPage_section">
+            <div class="myPage_Wrap">
+                <div class="menuBox">
+                    <div class="box01 longver">
 
-    <div>
-        <p style="text-align: center; padding: 200px 0; font-size: 2rem; margin: 0;">메인 페이지 내용</p>
-    </div>
+                    </div>
+
+                    <div class="box02">
+                        <div class="notice">
+                            <!-- <img src="https://linkid.pw/static/media/ic-speaker-24.b2c49cdf.svg" alt="" style="width: 24px; height: 24px; vertical-align: baseline;"> -->
+                            <i class="bi bi-megaphone"></i>
+                            <p class="text">공지사항</p>
+                        </div>
+                        <div class="notice">
+                            <i class="bi bi-chat-left-text"></i>
+                            <p class="text">1:1 문의 내역</p>
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+        </section>
+
+
 
 
 
@@ -118,7 +115,6 @@
         벗츠는 소비자 보호와 안전거래를 위해고객센터(manager@buts.co.kr)를 운영하고 있으며,분쟁이 발생 된 경우 별도의 분쟁처리절차에 의거분쟁해결 및 청약철회 등이 진행 됩니다.
         </div>
     </footer>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
