@@ -60,7 +60,7 @@
             <div class="login-form">
                 <form class="form" role="form" name="flogin" action="/member/login.do" method="POST">
                     <div class="login-logo">
-                        <img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/big-butslogo.png" alt="">
+                        <img src="${ path }/images/logo/OGG_logo.png"  alt="logo">
                     </div>
                     <div class="login-input">
                         <input type="text" name="m_id" id="m_id" required="" maxlength="20" placeholder="아이디를 입력하세요">
@@ -86,7 +86,7 @@
                  		</c:if>
                     <div class="form-text">
                         <p>
-                            벗츠 회원이 아닌가요? <br>
+                            OGG 회원이 아닌가요? <br>
                             첫가입 시 500포인트! <span class="text-purple">추천인 등록 시 추가 500포인트!</span>
                         </p>
                     </div>
@@ -95,7 +95,7 @@
 
                     <div class="form-sns-join sns-wrap">
 						<div id="kakaoLogin">
-							<a href="javascript:kakaoLogin();">
+							<a href="javascript:kakaoLogin();" class="kakao">
 								<img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/btn-sns-login-kakao.png">
 								카카오 계정으로 로그인 하기         
 							</a>

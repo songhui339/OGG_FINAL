@@ -30,9 +30,7 @@
     <header>
         <div class="width-container">
             <div class="logoBox">
-                <a href="javascript:">
-                    <img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/small-butslogo.png" 
-                    srcset="https://buts.co.kr/thema/Buts/colorset/Basic/img/2x/small-butslogo.png 2x" alt="loogo" title=""></a>
+                <a href="${ path }/"><img src="${ path }/images/logo/OGG_logo_menu.png"  alt="logo"></a>
             </div>
 
 			<!-- 로그인 전 btnBox -->
