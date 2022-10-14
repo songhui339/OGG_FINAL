@@ -9,7 +9,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
-    <title>내 파티 관리</title>
+    <title>찜한 컨텐츠</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="ogg_myPage.css" class="css">
@@ -104,155 +104,74 @@
 
                 <!-- 정보 영역 -->
                 <div class="infoBox">
-                    <p class="titleText">내 파티 관리</p>
+                    <p class="titleText">찜한 컨텐츠</p>
                     <div class="line"></div>
+                    <!-- 노출 최대 8개 -->
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">제목</th>
+                            </tr>
+                        </thead>
+                        <tbody class="partyitem">
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>${F_TITLE}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>${F_TITLE}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td>${F_TITLE}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td>${F_TITLE}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">4</th>
+                                <td>${F_TITLE}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">5</th>
+                                <td>${F_TITLE}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">6</th>
+                                <td>${F_TITLE}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">7</th>
+                                <td>${F_TITLE}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">8</th>
+                                <td>${F_TITLE}</td>
+                            </tr>
+                        </tbody>
+                    </table>
 
-                    <div class="partyBox" onclick="location.href='';">
-                        <div class="logoImg">
-                            <img src="../파이널 UI 설계 이미지/logo_netflix.png" alt="logoImg">
-                        </div>
-                        <div class="partyTitle">
-                            <p class="text">유튜브 프리미엄</p>
-                        </div>
-                        <div class="partyPosition">
-                            <p class="badge leader">파티장</p>
-                        </div>
-
-                        <div class="btnBox">
-                            <button class="button">상세보기</button>
-                        </div>
-                    </div>
-
-                    <div class="partyBox" onclick="location.href='';">
-                        <div class="logoImg">
-                            <img src="../파이널 UI 설계 이미지/logo_disney.png" alt="logoImg">
-                        </div>
-                        <div class="partyTitle">
-                            <p class="text">디즈니 플러스</p>
-                        </div>
-                        <div class="partyPosition">
-                            <p class="badge member">파티원</p>
-                        </div>
-
-                        <div class="btnBox">
-                            <button class="button">상세보기</button>
-                        </div>
-                    </div>
-
-                    <div class="partyBox" onclick="location.href='';">
-                        <div class="logoImg">
-                            <img src="../파이널 UI 설계 이미지/logo_disney.png" alt="logoImg">
-                        </div>
-                        <div class="partyTitle">
-                            <p class="text">디즈니 플러스</p>
-                        </div>
-                        <div class="partyPosition">
-                            <p class="badge member">파티원</p>
-                        </div>
-
-                        <div class="btnBox">
-                            <button class="button">상세보기</button>
-                        </div>
-                    </div>
-
-                    <div class="partyBox" onclick="location.href='';">
-                        <div class="logoImg">
-                            <img src="../파이널 UI 설계 이미지/logo_disney.png" alt="logoImg">
-                        </div>
-                        <div class="partyTitle">
-                            <p class="text">디즈니 플러스</p>
-                        </div>
-                        <div class="partyPosition">
-                            <p class="badge member">파티원</p>
-                        </div>
-
-                        <div class="btnBox">
-                            <button class="button">상세보기</button>
-                        </div>
-                    </div>
-
-                    <div class="partyBox" onclick="location.href='';">
-                        <div class="logoImg">
-                            <img src="../파이널 UI 설계 이미지/logo_disney.png" alt="logoImg">
-                        </div>
-                        <div class="partyTitle">
-                            <p class="text">디즈니 플러스</p>
-                        </div>
-                        <div class="partyPosition">
-                            <p class="badge member">파티원</p>
-                        </div>
-
-                        <div class="btnBox">
-                            <button class="button">상세보기</button>
-                        </div>
-                    </div>
-
-                    <div class="partyBox" onclick="location.href='';">
-                        <div class="logoImg">
-                            <img src="../파이널 UI 설계 이미지/logo_disney.png" alt="logoImg">
-                        </div>
-                        <div class="partyTitle">
-                            <p class="text">디즈니 플러스</p>
-                        </div>
-                        <div class="partyPosition">
-                            <p class="badge member">파티원</p>
-                        </div>
-
-                        <div class="btnBox">
-                            <button class="button">상세보기</button>
-                        </div>
-                    </div>
-
-                    <div class="partyBox" onclick="location.href='';">
-                        <div class="logoImg">
-                            <img src="../파이널 UI 설계 이미지/logo_disney.png" alt="logoImg">
-                        </div>
-                        <div class="partyTitle">
-                            <p class="text">디즈니 플러스</p>
-                        </div>
-                        <div class="partyPosition">
-                            <p class="badge member">파티원</p>
-                        </div>
-
-                        <div class="btnBox">
-                            <button class="button">상세보기</button>
-                        </div>
-                    </div>
-
-                    <div class="partyBox" onclick="location.href='';">
-                        <div class="logoImg">
-                            <img src="../파이널 UI 설계 이미지/logo_disney.png" alt="logoImg">
-                        </div>
-                        <div class="partyTitle">
-                            <p class="text">디즈니 플러스</p>
-                        </div>
-                        <div class="partyPosition">
-                            <p class="badge member">파티원</p>
-                        </div>
-
-                        <div class="btnBox">
-                            <button class="button">상세보기</button>
-                        </div>
-                    </div>
-
-                    <div class="partyBox" onclick="location.href='';">
-                        <div class="logoImg">
-                            <img src="../파이널 UI 설계 이미지/logo_disney.png" alt="logoImg">
-                        </div>
-                        <div class="partyTitle">
-                            <p class="text">디즈니 플러스</p>
-                        </div>
-                        <div class="partyPosition">
-                            <p class="badge member">파티원</p>
-                        </div>
-
-                        <div class="btnBox">
-                            <button class="button">상세보기</button>
-                        </div>
-                    </div>
-
-                    
-
+                    <!-- page 네비게이션 -->
+                    <nav aria-label="Page navigation example" class="pageNav">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item">
+                                <a class="page-link c_purple" href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li class="page-item"><a class="page-link c_purple" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link c_purple" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link c_purple" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link c_purple" href="#" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
 
                 <!-- 배너 영역 -->
