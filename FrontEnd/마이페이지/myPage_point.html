@@ -9,7 +9,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
-    <title>내 파티 관리</title>
+    <title>포인트 관리</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="ogg_myPage.css" class="css">
@@ -89,7 +89,6 @@
 
                     <div class="box02">
                         <div class="notice">
-                            <!-- <img src="https://linkid.pw/static/media/ic-speaker-24.b2c49cdf.svg" alt="" style="width: 24px; height: 24px; vertical-align: baseline;"> -->
                             <i class="bi bi-megaphone"></i>
                             <p class="text">공지사항</p>
                         </div>
@@ -104,55 +103,70 @@
 
                 <!-- 정보 영역 -->
                 <div class="infoBox">
-                    <p class="titleText">내 파티 관리</p>
+                    <p class="titleText">OGG 포인트</p>
                     <div class="line"></div>
 
-                    <form action="">
-                        <div class="formBox">
-                            <ul class="form-list">
-                                <li>
-                                    <label for="">공유서비스</label>
-                                    <p class="text">넷플릭스</p>
-                                </li>
-                                <li>
-                                    <label for="">아이디</label>
-                                    <input type="text" name="" value="${P_SHARE_ID}" id="" readonly>
-                                </li>
-                                <li>
-                                    <label for="">비밀번호</label>
-                                    <input type="text" name="" value="${P_SHARE_PWD}" readonly>
-                                </li>
-                                <li>
-                                    <label for="">파티원 수</label>
-                                    <p class="text">2 / 5 명</p>
-                                </li>
-                                <li>
-                                    <label for="">파티원 ID</label>
-                                    <p class="text">${m_id}, ${m_id}</p>
-                                </li>
-                                <li>
-                                    <label for="">파티 시작일</label>
-                                    <p class="text">${P_START_DATE}</p>
-                                </li>
-                                <li>
-                                    <label for="">파티 종료일</label>
-                                    <p class="text">${P_END_DATE}</p>
-                                </li>
-                                
-                            </ul>
-
-                            <div class="btnBox">
-                                <button type="submit" class="btn">뒤로가기</button>
-                                <button type="" class="btn redBtn">탈퇴하기</button>
-                            </div>
-
-                            
-
+                    <div class="pointBox">
+                        <div class="titleText">
+                            <img src="https://linkid.pw/static/media/ic-linkidpoint-18.1f528a85.svg" alt="">
+                            <span class="text">보유 포인트</span>
                         </div>
-                    </form>
+                        <div class="pointText">
+                            <span class="text">${POINT} P</span>
+                        </div>
+                    </div>
 
-                
+                    <table class="table" style="margin-top: 30px;">
+                        <thead>
+                            <tr>
+                                <th scope="col">No</th>
+                                <th scope="col">날짜</th>
+                                <th scope="col">내역</th>
+                                <th scope="col">정산 포인트</th>
+                            </tr>
+                        </thead>
+                        <tbody class="partyitem">
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>${C_TITLE}</td>
+                                <td>${C_WRITEDATE}</td>
+                                <td>${C_VIEWCOUNT}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>${C_TITLE}</td>
+                                <td>${C_WRITEDATE}</td>
+                                <td>${C_VIEWCOUNT}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td>${C_TITLE}</td>
+                                <td>${C_WRITEDATE}</td>
+                                <td>${C_VIEWCOUNT}</td>
+                            </tr>
+                        </tbody>
+                    </table>
 
+                    <!-- page 네비게이션 -->
+                    <nav aria-label="Page navigation example" class="pageNav">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item">
+                                <a class="page-link c_purple" href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li class="page-item"><a class="page-link c_purple" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link c_purple" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link c_purple" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link c_purple" href="#" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+
+                    
                 </div>
 
                 <!-- 배너 영역 -->
