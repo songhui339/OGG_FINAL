@@ -140,12 +140,25 @@ OGG 마이페이지 CSS
 
 .myPage_section .myPage_Wrap .infoBox p.titleText {
     height: 21px;
+    width: 100%;
     font-size: 18px;
     font-weight: 600;
     line-height: 27px;
     text-align: left;
     color: rgb(34, 34, 34);
     margin-bottom: 0;
+}
+
+.myPage_section .myPage_Wrap .infoBox p.titleText a.button {
+    float: right;
+    color: #ffffff;
+    text-decoration: none;
+    background-color: #7e69fe;
+    padding: 3px 10px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: 5px;
+    transform: translateY(-3px);
 }
 
 .myPage_section .myPage_Wrap .infoBox .line {
@@ -497,3 +510,18 @@ OGG 마이페이지 CSS
     color: #ffffff;
 }
 
+/* ========== 1:1 문의 ========== */
+.table .partyitem td span.statusN {
+    background-color: #dddddd;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+}
+
+.table .partyitem td span.statusY {
+    background-color: #7e69fe;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    color: #ffffff;
+}
