@@ -125,7 +125,7 @@
                 <p class="text">더 궁금한 내용이 있으신가요?</p>
                 <div class="imgNbtn">
                     <a href="${ path }/faq">FAQ 자세히 보기<i class="bi bi-chevron-right"></i></a>
-                    <img src="img_faqBanner.png" alt="" class="question">
+                    <img src="${ path }/images/common/img_faqBanner.png" alt="faq" class="question">
                 </div>
             </div>
         </div>

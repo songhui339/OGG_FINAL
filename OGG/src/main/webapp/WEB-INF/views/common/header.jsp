@@ -51,7 +51,7 @@
                <a href="javascript:" class="myPageBtn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">${m_name} 님</a>
                
               <ul class="dropdown-menu" style="z-index: 80;">
-               	<li><a class="dropdown-item" href="#">마이페이지</a></li>
+               	<li><a class="dropdown-item" href="${ path }/mypage/main">마이페이지</a></li>
                	<li><a class="dropdown-item" href="${ path }/admin/home">관리페이지</a></li>
                	<li><hr class="dropdown-divider"></li>
                	<li><a class="dropdown-item" href="#">로그아웃</a></li>
