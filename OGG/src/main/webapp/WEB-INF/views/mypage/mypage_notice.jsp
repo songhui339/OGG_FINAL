@@ -19,16 +19,16 @@
                 <div class="menuList">
                     <p class="titleText">회원 정보 관리</p>
                     <!-- <hr> -->
-                    <a href="${ path }/mypage/main">
+                    <a href="#">
                         <div class="item">회원 정보 수정 / 탈퇴</div>
                     </a>
-                    <a href="${ path }/mypage/party">
+                    <a href="#">
                         <div class="item">내 파티 관리</div>
                     </a>
-                    <a href="${ path }/mypage/board">
+                    <a href="#">
                         <div class="item">내 게시글 관리</div>
                     </a>
-                    <a href="${ path }/mypage/contents">
+                    <a href="#">
                         <div class="item">찜한 컨텐츠</div>
                     </a>
                 </div>
@@ -50,7 +50,7 @@
             </div>
 
             <div class="box02">
-                <div class="notice" onclick="location.href='${ path }/mypage/notice';">
+                <div class="notice">
                     <!-- <img src="https://linkid.pw/static/media/ic-speaker-24.b2c49cdf.svg" alt="" style="width: 24px; height: 24px; vertical-align: baseline;"> -->
                     <i class="bi bi-megaphone"></i>
                     <p class="text">공지사항</p>
@@ -66,58 +66,47 @@
 
         <!-- 정보 영역 -->
         <div class="infoBox">
-            <p class="titleText">회원 정보 수정</p>
+            <p class="titleText">공지사항</p>
             <div class="line"></div>
-            <form action="">
-                <div class="formBox">
-                    <ul class="form-list">
-                        <li>
-                            <label for="">아이디</label>
-                            <input type="text" name="" value="${m_id}" id="" readonly>
-                        </li>
-                        <li>
-                            <label for="">비밀번호</label>
-                            <input type="password" name="" placeholder="비밀번호" minlength="3" maxlength="20">
-                        </li>
-                        <li>
-                            <label for="">비밀번호 확인</label>
-                            <input type="password" name="" placeholder="비밀번호 확인" minlength="3" maxlength="20">
-                        </li>
-                        <li>
-                            <label for="">이름</label>
-                            <input type="text" value="${m_name}" name="" placeholder="이름" minlength="3" maxlength="20" id="">
-                        </li>
-                        <li>
-                            <label for="">닉네임</label>
-                            <input type="text" value="${m_name}" name="" placeholder="닉네임" minlength="3" maxlength="20" id="">
-                        </li>
-                        <li>
-                            <label for="">이메일</label>
-                            <input type="email" value="${m_email}" name="" placeholder="이메일" minlength="3" maxlength="20" id="">
-                        </li>
-                        <li>
-                            <label for="">휴대폰 번호</label>
-                            <input type="tel" value="${m_phone}" name="" placeholder="휴대폰 번호 입력" minlength="3" maxlength="20" id="">
-                        </li>
-
-                        <li>
-                            <span class="subject">이메일 수신</span>
-                            <input type="checkbox" name="" id="">
-                            <span class="subject">SMS 수신</span>
-                            <input type="checkbox" name="" id="">
-                        </li>
-                    </ul>
-
-                    <div class="btnBox">
-                        <button type="submit" class="btn">수정하기</button>
-                        <button type="" class="btn redBtn">탈퇴하기</button>
-                    </div>
-
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">제목</th>
+                        <th scope="col">작성 날짜</th>
+                        <th scope="col">조회수</th>
+                    </tr>
+                </thead>
+                <tbody class="partyitem">
+                    <tr onclick="location.href='';">
+                        <th scope="row">${N_NO}</th>
+                        <td>${N_TITLE}</td>
+                        <td>${N_CREATE_DATE}</td>
+                        <td>${N_READCOUNT}</td>
+                    </tr>
+                    <tr onclick="location.href='';">
+                        <th scope="row">${N_NO}</th>
+                        <td>${N_TITLE}</td>
+                        <td>${N_CREATE_DATE}</td>
+                        <td>${N_READCOUNT}</td>
+                    </tr>
+                    <tr onclick="location.href='';">
+                        <th scope="row">${N_NO}</th>
+                        <td>${N_TITLE}</td>
+                        <td>${N_CREATE_DATE}</td>
+                        <td>${N_READCOUNT}</td>
+                    </tr>
+                    <tr onclick="location.href='';">
+                        <th scope="row">${N_NO}</th>
+                        <td>${N_TITLE}</td>
+                        <td>${N_CREATE_DATE}</td>
+                        <td>${N_READCOUNT}</td>
+                    </tr>
                     
+                </tbody>
+            </table>
+           </div>
 
-                </div>
-            </form>
-        </div>
 
         <!-- 배너 영역 -->
         <div class="bannerBox">
