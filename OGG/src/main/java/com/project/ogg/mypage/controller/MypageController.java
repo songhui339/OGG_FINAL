@@ -22,7 +22,7 @@ public class MypageController {
         return "mypage/mypage_notice";
     }
     
-    @GetMapping("/notice/detail")
+    @GetMapping("/notice/view")
     public String mypageNoticeDetail () {
         
         return "mypage/mypage_notice_detail";
@@ -88,7 +88,7 @@ public class MypageController {
         return "mypage/mypage_ask";
     }
     
-    @GetMapping("/ask/detail")
+    @GetMapping("/ask/view")
     public String mypageAskDetail () {
         
         return "mypage/mypage_ask_detail";

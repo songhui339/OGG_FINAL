@@ -3,14 +3,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-
 <c:set var="path" value="${ pageContext.request.contextPath }"/>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<script src="${ path }/js/jquery-3.6.0.min.js"></script>
+
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
 <style>
 table {
@@ -22,8 +19,6 @@ th, td {
 }
 </style>
 
-</head>
-<body>
 	<h2>게시판 </h2>
 	<div>
 		<button type="button" onclick="location.href='${path}/community/goWrite.do'">글쓰기</button>
@@ -99,5 +94,8 @@ th, td {
 		</div>
 		
 	</div>
-</body>
-</html>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
