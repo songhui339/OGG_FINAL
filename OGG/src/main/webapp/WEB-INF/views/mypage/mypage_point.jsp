@@ -66,47 +66,71 @@
 
         <!-- 정보 영역 -->
         <div class="infoBox">
-            <p class="titleText">공지사항</p>
+            <p class="titleText">OGG 포인트</p>
             <div class="line"></div>
-            <table class="table">
+
+            <div class="pointBox">
+                <div class="titleText">
+                    <img src="https://linkid.pw/static/media/ic-linkidpoint-18.1f528a85.svg" alt="">
+                    <span class="text">보유 포인트</span>
+                </div>
+                <div class="pointText">
+                    <span class="text">${POINT} P</span>
+                </div>
+            </div>
+
+            <table class="table" style="margin-top: 30px;">
                 <thead>
                     <tr>
                         <th scope="col">No</th>
-                        <th scope="col">제목</th>
-                        <th scope="col">작성 날짜</th>
-                        <th scope="col">조회수</th>
+                        <th scope="col">날짜</th>
+                        <th scope="col">내역</th>
+                        <th scope="col">정산 포인트</th>
                     </tr>
                 </thead>
                 <tbody class="partyitem">
-                    <tr onclick="location.href='';">
-                        <th scope="row">${N_NO}</th>
-                        <td>${N_TITLE}</td>
-                        <td>${N_CREATE_DATE}</td>
-                        <td>${N_READCOUNT}</td>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>${C_TITLE}</td>
+                        <td>${C_WRITEDATE}</td>
+                        <td>${C_VIEWCOUNT}</td>
                     </tr>
-                    <tr onclick="location.href='';">
-                        <th scope="row">${N_NO}</th>
-                        <td>${N_TITLE}</td>
-                        <td>${N_CREATE_DATE}</td>
-                        <td>${N_READCOUNT}</td>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>${C_TITLE}</td>
+                        <td>${C_WRITEDATE}</td>
+                        <td>${C_VIEWCOUNT}</td>
                     </tr>
-                    <tr onclick="location.href='';">
-                        <th scope="row">${N_NO}</th>
-                        <td>${N_TITLE}</td>
-                        <td>${N_CREATE_DATE}</td>
-                        <td>${N_READCOUNT}</td>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>${C_TITLE}</td>
+                        <td>${C_WRITEDATE}</td>
+                        <td>${C_VIEWCOUNT}</td>
                     </tr>
-                    <tr onclick="location.href='';">
-                        <th scope="row">${N_NO}</th>
-                        <td>${N_TITLE}</td>
-                        <td>${N_CREATE_DATE}</td>
-                        <td>${N_READCOUNT}</td>
-                    </tr>
-                    
                 </tbody>
             </table>
-           </div>
 
+            <!-- page 네비게이션 -->
+            <nav aria-label="Page navigation example" class="pageNav">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item">
+                        <a class="page-link c_purple" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item"><a class="page-link c_purple" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link c_purple" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link c_purple" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link c_purple" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            
+        </div>
 
         <!-- 배너 영역 -->
         <div class="bannerBox">

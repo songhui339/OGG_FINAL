@@ -66,46 +66,26 @@
 
         <!-- 정보 영역 -->
         <div class="infoBox">
-            <p class="titleText">공지사항</p>
+            <p class="titleText">${Q_TITLE}</p>
             <div class="line"></div>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">No</th>
-                        <th scope="col">제목</th>
-                        <th scope="col">작성 날짜</th>
-                        <th scope="col">조회수</th>
-                    </tr>
-                </thead>
-                <tbody class="partyitem">
-                    <tr onclick="location.href='';">
-                        <th scope="row">${N_NO}</th>
-                        <td>${N_TITLE}</td>
-                        <td>${N_CREATE_DATE}</td>
-                        <td>${N_READCOUNT}</td>
-                    </tr>
-                    <tr onclick="location.href='';">
-                        <th scope="row">${N_NO}</th>
-                        <td>${N_TITLE}</td>
-                        <td>${N_CREATE_DATE}</td>
-                        <td>${N_READCOUNT}</td>
-                    </tr>
-                    <tr onclick="location.href='';">
-                        <th scope="row">${N_NO}</th>
-                        <td>${N_TITLE}</td>
-                        <td>${N_CREATE_DATE}</td>
-                        <td>${N_READCOUNT}</td>
-                    </tr>
-                    <tr onclick="location.href='';">
-                        <th scope="row">${N_NO}</th>
-                        <td>${N_TITLE}</td>
-                        <td>${N_CREATE_DATE}</td>
-                        <td>${N_READCOUNT}</td>
-                    </tr>
-                    
-                </tbody>
-            </table>
-           </div>
+            <div class="noticeBox">
+                <div class="subTextBox">
+                    <p class="createDate">작성일자 : ${Q_ENROLLDATE}</p>
+                    <p class="readCount">${Q_STATUS}</p>
+                </div>
+
+                <div class="contentBox">
+                    <p>
+                        ${N_CONTENT}
+                    </p>
+                </div>
+                <div class="btnBox">
+                    <button type="" class="btn">목록으로</button>
+                </div>
+            </div>
+
+            
+        </div>
 
 
         <!-- 배너 영역 -->

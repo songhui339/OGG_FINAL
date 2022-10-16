@@ -19,16 +19,16 @@
                 <div class="menuList">
                     <p class="titleText">회원 정보 관리</p>
                     <!-- <hr> -->
-                    <a href="#">
+                    <a href="${ path }/mypage/main">
                         <div class="item">회원 정보 수정 / 탈퇴</div>
                     </a>
-                    <a href="#">
+                    <a href="${ path }/mypage/party">
                         <div class="item">내 파티 관리</div>
                     </a>
-                    <a href="#">
+                    <a href="${ path }/mypage/board">
                         <div class="item">내 게시글 관리</div>
                     </a>
-                    <a href="#">
+                    <a href="${ path }/mypage/contents">
                         <div class="item">찜한 컨텐츠</div>
                     </a>
                 </div>
@@ -36,13 +36,13 @@
                 <div class="menuList">
                     <p class="titleText" style="margin-top: 32px;">결제 정보 관리</p>
                     <!-- <hr> -->
-                    <a href="#">
+                    <a href="${ path }/mypage/payment">
                         <div class="item">결제 수단 / 계좌 관리</div>
                     </a>
-                    <a href="#">
+                    <a href="${ path }/mypage/point">
                         <div class="item">포인트 관리</div>
                     </a>
-                    <a href="#">
+                    <a href="${ path }/mypage/payment_history">
                         <div class="item">정산 내역 확인</div>
                     </a>
                     
@@ -50,12 +50,12 @@
             </div>
 
             <div class="box02">
-                <div class="notice">
+                <div class="notice" onclick="location.href='${ path }/mypage/notice';">
                     <!-- <img src="https://linkid.pw/static/media/ic-speaker-24.b2c49cdf.svg" alt="" style="width: 24px; height: 24px; vertical-align: baseline;"> -->
                     <i class="bi bi-megaphone"></i>
                     <p class="text">공지사항</p>
                 </div>
-                <div class="notice">
+                <div class="notice" onclick="location.href='${ path }/mypage/ask';">
                     <i class="bi bi-chat-left-text"></i>
                     <p class="text">1:1 문의 내역</p>
                 </div>

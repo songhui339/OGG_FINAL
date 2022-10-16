@@ -66,7 +66,8 @@
 
         <!-- 정보 영역 -->
         <div class="infoBox">
-            <p class="titleText">공지사항</p>
+            <p class="titleText">1:1 문의 내역 <a href="#" class="button">문의 작성</a></p>
+            
             <div class="line"></div>
             <table class="table">
                 <thead>
@@ -79,33 +80,54 @@
                 </thead>
                 <tbody class="partyitem">
                     <tr onclick="location.href='';">
-                        <th scope="row">${N_NO}</th>
-                        <td>${N_TITLE}</td>
-                        <td>${N_CREATE_DATE}</td>
-                        <td>${N_READCOUNT}</td>
+                        <th scope="row">${Q_NO}</th>
+                        <td>${Q_TITLE}</td>
+                        <td>${Q_ENROLLDATE}</td>
+                        <td><span class="statusY">답변 완료</span></td>
                     </tr>
                     <tr onclick="location.href='';">
-                        <th scope="row">${N_NO}</th>
-                        <td>${N_TITLE}</td>
-                        <td>${N_CREATE_DATE}</td>
-                        <td>${N_READCOUNT}</td>
+                        <th scope="row">${Q_NO}</th>
+                        <td>${Q_TITLE}</td>
+                        <td>${Q_ENROLLDATE}</td>
+                        <td><span class="statusN">답변 대기</span></td>
                     </tr>
                     <tr onclick="location.href='';">
-                        <th scope="row">${N_NO}</th>
-                        <td>${N_TITLE}</td>
-                        <td>${N_CREATE_DATE}</td>
-                        <td>${N_READCOUNT}</td>
+                        <th scope="row">${Q_NO}</th>
+                        <td>${Q_TITLE}</td>
+                        <td>${Q_ENROLLDATE}</td>
+                        <td><span class="statusN">${Q_STATUS}</span></td>
                     </tr>
                     <tr onclick="location.href='';">
-                        <th scope="row">${N_NO}</th>
-                        <td>${N_TITLE}</td>
-                        <td>${N_CREATE_DATE}</td>
-                        <td>${N_READCOUNT}</td>
+                        <th scope="row">${Q_NO}</th>
+                        <td>${Q_TITLE}</td>
+                        <td>${Q_ENROLLDATE}</td>
+                        <td><span class="statusN">${Q_STATUS}</span></td>
                     </tr>
+                    
                     
                 </tbody>
             </table>
-           </div>
+
+            <!-- page 네비게이션 -->
+            <nav aria-label="Page navigation example" class="pageNav">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item">
+                        <a class="page-link c_purple" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item"><a class="page-link c_purple" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link c_purple" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link c_purple" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link c_purple" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+        </div>
 
 
         <!-- 배너 영역 -->

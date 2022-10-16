@@ -66,47 +66,56 @@
 
         <!-- 정보 영역 -->
         <div class="infoBox">
-            <p class="titleText">공지사항</p>
+            <p class="titleText">내 파티 관리</p>
             <div class="line"></div>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">No</th>
-                        <th scope="col">제목</th>
-                        <th scope="col">작성 날짜</th>
-                        <th scope="col">조회수</th>
-                    </tr>
-                </thead>
-                <tbody class="partyitem">
-                    <tr onclick="location.href='';">
-                        <th scope="row">${N_NO}</th>
-                        <td>${N_TITLE}</td>
-                        <td>${N_CREATE_DATE}</td>
-                        <td>${N_READCOUNT}</td>
-                    </tr>
-                    <tr onclick="location.href='';">
-                        <th scope="row">${N_NO}</th>
-                        <td>${N_TITLE}</td>
-                        <td>${N_CREATE_DATE}</td>
-                        <td>${N_READCOUNT}</td>
-                    </tr>
-                    <tr onclick="location.href='';">
-                        <th scope="row">${N_NO}</th>
-                        <td>${N_TITLE}</td>
-                        <td>${N_CREATE_DATE}</td>
-                        <td>${N_READCOUNT}</td>
-                    </tr>
-                    <tr onclick="location.href='';">
-                        <th scope="row">${N_NO}</th>
-                        <td>${N_TITLE}</td>
-                        <td>${N_CREATE_DATE}</td>
-                        <td>${N_READCOUNT}</td>
-                    </tr>
-                    
-                </tbody>
-            </table>
-           </div>
 
+            <form action="">
+                <div class="formBox">
+                    <ul class="form-list">
+                        <li>
+                            <label for="">공유서비스</label>
+                            <p class="text">넷플릭스</p>
+                        </li>
+                        <li>
+                            <label for="">아이디</label>
+                            <input type="text" name="" value="${P_SHARE_ID}" id="">
+                        </li>
+                        <li>
+                            <label for="">비밀번호</label>
+                            <input type="text" name="" value="${P_SHARE_PWD}" minlength="3" maxlength="20">
+                        </li>
+                        <li>
+                            <label for="">파티원 수</label>
+                            <p class="text">2 / 5 명</p>
+                        </li>
+                        <li>
+                            <label for="">파티원 ID</label>
+                            <p class="text">${m_id}, ${m_id}</p>
+                        </li>
+                        <li>
+                            <label for="">파티 시작일</label>
+                            <p class="text">${P_START_DATE}</p>
+                        </li>
+                        <li>
+                            <label for="">파티 종료일</label>
+                            <p class="text">${P_END_DATE}</p>
+                        </li>
+                        
+                    </ul>
+
+                    <div class="btnBox">
+                        <button type="submit" class="btn">수정하기</button>
+                        <button type="" class="btn redBtn">삭제하기</button>
+                    </div>
+
+                    
+
+                </div>
+            </form>
+
+        
+
+        </div>
 
         <!-- 배너 영역 -->
         <div class="bannerBox">

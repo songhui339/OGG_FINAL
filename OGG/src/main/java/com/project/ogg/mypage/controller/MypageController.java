@@ -35,5 +35,65 @@ public class MypageController {
         return "mypage/mypage_party";
     }
     
+    @GetMapping("/party/leader")
+    public String mypagePartyLeader () {
+        
+        return "mypage/mypage_party_leader";
+    }
+    
+    @GetMapping("/party/member")
+    public String mypagePartyMember () {
+        
+        return "mypage/mypage_party_member";
+    }
+    
+    // 마이페이지 - 결제 수단
+    @GetMapping("/payment")
+    public String mypagePayment () {
+        
+        return "mypage/mypage_payment";
+    }
+    
+    @GetMapping("/payment_history")
+    public String mypagePaymentHistory () {
+        
+        return "mypage/mypage_paymentList";
+    }
+    
+    @GetMapping("/point")
+    public String mypagePoint () {
+        
+        return "mypage/mypage_point";
+    }
+    
+    // 마이페이지 - 찜한 콘텐츠
+    @GetMapping("/contents")
+    public String mypageContents () {
+        
+        return "mypage/mypage_content";
+    }
+    
+    
+    // 마이페이지 - 내 게시글
+    @GetMapping("/board")
+    public String mypageBoard () {
+        
+        return "mypage/mypage_board";
+    }
+    
+    // 마이페이지 - 1:1 문의
+    @GetMapping("/ask")
+    public String mypageAsk () {
+        
+        return "mypage/mypage_ask";
+    }
+    
+    @GetMapping("/ask/detail")
+    public String mypageAskDetail () {
+        
+        return "mypage/mypage_ask_detail";
+    }
+    
+    
     
 }

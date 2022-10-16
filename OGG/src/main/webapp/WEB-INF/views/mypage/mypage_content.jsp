@@ -66,46 +66,75 @@
 
         <!-- 정보 영역 -->
         <div class="infoBox">
-            <p class="titleText">공지사항</p>
+            <p class="titleText">찜한 컨텐츠</p>
             <div class="line"></div>
+            <!-- 노출 최대 8개 -->
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">No</th>
+                        <th scope="col">#</th>
                         <th scope="col">제목</th>
-                        <th scope="col">작성 날짜</th>
-                        <th scope="col">조회수</th>
                     </tr>
                 </thead>
                 <tbody class="partyitem">
-                    <tr onclick="location.href='';">
-                        <th scope="row">${N_NO}</th>
-                        <td>${N_TITLE}</td>
-                        <td>${N_CREATE_DATE}</td>
-                        <td>${N_READCOUNT}</td>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>${F_TITLE}</td>
                     </tr>
-                    <tr onclick="location.href='';">
-                        <th scope="row">${N_NO}</th>
-                        <td>${N_TITLE}</td>
-                        <td>${N_CREATE_DATE}</td>
-                        <td>${N_READCOUNT}</td>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>${F_TITLE}</td>
                     </tr>
-                    <tr onclick="location.href='';">
-                        <th scope="row">${N_NO}</th>
-                        <td>${N_TITLE}</td>
-                        <td>${N_CREATE_DATE}</td>
-                        <td>${N_READCOUNT}</td>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>${F_TITLE}</td>
                     </tr>
-                    <tr onclick="location.href='';">
-                        <th scope="row">${N_NO}</th>
-                        <td>${N_TITLE}</td>
-                        <td>${N_CREATE_DATE}</td>
-                        <td>${N_READCOUNT}</td>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>${F_TITLE}</td>
                     </tr>
-                    
+                    <tr>
+                        <th scope="row">4</th>
+                        <td>${F_TITLE}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">5</th>
+                        <td>${F_TITLE}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">6</th>
+                        <td>${F_TITLE}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">7</th>
+                        <td>${F_TITLE}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">8</th>
+                        <td>${F_TITLE}</td>
+                    </tr>
                 </tbody>
             </table>
-           </div>
+
+            <!-- page 네비게이션 -->
+            <nav aria-label="Page navigation example" class="pageNav">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item">
+                        <a class="page-link c_purple" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item"><a class="page-link c_purple" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link c_purple" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link c_purple" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link c_purple" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
 
 
         <!-- 배너 영역 -->
