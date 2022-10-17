@@ -10,9 +10,8 @@ import lombok.NoArgsConstructor;
 public class Film {
 
 	private String fCode;
+	private String fType;
 	private String fTitle;
-	private int fStarred;
-	private String fDib;
 	
 	// kofic ver.
 //    public String title;

@@ -13,6 +13,7 @@ public class Review {
 	
 	private int rvNo;
 	private String fCode;
+	private String fType;
 	private int rvWriterNo;
 	private Date rvDate;
 	private Date rvUpdate;
@@ -20,6 +21,6 @@ public class Review {
 	private String rvStatus;
 	private int rvLikes;
 	private int rvReadCount;
-	private String rvNickname;
 	private int rvCmtCount;
+	private String rvNickname;
 }

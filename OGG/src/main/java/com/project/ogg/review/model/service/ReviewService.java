@@ -14,9 +14,9 @@ public interface ReviewService {
 	
 	int filmSave(Film film);
 
-	List<Review> getBoardListAll(PageInfo pageInfo);
+	List<Review> getReviewListAll(PageInfo pageInfo);
 	
-	List<Review> getBoardListByFilm(PageInfo pageInfo, int fcode);
+	List<Review> getReviewListByFilm(PageInfo pageInfo, int fcode);
 	
 	Review getReviewByNo(int no);
 	
@@ -32,9 +32,9 @@ public interface ReviewService {
 
 	ReviewCmt getCmtByCmtNo(int cmtNo);
 
-	Review updateCmtCount(int no);
-
 	int getCmtCountByNo(int no);
+
+	int updateCmtCount(int rvNo);
 
 	int cmtWrite(ReviewCmt cmt);
 

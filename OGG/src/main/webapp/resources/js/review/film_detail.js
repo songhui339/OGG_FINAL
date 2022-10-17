@@ -268,6 +268,7 @@ $(document).ready(function() {
 			data : {
 				'rvNo' : rvNo,
 				'cmtContent' : cmtContent, 
+				// 'cmtNickname' : cmtNickname, 
 				'fCode' : fcode,
 				'ftype' : ftype
 			},
@@ -276,7 +277,7 @@ $(document).ready(function() {
 				console.log(data);
 
 				let html = "<tr id='cmtlist'>";
-					html += "<input id='cmtNo' type='hidden' value='"+ data.cmt.cmtNo +">";
+					html += "<input id='cmtNo' type='hidden' value='"+ data.cmt.cmtNo +"'>";
 					html += "<input id='cmtWriterNo' type='hidden' value='"+ data.cmt.cmtWriterNo +"'>";
 					html += "<td id='board-text4'>" + data.cmt.cmtNickname + "</td>";
 					html += "<td id='board-text5'>" + data.cmt.cmtContent + "</td>";

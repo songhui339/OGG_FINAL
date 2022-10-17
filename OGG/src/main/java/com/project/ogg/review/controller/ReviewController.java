@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.support.SmartTransactionObject;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -72,7 +73,7 @@ public class ReviewController {
 		int fcode = Integer.parseInt(fcodes);
 		
 		pageInfo = new PageInfo(page, 10, service.getReviewCount(fcode), 10);
-		list = service.getBoardListByFilm(pageInfo, fcode);
+		list = service.getReviewListByFilm(pageInfo, fcode);
 		
 		model.addObject("list", list); 
 		model.addObject("fcode", fcode);
@@ -96,7 +97,7 @@ public class ReviewController {
 		int fcode = Integer.parseInt(fcodes);
 		
 		pageInfo = new PageInfo(page, 10, service.getReviewCount(fcode), 10);
-		list = service.getBoardListByFilm(pageInfo, fcode);
+		list = service.getReviewListByFilm(pageInfo, fcode);
 		
 		model.addObject("list", list);
 		model.addObject("fcode", fcode);
@@ -234,16 +235,24 @@ public class ReviewController {
 			@ModelAttribute ReviewCmt cmt) {
 		
 		int cmtWrite = 0;
-		cmt.setCmtWriterNo(member.getM_no());
+		int reviewCountUpdate = 0;
 		int fcode = Integer.parseInt(fCode);
+		int rvNo = 0; 
+		int cmtNo = 0; 
+		int mNo = 0;
 		Map<String, ReviewCmt> map = new HashMap<>(); 
 		
+		mNo = member.getM_no();
+		cmt.setCmtWriterNo(mNo);
+		rvNo = cmt.getRvNo();
 		cmtWrite = service.cmtWrite(cmt);
-		
+		cmtNo = cmt.getCmtNo();
+
 		if(cmtWrite > 0) {
+			reviewCountUpdate = service.updateCmtCount(rvNo);
+			map.put("cmt", service.getCmtByCmtNo(cmtNo));
+
 			System.out.println("댓글 등록 성공");
-			map.put("cmt", service.getCmtByCmtNo(cmt.getCmtNo()));
-		
 		}else {
 			System.out.println("댓글 등록 실패");
 		}
@@ -262,6 +271,7 @@ public class ReviewController {
 		cmt.setCmtWriterNo(member.getM_no());
 		int fcode = Integer.parseInt(fCode);
 		
+		System.out.println(cmt);
 		cmtUpdate = service.cmtUpdate(cmt);
 		
 		if(cmtUpdate > 0) {
@@ -286,6 +296,7 @@ public class ReviewController {
 		cmt.setCmtWriterNo(member.getM_no());
 		int fcode = Integer.parseInt(fCode);
 		
+		System.out.println(cmt);
 		cmtDelete = service.cmtDelete(cmt);
 		
 		if(cmtDelete > 0) {

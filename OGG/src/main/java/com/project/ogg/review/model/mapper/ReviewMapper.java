@@ -19,7 +19,6 @@ public interface ReviewMapper {
 	List<Review> selectReviewAll(RowBounds rowBounds);
 	
 	List<Review> selectReviewByFilm(RowBounds rowBounds, int fcode);
-
 	Review selectReviewByNo(int no);
 
 	int selectReviewCount(int fcode);
@@ -34,9 +33,9 @@ public interface ReviewMapper {
 
 	ReviewCmt selectCmtByCmtNo(int cmtNo);
 
-	Review updateCmtCount(int no);
-
 	int selectCmtCount(int no);
+
+	int updateCmtCount(int rvNo);
 
 	int writeCmt(ReviewCmt cmt);
 

@@ -161,7 +161,7 @@
 			url : contextpath + '/review/cmt_update',
 			data : {
 				'rvNo' : rvNo,
-				'cmtNo' : $(event.target).parent().parent().parent().parent().prev().find('#cmtNo').val(),
+				'cmtNo' : $(event.target).parent().parent().parent().prev().find('#cmtNo').val(),
 				'cmtContent' : cmtContent, 
 				'fCode' : fcode,
 				'ftype' : ftype
@@ -197,6 +197,7 @@
 				},
 				error : (error) => {
 					alert('댓글 삭제에 실패하였습니다');
+
 				}
 			});
 		};
