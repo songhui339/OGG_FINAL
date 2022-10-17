@@ -27,7 +27,7 @@ header {
 header .width-container {
     /* position: absolute; */
     position: relative;
-    z-index: 1;
+    /* z-index: 1; */
     max-width: 1180px;
     width: 100%;
     inset: 0px;
@@ -38,15 +38,15 @@ header .width-container {
 header .width-container .logoBox {
     position: relative;
     display: inline-block;
-    padding-top: 40px;
-    z-index: 1;
+    padding-top: 30px;
+    z-index: 99;
 }
 
 header .width-container .btnBox {
     position: absolute;
     top: 0;
     right: 0;
-    z-index: 1;
+    z-index: 99;
 }
 
 header .width-container .btnBox a.loginBtn {
@@ -103,6 +103,7 @@ header .width-container .btnBox img {
 
 header .menu-container {
     position: absolute;
+    z-index : 9;
     top: 0;
     left: 0;
     width: 100%;
@@ -158,7 +159,7 @@ footer {
 footer .width-container {
     position: relative;
     max-width: 1280px;
-    height: 100%;
+    /* height: 100%; */
     margin: 0 auto;
 }
 
