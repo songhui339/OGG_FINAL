@@ -279,8 +279,7 @@
         height: 30px; 
         text-align: center;
     }
-    
-    /* 별점 */
+    /******** 별점 ********/
     .star-rating {
         display: flex;
         flex-direction: row-reverse;

@@ -8,6 +8,7 @@ import org.apache.ibatis.session.RowBounds;
 import com.project.ogg.review.model.vo.Film;
 import com.project.ogg.review.model.vo.Review;
 import com.project.ogg.review.model.vo.ReviewCmt;
+import com.project.ogg.review.model.vo.ReviewLikes;
 
 @Mapper
 public interface ReviewMapper {
@@ -23,11 +24,9 @@ public interface ReviewMapper {
 
 	int selectReviewCount(int fcode);
 
-	int writeReview(Review review);
+	int insertReview(Review review);
 	
 	int updateReview(Review review);
-	
-	int deleteReview(Review review);
 	
 	List<ReviewCmt> selectCmtByReviewNo(int no);
 
@@ -41,5 +40,7 @@ public interface ReviewMapper {
 
 	int updateCmt(ReviewCmt cmt);
 
-	int deleteCmt(ReviewCmt cmt);
+	int insertStar(ReviewLikes reviewLikes);
+
+	ReviewLikes selectStar(ReviewLikes reviewLikes);
 }

@@ -5,7 +5,7 @@ $(document).ready(function() {
 	const type1 = "movie";
     const type2 = "tv";
 	let poster = 'https://image.tmdb.org/t/p/w500/';
-    var title;
+    // var title;
     var name;
 
     ////////////
@@ -163,6 +163,7 @@ $(document).ready(function() {
     ////////////
     /////키업////
     ////////////
+    
     $("#message-text").keyup(function(e) {
 	    var content = $(this).val();
 	    $("#textLengthCheck").text("(" + content.length + " / 2000)");
@@ -176,8 +177,10 @@ $(document).ready(function() {
     ////////////
     /////리뷰////
     ////////////
+    
     $('#writeReview').on("click", function() {
-        let rvContent = document.getElementById('message-text').value
+        let rvContent = document.getElementById('message-text').value;
+        
 		$.ajax({
 	        async: true,
 			type : 'POST',
@@ -202,7 +205,7 @@ $(document).ready(function() {
     $('#updateReview').on("click", function() {
         let rvContent = document.getElementById('message-text').value;
         let rvNo = document.getElementById('rvNo').value;
-        
+
 		$.ajax({
 	        async: true,
 			type : 'POST',
@@ -225,18 +228,16 @@ $(document).ready(function() {
     });
     
     $('#deleteReview').on("click", function() {
-        let rvContent = document.getElementById('message-text').value
         let rvNo = document.getElementById('rvNo').value;
-        
+
         if(confirm('리뷰를 삭제하시겠습니까?')){
-        	
 			$.ajax({
 		        async: true,
 				type : 'POST',
-				url : contextpath + '/review/review_delete',
+				url : contextpath + '/review/review_update',
 				data : {
 					'rvNo' : rvNo,
-					'rvContent' : rvContent, 
+					'rvStatus' : 'N', 
 					'fCode' : fcode,
 					'ftype' : ftype
 				},
@@ -255,54 +256,70 @@ $(document).ready(function() {
     /////댓글////
     ////////////
     $('#writeCmt').on("click", function() {
-        let rvNo = document.getElementById('rvNo').value;
-        // let cmtNo = document.getElementById('cmtNo').value;
         let cmtContent = document.getElementById('message-cmt').value;
-        // let cmtNickname = document.getElementById('cmtNickname').value;
-        // let cmtWriterNo = document.getElementById('cmtWriterNo').value;
+        let rvNo = document.getElementById('rvNo').value;
 
-		$.ajax({
-			async: true,
-			type : 'POST',
-			url : contextpath + '/review/cmt_write',
-			data : {
-				'rvNo' : rvNo,
-				'cmtContent' : cmtContent, 
-				// 'cmtNickname' : cmtNickname, 
-				'fCode' : fcode,
-				'ftype' : ftype
-			},
-			success : (data) => {
-				alert('댓글이 정상적으로 등록되었습니다.');
-				console.log(data);
+		if(cmtContent.trim()==""){
+			alert("내용을 입력해주세요");
+        }else{
+            $.ajax({
+                async: true,
+                type : 'POST',
+                url : contextpath + '/review/cmt_write',
+                data : {
+                    'rvNo' : rvNo,
+                    'cmtContent' : cmtContent, 
+                    'fCode' : fcode,
+                    'ftype' : ftype
+                },
+                success : (data) => {
+                    let html = "<tr id='cmtlist'>";
+                        html += "<input id='cmtNo' type='hidden' value='"+ data.cmt.cmtNo +"'>";
+                        html += "<input id='cmtWriterNo' type='hidden' value='"+ data.cmt.cmtWriterNo +"'>";
+                        html += "<td id='board-text4'>" + data.cmt.cmtNickname + "</td>";
+                        html += "<td id='board-text5'>" + data.cmt.cmtContent + "</td>";
+                        html += "<td id='board-text7'>";
+                        html += "<div class='btn-group' role='group' aria-label='Basic mixed styles example'>";
+                        html += "<button class='btn btn-primary' type='button' onclick='showUpdateCmt(event)'>수정</button>";
+                        html += "<button class='btn btn-primary' type='button' onclick='deleteCmt(event)'>삭제</button>";
+                        html += "</div></td></tr>";
+                        html += "<tr id='cmtlist2' style='display: none;'>";
+                        html += "<td id='board-text4'>" + data.cmt.cmtNickname + "</td>";
+                        html += "<td id='board-text5-1'>";
+                        html += "<textarea id='message-cmt-2' style='border: 1px solid lightgrey; resize: none; width: 100%;'>${ reviewCmt.cmtContent }</textarea>";
+                        html += "</td><td id='board-text7-1'>";
+                        html += "<div class='btn-group' role='group' aria-label='Basic mixed styles example'>";
+                        html += "<button class='btn btn-primary' type='button' onclick='updateCmt(event)' >수정</button>";
+                        html += "<button class='btn btn-primary' type='button' onclick='updateCommentsCancel(event)'>취소</button>";
+                        html += "</div></td></tr>";
 
-				let html = "<tr id='cmtlist'>";
-					html += "<input id='cmtNo' type='hidden' value='"+ data.cmt.cmtNo +"'>";
-					html += "<input id='cmtWriterNo' type='hidden' value='"+ data.cmt.cmtWriterNo +"'>";
-					html += "<td id='board-text4'>" + data.cmt.cmtNickname + "</td>";
-					html += "<td id='board-text5'>" + data.cmt.cmtContent + "</td>";
-					html += "<td id='board-text7'>";
-					html += "<div class='btn-group' role='group' aria-label='Basic mixed styles example'>";
-					html += "<button class='btn btn-primary' type='button' onclick='showUpdateCmt(event)'>수정</button>";
-					html += "<button class='btn btn-primary' type='button' onclick='deleteCmt(event)'>삭제</button>";
-					html += "</div></td></tr>";
-					html += "<tr id='cmtlist2' style='display: none;'>";
-					html += "<td id='board-text4'>" + data.cmt.cmtNickname + "</td>";
-					html += "<td id='board-text5-1'>";
-					html += "<textarea id='message-cmt-2' style='border: 1px solid lightgrey; resize: none; width: 100%;'>${ reviewCmt.cmtContent }</textarea>";
-					html += "</td><td id='board-text7-1'>";
-					html += "<div class='btn-group' role='group' aria-label='Basic mixed styles example'>";
-					html += "<button class='btn btn-primary' type='button' onclick='updateCmt(event)' >수정</button>";
-					html += "<button class='btn btn-primary' type='button' onclick='updateCommentsCancel(event)'>취소</button>";
-					html += "</div></td></tr>";
-
-					$("#cmtTbody").append(html);
-					$("#message-cmt").val('');
-			},
-			error : (error) => {
-				alert('댓글 등록에 실패하였습니다');
-			}
-		});
+                        $("#cmtTbody").append(html);
+                        $("#message-cmt").val('');
+                },
+                error : (error) => {
+                    alert('서버와 연결에 실패하였습니다');
+                }
+            });
+        }
     });
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
 
 });

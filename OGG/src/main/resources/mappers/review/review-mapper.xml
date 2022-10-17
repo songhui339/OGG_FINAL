@@ -39,6 +39,19 @@
 		JOIN MEMBER M ON (M.M_NO = R.CMT_WRITER_NO)
 	</sql>
 	
+	<!-- REVIEW_LIKES sql-->
+	<sql id="reviewLikesSql">
+		SELECT L_NO,
+		       M_NO,
+		       RV_NO,
+		       CMT_NO,
+		       F_CODE,
+		       F_TYPE,
+		       F_LIKES,
+		       F_STAR
+		FROM REVIEW_LIKES
+	</sql>
+	
 	<!-- REVIEW resultMap-->
 	<resultMap type="Review" id="reviewResultMap">
 		<id property="rvNo" column="RV_NO" />
@@ -55,7 +68,7 @@
 		<result property="rvNickname" column="M_NICKNAME" />
 	</resultMap>	
 
-	<!-- REVIEW-CMTS resultMap-->
+	<!-- REVIEW_CMTS resultMap-->
 	<resultMap type="ReviewCmt" id="reviewCmtResultMap">
 		<id property="cmtNo" column="CMT_NO" />
 		<result property="rvNo" column="RV_NO" />
@@ -74,6 +87,19 @@
 	<resultMap type="Film" id="filmResultMap">
 		<id property="fCode" column="F_CODE" />
 		<result property="fTitle" column="F_TITLE" />
+	</resultMap>	
+
+	<!-- REVIEW_LIKES resultMap-->
+	<resultMap type="ReviewLikes" id="reviewLikesResultMap">
+		<id property="lNo" column="L_NO" />
+		<result property="fTitle" column="F_TITLE" />
+		<result property="mNo" column="M_NO" />
+		<result property="rvNo" column="RV_NO" />
+		<result property="cmtNo" column="CMT_NO" />
+		<result property="fCode" column="F_CODE" />
+		<result property="fType" column="F_TYPE" />
+		<result property="fLikes" column="F_LIKES" />
+		<result property="fStar" column="F_STAR" />
 	</resultMap>	
 	
 	<!-- 영화 체크 -->		
@@ -97,6 +123,44 @@
 	      	)	
 	</insert>
 	
+	<!-- 평가 조회 (영화 별점) -->
+	<select id="selectStar" parameterType="ReviewLikes" resultMap="reviewLikesResultMap">
+		SELECT *
+			FROM(
+				SELECT L_NO,
+				       M_NO,
+				       RV_NO,
+				       CMT_NO,
+				       F_CODE,
+				       F_TYPE,
+				       F_LIKES,
+				       F_STAR,
+				       L_DATE,
+				       L_UPDATE
+				FROM REVIEW_LIKES
+				WHERE M_NO = #{mNo} AND F_STAR > 0 AND F_CODE=#{fCode}
+				ORDER BY L_UPDATE DESC)
+			WHERE ROWNUM = 1
+	</select>
+	
+	<!-- 별점 저장 -->
+	<insert id="insertStar" parameterType="ReviewLikes">
+		INSERT INTO REVIEW_LIKES(
+	            L_NO,
+	            M_NO,
+	            F_CODE,
+	            F_TYPE,
+	            F_STAR
+		      )
+		      VALUES(
+		            SEQ_LIKES_NO.NEXTVAL,
+		            #{mNo},
+		            #{fCode},
+		            'movie',
+		            #{fStar}
+		      )
+	</insert>
+	
 	<!-- 리뷰 조회 (전체) -->
 	<select id="selectReviewAll" resultMap="reviewResultMap">
 		<include refid="reviewSql"></include>
@@ -104,7 +168,7 @@
 		ORDER BY RV_LIKES DESC
 	</select>
 
-	<!-- 리뷰 조회 (영화) -->
+	<!-- 리뷰 조회 (영화 별점) -->
 	<select id="selectReviewByFilm" parameterType="_int" resultMap="reviewResultMap">
 		<include refid="reviewSql"></include>
 		WHERE F_CODE = #{fcode} AND F_TYPE = 'movie' AND RV_STATUS = 'Y'
@@ -124,7 +188,7 @@
 	</select>
 	
 	<!-- 리뷰 등록 -->
-	<insert id="writeReview" parameterType="Review"
+	<insert id="insertReview" parameterType="Review"
 		useGeneratedKeys="true" keyProperty="rvNo" keyColumn="RV_NO">
 		INSERT INTO REVIEW (
             RV_NO, 
@@ -153,20 +217,29 @@
 				DEFAULT
 			)
 	</insert>	
-	
+
 	<!-- 리뷰 수정 -->
 	<update id="updateReview" parameterType="Review">
 		UPDATE REVIEW
-		SET RV_CONTENT = #{rvContent},
-		    RV_UPDATE = SYSDATE
+		SET 
+			RV_UPDATE = SYSDATE,
+			<choose>
+		    <when test="rvContent != null">
+			  	RV_CONTENT = #{rvContent}
+		    </when>
+		    <when test="rvStatus != null">
+				RV_STATUS = #{rvStatus}
+		    </when>
+		    </choose>	
 		WHERE F_CODE = #{fCode} AND F_TYPE = 'movie' AND RV_NO = #{rvNo}
 	</update>	
 	
 	<!-- 리뷰 삭제 -->
 	<update id="deleteReview" parameterType="Review">
 		UPDATE REVIEW
-		SET RV_UPDATE = SYSDATE,
-		    RV_STATUS = 'N'
+		SET 
+			RV_UPDATE = SYSDATE,
+		    RV_STATUS = #{rvStatus}
 		WHERE F_CODE = #{fCode} AND F_TYPE = 'movie' AND RV_NO = #{rvNo}
 	</update>	
 	
@@ -226,19 +299,19 @@
 		      )
 	</insert>	
 	
-	<!-- 댓글 수정 -->
+	<!-- 댓글 수정 및 삭제 -->
 	<update id="updateCmt" parameterType="ReviewCmt">
 		UPDATE REVIEW_CMT
-		SET CMT_CONTENT = #{cmtContent},
-		    CMT_UPDATE = SYSDATE
-		WHERE CMT_NO = #{cmtNo}
-	</update>
-	
-	<!-- 댓글 삭제 -->
-	<update id="deleteCmt" parameterType="ReviewCmt">
-		UPDATE REVIEW_CMT
-		SET CMT_UPDATE = SYSDATE,
-			CMT_STATUS = 'N'
+		SET 
+			CMT_UPDATE = SYSDATE,
+		<choose>
+	    <when test="cmtContent != null">
+		  	CMT_CONTENT = #{cmtContent}
+	    </when>
+	    <when test="cmtStatus != null">
+			CMT_STATUS = #{cmtStatus}
+	    </when>
+	    </choose>
 		WHERE CMT_NO = #{cmtNo}
 	</update>
 	

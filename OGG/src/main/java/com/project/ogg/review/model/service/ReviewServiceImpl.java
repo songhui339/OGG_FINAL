@@ -5,12 +5,14 @@ import java.util.List;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.project.ogg.common.util.PageInfo;
 import com.project.ogg.review.model.mapper.ReviewMapper;
 import com.project.ogg.review.model.vo.Film;
 import com.project.ogg.review.model.vo.Review;
 import com.project.ogg.review.model.vo.ReviewCmt;
+import com.project.ogg.review.model.vo.ReviewLikes;
 
 @Service
 public class ReviewServiceImpl implements ReviewService {
@@ -24,7 +26,8 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
-	public int filmSave(Film film) {
+	@Transactional
+	public int filmInsert(Film film) {
 		return mapper.insertFilm(film);
 	}
 	
@@ -57,20 +60,17 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
-	public int reviewSave(Review review) {
-		return mapper.writeReview(review);
+	@Transactional
+	public int reviewWrite(Review review) {
+		return mapper.insertReview(review);
 	}
 
 	@Override
+	@Transactional
 	public int reviewUpdate(Review review) {
 		return mapper.updateReview(review);
 	}
 
-	@Override
-	public int reviewDelete(Review review) {
-		return mapper.deleteReview(review);
-	}	
-	
 	@Override
 	public List<ReviewCmt> getCmtByReviewNo(int no) {
 		return mapper.selectCmtByReviewNo(no);
@@ -87,22 +87,32 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 	
 	@Override
+	@Transactional
 	public int updateCmtCount(int rvNo) {
 		return mapper.updateCmtCount(rvNo);
 	}
 
 	@Override
+	@Transactional
 	public int cmtWrite(ReviewCmt cmt) {
 		return mapper.writeCmt(cmt);
 	}
 
 	@Override
+	@Transactional
 	public int cmtUpdate(ReviewCmt cmt) {
 		return mapper.updateCmt(cmt);
 	}
 
 	@Override
-	public int cmtDelete(ReviewCmt cmt) {
-		return mapper.deleteCmt(cmt);
+	public int insertStar(ReviewLikes reviewLikes) {
+		
+		return mapper.insertStar(reviewLikes);
+	}
+
+	@Override
+	public ReviewLikes getStar(ReviewLikes reviewLikes) {
+		
+		return mapper.selectStar(reviewLikes);
 	}
 }

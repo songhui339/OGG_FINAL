@@ -20,15 +20,15 @@
 	            <div class="row">
 	                <div class="col-3 col-sm-3" style="margin-bottom: 10px;">
 	                    <div class="star-rating space-x-4 mx-auto">
-	                        <input type="radio" id="5-stars" name="rating" value="5" v-model="ratings"/>
-	                        <label for="5-stars" class="star pr-4">★&nbsp;</label>
-	                        <input type="radio" id="4-stars" name="rating" value="4" v-model="ratings"/>
-	                        <label for="4-stars" class="star">★&nbsp;</label>
-	                        <input type="radio" id="3-stars" name="rating" value="3" v-model="ratings"/>
-	                        <label for="3-stars" class="star">★&nbsp;</label>
-	                        <input type="radio" id="2-stars" name="rating" value="2" v-model="ratings"/>
-	                        <label for="2-stars" class="star">★&nbsp;</label>
-	                        <input type="radio" id="1-star" name="rating" value="1" v-model="ratings" />
+	                        <input type="radio" id="5-star" name="rating" value="5" v-model="ratings" onclick="starFilm(event)"/>
+	                        <label for="5-star" class="star pr-4">★&nbsp;</label>
+	                        <input type="radio" id="4-star" name="rating" value="4" v-model="ratings" onclick="starFilm(event)"/>
+	                        <label for="4-star" class="star">★&nbsp;</label>
+	                        <input type="radio" id="3-star" name="rating" value="3" v-model="ratings" onclick="starFilm(event)"/>
+	                        <label for="3-star" class="star">★&nbsp;</label>
+	                        <input type="radio" id="2-star" name="rating" value="2" v-model="ratings" onclick="starFilm(event)"/>
+	                        <label for="2-star" class="star">★&nbsp;</label>
+	                        <input type="radio" id="1-star" name="rating" value="1" v-model="ratings" onclick="starFilm(event)"/>
 	                        <label for="1-star" class="star">★&nbsp;</label>
 	                    </div>
 	                </div>
@@ -66,3 +66,53 @@
 	    </div>
 	</div>
 	<hr>
+
+	<script>
+	$(document).ready(function() {
+
+		$.ajax({
+			async: true,
+			type : 'POST',
+			url : contextpath + '/review/get_star',
+			data : {
+				'fCode' : fcode,
+				'ftype' : ftype
+			},
+			success : (data) => {
+
+				if(data.star != null){
+					let num = data.star.fstar;
+					console.log(num)
+
+					$('#' + num + '-star').attr('checked', 'checked');
+				}
+			},
+			error: function (error) {
+				console.log('do nothing');
+			}
+		});
+	});
+
+	function starFilm(event) {
+		fStar = document.querySelector('.star-rating :checked').value;
+
+		$.ajax({
+			async: true,
+			type : 'POST',
+			url : contextpath + '/review/insert_star',
+			data : {
+				'fStar' : fStar, 
+				'fTitle' : title, 
+				'fCode' : fcode,
+				'ftype' : ftype
+			},
+			success : (data) => {
+				alert('별점이 등록되었습니다');
+				// console.log(data.star)
+			},
+			error : (error) => {
+				alert('서버와 연결에 실패하였습니다');
+			}
+		});
+	}
+	</script>

@@ -154,27 +154,30 @@
 
 	function updateCmt(event) {
 		let cmtContent = $(event.target).parent().parent().prev().find('#message-cmt-2').val();
-
-		$.ajax({
-			async: true,
-			type : 'POST',
-			url : contextpath + '/review/cmt_update',
-			data : {
-				'rvNo' : rvNo,
-				'cmtNo' : $(event.target).parent().parent().parent().prev().find('#cmtNo').val(),
-				'cmtContent' : cmtContent, 
-				'fCode' : fcode,
-				'ftype' : ftype
-			},
-			success : (data) => {
-				$(event.target).parent().parent().parent().hide();
-				$(event.target).parent().parent().parent().prev().show();
-				$(event.target).parent().parent().parent().prev().find('#board-text5').text(cmtContent);
-			},
-			error : (error) => {
-				alert('댓글 수정에 실패하였습니다');
-			}
-		});
+		if(cmtContent.trim()==""){
+			alert("내용을 입력해주세요");
+        }else{
+			$.ajax({
+				async: true,
+				type : 'POST',
+				url : contextpath + '/review/cmt_update',
+				data : {
+					'rvNo' : rvNo,
+					'cmtNo' : $(event.target).parent().parent().parent().prev().find('#cmtNo').val(),
+					'cmtContent' : cmtContent, 
+					'fCode' : fcode,
+					'ftype' : ftype
+				},
+				success : (data) => {
+					$(event.target).parent().parent().parent().hide();
+					$(event.target).parent().parent().parent().prev().show();
+					$(event.target).parent().parent().parent().prev().find('#board-text5').text(cmtContent);
+				},
+				error : (error) => {
+					alert('서버와 연결에 실패하였습니다');
+				}
+			});
+		}
     }
 
 	function deleteCmt(event) {
@@ -183,20 +186,20 @@
 			$.ajax({
 				async: true,
 				type : 'POST',
-				url : contextpath + '/review/cmt_delete',
+				url : contextpath + '/review/cmt_update',
 				data : {
 					'rvNo' : rvNo,
 					'cmtNo' : $(event.target).parent().parent().parent().parent().find('#cmtNo').val(),
 					'cmtContent' : $(event.target).parent().parent().find('#message-cmt-2').val(), 
+					'cmtStatus' : 'N', 
 					'fCode' : fcode,
 					'ftype' : ftype
 				},
 				success : (data) => {
-					alert('댓글이 정상적으로 삭제되었습니다.');
 					$(event.target).parents("#cmtlist").remove();
 				},
 				error : (error) => {
-					alert('댓글 삭제에 실패하였습니다');
+					alert('서버와 연결에 실패하였습니다');
 
 				}
 			});

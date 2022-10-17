@@ -29,7 +29,7 @@
 	        <div id="div_review">
 	            <div class="row" id="detail-text0">
 	                <div class="col-3">이 작품에 대한 평가를 남겨보세요</div>
-	                <div class="col-9"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="남기기">리뷰 남기기</button></div>
+	                <div class="col-9"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reviewModal" data-bs-whatever="남기기">리뷰 남기기</button></div>
 	            </div>
 	        </div>
 	        <br>
@@ -44,11 +44,11 @@
 	        <br>
 		</c:if>
         <!-- 모달 -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header"id="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">영화 이름</h5>
+                        <h5 class="modal-title" id="reviewModalLabel">영화 이름</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -144,10 +144,10 @@
     <!-- 내용 전체 컨테이너 끝 -->
 
 	<script>
-	var fcode = "${ fcode }";
-	var ftype = "${ ftype }";
-	var m_no = "${ m_no }";
-	var contextpath = "${ pageContext.request.contextPath }";
+	fcode = "${ fcode }";
+	ftype = "${ ftype }";
+	m_no = "${ m_no }";
+	contextpath = "${ pageContext.request.contextPath }";
 	</script>
 	
 	<script>
@@ -161,20 +161,16 @@
 	}
 	});
 	
-	var exampleModal = document.getElementById('exampleModal')
-	exampleModal.addEventListener('show.bs.modal', function (event) {
-	// Button that triggered the modal
-	var button = event.relatedTarget
-	// Extract info from data-bs-* attributes
-	var recipient = button.getAttribute('data-bs-whatever')
-	// If necessary, you could initiate an AJAX request here
-	// and then do the updating in a callback.
-	// Update the modal's content.
-	var modalTitle = exampleModal.querySelector('.modal-title')
-	var modalBodyInput = exampleModal.querySelector('.modal-body input')
+	reviewModal = document.getElementById('reviewModal')
+
+	reviewModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget
+        var recipient = button.getAttribute('data-bs-whatever')
+        var modalTitle = reviewModal.querySelector('.modal-title')
+        var modalBodyInput = reviewModal.querySelector('.modal-body input')
 	
-	modalTitle.textContent = '리뷰' + recipient
-	modalBodyInput.value = recipient
+        modalTitle.textContent = '리뷰' + recipient
+        modalBodyInput.value = recipient
 	});
     </script>
     

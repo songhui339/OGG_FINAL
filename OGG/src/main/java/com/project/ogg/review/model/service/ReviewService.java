@@ -6,13 +6,14 @@ import com.project.ogg.common.util.PageInfo;
 import com.project.ogg.review.model.vo.Film;
 import com.project.ogg.review.model.vo.Review;
 import com.project.ogg.review.model.vo.ReviewCmt;
+import com.project.ogg.review.model.vo.ReviewLikes;
 
 
 public interface ReviewService {
 
 	Film filmcheck(int fcode);
 	
-	int filmSave(Film film);
+	int filmInsert(Film film);
 
 	List<Review> getReviewListAll(PageInfo pageInfo);
 	
@@ -22,11 +23,9 @@ public interface ReviewService {
 	
 	int getReviewCount(int fcode);
 
-	int reviewSave(Review review);
+	int reviewWrite(Review review);
 	
 	int reviewUpdate(Review review);
-	
-	int reviewDelete(Review review);
 
 	List<ReviewCmt> getCmtByReviewNo(int no);
 
@@ -40,5 +39,9 @@ public interface ReviewService {
 
 	int cmtUpdate(ReviewCmt cmt);
 
-	int cmtDelete(ReviewCmt cmt);
+	int insertStar(ReviewLikes reviewLikes);
+
+	ReviewLikes getStar(ReviewLikes reviewLikes);
+
+
 }
