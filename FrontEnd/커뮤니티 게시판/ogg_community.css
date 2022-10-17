@@ -1,0 +1,112 @@
+/* 
+====================================================
+OGG 커뮤니티 게시판 CSS
+====================================================
+*/
+
+.community_section {
+    background-color: #f7f7f7;
+    width: 100vw;
+    /* min-height: 100vh; */
+    /* display: flex; */
+    /* flex-direction: column; */
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    padding: 80px 0;
+}
+
+.community_section .pageTitleBox {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.community_section .pageTitleBox .titleText {
+    display: inline-block;
+    font-size: 1.6rem;
+    vertical-align: bottom;
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+
+.community_section .listBox {
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #f9f9f9;
+}
+
+.community_section .listBox {}
+
+.community_section .listBox .listTable {
+    margin-bottom: 30px;
+}
+
+.community_section .listBox .listTable .tHeader {
+    background-color: #ffffff;
+}
+
+/* 부트스트랩 기본 CSS 설정 삭제 */
+.community_section .listBox .listTable .tHeader>tr>th {
+    border-style: none !important;
+    font-size: 1rem;
+    font-weight: 600;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    /* text-align: center; */
+}
+
+.community_section .listBox .listTable tbody tr.boardItem {
+    cursor: pointer;
+}
+
+.community_section .listBox .listTable tbody tr.boardItem:hover {
+    background-color: #7d69fe26;
+}
+
+.community_section .listBox .listTable tbody tr.boardItem>th,
+.community_section .listBox .listTable tbody tr.boardItem>td {
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+
+/* ========== 페이지 Nav ========== */
+
+.community_section .pageNav {
+    text-align: center;
+    margin: 0 auto;
+}
+
+.community_section .pageNav>button {
+    border: 1px solid #7e69fe;
+    color: #7e69fe;
+}
+
+.community_section .pageNav .arrowBtn {
+    background-color: #7e69fe;
+    color: #ffffff;
+}
+
+.community_section .pageNav .pageNoBtn:hover {
+    background-color: #7e69fe;
+    color: #ffffff;
+}
+
+.community_section nav.pageNav {
+    margin: 0 auto;
+}
+
+.community_section nav.pageNav li a.c_purple {
+    color: #7e69fe !important;
+}
+
+.community_section nav.pageNav li a.c_purple:hover {
+    background-color: #7d69fe34 !important;
+    border-color: #7d69fe34 !important;
+}
+
+.community_section nav.pageNav li a.c_purple:active {
+    background-color: #7d69fe34 !important;
+    border-color: #7d69fe34 !important;
+}
