@@ -404,6 +404,32 @@ OGG 마이페이지 CSS
     color: #7e69fe !important;
 }
 
+.myPage_section .myPage_Wrap .infoBox nav.pageNav li a.c_purple:hover {
+	background-color: #7d69fe34 !important;
+    border-color: #7d69fe34 !important;
+}
+
+.myPage_section .myPage_Wrap .infoBox .pageNav {
+    text-align: center;
+    margin: 0 auto;
+}
+
+.myPage_section .myPage_Wrap .infoBox .pageNav>button {
+	font-size : 0.8rem;
+    border: 1px solid #7e69fe;
+    color: #7e69fe;
+}
+
+.myPage_section .myPage_Wrap .infoBox .pageNav .arrowBtn {
+    background-color: #7e69fe;
+    color: #ffffff;
+}
+
+.myPage_section .myPage_Wrap .infoBox .pageNav .pageNoBtn:hover {
+    background-color: #7e69fe;
+    color: #ffffff;
+}
+
 
 /* ========== 포인트 ========== */
 .myPage_section .myPage_Wrap .infoBox .pointBox {
