@@ -49,6 +49,7 @@
 
             <div class="pageTitleBox">
                 <h2 class="titleText">💬 커뮤니티</h2>
+                <button onclick="location.href='${path}/community/goWrite.do'" class="btn writeBtn">글쓰기 <i class="bi bi-pencil"></i></button>
             </div>
 
             <div class="listBox">
@@ -98,14 +99,29 @@
                 <button class="btn arrowBtn" onclick="location.href='${ path }/community/list.do?page=${ pageInfo.prevPage }'">&lt;</button>
     
                 <!--  10개 페이지 목록 -->
-                    <button class="btn" disabled>${ status.current }</button>
-                    <button class="btn pageNoBtn" onclick="location.href='${ path }/community/list.do?page=${ status.current }'">${ status.current }</button>
+                <c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" varStatus="status">
+                    <c:if test="${ status.current == pageInfo.currentPage }">
+                        <button class="btn" disabled>${ status.current }</button>
+                    </c:if>
+                    <c:if test="${ status.current != pageInfo.currentPage }">
+                        <button class="btn pageNoBtn" onclick="location.href='${ path }/community/list.do?page=${ status.current }'">${ status.current }</button>
+                    </c:if>
     
                 <!-- 다음 페이지로 -->
                 <button class="btn arrowBtn" onclick="location.href='${ path }/community/list.do?page=${ pageInfo.nextPage }'">&gt;</button>
     
                 <!-- 맨 끝으로 -->
                 <button class="btn arrowBtn" onclick="location.href='${ path }/community/list.do?page=${ pageInfo.maxPage }'">&gt;&gt;</button>
+            </div>
+
+            <!-- 검색 -->
+            <div class="searchBox">
+                <select class="form-select searchCategory" aria-label="Default select example" style="display: inline; width: 100px;">
+                    <option value="subject">제목</option>
+                    <option value="c_content">내용</option>
+                </select>
+                <input type="text" name="keyword" />
+                <button type="button" class="btn searchBtn"><i class="bi bi-search"></i> 검색</button>
             </div>
 
 
