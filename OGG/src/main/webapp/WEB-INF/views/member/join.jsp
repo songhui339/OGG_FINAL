@@ -9,7 +9,7 @@
 
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<!-- 로그인 및 회원가입 관련 CSS -->
-    <link rel="stylesheet" href="${path}/css/member/join.css">
+    <link rel="stylesheet" href="${path}/css/member/join.css?ver=1.1">
 
     <section class="enrollPage02">
         <div class="contentWrap">
