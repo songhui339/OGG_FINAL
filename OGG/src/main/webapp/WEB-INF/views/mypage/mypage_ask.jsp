@@ -66,7 +66,7 @@
 
         <!-- 정보 영역 -->
         <div class="infoBox">
-            <p class="titleText">1:1 문의 내역 <a href="${ path }/mypage/ask/write" class="button">문의 작성</a></p>
+            <p class="titleText">1:1 문의 내역 <a href="#" class="button">문의 작성</a></p>
             
             <div class="line"></div>
             <table class="table">
@@ -79,25 +79,25 @@
                     </tr>
                 </thead>
                 <tbody class="partyitem">
-                    <tr onclick="location.href='${ path }/mypage/ask/view';">
+                    <tr onclick="location.href='';">
                         <th scope="row">${Q_NO}</th>
                         <td>${Q_TITLE}</td>
                         <td>${Q_ENROLLDATE}</td>
                         <td><span class="statusY">답변 완료</span></td>
                     </tr>
-                    <tr onclick="location.href='${ path }/mypage/ask/view';">
+                    <tr onclick="location.href='';">
                         <th scope="row">${Q_NO}</th>
                         <td>${Q_TITLE}</td>
                         <td>${Q_ENROLLDATE}</td>
                         <td><span class="statusN">답변 대기</span></td>
                     </tr>
-                    <tr onclick="location.href='${ path }/mypage/ask/view';">
+                    <tr onclick="location.href='';">
                         <th scope="row">${Q_NO}</th>
                         <td>${Q_TITLE}</td>
                         <td>${Q_ENROLLDATE}</td>
                         <td><span class="statusN">${Q_STATUS}</span></td>
                     </tr>
-                    <tr onclick="location.href='${ path }/mypage/ask/view';">
+                    <tr onclick="location.href='';">
                         <th scope="row">${Q_NO}</th>
                         <td>${Q_TITLE}</td>
                         <td>${Q_ENROLLDATE}</td>

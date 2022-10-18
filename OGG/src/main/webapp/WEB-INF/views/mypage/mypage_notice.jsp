@@ -78,25 +78,25 @@
                     </tr>
                 </thead>
                 <tbody class="partyitem">
-                    <tr onclick="location.href='${ path }/mypage/notice/view';">
+                    <tr onclick="location.href='';">
                         <th scope="row">${N_NO}</th>
                         <td>${N_TITLE}</td>
                         <td>${N_CREATE_DATE}</td>
                         <td>${N_READCOUNT}</td>
                     </tr>
-                    <tr onclick="location.href='${ path }/mypage/notice/view';">
+                    <tr onclick="location.href='';">
                         <th scope="row">${N_NO}</th>
                         <td>${N_TITLE}</td>
                         <td>${N_CREATE_DATE}</td>
                         <td>${N_READCOUNT}</td>
                     </tr>
-                    <tr onclick="location.href='${ path }/mypage/notice/view';">
+                    <tr onclick="location.href='';">
                         <th scope="row">${N_NO}</th>
                         <td>${N_TITLE}</td>
                         <td>${N_CREATE_DATE}</td>
                         <td>${N_READCOUNT}</td>
                     </tr>
-                    <tr onclick="location.href='${ path }/mypage/notice/view';">
+                    <tr onclick="location.href='';">
                         <th scope="row">${N_NO}</th>
                         <td>${N_TITLE}</td>
                         <td>${N_CREATE_DATE}</td>

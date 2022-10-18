@@ -94,12 +94,6 @@ body {
     overflow-y: auto;
     background-color: #f9f9f9;
 }
-
-.enrollPage01 .contentWrap .formBox .form-round::-webkit-scrollbar {
-    width: 6px;
-}
-
-
 .enrollPage01 .contentWrap .formBox .input-check {
     position: relative;
     display: inline-block;
