@@ -10,9 +10,21 @@ public class MypageController {
     
     // 회원 정보 수정 페이지
     @GetMapping("/main")
-    public String mypageMember () {
+    public String main () {
         
         return "mypage/mypage_main";
+    }
+    
+    @GetMapping("/pwdCheck")
+    public String pwdCheck () {
+        
+        return "mypage/mypage_pwdCheck";
+    }
+    
+    @GetMapping("/member_modify")
+    public String memberInfoModify () {
+        
+        return "mypage/mypage_memberInfo_modify";
     }
     
     // 공지사항

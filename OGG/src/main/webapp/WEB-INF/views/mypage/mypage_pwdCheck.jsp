@@ -65,60 +65,19 @@
         </div>
 
         <!-- 정보 영역 -->
-        <div class="infoBox">
-            <p class="titleText">정산 내역 확인</p>
-            <div class="line"></div>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">No</th>
-                        <th scope="col">정산 날짜</th>
-                        <th scope="col">내역</th>
-                        <th scope="col">정산 금액</th>
-                    </tr>
-                </thead>
-                <tbody class="partyitem">
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>${C_TITLE}</td>
-                        <td>${C_WRITEDATE}</td>
-                        <td>${C_VIEWCOUNT}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>${C_TITLE}</td>
-                        <td>${C_WRITEDATE}</td>
-                        <td>${C_VIEWCOUNT}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>${C_TITLE}</td>
-                        <td>${C_WRITEDATE}</td>
-                        <td>${C_VIEWCOUNT}</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <!-- Page 네비게이션 -->
-            <div class="pageNav" id="pageBar">
-                <!-- 맨 처음으로 -->
-                <button class="btn arrowBtn" onclick="location.href=''">&lt;&lt;</button>
-    
-                <!-- 이전 페이지로 -->
-                <button class="btn arrowBtn" onclick="location.href=''">&lt;</button>
-    
-                <!--  10개 페이지 목록 -->
-                    <button class="btn" disabled>${ status.current }</button>
-                    <button class="btn pageNoBtn" onclick="location.href=''">2</button>
-    
-                <!-- 다음 페이지로 -->
-                <button class="btn arrowBtn" onclick="location.href=''">&gt;</button>
-    
-                <!-- 맨 끝으로 -->
-                <button class="btn arrowBtn" onclick="location.href=''">&gt;&gt;</button>
-            </div>
-
-        </div>
+         <div class="infoBox">
+             <p class="titleText">회원 정보 수정</p>
+             <div class="line"></div>
+             <form action="">
+                 <div class="formBox">
+                     <p>본인 확인을 위해 비밀번호를 입력 해주세요.</p>
+                     <input type="password" name="" placeholder="비밀번호" minlength="3" maxlength="20" disabled>
+                     <div class="btnBox">
+                         <button onclick="location.href='${ path }/mypage/member_modify';" type="button" class="btn">비멀번호 확인</button>
+                     </div>
+                 </div>
+             </form>
+         </div>
 
         <!-- 배너 영역 -->
         <div class="bannerBox">

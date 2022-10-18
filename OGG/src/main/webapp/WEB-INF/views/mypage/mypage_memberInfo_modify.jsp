@@ -66,58 +66,57 @@
 
         <!-- 정보 영역 -->
         <div class="infoBox">
-            <p class="titleText">정산 내역 확인</p>
+            <p class="titleText">회원 정보 수정</p>
             <div class="line"></div>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">No</th>
-                        <th scope="col">정산 날짜</th>
-                        <th scope="col">내역</th>
-                        <th scope="col">정산 금액</th>
-                    </tr>
-                </thead>
-                <tbody class="partyitem">
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>${C_TITLE}</td>
-                        <td>${C_WRITEDATE}</td>
-                        <td>${C_VIEWCOUNT}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>${C_TITLE}</td>
-                        <td>${C_WRITEDATE}</td>
-                        <td>${C_VIEWCOUNT}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>${C_TITLE}</td>
-                        <td>${C_WRITEDATE}</td>
-                        <td>${C_VIEWCOUNT}</td>
-                    </tr>
-                </tbody>
-            </table>
+            <form action="">
+                <div class="formBox">
+                    <ul class="form-list">
+                        <li>
+                            <label for="">아이디</label>
+                            <input type="text" name="" value="${m_id}" id="" readonly>
+                        </li>
+                        <li>
+                            <label for="">비밀번호</label>
+                            <input type="password" name="" placeholder="비밀번호" minlength="3" maxlength="20">
+                        </li>
+                        <li>
+                            <label for="">비밀번호 확인</label>
+                            <input type="password" name="" placeholder="비밀번호 확인" minlength="3" maxlength="20">
+                        </li>
+                        <li>
+                            <label for="">이름</label>
+                            <input type="text" value="${m_name}" name="" placeholder="이름" minlength="3" maxlength="20" id="">
+                        </li>
+                        <li>
+                            <label for="">닉네임</label>
+                            <input type="text" value="${m_name}" name="" placeholder="닉네임" minlength="3" maxlength="20" id="">
+                        </li>
+                        <li>
+                            <label for="">이메일</label>
+                            <input type="email" value="${m_email}" name="" placeholder="이메일" minlength="3" maxlength="20" id="">
+                        </li>
+                        <li>
+                            <label for="">휴대폰 번호</label>
+                            <input type="tel" value="${m_phone}" name="" placeholder="휴대폰 번호 입력" minlength="3" maxlength="20" id="">
+                        </li>
 
-            <!-- Page 네비게이션 -->
-            <div class="pageNav" id="pageBar">
-                <!-- 맨 처음으로 -->
-                <button class="btn arrowBtn" onclick="location.href=''">&lt;&lt;</button>
-    
-                <!-- 이전 페이지로 -->
-                <button class="btn arrowBtn" onclick="location.href=''">&lt;</button>
-    
-                <!--  10개 페이지 목록 -->
-                    <button class="btn" disabled>${ status.current }</button>
-                    <button class="btn pageNoBtn" onclick="location.href=''">2</button>
-    
-                <!-- 다음 페이지로 -->
-                <button class="btn arrowBtn" onclick="location.href=''">&gt;</button>
-    
-                <!-- 맨 끝으로 -->
-                <button class="btn arrowBtn" onclick="location.href=''">&gt;&gt;</button>
-            </div>
+                        <li>
+                            <span class="subject">이메일 수신</span>
+                            <input type="checkbox" name="" id="">
+                            <span class="subject">SMS 수신</span>
+                            <input type="checkbox" name="" id="">
+                        </li>
+                    </ul>
 
+                    <div class="btnBox">
+                        <button type="submit" class="btn">수정하기</button>
+                        <button type="" class="btn redBtn">탈퇴하기</button>
+                    </div>
+
+                    
+
+                </div>
+            </form>
         </div>
 
         <!-- 배너 영역 -->
