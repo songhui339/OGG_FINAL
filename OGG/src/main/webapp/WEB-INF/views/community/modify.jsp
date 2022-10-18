@@ -4,20 +4,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <c:set var="path" value="${ pageContext.request.contextPath }"/>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>커뮤니티</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-    
+
+<script src="${ path }/js/jquery-3.6.0.min.js"></script>
+
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+
+	<!-- 커뮤니티 페이지 CSS -->
     <link rel="stylesheet" href="${path}/css/community/ogg_community.css" class="css">
-    <link rel="stylesheet" href="${path}/css/member/headerFooter.css" class="css">
-    <script src="${ path }/js/jquery-3.6.0.min.js"></script>
     
     <!-- 서머노트 -->
 	<script src="${path}/summernote/summernote-lite.js"></script>
@@ -25,7 +18,7 @@
 	<link rel="stylesheet" href="${path}/summernote/summernote-lite.css">
 	
 	    <script type="text/javascript">
-window.onload = function() {
+			window.onload = function() {
 			
 			// '등록하기' 버튼 클릭시 모두 입력되었는지 검사
 			document.getElementById('communitySubmit').onclick = function() {
@@ -75,10 +68,6 @@ window.onload = function() {
 			
 		};
 	</script>
-
-</head>
-<body>
-    <jsp:include page="/WEB-INF/views/common/header.jsp"/>
     
         <section class="community_section">
 
@@ -124,7 +113,4 @@ window.onload = function() {
         </section>
         
 	    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
-</body>
-</html>

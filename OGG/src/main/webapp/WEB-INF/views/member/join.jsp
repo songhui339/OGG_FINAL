@@ -4,55 +4,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <c:set var="path" value="${ pageContext.request.contextPath }"/>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>회원가입 페이지</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-    
+
+<script src="${ path }/js/jquery-3.6.0.min.js"></script>
+
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+	<!-- 로그인 및 회원가입 관련 CSS -->
     <link rel="stylesheet" href="${path}/css/member/join.css">
-    <link rel="stylesheet" href="${path}/css/member/headerFooter.css" class="css">
-
-	<script src="${ path }/js/jquery-3.6.0.min.js"></script>
-    
-</head>
-<body>
-    <header>
-        <div class="width-container">
-            <div class="logoBox">
-                <a href="javascript:">
-                    <img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/small-butslogo.png" srcset="https://buts.co.kr/thema/Buts/colorset/Basic/img/2x/small-butslogo.png 2x" alt="loogo" title=""></a>
-            </div>
-
-            <div class="btnBox">
-                <a href="javascript:" class="loginBtn" onclick="location.href='/member/goLoginPage.do'">로그인</a>
-            </div>
-        </div>
-
-        <div class="menu-container">
-            <ul class="menuBox">
-                <li>
-                    <a href="javascript:">파티 만들기</a>
-                </li>
-                <li>
-                    <a href="javascript:">파티 찾기</a>
-                </li>
-                <li>
-                    <a href="javascript:">리뷰</a>
-                </li>
-                <li>
-                    <a href="javascript:">커뮤니티</a>
-                </li>
-                <li>
-                    <a href="javascript:">이벤트</a>
-                </li>
-            </ul>
-        </div>
-    </header>
 
     <section class="enrollPage02">
         <div class="contentWrap">

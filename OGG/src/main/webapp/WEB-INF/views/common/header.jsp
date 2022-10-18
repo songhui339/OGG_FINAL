@@ -42,7 +42,6 @@
                 <a href="${ path }/"><img src="${ path }/images/logo/OGG_logo_menu.png"  alt="logo"></a>
             </div>
 
-<<<<<<< HEAD
 			<div class="btnBox">
 			
 				<!-- 로그인 전 -->
@@ -59,35 +58,17 @@
 				</security:authorize>
 			 
 				<ul class="dropdown-menu" style="z-index: 80;">
-					<li><a class="dropdown-item" href="${ path }/mypage/main">마이페이지</a></li>
-					<li><a class="dropdown-item" href="${ path }/admin/home">관리페이지</a></li>
+					<li><a class="dropdown-item c_purple" href="${ path }/mypage/main">마이페이지</a></li>
+					<li><a class="dropdown-item c_purple" href="${ path }/admin/home">관리페이지</a></li>
 					<li><hr class="dropdown-divider"></li>
 					
 					<!-- 로그인한 경우에 로그아웃 노출 -->
 					<security:authorize access="isAuthenticated()">
-						<li><a class="dropdown-item" href="${ path }/member/doLogout.do">로그아웃</a></li>
+						<li><a class="dropdown-item c_red" href="${ path }/member/doLogout.do">로그아웃</a></li>
 					</security:authorize>
 				</ul>
 			</div> 
-=======
-			<!-- 로그인 전 btnBox -->
-            <!-- <div class="btnBox">
-                <a href="javascript:" class="loginBtn">로그인</a>
-            </div> -->
             
-            <!-- 로그인 후 btnBox -->
-            <div class="btnBox">
-               <a href="javascript:" class="myPageBtn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">${m_name} 님</a>
-               
-              <ul class="dropdown-menu" style="z-index: 80;">
-               	<li><a class="dropdown-item c_purple" href="${ path }/mypage/main">마이페이지</a></li>
-               	<li><a class="dropdown-item c_purple" href="${ path }/admin/home">관리페이지</a></li>
-               	<li><hr class="dropdown-divider"></li>
-               	<li><a class="dropdown-item c_red" href="#">로그아웃</a></li>
-              </ul>
-            </div> 
-            
->>>>>>> 828f8a2a3baec66ea40cd201533840fc7709347f
         </div>
 
         <div class="menu-container">

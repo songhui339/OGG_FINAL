@@ -5,14 +5,14 @@ OGG LoginPage CSS
 */
 
 .loginPage_section {
-    min-height: 600px;
-    padding: 100px 0;
+    /* min-height: 600px; */
+    padding: 0 0 100px 0;
 }
 
 .loginPage_section .contentWrap {
     position: relative;
     max-width: 1280px;
-    height: 100%;
+    /* height: 100%; */
     margin: 0 auto;
 }
 
