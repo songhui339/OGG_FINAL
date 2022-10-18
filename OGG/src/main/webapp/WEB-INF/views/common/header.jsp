@@ -21,8 +21,8 @@
 	<link rel="manifest" href="${ path }/images/favicon_io/site.webmanifest">
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" 
-    integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" rel="stylesheet">
     
  	 <!-- Mainstyle CSS -->
     <link rel="stylesheet" href="${path}/css/common/ogg_common.css">
@@ -42,6 +42,7 @@
                 <a href="${ path }/"><img src="${ path }/images/logo/OGG_logo_menu.png"  alt="logo"></a>
             </div>
 
+<<<<<<< HEAD
 			<div class="btnBox">
 			
 				<!-- 로그인 전 -->
@@ -68,6 +69,25 @@
 					</security:authorize>
 				</ul>
 			</div> 
+=======
+			<!-- 로그인 전 btnBox -->
+            <!-- <div class="btnBox">
+                <a href="javascript:" class="loginBtn">로그인</a>
+            </div> -->
+            
+            <!-- 로그인 후 btnBox -->
+            <div class="btnBox">
+               <a href="javascript:" class="myPageBtn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">${m_name} 님</a>
+               
+              <ul class="dropdown-menu" style="z-index: 80;">
+               	<li><a class="dropdown-item c_purple" href="${ path }/mypage/main">마이페이지</a></li>
+               	<li><a class="dropdown-item c_purple" href="${ path }/admin/home">관리페이지</a></li>
+               	<li><hr class="dropdown-divider"></li>
+               	<li><a class="dropdown-item c_red" href="#">로그아웃</a></li>
+              </ul>
+            </div> 
+            
+>>>>>>> 828f8a2a3baec66ea40cd201533840fc7709347f
         </div>
 
         <div class="menu-container">
