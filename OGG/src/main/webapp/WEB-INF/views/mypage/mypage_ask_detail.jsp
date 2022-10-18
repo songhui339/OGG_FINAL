@@ -74,13 +74,13 @@
                     <p class="readCount">${Q_STATUS}</p>
                 </div>
 
-                <div class="contentBox" style="height: 180px !important;">
+                <div class="contentBox" style="height: auto !important;">
                     <p style="margin-bottom: 0;">
                         ${N_CONTENT}
                     </p>
                 </div>
 
-                <div class="contentBox" style="height: 250px !important;">
+                <div class="contentBox" style="height: auto !important;">
                     <p class="answerTitle" style="    margin-bottom: 10px;
                     font-size: 1rem;
                     font-weight: 600;">

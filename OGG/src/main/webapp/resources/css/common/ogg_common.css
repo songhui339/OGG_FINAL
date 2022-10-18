@@ -91,6 +91,15 @@ header .width-container .btnBox a.myPageBtn:hover {
     color: #7e69fe;
 }
 
+header .width-container .btnBox ul li a.c_purple:hover {
+	background-color : #7d69fe20 !important;
+}
+
+header .width-container .btnBox ul li a.c_red:hover {
+	background-color : rgba(255, 99, 71, 0.20) !important;
+}
+
+
 /* 로그인 후 나오는 버튼 */
 header .width-container .btnBox img {
     cursor: pointer;
