@@ -215,3 +215,54 @@ footer .v-bar::after {
 footer span {
     white-space: nowrap;
 }
+
+
+/* *************************** */
+/* ****** 접근 제한 페이지 ****** */
+/* *************************** */
+.accessDenied_section {
+	padding: 80px 0 100px 0;
+    text-align: center;
+    background-color: rgb(244, 244, 250);
+}
+
+.accessDenied_section .emojiIMG {
+    width: 20%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.accessDenied_section .text {
+    margin-top: 30px;
+    font-size: 1.6rem;
+    font-weight : 300;
+}
+
+.accessDenied_section .text .highlight {
+	font-weight: 600;
+    font-size: 2rem;
+}
+
+.accessDenied_section .btnBox {
+	width: 70%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.accessDenied_section .btnBox .gotoMain {
+	text-decoration: none;
+    color: #ffffff;
+    font-size: 1.2rem;
+    background-color: #7e69fe;
+    padding: 10px 40px;
+    border-radius: 10px;
+    border: 1px solid #7e69fe;
+    -webkit-apperance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.accessDenied_section .btnBox .gotoMain:hover {
+	background-color : #ffffff;
+	color : #7e69fe;
+}
