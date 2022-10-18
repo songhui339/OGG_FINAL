@@ -65,67 +65,27 @@
         </div>
 
         <!-- 정보 영역 -->
-        <div class="infoBox">
-            <p class="titleText">1:1 문의 내역 <a href="${ path }/mypage/ask/write" class="button">문의 작성</a></p>
-            
+        <div class="infoBox" style="display: block !important;">
+            <p class="titleText">1:1 문의 작성</p>
             <div class="line"></div>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">No</th>
-                        <th scope="col">제목</th>
-                        <th scope="col">작성 날짜</th>
-                        <th scope="col">조회수</th>
-                    </tr>
-                </thead>
-                <tbody class="partyitem">
-                    <tr onclick="location.href='${ path }/mypage/ask/view';">
-                        <th scope="row">${Q_NO}</th>
-                        <td>${Q_TITLE}</td>
-                        <td>${Q_ENROLLDATE}</td>
-                        <td><span class="statusY">답변 완료</span></td>
-                    </tr>
-                    <tr onclick="location.href='${ path }/mypage/ask/view';">
-                        <th scope="row">${Q_NO}</th>
-                        <td>${Q_TITLE}</td>
-                        <td>${Q_ENROLLDATE}</td>
-                        <td><span class="statusN">답변 대기</span></td>
-                    </tr>
-                    <tr onclick="location.href='${ path }/mypage/ask/view';">
-                        <th scope="row">${Q_NO}</th>
-                        <td>${Q_TITLE}</td>
-                        <td>${Q_ENROLLDATE}</td>
-                        <td><span class="statusN">${Q_STATUS}</span></td>
-                    </tr>
-                    <tr onclick="location.href='${ path }/mypage/ask/view';">
-                        <th scope="row">${Q_NO}</th>
-                        <td>${Q_TITLE}</td>
-                        <td>${Q_ENROLLDATE}</td>
-                        <td><span class="statusN">${Q_STATUS}</span></td>
-                    </tr>
-                    
-                    
-                </tbody>
-            </table>
 
-            <!-- Page 네비게이션 -->
-            <div class="pageNav" id="pageBar">
-                <!-- 맨 처음으로 -->
-                <button class="btn arrowBtn" onclick="location.href=''">&lt;&lt;</button>
-    
-                <!-- 이전 페이지로 -->
-                <button class="btn arrowBtn" onclick="location.href=''">&lt;</button>
-    
-                <!--  10개 페이지 목록 -->
-                    <button class="btn" disabled>${ status.current }</button>
-                    <button class="btn pageNoBtn" onclick="location.href=''">2</button>
-    
-                <!-- 다음 페이지로 -->
-                <button class="btn arrowBtn" onclick="location.href=''">&gt;</button>
-    
-                <!-- 맨 끝으로 -->
-                <button class="btn arrowBtn" onclick="location.href=''">&gt;&gt;</button>
-            </div>
+            <form action="">    
+                <div class="titleBox">
+                    <label for="c_title" class="c_title">제목</label>
+                    <input type="text" name="c_title" id="c_title">
+                </div>
+
+                <div class="contentBox">
+                    <textarea placeholder="문의 내용을 입력해 주세요." name="c_content" cols="50" rows="15" ></textarea>
+                </div>
+
+
+                <div class="btnBox">
+                    <button type="button" class="btn askSubmitBtn">등록</button>
+                </div>
+            </form>
+
+        
 
         </div>
 

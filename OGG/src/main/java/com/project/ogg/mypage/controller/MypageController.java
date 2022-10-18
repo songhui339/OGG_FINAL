@@ -94,6 +94,12 @@ public class MypageController {
         return "mypage/mypage_ask_detail";
     }
     
+    @GetMapping("/ask/write")
+    public String askWrite () {
+        
+        return "mypage/mypage_ask_write";
+    }
+    
     
     
 }
