@@ -47,7 +47,7 @@ $(document).ready(function() {
 		    let id = result.id;
 
             let html = "";
-                html += "<a href='" + contextpath + "/review/film_detail?fcode=" + id + "&ftype=" + type1 + "'>";
+                html += "<a href='" + contextpath + "/film/detail?fcode=" + id + "&ftype=" + type1 + "'>";
                 html += "<div class='row' style='font-size: 2em; font-weight: 700; margin-top: 35px; margin-bottom: 1px; margin-left: 1px;'>";
                 html += title;
                 html += "</div>";
@@ -140,7 +140,7 @@ $(document).ready(function() {
 	                let id = result.results[0].known_for[i].id;
 	
 	                html += "<div class='col' id='dir_film'>";
-	                html += "<a href='"+ contextpath +"/review/film_detail?fcode="+ id +"&ftype="+ type1 +"'>";
+	                html += "<a href='"+ contextpath +"/film/detail?fcode="+ id +"&ftype="+ type1 +"'>";
 	                html += "<div class='card' id='card_film2'>";
 	                html += "<img src='" + img + "' id='img_film2'>";
 	                html += "<div class='card-body'>";
@@ -193,7 +193,7 @@ $(document).ready(function() {
 			},
 			success : (data) => {
 				alert('리뷰가 성공적으로 등록되었습니다');
-                location.replace(contextpath + '/review/review_list?fcode=' + fcode + '&ftype=' + ftype);
+                location.replace(contextpath + '/film/review_list?fcode=' + fcode + '&ftype=' + ftype);
             },
 			error : (error) => {
 				alert('리뷰 등록에 실패하였습니다');
@@ -243,7 +243,7 @@ $(document).ready(function() {
 				},
 				success : (data) => {
 					alert('리뷰가 성공적으로 삭제되었습니다');
-					location.replace(contextpath + '/review/review_list?fcode=' + fcode + '&ftype=' + ftype);
+					location.replace(contextpath + '/film/review_list?fcode=' + fcode + '&ftype=' + ftype);
 				},
 				error : (error) => {
 					alert('리뷰 삭제에 실패하였습니다');
@@ -302,24 +302,5 @@ $(document).ready(function() {
             });
         }
     });
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
 
 });

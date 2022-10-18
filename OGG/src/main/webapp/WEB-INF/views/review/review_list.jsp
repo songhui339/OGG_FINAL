@@ -70,10 +70,10 @@
         <div class="col-4">
             <ul class="pagination justify-content-center">
             	<!-- 맨 처음으로 -->
-                <li class="page-item"><a class="page-link" href="${ path }/review/review_list?page=1&fcode=${ fcode }&ftype=${ ftype }">&lt;&lt;</a></li>
+                <li class="page-item"><a class="page-link" href="${ path }/film/review_list?page=1&fcode=${ fcode }&ftype=${ ftype }">&lt;&lt;</a></li>
                 
                 <!-- 이전 페이지로 -->
-                <li class="page-item"><a class="page-link" href="${ path }/review/review_list?page=${ pageInfo.prevPage }&fcode=${ fcode }&ftype=${ ftype }">&lt;</a></li>
+                <li class="page-item"><a class="page-link" href="${ path }/film/review_list?page=${ pageInfo.prevPage }&fcode=${ fcode }&ftype=${ ftype }">&lt;</a></li>
                 
                 <!--  10개 페이지 목록 -->
 				<c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" varStatus="status">
@@ -81,13 +81,13 @@
                   		<li class="page-item disabled"><a class="page-link" href="#">${ status.current }</a></li>
 					</c:if>
 					<c:if test="${ status.current != pageInfo.currentPage }">
-                  		<li class="page-item"><a class="page-link" href="${ path }/review/review_list?page=${ status.current }&fcode=${ fcode }&ftype=${ ftype }">${ status.current }</a></li>
+                  		<li class="page-item"><a class="page-link" href="${ path }/film/review_list?page=${ status.current }&fcode=${ fcode }&ftype=${ ftype }">${ status.current }</a></li>
 					</c:if>
 				</c:forEach>
 				  <!-- 다음 페이지로 -->
-				  <li class="page-item"><a class="page-link" href="${ path }/review/review_list?page=${ pageInfo.nextPage }&fcode=${ fcode }&ftype=${ ftype }">&gt;</a></li>
+				  <li class="page-item"><a class="page-link" href="${ path }/film/review_list?page=${ pageInfo.nextPage }&fcode=${ fcode }&ftype=${ ftype }">&gt;</a></li>
                   <!-- 맨 끝으로 -->
-                  <li class="page-item"><a class="page-link" href="${ path }/review/review_list?page=${ pageInfo.maxPage }&fcode=${ fcode }&ftype=${ ftype }">&gt;&gt;</a></li>
+                  <li class="page-item"><a class="page-link" href="${ path }/film/review_list?page=${ pageInfo.maxPage }&fcode=${ fcode }&ftype=${ ftype }">&gt;&gt;</a></li>
             </ul>
         </div>
     </div>

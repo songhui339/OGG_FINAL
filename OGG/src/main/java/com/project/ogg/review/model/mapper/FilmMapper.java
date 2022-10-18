@@ -11,19 +11,13 @@ import com.project.ogg.review.model.vo.ReviewCmt;
 import com.project.ogg.review.model.vo.ReviewLikes;
 
 @Mapper
-public interface ReviewMapper {
+public interface FilmMapper {
 	
-	Film checkFilm(int fCode);
+	List<Review> selectReviewAll(RowBounds rowBounds);
 	
-	int insertFilm(Film film);
+	List<Review> selectReviewByFilm(RowBounds rowBounds, int fcode);
 
-	Review selectReviewByNo(int no);
+	int selectReviewCount(int fcode);
 
 	int selectCmtCount(int no);
-
-	List<ReviewCmt> selectCmtByReviewNo(int no);
-
-	int insertReview(Review review);
-	
-	int updateReview(Review review);
 }

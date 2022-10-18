@@ -22,7 +22,7 @@ $.ajax({
                 let id = result.results[i].id;
 
                 html += "<div class='col' >";
-                html += "<a href='"+ contextpath +"/review/film_detail?fcode="+ id +"&ftype="+ type1 +"'>";
+                html += "<a href='"+ contextpath +"/film/detail?fcode="+ id +"&ftype="+ type1 +"'>";
                 html += "<div class='card' id='card_film'>";
                 html += "<img src='" + img + "' id='img_film'>";
                 html += "<input id='fcode' hidden value='" + id +"'>";
@@ -45,7 +45,7 @@ $.ajax({
                 let id = result.results[i].id;
 
                 html2 += "<div class='col' >";
-                html2 += "<a href='"+ contextpath +"/review/film_detail?fcode="+ id +"&ftype="+ type1 +"'>";
+                html2 += "<a href='"+ contextpath +"/film/detail?fcode="+ id +"&ftype="+ type1 +"'>";
                 html2 += "<div class='card' id='card_film'>";
                 html2 += "<img src='" + img + "' id='img_film'>";
                 html2 += "<div class='card-body'>";
@@ -79,7 +79,7 @@ $.ajax({
                 let id = result.results[i].id;
 
                 html += "<div class='col' >";
-                html += "<a href='"+ contextpath +"/review/film_detail?fcode="+ id +"&ftype="+ type2 +"'>";
+                html += "<a href='"+ contextpath +"/film/detail?fcode="+ id +"&ftype="+ type2 +"'>";
                 html += "<div class='card' id='card_film'>";
                 html += "<img src='" + img + "' id='img_film'>";
                 html += "<div class='card-body'>";
@@ -134,7 +134,7 @@ $.ajax({
                 let id = result.results[i].id;
 
                 html += "<div class='col' >";
-                html += "<a href='"+ contextpath +"/review/film_detail?fcode="+ id +"&ftype="+ type1 +"'>";
+                html += "<a href='"+ contextpath +"/film/detail?fcode="+ id +"&ftype="+ type1 +"'>";
                 html += "<div class='card' id='card_film'>";
                 html += "<img src='" + img + "' id='img_film'>";
                 html += "<div class='card-body'>";
@@ -155,7 +155,7 @@ $.ajax({
                 let id = result.results[i].id;
 
                 html2 += "<div class='col' >";
-                html2 += "<a href='"+ contextpath +"/review/film_detail?fcode="+ id +"&ftype="+ type1 +"'>";
+                html2 += "<a href='"+ contextpath +"/film/detail?fcode="+ id +"&ftype="+ type1 +"'>";
                 html2 += "<div class='card' id='card_film'>";
                 html2 += "<img src='" + img + "' id='img_film'>";
                 html2 += "<div class='card-body'>";

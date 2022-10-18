@@ -85,6 +85,7 @@
 					console.log(num)
 
 					$('#' + num + '-star').attr('checked', 'checked');
+					console.log('got star');
 				}
 			},
 			error: function (error) {

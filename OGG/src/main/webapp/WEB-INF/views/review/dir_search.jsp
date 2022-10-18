@@ -49,7 +49,7 @@
 		$("#searchBtn").on("click", () => {
 			var keyword = $("#searchInput").val();
 			
-		    location.href="${path}/review/dir_search?keyword=" + keyword;
+		    location.href="${path}/film/dir_search?keyword=" + keyword;
 		});
 	
 		let searchkeyword = "[[${searchkeyword}]]";

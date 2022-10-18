@@ -32,87 +32,29 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 	
 	@Override
-	public List<Review> getReviewListAll(PageInfo pageInfo) {
-	    int offset = (pageInfo.getCurrentPage() - 1) * pageInfo.getListLimit();
-	    int limit = pageInfo.getListLimit();
-	    RowBounds rowBounds = new RowBounds(offset, limit);   
-		
-		return mapper.selectReviewAll(rowBounds);
-	}
-
-	@Override
-	public List<Review> getReviewListByFilm(PageInfo pageInfo, int fcode) {
-	    int offset = (pageInfo.getCurrentPage() - 1) * pageInfo.getListLimit();
-	    int limit = pageInfo.getListLimit();
-	    RowBounds rowBounds = new RowBounds(offset, limit);   
-		
-		return mapper.selectReviewByFilm(rowBounds, fcode);
-	}
-	
-	@Override
 	public Review getReviewByNo(int no) {
 		return mapper.selectReviewByNo(no);
 	}
 
-	@Override
-	public int getReviewCount(int fcode) {
-		return mapper.selectReviewCount(fcode);
-	}
-
-	@Override
-	@Transactional
-	public int reviewWrite(Review review) {
-		return mapper.insertReview(review);
-	}
-
-	@Override
-	@Transactional
-	public int reviewUpdate(Review review) {
-		return mapper.updateReview(review);
-	}
-
-	@Override
-	public List<ReviewCmt> getCmtByReviewNo(int no) {
-		return mapper.selectCmtByReviewNo(no);
-	}
-	
-	@Override
-	public ReviewCmt getCmtByCmtNo(int cmtNo) {
-		return mapper.selectCmtByCmtNo(cmtNo);
-	}
-	
 	@Override
 	public int getCmtCountByNo(int no) {
 		return mapper.selectCmtCount(no);
 	}
 	
 	@Override
-	@Transactional
-	public int updateCmtCount(int rvNo) {
-		return mapper.updateCmtCount(rvNo);
+	public List<ReviewCmt> getCmtByReviewNo(int no) {
+		return mapper.selectCmtByReviewNo(no);
 	}
-
+	
 	@Override
 	@Transactional
-	public int cmtWrite(ReviewCmt cmt) {
-		return mapper.writeCmt(cmt);
+	public int reviewWrite(Review review) {
+		return mapper.insertReview(review);
 	}
-
+	
 	@Override
 	@Transactional
-	public int cmtUpdate(ReviewCmt cmt) {
-		return mapper.updateCmt(cmt);
-	}
-
-	@Override
-	public int insertStar(ReviewLikes reviewLikes) {
-		
-		return mapper.insertStar(reviewLikes);
-	}
-
-	@Override
-	public ReviewLikes getStar(ReviewLikes reviewLikes) {
-		
-		return mapper.selectStar(reviewLikes);
+	public int reviewUpdate(Review review) {
+		return mapper.updateReview(review);
 	}
 }

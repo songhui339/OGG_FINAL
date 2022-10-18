@@ -83,7 +83,7 @@
         
         <!-- 5th row -->
         <div class="col-3 col-sm-12" id="div_review">
-            <p id="detail-text1">리뷰 <a href="${ path }/review/review_list?fcode=${ fcode }&ftype=${ ftype }" id="more-text1" style="margin-left: 90%;">더보기</a></p>
+            <p id="detail-text1">리뷰 <a href="${ path }/film/review_list?fcode=${ fcode }&ftype=${ ftype }" id="more-text1" style="margin-left: 90%;">더보기</a></p>
             <hr>
 
             <!-- div -->

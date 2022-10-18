@@ -23,7 +23,7 @@ $(document).ready(function() {
                 let id = item.id;
 
                 html += "<div class='col' >";
-             	html += "<a href='"+ contextpath +"/review/film_detail?fcode="+ id +"&ftype="+ type1 +"'>";
+             	html += "<a href='"+ contextpath +"/film/detail?fcode="+ id +"&ftype="+ type1 +"'>";
                 html += "<div class='card' id='card_film3'>";
                 html += "<img src='" + img + "' id='img_film'>";
                 html += "<div class='card-body'>";

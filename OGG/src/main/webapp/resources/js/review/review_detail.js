@@ -67,7 +67,7 @@ $(document).ready(function() {
 			$.ajax({
 		        async: true,
 				type : 'POST',
-				url : contextpath + '/review/review_delete',
+				url : contextpath + '/review/review_update',
 				data : {
 					'rvNo' : rvNo,
 					'rvContent' : rvContent, 
@@ -76,7 +76,7 @@ $(document).ready(function() {
 				},
 				success : (data) => {
 					alert('리뷰가 성공적으로 삭제되었습니다');
-					location.replace(contextpath + '/review/review_list?fcode=' + fcode + '&ftype=' + ftype);
+					location.replace(contextpath + '/film/review_list?fcode=' + fcode + '&ftype=' + ftype);
 				},
 				error : (error) => {
 					alert('리뷰 삭제에 실패하였습니다');
