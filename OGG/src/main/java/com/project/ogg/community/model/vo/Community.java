@@ -15,7 +15,7 @@ public class Community {
 	private String c_title; // 제목
 	private String c_content; // 내용
 	private String c_file; // 파일
-	private String c_fileModify; // 파일 수정
+	private String c_fileRename; // 파일 수정
 	private Date c_writeDate; // 작성일자
 	private Date c_modifyDate; // 수정일자
 	private int c_viewCount; // 조회수

@@ -35,17 +35,18 @@ public class CommunityReplyController {
 	}
 	
 	// 댓글 수정
-	@GetMapping("/cummunity/replyModify.do")
+	@PostMapping("/cummunity/replyModify.do")
 	public ModelAndView communityReplutModify(ModelAndView model,
-											  @ModelAttribute CommunityReply communityReply,
 											  @AuthenticationPrincipal Member member,
 											  @RequestParam int cr_no) {
-		
 		int result = 0;
+		
+		CommunityReply communityReply = null;
+		communityReply = replyService.findCommunityReplyByNo(cr_no);
 
 		if(communityReply.getCr_writerNo() == member.getM_no()) {
 			result = replyService.communityReplutModify(communityReply);
-			
+
 			if(result > 0) {
 				model.addObject("msg", "댓글이 정상적으로 수정되었습니다.");
 				model.addObject("location", "/community/view.do?c_no=" + communityReply.getCr_communityNo());
@@ -68,8 +69,6 @@ public class CommunityReplyController {
 	public ModelAndView communityReplyDelete(ModelAndView model,
 											 @AuthenticationPrincipal Member member,
 											 @RequestParam int cr_no) {
-		
-		System.out.println(cr_no);
 		
 		int result = 0;
 		CommunityReply communityReply = null;

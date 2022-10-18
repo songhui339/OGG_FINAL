@@ -6,10 +6,10 @@ import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.project.ogg.common.model.CommonVO;
 import com.project.ogg.common.util.PageInfo;
 import com.project.ogg.community.model.mapper.CommunityMapper;
 import com.project.ogg.community.model.vo.Community;
-import com.project.ogg.community.model.vo.CommunityReply;
 
 @Service
 public class CommunityServiceImple implements CommunityService {
@@ -18,18 +18,18 @@ public class CommunityServiceImple implements CommunityService {
 	private CommunityMapper mapper;
 
 	@Override
-	public List<Community> getBoardList(PageInfo pageInfo) {
+	public List<Community> getBoardList(PageInfo pageInfo, CommonVO vo) {
 		int offset = (pageInfo.getCurrentPage() - 1) * pageInfo.getListLimit();
 		int limit = pageInfo.getListLimit();
 		RowBounds rowBounds = new RowBounds(offset, limit);			
 		
-		return mapper.selectAll(rowBounds);
+		return mapper.selectAll(rowBounds, vo);
 	}
 
 	@Override
-	public int getBoardCount() {
+	public int getBoardCount(CommonVO vo) {
 
-		return mapper.selectCommunityCount();
+		return mapper.selectCommunityCount(vo);
 	}
 
 	@Override
@@ -43,9 +43,10 @@ public class CommunityServiceImple implements CommunityService {
 		int result = 0;
 		
 		if(community.getC_no() != 0) {
+			// 수정
 			result = mapper.modifyCommunity(community);
-
 		} else {
+			// 저장
 			result = mapper.insertCommunity(community);
 		}
 		

@@ -6,15 +6,15 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
+import com.project.ogg.common.model.CommonVO;
 import com.project.ogg.community.model.vo.Community;
-import com.project.ogg.community.model.vo.CommunityReply;
 
 @Mapper
 public interface CommunityMapper {
 
-	List<Community> selectAll(RowBounds rowBounds);
+	List<Community> selectAll(RowBounds rowBounds, CommonVO vo);
 
-	int selectCommunityCount();
+	int selectCommunityCount(CommonVO vo);
 
 	Community findCommunityByNo(@Param("c_no") int c_no);
 
