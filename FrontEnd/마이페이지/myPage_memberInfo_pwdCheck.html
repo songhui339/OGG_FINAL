@@ -9,7 +9,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
-    <title>공지사항</title>
+    <title>마이페이지</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="ogg_myPage.css" class="css">
@@ -89,6 +89,7 @@
 
                     <div class="box02">
                         <div class="notice">
+                            <!-- <img src="https://linkid.pw/static/media/ic-speaker-24.b2c49cdf.svg" alt="" style="width: 24px; height: 24px; vertical-align: baseline;"> -->
                             <i class="bi bi-megaphone"></i>
                             <p class="text">공지사항</p>
                         </div>
@@ -103,38 +104,20 @@
 
                 <!-- 정보 영역 -->
                 <div class="infoBox">
-                    <p class="titleText">${Q_TITLE}</p>
+                    <p class="titleText">회원 정보 수정</p>
                     <div class="line"></div>
-                    <div class="noticeBox">
-                        <div class="subTextBox">
-                            <p class="createDate">작성일자 : ${Q_ENROLLDATE}</p>
-                            <p class="readCount">${Q_STATUS}</p>
-                        </div>
+                    <form action="">
+                        <div class="formBox">
+                            <p>본인 확인을 위해 비밀번호를 입력 해주세요.</p>
+                            <input type="password" name="" placeholder="비밀번호" minlength="3" maxlength="20" disabled>
+                            <div class="btnBox">
+                                <button type="submit" class="btn">비멀번호 확인</button>
+                            </div>
 
-                        <div class="contentBox" style="height: 180px !important;">
-                            <p style="margin-bottom: 0;">
-                                ${N_CONTENT}
-                            </p>
-                        </div>
+                            
 
-                        <div class="contentBox" style="height: 250px !important;">
-                            <p class="answerTitle" style="    margin-bottom: 10px;
-                            font-size: 1rem;
-                            font-weight: 600;">
-                                ${N_CONTENT}
-                                <span style="float: right;
-                            color: #999999; font-weight: 500;">답변</span>
-                            </p>
-                            <p class="answerText" style="margin-bottom: 0;">
-                                ${N_CONTENT}
-                            </p>
                         </div>
-                        <div class="btnBox">
-                            <button type="" class="btn">목록으로</button>
-                        </div>
-                    </div>
-
-                    
+                    </form>
                 </div>
 
                 <!-- 배너 영역 -->
