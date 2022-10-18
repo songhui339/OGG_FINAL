@@ -401,8 +401,6 @@ OGG 커뮤니테 게시판 상세보기 CSS
 .community_section .btnBox button.backtoListBtn:hover {
     background-color: #7e69fe;
     color: #ffffff;
-<<<<<<< HEAD
-=======
 }
 
 /* 
@@ -535,5 +533,4 @@ OGG 커뮤니테 게시판 상세보기 CSS
     background-color: tomato;
     border: 1px solid tomato;
     color: #ffffff;
->>>>>>> FrontEnd
 }
