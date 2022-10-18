@@ -65,58 +65,30 @@
         </div>
 
         <!-- 정보 영역 -->
-        <div class="infoBox">
-            <p class="titleText">회원 정보 확인</p>
+        <div class="infoBox" style="display: block !important;">
+            <p class="titleText">1:1 문의 작성</p>
             <div class="line"></div>
-            <form action="">
-                <div class="formBox">
-                    <ul class="form-list">
-                        <li>
-                            <label for="">아이디</label>
-                            <p class="text">${ m_id }</p>
-                        </li>
-                        <!-- <li>
-                            <label for="">비밀번호</label>
-                            <input type="password" name="" placeholder="비밀번호" minlength="3" maxlength="20">
-                        </li>
-                        <li>
-                            <label for="">비밀번호 확인</label>
-                            <input type="password" name="" placeholder="비밀번호 확인" minlength="3" maxlength="20">
-                        </li> -->
-                        <li>
-                            <label for="">이름</label>
-                            <p class="text">${ m_name }</p>
-                        </li>
-                        <li>
-                            <label for="">닉네임</label>
-                            <p class="text">${ m_nickname }</p>
-                        </li>
-                        <li>
-                            <label for="">이메일</label>
-                            <p class="text">${ m_email }</p>
-                        </li>
-                        <li>
-                            <label for="">휴대폰 번호</label>
-                            <p class="text">${ m_phone }</p>
-                        </li>
 
-                        <li>
-                            <span class="subject">이메일 수신</span>
-                            <input type="checkbox" name="" id="">
-                            <span class="subject">SMS 수신</span>
-                            <input type="checkbox" name="" id="">
-                        </li>
-                    </ul>
+            <form action="">    
+                <div class="titleBox">
+                    <label for="c_title" class="c_title">제목</label>
+                    <input type="text" name="c_title" id="c_title">
+                </div>
 
-                    <div class="btnBox">
-                        <button onclick="location.href='${ path }/mypage/pwdCheck';" type="button" class="btn">수정하기</button>
-                    </div>
+                <div class="contentBox">
+                    <textarea placeholder="문의 내용을 입력해 주세요." name="c_content" cols="50" rows="15" ></textarea>
+                </div>
 
-                    
 
+                <div class="btnBox">
+                    <button type="button" class="btn askSubmitBtn">등록</button>
                 </div>
             </form>
+
+        
+
         </div>
+
 
         <!-- 배너 영역 -->
         <div class="bannerBox">
@@ -136,3 +108,4 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+ No newline at end of file

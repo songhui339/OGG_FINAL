@@ -126,9 +126,9 @@ OGG 마이페이지 CSS
     height: calc(230px);
     min-height: 640px;
     padding: 32px 24px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* align-items: flex-start; */
     overflow: scroll;
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */

@@ -8,11 +8,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/mypage")
 public class MypageController {
     
-    // 회원 정보 수정 페이지
+    // 마이페이지 메인
     @GetMapping("/main")
-    public String mypageMember () {
+    public String main () {
         
         return "mypage/mypage_main";
+    }
+    
+    // 회원 정보 수정을 위한 비밀번호 체크
+    @GetMapping("/pwdCheck")
+    public String pwdCheck () {
+        
+        return "mypage/mypage_pwdCheck";
+    }
+    
+    // 회원 정보 수정을 위한 비밀번호 체크
+    @GetMapping("/updateMember")
+    public String updateMember () {
+        
+        return "mypage/updateMember";
     }
     
     // 공지사항
@@ -93,6 +107,13 @@ public class MypageController {
         
         return "mypage/mypage_ask_detail";
     }
+    
+    @GetMapping("/ask/write")
+    public String writeAsk () {
+        
+        return "mypage/mypage_ask_write";
+    }
+    
     
     
     

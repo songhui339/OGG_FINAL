@@ -66,38 +66,38 @@
 
         <!-- 정보 영역 -->
         <div class="infoBox">
-            <p class="titleText">회원 정보 확인</p>
+            <p class="titleText">회원 정보 수정</p>
             <div class="line"></div>
             <form action="">
                 <div class="formBox">
                     <ul class="form-list">
                         <li>
                             <label for="">아이디</label>
-                            <p class="text">${ m_id }</p>
+                            <input type="text" name="" value="${m_id}" id="" readonly>
                         </li>
-                        <!-- <li>
+                        <li>
                             <label for="">비밀번호</label>
                             <input type="password" name="" placeholder="비밀번호" minlength="3" maxlength="20">
                         </li>
                         <li>
                             <label for="">비밀번호 확인</label>
                             <input type="password" name="" placeholder="비밀번호 확인" minlength="3" maxlength="20">
-                        </li> -->
+                        </li>
                         <li>
                             <label for="">이름</label>
-                            <p class="text">${ m_name }</p>
+                            <input type="text" value="${m_name}" name="" placeholder="이름" minlength="3" maxlength="20" id="">
                         </li>
                         <li>
                             <label for="">닉네임</label>
-                            <p class="text">${ m_nickname }</p>
+                            <input type="text" value="${m_name}" name="" placeholder="닉네임" minlength="3" maxlength="20" id="">
                         </li>
                         <li>
                             <label for="">이메일</label>
-                            <p class="text">${ m_email }</p>
+                            <input type="email" value="${m_email}" name="" placeholder="이메일" minlength="3" maxlength="20" id="">
                         </li>
                         <li>
                             <label for="">휴대폰 번호</label>
-                            <p class="text">${ m_phone }</p>
+                            <input type="tel" value="${m_phone}" name="" placeholder="휴대폰 번호 입력" minlength="3" maxlength="20" id="">
                         </li>
 
                         <li>
@@ -109,7 +109,8 @@
                     </ul>
 
                     <div class="btnBox">
-                        <button onclick="location.href='${ path }/mypage/pwdCheck';" type="button" class="btn">수정하기</button>
+                        <button type="submit" class="btn">수정하기</button>
+                        <button type="" class="btn redBtn">탈퇴하기</button>
                     </div>
 
                     

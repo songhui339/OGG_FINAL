@@ -66,50 +66,16 @@
 
         <!-- 정보 영역 -->
         <div class="infoBox">
-            <p class="titleText">회원 정보 확인</p>
+            <p class="titleText">회원 정보 수정</p>
             <div class="line"></div>
             <form action="">
                 <div class="formBox">
-                    <ul class="form-list">
-                        <li>
-                            <label for="">아이디</label>
-                            <p class="text">${ m_id }</p>
-                        </li>
-                        <!-- <li>
-                            <label for="">비밀번호</label>
-                            <input type="password" name="" placeholder="비밀번호" minlength="3" maxlength="20">
-                        </li>
-                        <li>
-                            <label for="">비밀번호 확인</label>
-                            <input type="password" name="" placeholder="비밀번호 확인" minlength="3" maxlength="20">
-                        </li> -->
-                        <li>
-                            <label for="">이름</label>
-                            <p class="text">${ m_name }</p>
-                        </li>
-                        <li>
-                            <label for="">닉네임</label>
-                            <p class="text">${ m_nickname }</p>
-                        </li>
-                        <li>
-                            <label for="">이메일</label>
-                            <p class="text">${ m_email }</p>
-                        </li>
-                        <li>
-                            <label for="">휴대폰 번호</label>
-                            <p class="text">${ m_phone }</p>
-                        </li>
-
-                        <li>
-                            <span class="subject">이메일 수신</span>
-                            <input type="checkbox" name="" id="">
-                            <span class="subject">SMS 수신</span>
-                            <input type="checkbox" name="" id="">
-                        </li>
-                    </ul>
+                    <p>본인 확인을 위해 비밀번호를 입력 해주세요.</p>
+                    <input type="password" name="" placeholder="비밀번호" minlength="3" maxlength="20">
+                    
 
                     <div class="btnBox">
-                        <button onclick="location.href='${ path }/mypage/pwdCheck';" type="button" class="btn">수정하기</button>
+                        <button onclick="location.href='${ path }/mypage/updateMember';" type="button" class="btn">비밀번화 확인</button>
                     </div>
 
                     
