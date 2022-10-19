@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.ibatis.io.ResolverUtil.IsA;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -42,43 +43,23 @@ public class ReviewLikesController {
 			@ModelAttribute ReviewLikes reviewLikes,
 			@ModelAttribute Film film)  {
 		
-		int mNo = 0;
 		int fcode = 0;
 		int filmSave = 0;
 		int insertStar = 0;
 		Film filmCheck = null;
 		Map<String, ReviewLikes> map = new HashMap<>(); 
 		
-		mNo = member.getM_no();
-		reviewLikes.setMNo(mNo);
+		reviewLikes.setMNo(member.getM_no());
 		fcode = Integer.parseInt(reviewLikes.getFCode());
 		filmCheck = service.filmcheck(fcode);
 		
 		if(filmCheck == null) {
 			filmSave = service.filmInsert(film);
-			
-			if(filmSave > 0) {
-				System.out.println("필름 인서트 성공");
-				insertStar = service.insertStar(reviewLikes);
-				
-				if(insertStar > 0) {
-					map.put("star", service.getStar(reviewLikes));
-					System.out.println("별점 성공");
-				} else {
-					System.out.println("별점 실패");
-				}
-			} else {
-				System.out.println("필름 인서트 실패");
-			}
+			insertStar = service.insertStar(reviewLikes);
+			map.put("star", service.getStar(reviewLikes));
 		}else {
 			insertStar = service.insertStar(reviewLikes);
-			if(insertStar > 0) {
-				map.put("star", service.getStar(reviewLikes));
-				System.out.println(map);
-				System.out.println("별점 성공");
-			} else {
-				System.out.println("별점 실패");
-			}
+			map.put("star", service.getStar(reviewLikes));
 		}
 		return map;
 	}
@@ -90,15 +71,13 @@ public class ReviewLikesController {
 			@RequestParam("ftype") String ftype,
 			@ModelAttribute ReviewLikes reviewLikes)  {
 		
-		int mNo = 0;
 		int fcode = 0;
 		int filmSave = 0;
 		int insertStar = 0;
 		Film filmCheck = null;
 		Map<String, ReviewLikes> map = new HashMap<>(); 
 		
-		mNo = member.getM_no();
-		reviewLikes.setMNo(mNo);
+		reviewLikes.setMNo(member.getM_no());
 		fcode = Integer.parseInt(reviewLikes.getFCode());
 		filmCheck = service.filmcheck(fcode);
 		map.put("star", service.getStar(reviewLikes));
@@ -106,26 +85,86 @@ public class ReviewLikesController {
 		return map;
 	}
 	
-//	@PostMapping("/insert_likes")
-//	@ResponseBody
-//	public Map<String, ReviewLikes> insertLikes(
-//			@AuthenticationPrincipal Member member,
-//			@RequestParam("ftype") String ftype,
-//			@ModelAttribute ReviewLikes reviewLikes)  {
-//		
-//		int mNo = 0;
-//		int fcode = 0;
-//		Map<String, ReviewLikes> map = new HashMap<>(); 
-//		
-//		mNo = member.getM_no();
-//		reviewLikes.setMNo(mNo);
-//		fcode = Integer.parseInt(reviewLikes.getFCode());
-//		System.out.println(reviewLikes);
-//		
-//		map.put("star", service.getStar(reviewLikes));
-//		System.out.println(map);
-//		
-//		return map;
-//	}
+	@PostMapping("/get_likes")
+	@ResponseBody
+	public Map<String, ReviewLikes> getLikes(
+			@AuthenticationPrincipal Member member,
+			@RequestParam("ftype") String ftype,
+			@ModelAttribute ReviewLikes reviewLikes)  {
+
+		Map<String, ReviewLikes> map = new HashMap<>(); 
+		
+		reviewLikes.setMNo(member.getM_no());
+		map.put("likes", service.getLikes(reviewLikes));
+		
+		System.out.println("조회" + map);
+		
+		return map;
+	}
+	
+	@PostMapping("/insert_likes")
+	@ResponseBody
+	public Map<String, ReviewLikes> insertLikes(
+			@AuthenticationPrincipal Member member,
+			@RequestParam("ftype") String ftype,
+			@ModelAttribute ReviewLikes reviewLikes,
+			@ModelAttribute Film film)  {
+		
+		int fcode = 0;
+		int insertFilm = 0;
+		int insertLikes = 0;
+		int updateTotalLikes = 0;
+		Film filmCheck = null;
+		Map<String, ReviewLikes> map = new HashMap<>(); 
+		Review review = new Review();
+
+		reviewLikes.setMNo(member.getM_no());
+		fcode = Integer.parseInt(reviewLikes.getFCode());
+		filmCheck = service.filmcheck(fcode);
+		
+		if(filmCheck == null) {
+			insertFilm = service.filmInsert(film);
+			insertLikes = service.insertLikes(reviewLikes);
+			review = service.getRTotalLikes(reviewLikes);
+			reviewLikes.setNum(review.getRvLikes()+1);
+			updateTotalLikes = service.updateTotalLikes(reviewLikes);
+			map.put("likes", service.getLikes(reviewLikes));
+		}else {
+			insertLikes = service.insertLikes(reviewLikes);
+			review = service.getRTotalLikes(reviewLikes);
+			reviewLikes.setNum(review.getRvLikes()+1);
+			updateTotalLikes = service.updateTotalLikes(reviewLikes);
+			map.put("likes", service.getLikes(reviewLikes));
+		}
+		
+		System.out.println("좋아요" + map);
+		
+		return map;
+	}
+	
+	
+	@PostMapping("/delete_likes")
+	@ResponseBody
+	public Map<String, ReviewLikes> deleteLikes(
+			@AuthenticationPrincipal Member member,
+			@RequestParam("ftype") String ftype,
+			@ModelAttribute ReviewLikes reviewLikes)  {
+		
+		int deleteLikes = 0;
+		int updateTotalLikes = 0;
+		Map<String, ReviewLikes> map = new HashMap<>(); 
+		Review review = new Review();
+
+		reviewLikes.setMNo(member.getM_no());
+		
+		deleteLikes = service.deleteLikes(reviewLikes);
+		review = service.getRTotalLikes(reviewLikes);
+		reviewLikes.setNum(review.getRvLikes()-1);
+		updateTotalLikes = service.updateTotalLikes(reviewLikes);
+		map.put("likes", service.getLikes(reviewLikes));	
+		System.out.println("삭제" + map);
+		
+		return map;
+	}
 	
 }

@@ -26,7 +26,7 @@
             <!-- 리뷰 내용 -->
 			<div id="div_review">
 				<p id="board-text1">${ review.rvNickname }</p>
-				<input id="rvNo" type="hidden" value="${ review.rvNo}">
+				<input id="rvNo" type="hidden" value="${ review.rvNo }">
 				<hr>
 				<p id="board-text3">
 					<br>
@@ -36,20 +36,21 @@
 				<hr>
 			    <div class="row" id="detail-text">
 			        <div class="col-sm-1">
-			            <img src="${path}/images/review/heart2.png" style="margin-left: 10px;" height="30px;">
-			            ${ review.rvLikes }
+			            <img src="${path}/images/review/heart2.png" id="reviewLikes" style="margin-left: 10px;" height="30px;" onclick="ReviewLikes(event)">
+			            <img src="${path}/images/review/heart3.png" id="reviewDisLikes" style="margin-left: 10px; display: none;" height="30px;" onclick="ReviewDislikes(event)">
+			            <span id="rvLikes">${ review.rvLikes }</span>
 			        </div>
 			        <div class="col-sm-8">
 			            <img src="${path}/images/review/comment2.png"  height="30px;">
 			            ${ cmtCount }
 			        </div>
 			        <c:if test="${ loginMember.m_no == review.rvWriterNo }">
- 			        <div class="col-sm-3">
-			            <div class="btn-group" role="group" aria-label="Basic mixed styles example" style="padding-left: 55%;">
-			                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever=" 남기기">수정</button>
-			                <button class="btn btn-primary" type="button" id="deleteReview">삭제</button>
-			            </div>        
-			        </div> 
+						<div class="col-sm-3">
+							<div class="btn-group" role="group" aria-label="Basic mixed styles example" style="padding-left: 55%;">
+								<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever=" 남기기">수정</button>
+								<button class="btn btn-primary" type="button" id="deleteReview">삭제</button>
+							</div>        
+						</div> 
 			    	</c:if>
 			    </div>
 			</div>
@@ -138,7 +139,7 @@
 	var fcode = "${ fcode }";
 	var ftype = "${ ftype }";
 	var m_no = "${ m_no }";
-    var rvNo = document.getElementById('rvNo').value;
+    var rvNo1 = document.getElementById('rvNo').value;
 	var contextpath = "${ pageContext.request.contextPath }";
 
 	function showUpdateCmt(event) {
@@ -162,7 +163,7 @@
 				type : 'POST',
 				url : contextpath + '/review/cmt_update',
 				data : {
-					'rvNo' : rvNo,
+					'rvNo' : rvNo1,
 					'cmtNo' : $(event.target).parent().parent().parent().prev().find('#cmtNo').val(),
 					'cmtContent' : cmtContent, 
 					'fCode' : fcode,
@@ -188,7 +189,7 @@
 				type : 'POST',
 				url : contextpath + '/review/cmt_update',
 				data : {
-					'rvNo' : rvNo,
+					'rvNo' : rvNo1,
 					'cmtNo' : $(event.target).parent().parent().parent().parent().find('#cmtNo').val(),
 					'cmtContent' : $(event.target).parent().parent().find('#message-cmt-2').val(), 
 					'cmtStatus' : 'N', 
@@ -205,6 +206,88 @@
 			});
 		};
     }
+
+	$(document).ready(function() {
+		$.ajax({
+			async: true,
+			type : 'POST',
+			url : contextpath + '/review/get_likes',
+			data : {
+				'rvNo' : rvNo1,
+				'fCode' : fcode,
+				'ftype' : ftype
+			},
+			success : (data) => {
+				console.log(data);
+
+				if(data.likes.rvNo == 0 || data.likes.rvNo == null){
+					console.log('ㅎㅎㅎ');
+				}else{
+					$('#reviewLikes').hide();
+					$('#reviewDisLikes').show();
+				}
+
+			},
+			error: function (error) {
+				console.log('통신 오류');
+			}
+		});
+	});
+
+	function ReviewLikes(event) {
+		$.ajax({
+			async: true,
+			type : 'POST',
+			url : contextpath + '/review/insert_likes',
+			data : {
+				'rvNo' : rvNo1,
+				'lType' : 'REVIEW',
+				'fCode' : fcode,
+				'ftype' : ftype
+			},
+			success : (data) => {
+				let no = $(event.target).next().next().html();
+				no = Number(no) + 1;
+
+				$(event.target).hide();
+				$(event.target).next().show();
+				$(event.target).next().next().html(no);
+
+				console.log('like it');
+				console.log(no);
+			},
+			error : (error) => {
+				alert('로그인 후 가능합니다');
+			}
+		});
+	};
+
+	function ReviewDislikes(event) {
+		$.ajax({
+			async: true,
+			type : 'POST',
+			url : contextpath + '/review/delete_likes',
+			data : {
+				'rvNo' : rvNo1,
+				'lType' : 'REVIEW',
+				'fCode' : fcode,
+				'ftype' : ftype
+			},
+			success : (data) => {
+				let no = $(event.target).next().html();
+				no = Number(no) - 1;
+				
+				$(event.target).hide();
+				$(event.target).prev().show();
+				$(event.target).next().html(no);
+
+				console.log('unlike it');
+			},
+			error : (error) => {
+				alert('로그인 후 가능합니다');
+			}
+		});
+	}
 	</script>  
 
 	<!-- footer -->

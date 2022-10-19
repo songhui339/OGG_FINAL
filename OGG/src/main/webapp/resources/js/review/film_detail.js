@@ -251,7 +251,85 @@ $(document).ready(function() {
 			});
         }
     });
-    
+
+    //////////////
+    //게시글 좋아요//
+    //////////////
+    // $.ajax({
+    //     async: true,
+    //     type : 'POST',
+    //     url : contextpath + '/review/get_likes',
+    //     data : {
+    //         'rvNo' : rvNo,
+    //         'fCode' : fcode,
+    //         'ftype' : ftype
+    //     },
+    //     success : (data) => {
+
+    //         console.log(data);
+
+    //         if(data.likes.rvNo != 0){
+    //             $('#reviewLikes').hide();
+    //             $('#reviewDisLikes').show();
+    //         }
+    //     },
+    //     error: function (error) {
+    //         console.log('좋아요 하지 않음');
+    //     }
+    // });
+
+    // $('#reviewLikes').on("click", function() {
+	// 	$.ajax({
+	// 		async: true,
+	// 		type : 'POST',
+	// 		url : contextpath + '/review/insert_likes',
+	// 		data : {
+	// 			'rvNo' : rvNo,
+	// 			'lType' : 'REVIEW',
+	// 			'fCode' : fcode,
+	// 			'ftype' : ftype
+	// 		},
+	// 		success : (data) => {
+	// 			let no = document.getElementById('rvLikes').innerHTML;
+	// 			no = Number(no) + 1;
+
+	// 			$('#reviewLikes').hide();
+	// 			$('#reviewDisLikes').show();
+	// 			$('#rvLikes').html(no);
+	// 		},
+	// 		error : (error) => {
+	// 			alert('로그인 후 가능합니다');
+	// 		}
+	// 	});
+	// });
+
+    // $('#reviewDisLikes').on("click", function() {
+	// 	$.ajax({
+	// 		async: true,
+	// 		type : 'POST',
+	// 		url : contextpath + '/review/delete_likes',
+	// 		data : {
+	// 			'rvNo' : rvNo,
+	// 			'lType' : 'REVIEW',
+	// 			'fCode' : fcode,
+	// 			'ftype' : ftype
+	// 		},
+	// 		success : (data) => {
+	// 			let no = document.getElementById('rvLikes').innerHTML;
+	// 			no = Number(no) - 1;
+				
+	// 			$('#reviewDisLikes').hide();
+	// 			$('#reviewLikes').show();
+	// 			$('#rvLikes').html(no);
+
+	// 			console.log('unlike it');
+	// 		},
+	// 		error : (error) => {
+	// 			alert('로그인 후 가능합니다');
+	// 		}
+	// 	});
+	// });
+
     ////////////
     /////댓글////
     ////////////
@@ -302,5 +380,10 @@ $(document).ready(function() {
             });
         }
     });
+
+
+
+
+
 
 });

@@ -109,8 +109,9 @@
                                 <div class="row" id="detail-text" style="position: absolute; width: 98%; left: 15px; bottom: 10px;">
 		                        <hr>
                                     <div class="col">
-                                        <img src="${ path }/images/review/heart2.png" style="margin-left: 10px; height: 26px;">
-                                       	${ review.rvLikes }
+                                        <img src="${path}/images/review/heart2.png" id="reviewLikes" style="margin-left: 10px;" height="30px;">
+                                        <img src="${path}/images/review/heart3.png" id="reviewDisLikes" style="margin-left: 10px; display: none;" height="30px;">
+                                        <span id="rvLikes">${ review.rvLikes }</span>   
                                     </div>
                                     <div class="col">
                                         <img src="${ path }/images/review/comment2.png" style="height: 26px;">

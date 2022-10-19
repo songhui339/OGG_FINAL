@@ -45,8 +45,9 @@
 						<hr>
 					    <div class="row" id="detail-text">
 					        <div class="col-sm-1">
-					            <img src="${ path }/images/review/heart2.png" style="margin-left: 10px;" height="30px;">
-					            ${ review.rvLikes }
+								<img src="${path}/images/review/heart2.png" id="reviewLikes" style="margin-left: 10px;" height="30px;">
+								<img src="${path}/images/review/heart3.png" id="reviewDisLikes" style="margin-left: 10px; display: none;" height="30px;">
+								<span id="rvLikes">${ review.rvLikes }</span>
 					        </div>
 					        <div class="col-sm-8">
 					            <img src="${ path }/images/review/comment2.png"  height="30px;">
@@ -100,8 +101,88 @@
 		var fcode = "${fcode}";
 		var ftype = "${ftype}";
 		var contextpath = "${ pageContext.request.contextPath }";
-
 	</script>	
+	<script>
+	$(document).ready(function() {
+		$.ajax({
+			async: true,
+			type : 'POST',
+			url : contextpath + '/review/get_likes',
+			data : {
+				'rvNo' : rvNo,
+				'fCode' : fcode,
+				'ftype' : ftype
+			},
+			success : (data) => {
+
+				console.log(data);
+
+				if(data.likes.rvNo != 0){
+					$('#reviewLikes').hide();
+					$('#reviewDisLikes').show();
+				}
+			},
+			error: function (error) {
+				console.log('좋아요 한적 x');
+			}
+		});
+	});
+
+	function ReviewLikes(event) {
+		$.ajax({
+			async: true,
+			type : 'POST',
+			url : contextpath + '/review/insert_likes',
+			data : {
+				'rvNo' : rvNo,
+				'lType' : 'REVIEW',
+				'fCode' : fcode,
+				'ftype' : ftype
+			},
+			success : (data) => {
+				let no = $(event.target).next().next().html();
+				no = Number(no) + 1;
+
+				$(event.target).hide();
+				$(event.target).next().show();
+				$(event.target).next().next().html(no);
+
+				console.log('like it');
+				console.log(no);
+			},
+			error : (error) => {
+				alert('로그인 후 가능합니다');
+			}
+		});
+	};
+
+	function ReviewDislikes(event) {
+		$.ajax({
+			async: true,
+			type : 'POST',
+			url : contextpath + '/review/delete_likes',
+			data : {
+				'rvNo' : rvNo,
+				'lType' : 'REVIEW',
+				'fCode' : fcode,
+				'ftype' : ftype
+			},
+			success : (data) => {
+				let no = $(event.target).next().html();
+				no = Number(no) - 1;
+				
+				$(event.target).hide();
+				$(event.target).prev().show();
+				$(event.target).next().html(no);
+
+				console.log('unlike it');
+			},
+			error : (error) => {
+				alert('로그인 후 가능합니다');
+			}
+		});
+	};
+	</script>
 
     <!-- footer -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

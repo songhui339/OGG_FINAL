@@ -45,7 +45,7 @@
 		ORDER BY RV_LIKES DESC
 	</select>
 
-	<!-- 리뷰 조회 (영화 별점) -->
+	<!-- 리뷰 조회 (영화 별, 좋아요 많은 순) -->
 	<select id="selectReviewByFilm" parameterType="_int" resultMap="reviewResultMap">
 		<include refid="reviewSql"></include>
 		WHERE F_CODE = #{fcode} AND F_TYPE = 'movie' AND RV_STATUS = 'Y'

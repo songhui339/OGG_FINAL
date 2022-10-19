@@ -42,23 +42,17 @@ public class ReviewCmtController {
 			@RequestParam("ftype") String ftype,
 			@ModelAttribute ReviewCmt cmt) {
 		
-		int mNo = 0;
-		int rvNo = 0; 
-		int cmtNo = 0; 
 		int cmtWrite = 0;
 		int reviewCountUpdate = 0;
 		Map<String, ReviewCmt> map = new HashMap<>(); 
 		
-		mNo = member.getM_no();
-		cmt.setCmtWriterNo(mNo);
-		rvNo = cmt.getRvNo();
+		cmt.setCmtWriterNo(member.getM_no());
 		cmtWrite = service.cmtWrite(cmt);
-		cmtNo = cmt.getCmtNo();
 
 		if(cmtWrite > 0) {
-			reviewCountUpdate = service.updateCmtCount(rvNo);
+			reviewCountUpdate = service.updateCmtCount(cmt.getRvNo());
 			if(reviewCountUpdate > 0) {
-				map.put("cmt", service.getCmtByCmtNo(cmtNo));
+				map.put("cmt", service.getCmtByCmtNo(cmt.getCmtNo()));
 				System.out.println("댓글 등록 성공");
 			}
 		}else {
@@ -86,17 +80,14 @@ public class ReviewCmtController {
 		if(cmtUpdate > 0) {
 			reviewCountUpdate = service.updateCmtCount(rvNo);
 			if(reviewCountUpdate > 0) {
-				model.addObject("msg", "댓글이 정상적으로 수정되었습니다.");
-				model.addObject("location", "/");
+				System.out.println("댓글 수정 성공");
 			}
 		}else {
-				model.addObject("msg", "댓글 수정에 실패하였습니다.");
-				model.addObject("location", "/");
+				System.out.println("댓글 수정 실패");
 		}
 		
 		model.setViewName("common/msg");
 		
 		return model;
 	}
-	
 }

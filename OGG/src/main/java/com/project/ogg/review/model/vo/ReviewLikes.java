@@ -1,5 +1,7 @@
 package com.project.ogg.review.model.vo;
 
+import java.util.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,4 +19,9 @@ public class ReviewLikes {
 	private String fType;
 	private int fLikes;
 	private int fStar;
+	private Date lDate;
+	private Date lUpdate;
+	private String lType;
+	private int num;
+	
 }

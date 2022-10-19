@@ -153,12 +153,12 @@
 		SET 
 			RV_UPDATE = SYSDATE,
 			<choose>
-		    <when test="rvContent != null">
-			  	RV_CONTENT = #{rvContent}
-		    </when>
-		    <when test="rvStatus != null">
-				RV_STATUS = #{rvStatus}
-		    </when>
+			    <when test="rvContent != null">
+				  	RV_CONTENT = #{rvContent}
+			    </when>
+			    <when test="rvStatus != null">
+					RV_STATUS = #{rvStatus}
+			    </when>
 		    </choose>	
 		WHERE F_CODE = #{fCode} AND F_TYPE = 'movie' AND RV_NO = #{rvNo}
 	</update>	
