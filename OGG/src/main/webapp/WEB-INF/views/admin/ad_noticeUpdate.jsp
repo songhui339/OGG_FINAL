@@ -19,7 +19,7 @@
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="${path }/css/admin/noticeUpdate.css">
         <script type="text/javascript" src="${path}/js/jquery-3.6.0.min.js"></script>
-        <script type="text/javascript" src="${path}/resources/smarteditor2/js/HuskyEZCreator.js" charset="utf-8"></script>
+        <script type="text/javascript" src="${path}/smarteditor2/js/HuskyEZCreator.js" charset="utf-8"></script>
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -157,20 +157,20 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="${path}/js/admin/script.js"></script>
         <script type="text/javascript">
-        	var oEditors = [];
-        	$(function(){
-        		nhn.husky.EZCreator.createInIFrame({
-        		oAppRef: oEditors,
-        		elPlaceHolder: "n_content",
-        		sSkinURI: "${path}/resources/smarteditor2/SmartEditor2Skin.html",
-        		fCreator: "createSEditor2"
-        		});
-        		
-        		$("#subBtn").on("click", function() {
-        			oEditors.getById["n_content"].exec("UPDATE_CONTENTS_FIELD",[]);
-        		});
-        		
-        		});
+        var oEditors = [];
+    	$(function(){
+    		nhn.husky.EZCreator.createInIFrame({
+    		oAppRef: oEditors,
+    		elPlaceHolder: "n_content",
+    		sSkinURI: "${path}/smarteditor2/SmartEditor2Skin.html",
+    		fCreator: "createSEditor2"
+    		});
+    		
+    		$("#subBtn").on("click", function() {
+    			oEditors.getById["n_content"].exec("UPDATE_CONTENTS_FIELD",[]);
+    		});
+    		
+    		});
         </script>
     </body>
 </html>
