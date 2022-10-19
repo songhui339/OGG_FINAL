@@ -51,7 +51,7 @@
 				id="sidenavAccordion">
 				<div class="sb-sidenav-menu">
 					<div class="nav">
-						<a class="nav-link" href="${path}">
+						<a class="nav-link" href="/">
                                 <div class="sb-nav-link-icon"><i class="fa-sharp fa-solid fa-house"></i></div>
                                 홈으로
                             </a>

@@ -165,6 +165,12 @@ public class AdminServiceImpl implements AdminService {
 		return mapper.getDecUserCount();
 	}
 
+	@Override
+	@Transactional
+	public int deleteOtt(int ott_no) {
+		return mapper.deleteOtt(ott_no);
+	}
+
 	
 
 }
