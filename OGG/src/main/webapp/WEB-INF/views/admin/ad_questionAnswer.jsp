@@ -139,7 +139,7 @@
                                         <button type="button" id="btnDelete">삭제</button>
                                          -->
                                         <input type="submit" id="btnsubmit" value="답변완료">
-                                       	<input type = "button" onclick="location.href='${path}/admin/question/view?no=${question.q_no}'" id="goBack">목록으로</button>
+                                       	<button onclick="location.href='${path}/admin/question?page=1'" id="goBack">목록으로</button>
                                         </div>
                                         </form>
                                         </c:if>
