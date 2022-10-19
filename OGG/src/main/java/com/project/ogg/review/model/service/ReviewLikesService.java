@@ -13,7 +13,7 @@ public interface ReviewLikesService {
 	int filmInsert(Film film);
 
 	int insertStar(ReviewLikes reviewLikes);
-
+	
 	ReviewLikes getStar(ReviewLikes reviewLikes);
 
 	int insertLikes(ReviewLikes reviewLikes);
@@ -25,7 +25,11 @@ public interface ReviewLikesService {
 	Review getRTotalLikes(ReviewLikes reviewLikes);
 
 	ReviewCmt getCTotalLikes(ReviewLikes reviewLikes);
+
+	ReviewLikes setTotalLikes(ReviewLikes reviewLikes, String type);
 	
-	int updateTotalLikes(ReviewLikes reviewLikes);
+	int updateTotalLikes(ReviewLikes reviewLikes, String type);
+
+	ReviewLikes setLikes(ReviewLikes reviewLikes, String type);
 
 }

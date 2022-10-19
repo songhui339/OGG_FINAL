@@ -154,13 +154,26 @@
 		    </choose>
 	</select> -->	
 	
-	<!-- 리뷰 좋아요 조회 -->
+	<!-- 좋아요 조회 -->
 	<select id="selectLikes" parameterType="ReviewLikes" resultMap="reviewLikesResultMap">
 		<include refid="reviewLikesSql" />
 		WHERE 
-			M_NO = #{mNo} 
-					AND RV_NO = #{rvNo} 
-					AND L_TYPE = 'REVIEW'	
+			M_NO = #{mNo} AND
+			<choose>
+			    <when test="lType == 'REVIEW'">
+					RV_NO = #{rvNo} AND 
+					L_TYPE = 'REVIEW'	
+				</when>
+			    <when test="lType == 'CMT'">
+					CMT_NO = #{cmtNo} AND 
+					L_TYPE = 'CMT'	
+			    </when>
+			    <when test="lType == 'FILM'">
+					F_CODE = #{fCode} AND 
+					F_LIKES = 1 AND 
+					L_TYPE = 'FILM'	
+			    </when>
+		    </choose>
 	</select>	
 	
 	<!-- 좋아요 인서트 -->
@@ -175,8 +188,10 @@
 					    <when test="lType == 'CMT'">
 				            CMT_NO,
 					    </when>
-					    <when test="fCode != null">
+					    <when test="lType == 'FILM'">
 				            F_CODE,
+				            F_TYPE,
+				            F_LIKES,
 					    </when>
 				    </choose>
 		            L_TYPE
@@ -193,9 +208,10 @@
 				            #{cmtNo},
 							'CMT'	
 					    </when>
-					    <when test="fCode != null">
-				            #{fcode},
+					    <when test="lType == 'FILM'">
+				            #{fCode},
 				            DEFAULT,
+				            1,
 							'FILM'	
 					    </when>
 				    </choose>
@@ -217,8 +233,9 @@
 					CMT_NO = #{cmtNo} AND 
 					L_TYPE = 'CMT'	
 			    </when>
-			    <when test="fCode != null">
+			    <when test="lType == 'FILM'">
 					F_CODE = #{fCode} AND 
+					F_LIKES = 1 AND
 					L_TYPE = 'FILM'	
 			    </when>
 		    </choose>

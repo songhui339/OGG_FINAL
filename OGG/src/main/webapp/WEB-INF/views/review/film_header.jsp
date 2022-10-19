@@ -34,15 +34,19 @@
 	                </div>
 	                <div class="col-3 col-sm-2">
 	                    <c:if test="${ loginMember != null }">
-		                    <a href="">
-		                		<img src="${path}/images/review/plus.png" height="30px;">
-		                        보고싶어요
-		                    </a>
+								<p id="likeFilm" onclick="likeFilm(event)"> 
+									<img src="${path}/images/review/plus.png" height="30px;" id="filmBefore">
+									&nbsp;보고싶어요
+								</p>
+								<p id="dislikeFilm" style="display: none;" onclick="dislikeFilm(event)"> 
+									<img src="${path}/images/review/checked.png" style ="height:30px;" id="filmAfter">
+									&nbsp;추가됨
+								</p>
 						</c:if>
 	                    <c:if test="${ loginMember == null }">
 		                    <a href="" onclick="alert('로그인 후 이용 가능합니다')">
 		                		<img src="${path}/images/review/plus.png" height="30px;">
-		                        보고싶어요
+		                        &nbsp;보고싶어요
 		                    </a>
 						</c:if>
 	                </div>
@@ -92,6 +96,30 @@
 				console.log('do nothing');
 			}
 		});
+
+		$.ajax({
+			async: true,
+			type : 'POST',
+			url : contextpath + '/review/get_filmlikes',
+			data : {
+				'lType' : 'FILM',
+				'fCode' : fcode,
+				'ftype' : ftype
+			},
+			success : (data) => {
+				console.log(data);
+				if(data.likeFilm.fcode == null || data.likeFilm.flikes == 0){
+					console.log('가가가가가가');
+				}else{
+					$('#likeFilm').hide();
+					$('#dislikeFilm').show();
+					console.log('마마마마마마');
+				}
+			},
+			error: function (error) {
+				console.log('통신 오류');
+			}
+		});
 	});
 
 	function starFilm(event) {
@@ -116,4 +144,49 @@
 			}
 		});
 	}
+
+	function likeFilm(event) {
+		
+		$.ajax({
+			async: true,
+			type : 'POST',
+			url : contextpath + '/review/like_film',
+			data : {
+				'fTitle' : title, 
+				'lType' : 'FILM',
+				'fCode' : fcode,
+				'ftype' : ftype
+			},
+			success : (data) => {
+				$(event.target).hide();
+				$(event.target).next().show();
+			},
+			error : (error) => {
+				alert('서버와 연결에 실패하였습니다');
+			}
+		});
+	}
+
+	function dislikeFilm(event) {
+		
+		$.ajax({
+			async: true,
+			type : 'POST',
+			url : contextpath + '/review/dislike_film',
+			data : {
+				'fTitle' : title, 
+				'lType' : 'FILM',
+				'fCode' : fcode,
+				'ftype' : ftype
+			},
+			success : (data) => {
+				$(event.target).hide();
+				$(event.target).prev().show();
+			},
+			error : (error) => {
+				alert('서버와 연결에 실패하였습니다');
+			}
+		});
+	}
+	
 	</script>

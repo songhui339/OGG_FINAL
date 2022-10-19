@@ -52,13 +52,67 @@ public class ReviewLikesServiceImpl implements ReviewLikesService {
 	@Override
 	@Transactional
 	public ReviewLikes getLikes(ReviewLikes reviewLikes) {
+		
 		return mapper.selectLikes(reviewLikes);
 	}
 
 	@Override
+	public ReviewLikes setLikes(ReviewLikes reviewLikes, String type) {
+		int insertLikes = 0;
+		int deleteLikes = 0;
+		Review review = new Review();
+		ReviewCmt cmt = new ReviewCmt();
+		
+		if (type.equals("INSERT")) {
+			insertLikes = insertLikes(reviewLikes);
+		}else if (type.equals("DELETE")) {
+			deleteLikes = deleteLikes(reviewLikes);
+		}
+		
+		return reviewLikes;
+	}
+	
+	@Override
+	public ReviewLikes setTotalLikes(ReviewLikes reviewLikes, String type) {
+		int insertLikes = 0;
+		int deleteLikes = 0;
+		Review review = new Review();
+		ReviewCmt cmt = new ReviewCmt();
+		
+		if (type.equals("INSERT")) {
+			insertLikes = insertLikes(reviewLikes);
+			
+			if(insertLikes > 0 && reviewLikes.getLType().equals("REVIEW")) {
+				review = this.getRTotalLikes(reviewLikes);
+				reviewLikes.setNum(review.getRvLikes()+1);
+			}else if(insertLikes > 0 && reviewLikes.getLType().equals("CMT")) {
+				cmt = this.getCTotalLikes(reviewLikes);
+				reviewLikes.setNum(cmt.getCmtLikes()+1);
+			}
+		}else if(type.equals("DELETE")) {
+			deleteLikes = deleteLikes(reviewLikes);
+			
+			if(deleteLikes > 0 && reviewLikes.getLType().equals("REVIEW") ) {
+				review = this.getRTotalLikes(reviewLikes);
+				reviewLikes.setNum(review.getRvLikes()-1);
+			}else if(deleteLikes > 0 && reviewLikes.getLType().equals("CMT")) {
+				cmt = this.getCTotalLikes(reviewLikes);
+				reviewLikes.setNum(cmt.getCmtLikes()-1);
+			}
+		}
+		
+		return reviewLikes;
+	}
+
+	@Override
 	@Transactional
-	public int updateTotalLikes(ReviewLikes reviewLikes) {
-		return mapper.updateTotalLikes(reviewLikes);
+	public int updateTotalLikes(ReviewLikes reviewLikes, String type) {
+		int result = 0;
+		
+		this.setTotalLikes(reviewLikes, type);
+		result = mapper.updateTotalLikes(reviewLikes);
+		
+		return result;
 	}
 
 	@Override
@@ -70,5 +124,6 @@ public class ReviewLikesServiceImpl implements ReviewLikesService {
 	public ReviewCmt getCTotalLikes(ReviewLikes reviewLikes) {
 		return mapper.selectCTotalLikes(reviewLikes);
 	}
+
 
 }

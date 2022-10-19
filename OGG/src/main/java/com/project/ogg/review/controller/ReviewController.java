@@ -71,24 +71,10 @@ public class ReviewController {
 			insertFilm = service.filmInsert(film);
 			
 			if(insertFilm > 0) {
-				System.out.println("필름 인서트 성공");
 				reviewWrite = service.reviewWrite(review);
-				
-				if(reviewWrite > 0) {
-					System.out.println("리뷰 성공");
-				} else {
-					System.out.println("리뷰 실패");
-				}
-			} else {
-				System.out.println("필름 인서트 실패");
-			}
+			} 
 		} else {
 			reviewWrite = service.reviewWrite(review);
-			if(reviewWrite > 0) {
-				System.out.println("리뷰 성공");
-			} else {
-				System.out.println("리뷰 실패");
-			}
 		}
 
 		model.addObject("loginMember", member);
