@@ -16,7 +16,6 @@
    	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
     <!-- 내용 전체 컨테이너 -->
-    <br><br><br><br><br>
     <div class="container" style="margin-bottom: 100px; margin-top: 40px;">
 
         <div class="row">
@@ -25,7 +24,7 @@
             </div>
             <div class="col">
             </div>
-            <div class="col">
+            <div class="col" style="z-index:9999;">
                 <input type="text" id="searchInput" style="margin-left: 35%; margin-top:5px; 
                         height: 34px; width:140px; border: 1px solid lightgray">
                 <button class="btn btn-primary" type="button" style="display: inline; height: 35px; margin-bottom: 5px;"
@@ -120,7 +119,7 @@
 		$("#searchBtn").on("click", () => {
 			var keyword = $("#searchInput").val();
 			
-		    location.href="${path}/review/film_search?keyword="+keyword;
+		    location.href="${path}/film/search?keyword=" + keyword;
 		});
 		
 		let searchkeyword = "[[${searchkeyword}]]";

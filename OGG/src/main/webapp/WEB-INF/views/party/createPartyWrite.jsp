@@ -5,100 +5,133 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <c:set var="path" value="${ pageContext.request.contextPath }"/>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>파티 만들기</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="oog_party3.css">
-    <link rel="stylesheet" href="../Header&Footer/ogg_common.css" class="css">
-</head>
-<body>
-    <header>
-        <div class="width-container">
-            <div class="logoBox">
-                <a href="javascript:">
-                    <img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/small-butslogo.png" srcset="https://buts.co.kr/thema/Buts/colorset/Basic/img/2x/small-butslogo.png 2x" alt="loogo" title=""></a>
-            </div>
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
-            <div class="btnBox">
-                <a href="javascript:" class="loginBtn">로그인</a>
-            </div>
-        </div>
+<!-- iamport.payment.js -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 
-        <div class="menu-container">
-            <ul class="menuBox">
-                <li>
-                    <a href="javascript:">파티 만들기</a>
-                </li>
-                <li>
-                    <a href="javascript:">파티 찾기</a>
-                </li>
-                <li>
-                    <a href="javascript:">리뷰</a>
-                </li>
-                <li>
-                    <a href="javascript:">커뮤니티</a>
-                </li>
-                <li>
-                    <a href="javascript:">이벤트</a>
-                </li>
-            </ul>
-        </div>
-    </header>
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
-    <section class="enrollPage02">
+<link rel="stylesheet" href="${ path }/css/party/ogg_party_write.css">
+
+<div style="height: 100px;"></div>
+
+	<section class="enrollPage02">
         <div class="contentWrap">
             <div class="formBox">
-                <form name="fregister" id="fregister" method="POST" autocomplete="off" class="form" role="form">
+                <div class="serviceInfoBox">
+                    <p class="text">
+                        공유 서비스
+                        <img src="${ path }/images/party/${ ott.ott_thumb }.png" alt="logoImg" class="logoImg" id="logoImg">
+                        <span class="nameText">${ ott.plan_name }</span>
+                    </p>
+                </div>
+                <form name="fregister" id="fregister" method="POST" autocomplete="off" class="form" role="form" action="${ path }/party/createParty">
+                    <input type="hidden" name="ott_no" value="${ ott.ott_no }">
                     <h3><span class="c_purple">로그인 정보</span> 입력</h3>
                     <div class="form-round-box">
                         <ul class="form-list">
                             <li>
-                                <span class="subject">ㆍ 아이디</span>
-                                <input type="text" name="" value="" id="" required="" placeholder="아이디" minlength="3" maxlength="20">
-                                <span class="lightgrey inline-break">영문자, 숫자, _ 입력 가능, 최소 3글자 입력해주세요</span>
+                                <span class="subject">아이디</span>
+                                <input type="text" name="p_share_id" value="" id="" required="" placeholder="아이디" minlength="3" maxlength="20">
+                                <span class="lightgrey inline-break"></span>
                             </li>
                             <li>
-                                <span class="subject">ㆍ 비밀번호</span>
-                                <input type="password" name="" id="" required="" class="form-control input-sm" placeholder="비밀번호" minlength="3" maxlength="20">
+                                <span class="subject">비밀번호</span>
+                                <input type="password" name="p_share_pwd" id="" required="" placeholder="비밀번호" minlength="3" maxlength="20">
                             </li>
                             <li>
-                                <span class="subject">ㆍ 비밀번호 확인</span>
-                                <input type="password" name="" id="" required="" class="form-control input-sm" placeholder="비밀번호 확인" minlength="3" maxlength="20">
+                                <span class="subject">비밀번호 확인</span>
+                                <input type="password" name="" id="" required="" placeholder="비밀번호 확인" minlength="3" maxlength="20">
                             </li>
                             </ul>
+                            <p class="subInfoText">
+                                - ${ ott.plan_name }을 이용중인 이메일 아이디를 입력해 주세요.<br>
+                                - 파티원과 공유 가능한 안전한 비밀번호를 사용해 주세요.
+                            </p>
+                            <a href="#" class="linkText">${ ott.plan_name } 바로가기</a>
                     </div>
 
                     <h3><span class="c_purple">진행 상태</span> 입력</h3>
                     <div class="form-round-box">
                         <ul class="form-list">
-                            
+                            <li>
+                                <span class="subject">파티원 수</span>
+                                <select name="p_max_member" class="form-select" aria-label="Default select example" style="width: 300px;">
+                                    <option selected>본인 제외</option>
+                                    <option value="1">1명</option>
+                                    <option value="2">2명</option>
+                                    <option value="3">3명</option>
+                                    <option value="4">4명</option>
+                                </select>
+                            </li>
+                            <li>
+                                <span class="subject">파티 시작일</span>
+                                <input type="date" name="p_start_date" value="" id="" required="">
+                            </li>
+                            <li>
+                                <span class="subject">혜택 기간</span>
+                            </li>
+                            <li>
+                                <span class="subject">파티 종료일</span>
+                                <input type="date" name="p_end_date" value="" id="" required="">
+                            </li>
                         </ul>
                     </div>
 
 
                     <h3><span class="c_purple">파티 규칙</span> 확인</h3>
                     <div class="form-round-box">
-                        <ul class="form-list">
-                            
-                        </ul>
+                            <div class="ruleBox" style="margin-bottom: 20px;">
+                                <p class="titleText"><i class="bi bi-check-lg" style="color: #7e69fe;"></i> ${ plan.plan_name }의 로그인 정보를 정확하게 입력/관리하겠습니다.</p>
+                                <p class="ruleText">
+                                    - 아이디 : <br>
+                                    - 비밀번호 : <br>
+                                    잘못된 로그인 정보를 입력하는 경우 위약금이 발생할 수 있습니다.<br>
+                                    파티원 변동 시 동시 접속 인원 관리를 위해 비밀번호를 변경해야 합니다.
+                                </p>
+                            </div>
+
+                            <div class="ruleBox">
+                                <p class="titleText"><i class="bi bi-check-lg" style="color: #7e69fe;"></i> 파티 기간은 2022.08.25 ~ 2023.02.24 약 6개월입니다.</p>
+                                <p class="ruleText">
+                                    파티 기간은 파티 시작 이후 변경할 수 없습니다. <br>
+                                    파티 기간에 따라 추가 적립금 및 위약금 금액이 달라집니다.
+                                </p>
+                            </div>
                     </div>
 
                     <h3><span class="c_purple">결제/정산 정보</span> 확인</h3>
                     <div class="form-round-box">
                         <ul class="form-list">
-                            
+                            <li>
+                                <span class="subject">결제 카드 번호</span>
+                                <input type="text" name="" value="" id="" required="" placeholder="카드 번호 (16자리)" minlength="16" maxlength="24">
+                            </li>
+                            <li>
+                                <span class="subject">OGG 정산일</span>
+                                <select class="form-select" aria-label="Default select example" style="width: 300px;">
+                                    <option selected>선택</option>
+                                    <option value="1">매달 1일</option>
+                                    <option value="5">매달 5일</option>
+                                    <option value="10">매달 10일</option>
+                                    <option value="15">매달 15일</option>
+                                    <option value="20">매달 20일</option>
+                                    <option value="25">매달 25일</option>
+                                    <option value="lastday">매달 말일</option>
+                                </select>
+                            </li>
+                            <li>
+                                <span class="subject"><i class="bi bi-check-lg" style="color: #7e69fe;"></i> OGG 정산일 <i class="bi bi-question-circle-fill" style="color: gray !important;"></i></span>
+                            </li>
                         </ul>
                     </div>
 
-                    <div class="buttonBox">
-                        <button type="submit" class="button" onclick="location('')">취소</button>
+                    <div class="buttonBox">                    
                         <button type="submit" class="button button-purple">파티 만들기</button>
+                    	<button type="button" class="button button-purple" id="payTest" onclick="requestPay()">결제 테스트</button>
+                        <button type="button" class="button" onclick="location.href='${path}/party/prevPartyPage'">취소</button>
                     </div>
 
                 </form>
@@ -107,46 +140,45 @@
         </div>
     </section>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 
-    <footer>
-        <div class="width-container">
-            <div class="contentWrap">
-                <div class="logoBox">
-                    <img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/small-butslogo-glay.png" alt="lgooIcon">
-                </div>
-                <a href="javascript:" target="_blank" class="v-bar">회사 소개</a>
-                <a href="javascript:" target="_blank" class="v-bar">제휴문의</a>
-                <a href="javascript:" target="_blank" class="v-bar">제휴문의</a>
-                <a href="javascript:" target="_blank" class="v-bar">1:1문의하기</a>
-                <a href="javascript:" target="_blank" class="v-bar"><strong>개인정보처리방침</strong></a>
-                <a href="javascript:" target="_blank" class="v-bar">이용약관</a>
-                <a href="javascript:" target="_blank" class="v-bar">FAQ</a>
-                <br><br>
-                <span class="v-bar">상호 : 벗츠</span>
-                <span>대표 : 김시진</span>
-                <br>
-                <span>주소 : 경기도 성남시 분당구 서현동 245-4 엘지분당에클라트2차 1221호</span>
-				<br>
-				<span class="v-bar">사업자등록번호 : 375-36-00640</span>
-				<span class="v-bar"><a href="http://www.ftc.go.kr/info/bizinfo/communicationList.jsp" target="_blank"> <strong>사업자정보확인</strong></a></span>
-				<span>통신판매번호 : 제 2019-의정부송산-040호</span>
-				<br>
-				<span class="v-bar">개인정보보호책임 : 김시진</span> <span>호스팅 사업자 : Amazon Web Service(AWS)</span>
-				<br>
-				<span class="v-bar">이메일 : <a href="mailto:manager@buts.co.kr">manager@buts.co.kr</a></span> <span>대표전화 : 070-4354-1015</span>
-				<br>
-				<br>
-				<span>Copyright © 2022 Buts Inc. All rights reserved.</span>
-            </div>
-        </div>
-    </footer>
-    <footer>
-        <div class="width-container">
-        벗츠는 통신판매중개자이며, 통신판매의 당사자가 아닙니다.파티정보, 구매에 관한 의무와 책임은 판매자에게 있습니다.<br>
-        벗츠는 소비자 보호와 안전거래를 위해고객센터(manager@buts.co.kr)를 운영하고 있으며,분쟁이 발생 된 경우 별도의 분쟁처리절차에 의거분쟁해결 및 청약철회 등이 진행 됩니다.
-        </div>
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+<script>
+	IMP.init('imp34485120'); //자신의 "가맹점 식별코드"를 사용
+
+	function requestPay() {		
+	  	IMP.request_pay({
+	  		pg: 'kakaopay',
+	  		pay_method: 'card',
+	  		merchant_uid: "order_monthly_"+new Date().getTime(),
+	  		customer_uid: '124222122112333333312', // 카드(빌링키)와 1:1로 대응하는 값, 유저 ID값으로 설정 예정
+	  		name: 'test012',
+	  		amount: 4000, 
+	  		buyer_email: 'gildong@gmail.com',
+	  		buyer_name: '홍길동',
+	  		buyer_tel: '010-4242-4242'
+	  	}, function (rsp) {
+	  		if ( rsp.success ) {
+	  			$.ajax({
+					url:"${path}/pay/subpay",
+					type: 'POST',
+					dataType: "json",
+					data: {
+						customer_uid: '124222122112333333312',
+				        merchant_uid: "order_monthly_"+new Date().getTime(),
+				        schedule_at: 1666235386,
+				        amount: 8900	
+					},
+					success: (result) => {
+						alert(result);
+					}
+				});
+				alert('결제 예약');
+		    } else {
+		    	alert('결제 예약 실패');		    	 
+	      	}
+	  	});
+	};	
+</script>
+   

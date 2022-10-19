@@ -5,14 +5,14 @@
         border-top-left-radius: 15px; 
         border-top-right-radius: 15px; 
         width: 100%;
-        height: 254px;
+        height: 265px;
     } 
     #card_film{
-        width: 14rem; 
+        width: 13rem; 
         border-radius: 15px;
     } 
     #card_film3{
-        width: 14rem; 
+        width: 13rem; 
         border-radius: 15px;
         margin-bottom: 15px;
     } 
@@ -23,7 +23,7 @@
         border-top-left-radius: 15px; 
         border-top-right-radius: 15px; 
         width: 100%;
-        height: 254px;
+        height: 265px;
     } 
     #card_film2{
         /* border: 2px solid rgb(21, 182, 182); */
@@ -38,11 +38,25 @@
         border-radius: 15px; 
         /* border-top-right-radius: 15px;  */
         width: 12rem;
-        height: 254px;
+        height: 265px;
     } 
 
     /* 전체 div 스타일 */
     #div_review{
+        border-radius: 15px;
+        border: 1px solid lightgray;
+        /* border: 1px solid #cfc9f6; */
+        height: 100%; 
+        padding: 20px;
+    }
+    #div_comment{
+        border-radius: 15px;
+        border: 1px solid lightgray;
+        /* border: 1px solid #cfc9f6; */
+        height: 100%; 
+        padding: 20px;
+    }
+    #div_film{
         border-radius: 15px;
         border: 1px solid lightgray;
         /* border: 1px solid #cfc9f6; */
@@ -67,10 +81,16 @@
     }
 
     /* 전체 텍스트 스타일 */
+    #detail-text0{
+        margin-left: 10px;
+        margin-top: 3px;
+        font-size: 0.9em;
+    }
     #detail-text1{
         margin-left: 10px;
         font-weight: 600;
         font-size: 1em;
+        line-height: 20px;
     }
     #detail-text2{
         margin-left: 10px;
@@ -81,12 +101,24 @@
         margin-left: 10px;
         margin-top: 3px;
         font-size: 0.9em;
+        display: -webkit-box;
+	    -webkit-line-clamp: 5 ;
+	    -webkit-box-orient: vertical;
+	    overflow: hidden;
+        text-overflow: ellipsis;
     }
     #detail-text4{
         font-size: 0.9em;
     }
     #detail-text5{
         font-size: 0.9em;
+    }
+    #detail-text6{
+        margin-left: 10px;
+        font-size: 1em;
+        line-height: 30px;
+        word-break: keep-all;
+        width: 850px;
     }
     #detail-text{
         margin-top: 3px;
@@ -116,13 +148,18 @@
         color: grey;
     }
 
-    /* 코멘트 리뷰 카드 */
+    /* 리뷰 카드 */
     #card_review{
         border-radius: 15px;
         width: 16em;
         margin: auto;
     }
-
+    #card_review2{
+        border-radius: 15px;
+        width: 16em;
+        height: 16em;
+        margin: auto;
+    }
     #card_review_row{
         /* border: 2px solid blue;  */
         padding-left: 30px; 
@@ -157,11 +194,14 @@
         font-size: 1em;
     }
     #board-text4{
-        width: 8%;
+        width: 13%;
         margin-left: 10px;
         font-size: 0.9em;
     }
     #board-text5{
+        font-size: 0.9em;
+    }
+    #board-text5-1{
         font-size: 0.9em;
     }
     #board-text6{
@@ -169,6 +209,10 @@
         font-size: 0.9em;
     }
     #board-text7{
+        width: 11%;
+        font-size: 0.9em;
+    }
+    #board-text7-1{
         width: 11%;
         font-size: 0.9em;
     }
@@ -188,6 +232,10 @@
     }
 
     a:link{
+        color: black;
+    }
+
+    a:visited{
         color: black;
     }
     /* ver1 */
@@ -223,7 +271,7 @@
         height: 30px; 
     }
     
-    .btn:hover{
+    .btn:hover, .btn:checked, .btn:focus {
         font-size: 1em;
         border: 1px solid #7e69fe;
         background-color: #7e69fe; 
@@ -231,8 +279,7 @@
         height: 30px; 
         text-align: center;
     }
-
-    /* 별점 */
+    /******** 별점 ********/
     .star-rating {
         display: flex;
         flex-direction: row-reverse;
@@ -294,7 +341,19 @@
     }
 
     #carousel01 {
-        /* border: 2px solid blue;  */
+        /* border: 2px solid blue; */
         padding-left: 50px; 
         padding-right: 60px;
+    }
+
+    #carousel00 {
+       /*  border: 2px solid blue; */
+		height: 400px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+    }
+    
+    #dir_film{
+    	padding: 50px;
     }

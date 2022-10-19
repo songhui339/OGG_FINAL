@@ -94,7 +94,7 @@
                     <a href="javascript:">파티 찾기</a>
                 </li>
                 <li>
-                    <a href="${ path }/review/film_list">리뷰</a>
+                    <a href="${ path }/film/list">리뷰</a>
                 </li>
                 <li>
                     <a href="${ path }/community/list.do">커뮤니티</a>

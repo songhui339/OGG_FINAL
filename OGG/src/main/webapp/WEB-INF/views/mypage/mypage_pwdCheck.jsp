@@ -69,9 +69,9 @@
             <p class="titleText">회원 정보 수정</p>
             <div class="line"></div>
             <form action="">
-                <div class="formBox">
-                    <p>본인 확인을 위해 비밀번호를 입력 해주세요.</p>
-                    <input type="password" name="" placeholder="비밀번호" minlength="3" maxlength="20">
+                <div class="formBox" style="text-align:center;">
+                    <p class="titleText">본인 확인을 위해 비밀번호를 입력 해주세요.</p>
+                    <input type="password" name="" placeholder="비밀번호를 입력해주세요." minlength="3" maxlength="20">
                     
 
                     <div class="btnBox">

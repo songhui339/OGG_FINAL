@@ -5,18 +5,25 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.RowBounds;
 
+import com.project.ogg.review.model.vo.Film;
 import com.project.ogg.review.model.vo.Review;
 import com.project.ogg.review.model.vo.ReviewCmt;
+import com.project.ogg.review.model.vo.ReviewLikes;
 
 @Mapper
 public interface ReviewMapper {
-
-	int selectBoardCount();
-
-	List<Review> selectAll(RowBounds rowBounds);
+	
+	Film checkFilm(int fCode);
+	
+	int insertFilm(Film film);
 
 	Review selectReviewByNo(int no);
 
-	List<ReviewCmt> selectReviewCmtByNo(int no);
+	int selectCmtCount(int no);
+
+	List<ReviewCmt> selectCmtByReviewNo(int no);
+
+	int insertReview(Review review);
 	
+	int updateReview(Review review);
 }

@@ -346,6 +346,7 @@ OGG 커뮤니테 게시판 상세보기 CSS
 
 .community_section .writeReplyBox {
     /* padding: 15px 25px 0 25px; */
+    padding-bottom : 5px;
     text-align: center;
     margin: 0 auto;
 }
