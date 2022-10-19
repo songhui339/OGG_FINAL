@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.project.ogg.party.model.mapper.PartyMapper;
 import com.project.ogg.party.model.vo.Ott;
 import com.project.ogg.party.model.vo.Party;
-import com.project.ogg.party.model.vo.Plan;
 
 @Service
 public class PartyServiceImpl implements PartyService {
@@ -23,21 +22,21 @@ public class PartyServiceImpl implements PartyService {
 	}
 
 	@Override
-	public List<Plan> getPlanInfo(int ottNo) {
+	public List<Ott> getPlanInfo(String ottName) {
 
-		return mapper.selectPlanList(ottNo);
+		return mapper.selectPlanList(ottName);
 	}
 
 	@Override
-	public Plan getPlanName(int planNo) {
+	public Ott getPlanName(int ottNo) {
 
-		return mapper.selectPlan(planNo);
+		return mapper.selectPlan(ottNo);
 	}
 
 	@Override
-	public Plan getOttInfo(int modal_plan_no) {
+	public Ott getOttInfo(int modal_ott_no) {
 		
-		return mapper.selectOttInfo(modal_plan_no);
+		return mapper.selectOttInfo(modal_ott_no);
 	}
 
 	@Override

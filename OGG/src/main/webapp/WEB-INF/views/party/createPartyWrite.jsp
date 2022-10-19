@@ -9,7 +9,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
 <!-- iamport.payment.js -->
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
@@ -23,12 +23,12 @@
                 <div class="serviceInfoBox">
                     <p class="text">
                         공유 서비스
-                        <img src="${ path }/images/party/${ plan.ott_thumb }.png" alt="logoImg" class="logoImg" id="logoImg">
-                        <span class="nameText">${ plan.plan_name }</span>
+                        <img src="${ path }/images/party/${ ott.ott_thumb }.png" alt="logoImg" class="logoImg" id="logoImg">
+                        <span class="nameText">${ ott.plan_name }</span>
                     </p>
                 </div>
                 <form name="fregister" id="fregister" method="POST" autocomplete="off" class="form" role="form" action="${ path }/party/createParty">
-                    <input type="hidden" name="ott_no" value="${ plan.ott_no }">
+                    <input type="hidden" name="ott_no" value="${ ott.ott_no }">
                     <h3><span class="c_purple">로그인 정보</span> 입력</h3>
                     <div class="form-round-box">
                         <ul class="form-list">
@@ -47,10 +47,10 @@
                             </li>
                             </ul>
                             <p class="subInfoText">
-                                - ${ plan.plan_name }을 이용중인 이메일 아이디를 입력해 주세요.<br>
+                                - ${ ott.plan_name }을 이용중인 이메일 아이디를 입력해 주세요.<br>
                                 - 파티원과 공유 가능한 안전한 비밀번호를 사용해 주세요.
                             </p>
-                            <a href="#" class="linkText">${ plan.plan_name } 바로가기</a>
+                            <a href="#" class="linkText">${ ott.plan_name } 바로가기</a>
                     </div>
 
                     <h3><span class="c_purple">진행 상태</span> 입력</h3>
@@ -145,31 +145,38 @@
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 
 <script>
+	IMP.init('imp34485120'); //자신의 "가맹점 식별코드"를 사용
 
-	function requestPay() {
-	  	IMP.init("imp34485120"); //iamport 대신 자신의 "가맹점 식별코드"를 사용
+	function requestPay() {		
 	  	IMP.request_pay({
-	  		pg: "kakaopay",
-	  		pay_method: "card", // "card"만 지원됩니다
-	  		merchant_uid: "issue_billingkey_monthly_0001"+new Date().getTime(), // 빌링키 발급용 주문번호
-	  		customer_uid: "gildong_0001_1234"+new Date().getTime(), // 카드(빌링키)와 1:1로 대응하는 값
-	  		name: "최초인증결제",
-	  		amount: 0, // 0 으로 설정하여 빌링키 발급만 진행합니다.
-	  		buyer_email: "gildong@gmail.com",
-	  		buyer_name: "홍길동",
-	  		buyer_tel: "010-4242-4242",
-	  		buyer_addr: "서울특별시 강남구 신사동",
-	  		buyer_postcode: "01181"
-	  	}, function (rsp) { // callback
+	  		pg: 'kakaopay',
+	  		pay_method: 'card',
+	  		merchant_uid: "order_monthly_"+new Date().getTime(),
+	  		customer_uid: '124222122112333333312', // 카드(빌링키)와 1:1로 대응하는 값, 유저 ID값으로 설정 예정
+	  		name: 'test012',
+	  		amount: 4000, 
+	  		buyer_email: 'gildong@gmail.com',
+	  		buyer_name: '홍길동',
+	  		buyer_tel: '010-4242-4242'
+	  	}, function (rsp) {
 	  		if ( rsp.success ) {
-		    	var msg = '결제가 완료되었습니다.';
-		        msg += '고유ID : ' + rsp.imp_uid;
-		        msg += '상점 거래ID : ' + rsp.merchant_uid;
-		        msg += '결제 금액 : ' + rsp.paid_amount;
-		        msg += '카드 승인번호 : ' + rsp.apply_num;
+	  			$.ajax({
+					url:"${path}/pay/subpay",
+					type: 'POST',
+					dataType: "json",
+					data: {
+						customer_uid: '124222122112333333312',
+				        merchant_uid: "order_monthly_"+new Date().getTime(),
+				        schedule_at: 1666235386,
+				        amount: 8900	
+					},
+					success: (result) => {
+						alert(result);
+					}
+				});
+				alert('결제 예약');
 		    } else {
-		    	 var msg = '결제에 실패하였습니다.';
-		         msg += '에러내용 : ' + rsp.error_msg;
+		    	alert('결제 예약 실패');		    	 
 	      	}
 	  	});
 	};	

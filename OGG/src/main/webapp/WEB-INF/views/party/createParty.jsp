@@ -83,7 +83,7 @@
                 </div>
                 <div class="modal-footer nextBtnBox">
                     <input type="submit" value="다음" class="nextBtn" data-bs-dismiss="modal" id="modal_submit" disabled>
-                    <input type="hidden" name="modal_plan_no" id="modal_plan_no">
+                    <input type="hidden" name="modal_ott_no" id="modal_ott_no">
                 </div>
             </div>
         </div>
@@ -144,7 +144,7 @@
                     	<c:if test="${ not empty list }">
                     		<c:forEach var="list" items="${ list }">
                     			<div class="itemBox ${ list.ott_class }" data-bs-toggle="modal" data-bs-target="#modalWindow" !hidden>
-                    				<input type=hidden value="${ list.ott_no }">
+                    				<input type=hidden value="${ list.ott_name }">
 		                            <img src="${ path }/images/party/${ list.ott_thumb }.png" alt="logoImg" class="logoImg" id="thumb_url">
 		                            <span class="serviceNameText">${ list.ott_name }</span>
 		                            <p class="saveText">매달 세이브!</p>
@@ -173,7 +173,7 @@ $(document).ready(() => {
 	
 	$(".itemBox").on("click", (e) => {
 		
-		let ottNo = () => {
+		let ottName = () => {
 			if($(e.target).find('input').val() != null) {
 				return $(e.target).find('input').val();
 			} else {
@@ -185,22 +185,21 @@ $(document).ready(() => {
 		
 		$.ajax({
 			type: "POST",
-			url: "${path}/party/modal",
+			url: "${path}/party/planSelect",
 			dataType: "json",
 			data: {
-				ottNo
+				ottName
 			},
 			success: (obj) => {				
 				let html = "";
 								
 				$.each(obj, function (index, item) {
-					let result = "";
 					let price = item.plan_price / item.ott_max_member
 					
 			        html += "<div class='serviceName_gray'>";
 			        html += "<label for='' class='text'><i class='bi bi-check-lg'></i>" + item.plan_name + "</label>";
        				html += "<ul class='infoText'>";
-			        html += "<input type=hidden value="+ item.plan_no +">";
+			        html += "<input type=hidden value="+ item.ott_no +">";
 					html += "<li>파티원 1~" + item.ott_max_member + " 모집 가능!</li>"                            
 					html += "<li>파티원 1명당 매달 " + Math.round(price / 1.1) + "원 적립!<br>" + "(파티 분담금 " + Math.round(price) + "원 − 링키드 수수료 " + Math.round(price - (price / 1.1)) + "원)</li>"                            
 					html += "<li>최대 인원(3명) 모집하면, 매달 최대 "+ item.plan_price_output + "원 적립</li>"                            
@@ -229,7 +228,7 @@ $(document).ready(() => {
 	
 	$(document).on("click",".serviceName_gray", (e) =>{
 		
-		let planNo = () => {
+		let ottNo = () => {
 			if($(e.target).find('input').val() != null) {
 				return $(e.target).find('input').val();
 			} else {
@@ -242,13 +241,13 @@ $(document).ready(() => {
 			url: "${path}/party/getPlanName",
 			dataType: "json",
 			data: {
-				planNo
+				ottNo
 			},
 			success: (obj) => {
-				document.getElementById('serviceText').innerHTML = obj.plan.plan_name;
-				document.getElementById('titleText').innerHTML = "꼭 '한국' " + obj.plan.plan_name + " 계정을 사용해 주세요.";
-				document.getElementById('infoText').innerHTML =  "🇰🇷 " + obj.plan.plan_name + " 정책상 거주/이용중인 국가에 따라 재생 가능한 콘텐츠가 다르기 때문에 꼭 한국 넷플릭스 계정을 공유해 주셔야 해요.";
-				document.getElementById('modal_plan_no').value = obj.plan.plan_no;
+				document.getElementById('serviceText').innerHTML = obj.ott.plan_name;
+				document.getElementById('titleText').innerHTML = "꼭 '한국' " + obj.ott.plan_name + " 계정을 사용해 주세요.";
+				document.getElementById('infoText').innerHTML =  "🇰🇷 " + obj.ott.plan_name + " 정책상 거주/이용중인 국가에 따라 재생 가능한 콘텐츠가 다르기 때문에 꼭 한국 넷플릭스 계정을 공유해 주셔야 해요.";
+				document.getElementById('modal_ott_no').value = obj.ott.ott_no;
 			},
 			error: (error) => {
 				console.log(error);

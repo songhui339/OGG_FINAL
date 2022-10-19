@@ -18,7 +18,11 @@ public class Ott {
 	
 	private int ott_max_member;
 	
+	private int plan_price;
+	
 	private String plan_price_output;
 	
 	private String ott_status;
+	
+	private String plan_name;
 }

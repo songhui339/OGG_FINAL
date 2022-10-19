@@ -10,13 +10,14 @@ public interface PartyService {
 
 	List<Ott> getOttList();
 
-	List<Plan> getPlanInfo(int ottNo);
+	List<Ott> getPlanInfo(String ottName);
 	
-	Plan getPlanName(int planNo);
+	Ott getPlanName(int ottNo);
 
-	Plan getOttInfo(int modal_plan_no);
+	Ott getOttInfo(int modal_ott_no);
 
 	Party partyCreate(Party party);
+
 
 
 }

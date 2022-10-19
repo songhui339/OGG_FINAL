@@ -13,11 +13,11 @@ public interface PartyMapper {
 
 	List<Ott> selectOttList();
 
-	List<Plan> selectPlanList(int ottNo);
+	List<Ott> selectPlanList(String ottNo);
 
-	Plan selectPlan(int planNo);
+	Ott selectPlan(int ottNo);
 
-	Plan selectOttInfo(int modal_plan_no);
+	Ott selectOttInfo(int modal_ott_no);
 
 	Party insertParty(Party party);
 	

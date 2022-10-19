@@ -45,36 +45,36 @@ public class PartyController {
 		return model;
 	}
 	
-	@PostMapping("/modal")
-	public ResponseEntity<List<Plan>> modal(@RequestParam int ottNo) {		
+	@PostMapping("/planSelect")
+	public ResponseEntity<List<Ott>> modal(@RequestParam String ottName) {		
 		
-		List<Plan> list = null;
+		List<Ott> list = null;
 		
-		list = service.getPlanInfo(ottNo);
+		list = service.getPlanInfo(ottName);
 		
-		return new ResponseEntity<List<Plan>>(list, HttpStatus.OK);
+		return new ResponseEntity<List<Ott>>(list, HttpStatus.OK);
 		
 	}
 	
 	@PostMapping("/getPlanName")
-	public ResponseEntity<Map<String, Plan>> getPlanName(@RequestParam int planNo) {		
-		Map<String, Plan> map = new HashMap<>();
+	public ResponseEntity<Map<String, Ott>> getPlanName(@RequestParam int ottNo) {		
+		Map<String, Ott> map = new HashMap<>();
 		
-		map.put("plan", service.getPlanName(planNo));
+		map.put("ott", service.getPlanName(ottNo));
 		
-		return new ResponseEntity<Map<String, Plan>>(map, HttpStatus.OK);
+		return new ResponseEntity<Map<String, Ott>>(map, HttpStatus.OK);
 		
 	}
 	
 	@PostMapping("/modalCheck")
-	public ModelAndView modalCheck(ModelAndView model, @RequestParam int modal_plan_no) {
-		System.out.println(modal_plan_no);
+	public ModelAndView modalCheck(ModelAndView model, @RequestParam int modal_ott_no) {
+		System.out.println(modal_ott_no);
 		
-		Plan plan = null;
+		Ott ott = null;
 		
-		plan = service.getOttInfo(modal_plan_no);
+		ott = service.getOttInfo(modal_ott_no);
 		
-		model.addObject("plan", plan);
+		model.addObject("ott", ott);
 		model.setViewName("party/createPartyWrite");
 		
 		return model;
