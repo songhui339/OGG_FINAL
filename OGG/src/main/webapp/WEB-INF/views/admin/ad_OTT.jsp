@@ -38,7 +38,7 @@
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
-                           <a class="nav-link" href="${path}">
+                           <a class="nav-link" href="/">
                                 <div class="sb-nav-link-icon"><i class="fa-sharp fa-solid fa-house"></i></div>
                                 홈으로
                             </a>
@@ -106,8 +106,8 @@
                                     <tbody>
                                     <c:forEach var="ott" items="${list}">
                                         <tr>
-                                            <td>${ott.ott_no }</td>
-                                            <td>${ott.ott_name }</td>
+                                            <td>${ott.ott_no}</td>
+                                            <td><a href="javascript:ottdel(${ott.ott_no})">${ott.ott_name }</a></td>
                                             <td>${ott.ott_class }</td>
                                             <td>${ott.ott_max_member }명</td>
                                             <td>${ott.plan_name }</td>
@@ -173,6 +173,13 @@
         var b = ${muser.juneUser};
         var c = ${muser.sepUser};
         var d = ${muser.decUser};
+        
+        function ottdel(e){
+            if(confirm("정말로 OTT를 삭제 하시겠습니까?")) {
+            	location.replace("${ path }/ott/delete?ott_no="+e);
+            }	
+        }
+            
 		</script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="${path}/js/admin/script.js"></script>
