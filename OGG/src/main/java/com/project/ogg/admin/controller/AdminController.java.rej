@@ -1,0 +1,9 @@
+diff a/OGG/src/main/java/com/project/ogg/admin/controller/AdminController.java b/OGG/src/main/java/com/project/ogg/admin/controller/AdminController.java	(rejected hunks)
+@@ -13,7 +13,6 @@
+ 
+ import org.springframework.beans.factory.annotation.Autowired;
+ import org.springframework.core.io.ResourceLoader;
+-import org.springframework.security.core.annotation.AuthenticationPrincipal;
+ import org.springframework.stereotype.Controller;
+ import org.springframework.web.bind.annotation.GetMapping;
+ import org.springframework.web.bind.annotation.ModelAttribute;

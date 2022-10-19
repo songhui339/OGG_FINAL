@@ -9,45 +9,108 @@
 
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
-	<h2>게시판 수정</h2>
-	<div>
-		<form action="${ path }/community/modify.do" method="POST" enctype="multipart/form-data">
-			<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
-			<input type="hidden" name="c_no" value="${ community.c_no }">
-			<input type="hidden" name="c_file" value="${ community.c_file }">
-			<input type="hidden" name="c_fileModify" value="${ community.c_fileModify }">
-			<table id='tbl-board'>
-				<tr>
-					<th>제목</th>
-					<td><input type="text" name="c_title" id="c_title" value="${ community.c_title }"></td>
-				</tr>
-				<tr>
-					<th>첨부파일</th>
-					<td>
-						<input type="file" name="upfile"> <br>
-						<c:if test="${ not empty community.c_file }">
-							<img src="${ path }/resources/images/file.png" width="20px" height="20px">
-							<span>${ community.c_file }</span>
-						</c:if>
-					</td>
-				</tr>
-				<tr>
-					<th>내용</th>
-					<td>
-						<textarea name="c_content" cols="50" rows="15">${ community.c_content }</textarea>
-					</td>
-				</tr>
-				<tr>
-					<th colspan="2">
-						<input type="submit" value="수정">
-						<input type="button" onclick="location.replace('${pageContext.request.contextPath}/community/goList.do')" value="목록으로">
-					</th>
-				</tr>
-			</table>
-		</form>
-	</div>
+	<!-- 커뮤니티 페이지 CSS -->
+    <link rel="stylesheet" href="${path}/css/community/ogg_community.css" class="css">
+    
+    <!-- 서머노트 -->
+	<script src="${path}/summernote/summernote-lite.js"></script>
+	<script src="${path}/summernote/lang/summernote-ko-KR.js"></script>
+	<link rel="stylesheet" href="${path}/summernote/summernote-lite.css">
+	
+	    <script type="text/javascript">
+			window.onload = function() {
+			
+			// '등록하기' 버튼 클릭시 모두 입력되었는지 검사
+			document.getElementById('communitySubmit').onclick = function() {
+				
+				if (document.communityWrite.c_title.value.length == 0) {
+					alert('제목을 입력하셔야 합니다.');
+					return false;
+				}
+				
+				if (document.communityWrite.c_content.value.length == 0) {
+					alert('내용을 입력하셔야 합니다.');
+					return false;
+				}
+				
+				document.communityWrite.submit();
+			};
+			
+			// Summernote 설정
+			var toolbar = [
+			    // 글꼴 설정
+			    ['fontname', ['fontname']],
+			    // 글자 크기 설정
+			    ['fontsize', ['fontsize']],
+			    // 굵기, 기울임꼴, 밑줄,취소 선, 서식지우기
+			    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
+			    // 글자색
+			    ['color', ['forecolor','color']],
+			    // 표만들기
+			    ['table', ['table']],
+			    // 글머리 기호, 번호매기기, 문단정렬
+			    ['para', ['ul', 'ol', 'paragraph']],
+			    // 줄간격
+			    ['height', ['height']],
+			    // 코드보기, 확대해서보기, 도움말
+			    ['view', ['codeview','fullscreen', 'help']]
+			  ];
+			
+			let setting = {
+					height: 300,                 // 에디터 높이
+					minHeight: null,             // 최소 높이
+					maxHeight: null,             // 최대 높이
+					focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
+					lang: "ko-KR",					// 한글 설정
+					placeholder: '최대 2048자까지 쓸 수 있습니다'	//placeholder 설정
+			}
+			$('.summernote').summernote(setting);
+			
+		};
+	</script>
+    
+        <section class="community_section">
 
+            <div class="pageTitleBox">
+                <h2 class="titleText">💬 커뮤니티</h2>
+            </div>
+            
+            <form name="communityWrite" action="${path}/community/modify.do" method="post" enctype="multipart/form-data">
+                <div class="articleWrap">
+                    <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
+					<input type="hidden" name="c_writerNo" value="${ community.c_writerNo }">
+					<input type="hidden" name="c_no" value="${ community.c_no }">
+					<input type="hidden" name="c_file" value="${ community.c_file }">
+					<input type="hidden" name="c_fileRename" value="${ community.c_fileRename }">
+                    
+                    <!-- 타이틀 -->
+                    <div class="titleBox">
+                        <label for="c_title" class="c_title">제목</label>
+                        <input type="text" name="c_title" id="c_title" value="${ community.c_title }">
+                    </div>
+    
+                    <!-- 파일 첨부 -->
+      
+	                    <div class="fileBox">
+	                        <span>파일 첨부</span>
+	                        <input class="upload-name" value="${ community.c_file }" disabled="disabled">
+	                        <label for="c_upfile" class="fileBtn">업로드 <i class="bi bi-upload"></i></label> 
+	                        <input type="file" name="upfile" id="c_upfile" class="upload-hidden">
+	                    </div>
+                 
+    
+                    <!-- 내용 -->
+                    <div class="contentBox">
+                        <textarea class="summernote" name="c_content" cols="50" rows="15" >${ community.c_content }</textarea>
+                    </div>
+                </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+                <div class="btnBox">
+                    <input type="submit" id="communitySubmit" value="수정" class="btn submitBtn">
+                    <input type="button" id="communitySubmit" onclick="location.replace('${path}/community/goList.do')" value="취소" class="btn deleteBtn">
+            </form>
 
-<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+        </section>
+        
+	    
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

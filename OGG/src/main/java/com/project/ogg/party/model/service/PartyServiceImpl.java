@@ -21,4 +21,28 @@ public class PartyServiceImpl implements PartyService {
 		return mapper.selectOttList();
 	}
 
+	@Override
+	public List<Ott> getPlanInfo(String ottName) {
+
+		return mapper.selectPlanList(ottName);
+	}
+
+	@Override
+	public Ott getPlanName(int ottNo) {
+
+		return mapper.selectPlan(ottNo);
+	}
+
+	@Override
+	public Ott getOttInfo(int modal_ott_no) {
+		
+		return mapper.selectOttInfo(modal_ott_no);
+	}
+
+	@Override
+	public Party partyCreate(Party party) {
+		
+		return mapper.insertParty(party);
+	}
+
 }

@@ -2,15 +2,15 @@ package com.project.ogg.community.model.service;
 
 import java.util.List;
 
+import com.project.ogg.common.model.CommonVO;
 import com.project.ogg.common.util.PageInfo;
 import com.project.ogg.community.model.vo.Community;
-import com.project.ogg.community.model.vo.CommunityReply;
 
 public interface CommunityService {
 	
-	int getBoardCount();
+	int getBoardCount(CommonVO vo);
 
-	List<Community> getBoardList(PageInfo pageInfo);
+	List<Community> getBoardList(PageInfo pageInfo, CommonVO vo);
 
 	Community findCommunityByNo(int c_no);
 
@@ -24,5 +24,6 @@ public interface CommunityService {
 	
 	// 게시글 조회수
 	int communityViewcount(int c_no);
+
 
 }

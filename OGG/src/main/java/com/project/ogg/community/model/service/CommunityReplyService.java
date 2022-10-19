@@ -14,7 +14,9 @@ public interface CommunityReplyService {
 	public void communityReplyWrite(CommunityReply communityReply);
 	
 	// 댓글 수정
-	public int communityReplutModify(CommunityReply communityReply);
+	int communityReplutModify(CommunityReply communityReply);
+	
+	CommunityReply findCommunityReplyByNo(int cr_no);
 	
 	// 댓글 삭제
 	int communityReplyDelete(int cr_no);

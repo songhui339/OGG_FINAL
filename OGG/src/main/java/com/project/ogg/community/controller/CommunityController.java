@@ -16,9 +16,9 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,10 +26,10 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.project.ogg.common.model.CommonVO;
 import com.project.ogg.common.util.MultipartFileUtil;
 import com.project.ogg.common.util.PageInfo;
 import com.project.ogg.community.model.service.CommunityReplyService;
@@ -51,42 +51,44 @@ public class CommunityController {
 	private CommunityReplyService replyService;
 	
 	// 게시글 리스트
-		@GetMapping("/community/list.do")
-		public ModelAndView list(ModelAndView model,
-				@RequestParam(value = "page", defaultValue = "1") int page,
-				HttpServletRequest request) {
-			
-			String keyword = request.getParameter("keyword");
-			String condition = request.getParameter("condition");
-			
-			if (keyword == null) {
-				keyword = "";
-				condition = "";
-			} 
-			
-			if (!keyword.equals("")) {
-				if(condition.equals("subject")) {
-					
-				} else if (condition.equals("content")) {
-					
-				} else if (condition.equals("writer")) {
-					
-				}
-			}
-
-			List<Community> list = null;
-			PageInfo pageInfo = null;
-			
-			pageInfo = new PageInfo(page, 10, service.getBoardCount(), 10);
-			list = service.getBoardList(pageInfo);
-			
-		    model.addObject("list", list);
-		    model.addObject("pageInfo", pageInfo);
-		    
-		    model.setViewName("community/list");
-
-		    return model;
+	@GetMapping("/community/list.do")
+	public ModelAndView list(ModelAndView model,
+			@RequestParam(value = "page", defaultValue = "1") int page,
+			@RequestParam(value = "sType", defaultValue = "") String sType,
+			@RequestParam(value = "sValue", defaultValue = "") String sValue,
+			HttpServletRequest request) {
+		
+		List<Community> list = null;
+		PageInfo pageInfo = null;
+		CommonVO commonVO = new CommonVO();
+		String preventSearchValue = "";
+		String preventSearchType = "";
+		
+		// 조회조건 설정
+		commonVO.setSType(sType);
+		commonVO.setSValue(sValue);
+		
+		// 페이징 설정
+		pageInfo = new PageInfo(page, 10, service.getBoardCount(commonVO), 10);
+		
+		
+		// 조회 조건 기입 후 검색 시 직전 검색 데이터 jsp로 return
+		
+		if ( !StringUtils.isEmpty(sValue) ) {
+			preventSearchType = sType;
+			preventSearchValue = sValue;
 		}
+		list = service.getBoardList(pageInfo, commonVO);
+		
+	    model.addObject("list", list);
+	    model.addObject("pageInfo", pageInfo);
+	    model.addObject("preventSearchType", preventSearchType);
+	    model.addObject("preventSearchValue", preventSearchValue);
+	    
+	    model.setViewName("community/list");
+
+	    return model;
+	}
 
 	@GetMapping("/community/goList.do")
 	public String list() {
@@ -127,7 +129,7 @@ public class CommunityController {
 	@PostMapping("/community/write.do")
 	public ModelAndView write(ModelAndView model, 
 							  @ModelAttribute Community community,
-							  @RequestParam("c_upfile") MultipartFile upfile,
+							  @RequestParam("upfile") MultipartFile upfile,
 							  @AuthenticationPrincipal Member member) {
 
 		int result = 0;
@@ -145,7 +147,7 @@ public class CommunityController {
 			
 			if (renamedFileName != null) {
 				community.setC_file(upfile.getOriginalFilename());
-				community.setC_fileModify(renamedFileName);
+				community.setC_fileRename(renamedFileName);
 			}
 		}
 		
@@ -227,7 +229,9 @@ public class CommunityController {
 	
 	// 게시글 수정
 	@GetMapping("/cummunity/goModify.do")
-	public ModelAndView update(ModelAndView model, @RequestParam("c_no")int c_no, @AuthenticationPrincipal Member member) {
+	public ModelAndView update(ModelAndView model,
+							   @RequestParam("c_no")int c_no,
+							   @AuthenticationPrincipal Member member) {
 		
 		Community community = null;
 		
@@ -253,7 +257,7 @@ public class CommunityController {
 		
 		int result = 0;
 		String location = null;
-		String c_fileModify = null;
+		String c_fileRename = null;
 		
 		// 작성자 확인
 		if(community.getC_writerNo() == member.getM_no()) {
@@ -261,19 +265,21 @@ public class CommunityController {
 			// 파일 수정
 			if(upfile != null && !upfile.isEmpty()) {
 				try {
+					
 					location = resourceLoader.getResource("resources/upload/community").getFile().getPath(); 
 					
-					if(community.getC_fileModify() != null) {
+					if(community.getC_fileRename() != null) {
 						// 이전에 업로드 된 첨부 파일이 존재하면 삭제
-						MultipartFileUtil.delete(location + "/" + community.getC_fileModify());
+						MultipartFileUtil.delete(location + "/" + community.getC_fileRename());
 					}
 					
-					c_fileModify = MultipartFileUtil.save(upfile, location);
+					c_fileRename = MultipartFileUtil.save(upfile, location);
 					
-					if(c_fileModify != null) {
+					if(c_fileRename != null) {
 						community.setC_file(upfile.getOriginalFilename());
-						community.setC_fileModify(c_fileModify);
+						community.setC_fileRename(c_fileRename);
 					}
+					
 				} catch (IOException e) {
 					e.printStackTrace();
 				}

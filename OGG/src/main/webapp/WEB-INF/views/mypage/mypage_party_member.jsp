@@ -78,11 +78,11 @@
                         </li>
                         <li>
                             <label for="">아이디</label>
-                            <input type="text" name="" value="${P_SHARE_ID}" id="">
+                            <input type="text" name="" value="${P_SHARE_ID}" id="" readonly>
                         </li>
                         <li>
                             <label for="">비밀번호</label>
-                            <input type="text" name="" value="${P_SHARE_PWD}" minlength="3" maxlength="20">
+                            <input type="text" name="" value="${P_SHARE_PWD}" readonly>
                         </li>
                         <li>
                             <label for="">파티원 수</label>

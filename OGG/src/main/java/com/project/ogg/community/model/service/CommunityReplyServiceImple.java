@@ -32,11 +32,16 @@ public class CommunityReplyServiceImple implements CommunityReplyService {
 	// 댓글 수정
 	@Override
 	public int communityReplutModify(CommunityReply communityReply) {
+
 		int result = 0;
-		
 		result = mapper.communityReplutModify(communityReply);
-		
 		return result;
+	}
+	
+	@Override
+	public CommunityReply findCommunityReplyByNo(int cr_no) {
+
+		return mapper.findCommunityReplyByNo(cr_no);
 	}
 	
 	// 댓글 삭제
@@ -54,5 +59,6 @@ public class CommunityReplyServiceImple implements CommunityReplyService {
 
 		return mapper.selectReplyByNo(cr_no);
 	}
+
 
 }

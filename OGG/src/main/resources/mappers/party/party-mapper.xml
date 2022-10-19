@@ -29,18 +29,80 @@
 		<result property="ott_class" column="OTT_CLASS"/>
 		<result property="ott_max_member" column="OTT_MAX_MEMBER"/>
 		<result property="plan_price" column="PLAN_PRICE"/>
+		<result property="plan_price_output" column="PLAN_PRICE_OUTPUT"/>
 		<result property="ott_status" column="OTT_STATUS"/>
+		<result property="plan_name" column="PLAN_NAME"/>
 	</resultMap>
 	
 	<select id="selectOttList" resultMap="ottListResultMap">
-		SELECT I.OTT_NO,
-			   I.OTT_NAME,
-			   I.OTT_THUMB,
-			   I.OTT_CLASS,
-			   I.OTT_MAX_MEMBER,
-			   P.PLAN_PRICE,
-			   I.OTT_STATUS
-		FROM OTT_INFO I
-		JOIN PLAN P ON(I.OTT_NO = P.OTT_NO)
+		SELECT OTT_NO,
+		       OTT_NAME,
+		       OTT_THUMB,
+		       OTT_CLASS,
+		       OTT_MAX_MEMBER,
+		       PLAN_PRICE,
+		       TO_CHAR(PLAN_PRICE,'999,999') AS PLAN_PRICE_OUTPUT,
+		       PLAN_NAME,
+		       OTT_STATUS
+		FROM (
+		SELECT ROW_NUMBER() 
+		OVER(PARTITION BY OTT_NAME ORDER BY PLAN_PRICE DESC ) AS RNUM, OTT_INFO.*
+		FROM OTT_INFO)
+		WHERE RNUM=1
+		ORDER BY OTT_NO
 	</select>
+	
+	<select id="selectPlanList" resultMap="ottListResultMap">
+		SELECT OTT_NO,
+			   OTT_NAME,
+			   OTT_THUMB,
+			   OTT_CLASS,
+			   OTT_MAX_MEMBER,
+			   PLAN_PRICE,
+			   TO_CHAR(PLAN_PRICE,'999,999') AS PLAN_PRICE_OUTPUT,
+			   PLAN_NAME,
+			   OTT_STATUS
+		FROM OTT_INFO
+        WHERE OTT_NAME = #{ottName}
+	</select>
+	
+	<select id="selectPlan" resultMap="ottListResultMap">
+		SELECT PLAN_NAME,
+			   OTT_NO
+		FROM OTT_INFO
+		WHERE OTT_NO=#{ottNo}
+	</select>
+
+	<select id="selectOttInfo" resultMap="ottListResultMap">
+		SELECT PLAN_NAME,
+			   OTT_NO,
+			   OTT_THUMB
+		FROM OTT_INFO
+		WHERE OTT_NO=#{modal_ott_no}
+	</select>
+	
+	<select id="insertParty" parameterType="Party">
+		INSERT INTO PARTY(
+			P_NO,
+			OTT_NO,
+			P_SHARE_ID,
+			P_SHARE_PWD,
+			P_MAX_MEMBER,
+			P_START_DATE,
+			P_END_DATE
+		)
+		VALUES(
+			SEQ_PARTY_NO.NEXTVAL,
+			#{ott_no},
+			#{p_share_id},
+			#{p_share_pwd},
+			#{p_max_member},
+			#{p_start_date},
+			#{p_end_date}
+		)
+	</select>
+	
+	
+	
+	
 </mapper>

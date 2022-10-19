@@ -87,7 +87,7 @@
 
             <div class="partyBox" onclick="location.href='${ path }/mypage/party/member';">
                 <div class="logoImg">
-                    <img src=".${ path }/images/party/logo_disney.png" alt="logoImg">
+                    <img src="${ path }/images/party/logo_disney.png" alt="logoImg">
                 </div>
                 <div class="partyTitle">
                     <p class="text">디즈니 플러스</p>
