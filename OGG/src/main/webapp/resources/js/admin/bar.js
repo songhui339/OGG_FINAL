@@ -4,15 +4,16 @@ Chart.defaults.global.defaultFontColor = '#292b2c';
 
 // Bar Chart Example
 var ctx = document.getElementById("myBarChart");
+
 var myLineChart = new Chart(ctx, {
   type: 'bar',
   data: {
-    labels: ["January", "February", "March", "April", "May", "June"],
+    labels: ["March","June","Sep","Dec"],
     datasets: [{
       label: "이용자 수",
       backgroundColor: "rgba(2,117,216,1)",
       borderColor: "rgba(2,117,216,1)",
-      data: [100, 300, 500, 700, 900, 1200],
+      data: [a,b,c,d],
     }],
   },
   options: {
@@ -31,8 +32,8 @@ var myLineChart = new Chart(ctx, {
       yAxes: [{
         ticks: {
           min: 0,
-          max: 1500,
-          maxTicksLimit: 5
+          max: 10,
+          maxTicksLimit: 10
         },
         gridLines: {
           display: true

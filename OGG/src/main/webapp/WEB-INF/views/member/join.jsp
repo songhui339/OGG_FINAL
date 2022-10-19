@@ -4,60 +4,17 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <c:set var="path" value="${ pageContext.request.contextPath }"/>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>회원가입 페이지</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-    
+
+<script src="${ path }/js/jquery-3.6.0.min.js"></script>
+
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+	<!-- 로그인 및 회원가입 관련 CSS -->
     <link rel="stylesheet" href="${path}/css/member/join.css">
-    <link rel="stylesheet" href="${path}/css/common/headerFooter.css">
-
-	<script src="${ path }/js/jquery-3.6.0.min.js"></script>
-    
-</head>
-<body>
-    <header>
-        <div class="width-container">
-            <div class="logoBox">
-                <a href="javascript:">
-                    <img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/small-butslogo.png" srcset="https://buts.co.kr/thema/Buts/colorset/Basic/img/2x/small-butslogo.png 2x" alt="loogo" title=""></a>
-            </div>
-
-            <div class="btnBox">
-                <a href="javascript:" class="loginBtn" onclick="location.href='${ path }/member/goLogin.do'">로그인</a>
-            </div>
-        </div>
-
-        <div class="menu-container">
-            <ul class="menuBox">
-                <li>
-                    <a href="javascript:">파티 만들기</a>
-                </li>
-                <li>
-                    <a href="javascript:">파티 찾기</a>
-                </li>
-                <li>
-                    <a href="javascript:">리뷰</a>
-                </li>
-                <li>
-                    <a href="javascript:">커뮤니티</a>
-                </li>
-                <li>
-                    <a href="javascript:">이벤트</a>
-                </li>
-            </ul>
-        </div>
-    </header>
 
     <section class="enrollPage02">
         <div class="contentWrap">
             <div class="formBox">
-                <form name="fregister" id="memberCheck" action="${ path }/member/join.do" method="POST" autocomplete="off" class="form" role="form">
+                <form name="fregister" id="memberCheck" action="/member/join.do" method="POST" autocomplete="off" class="form" role="form">
                     <h3>아이디/비밀번호</h3>
                     <div class="form-round-box">
                         <ul class="form-list">
@@ -123,7 +80,7 @@
                     </div>
 
                     <div class="buttonBox">
-                        <button type="submit" class="button" onclick="location.href='${ path }/'">취소</button>
+                        <button type="button" class="button" onclick="location.href='${ path }/member/goHome.do'">취소</button>
                         <button type="submit" class="button button-purple">회원가입</button>
                     </div>
 
@@ -174,14 +131,17 @@
    
 
 <script type="text/javascript">
+
 	$(function(msg){
 		var msg = "<c:out value="${msg}" />";
 		if (msg != "") {
 			alert(msg);
 		}
 	});
-	var empJ = /\s/g; //모든 공백 체크 정규식
-	var idJ = /^[A-za-z0-9]{4,12}$/; //아이디 정규식 : 4~12자 소문자, 숫자
+
+
+	var empJ = /\s/g; // 모든 공백 체크 정규식
+	var idJ = /^[A-za-z0-9]{4,12}$/; // 아이디 정규식 : 4~12자 소문자, 숫자
 	var pwJ = /^[A-Za-z0-9]{4,20}$/; // 비밀번호 정규식 : 4~20자의 소문자, 대문자, 숫자
 	var nameJ =  /^[가-힣]{1,8}$/;; // 이름 정규식 : 2~8자의 한글
 	var nicknameJ = /^[가-힣ㄱ-ㅎa-zA-Z0-9._-]{2,10}\$/; // 닉네임 정규식 : 2~16자의 대문자, 소문자, 한글, 숫자, 언더스코어 (공백X) 
@@ -211,12 +171,13 @@
 				isIdCheck = false;
 				
 			} else if($('#m_id').val() != '') {
+
 				var m_id=$('#m_id').val();
 				$.ajax({
 					async : true,
 					type : 'get',
 					data : { m_id : m_id },
-					url : '${ path }/member/idcheck.do',
+					url : '/member/idcheck.do',
 					dateType: 'json',
 					contentType: "application/json; charset=UTF-8",
 					success : function(data) {
@@ -252,6 +213,7 @@
 				isPwCheck = false;
 			}
 		});
+
 		$('#m_pwd2').blur(function() {
 			if ($('#m_pwd').val() != $(this).val()) {
 				$('#pwd_check2').text('비밀번호가 일치하지 않습니다.');
@@ -265,6 +227,7 @@
 				isPwCheck = true;
 			}
 		});
+
 		$("#m_name").blur(function() {
 			if (nameJ.test($(this).val())) {
 				$("#name_check").text('');
@@ -277,6 +240,7 @@
 				isNameCheck = false;
 			}
 		});
+
 		$("#m_nickname").blur(function() {
 			if (nicknameJ.test($(this).val())) {
 				$("#nickname_check").text('');
@@ -289,6 +253,7 @@
 				isNicknameCheck = false;
 			}
 		});
+
 		$("#m_email").blur(function() {
 			if (mailJ.test($(this).val())) {
 				$("#email_check").text('');
@@ -301,6 +266,7 @@
 				isEmailCheck = false;
 			}
 		});
+
 		$('#m_phonenumber').blur(function(){
 			if(phoneJ.test($(this).val())){
 				$('#phone_check').text('');
@@ -317,6 +283,7 @@
       
 		$('form').on('submit',function(){
 			var inval_Arr = new Array(6).fill(false);
+
 			if (isIdCheck) {
 				inval_Arr[0] = true;   
 			} else {
@@ -324,6 +291,7 @@
 				alert('아이디를  확인하세요.');
 				return false;
 			}
+
 			if (($('#m_pwd').val() == ($('#m_pwd2').val())) && pwJ.test($('#m_pwd').val())) {
 				inval_Arr[1] = true;
 			} else {
@@ -339,6 +307,7 @@
 				alert('이름을 확인하세요.');
 				return false;
 			}
+
 			if (nicknameJ.test($('#m_nickname').val())) {
 				inval_Arr[3] = true;   
 			} else {
@@ -362,6 +331,7 @@
 				alert('휴대폰 번호를 확인하세요.');
 				return false;
 			}
+
 			var validAll = true;
 			
 			for(var i = 0; i < inval_Arr.length; i++){

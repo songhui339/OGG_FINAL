@@ -38,9 +38,13 @@
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
-                           <a class="nav-link" href="${path}/admin/home">
+                           <a class="nav-link" href="${path}">
                                 <div class="sb-nav-link-icon"><i class="fa-sharp fa-solid fa-house"></i></div>
-                                메인
+                                홈으로
+                            </a>
+                            <a class="nav-link" href="${path}/admin/home">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-toolbox"></i></div>
+                                관리자 메인
                             </a>
                             <a class="nav-link" href="${path}/admin/OTT">
                                 <div class="sb-nav-link-icon"><i class="fa-sharp fa-solid fa-video"></i></div>
@@ -86,7 +90,7 @@
                             
                             <div class="card-body"> 
                                 <table id="datatablesSimple2">
-                                    <button type="button" class="btn btn-primary" style="float:right;" onclick="window.open('file:///C:/Users/user/programing/frontend/관리자페이지/addOTT.html','','left=500px,top=200px,width=800px,height=100px')" >OTT 추가하기</button>
+                                <button type="button" class="btn btn-primary" style="float:right;" onclick="window.open('${path}/admin/addOTT','','left=300px,top=300px,width=1100px,height=100px')" >OTT 추가하기</button>
                                     <br><br>
                                     <thead>
                                         <tr>
@@ -94,54 +98,23 @@
                                             <th>OTT 이름</th>
                                             <th>분류</th>
                                             <th>파티별 최대 인원</th>
-                                            <th>파티수</th>
+                                            <th>플랜 이름</th>
+                                            <th>플랜 금액</th>
                                             <th>이미지 소스</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    <c:forEach var="ott" items="${list}">
                                         <tr>
-                                            <td>1</td>
-                                            <td>유튜브</td>
-                                            <td>미디어</td>
-                                            <td>4명</td>
-                                            <td>20개</td>
-                                            <td><a href="assets/img/유튜브.png">유튜브이미지</a></td>
+                                            <td>${ott.ott_no }</td>
+                                            <td>${ott.ott_name }</td>
+                                            <td>${ott.ott_class }</td>
+                                            <td>${ott.ott_max_member }명</td>
+                                            <td>${ott.plan_name }</td>
+                                            <td>${ott.plan_price }</td>
+                                            <td><a href='#'onclick="window.open('${path }/images/party/${ott.ott_thumb }.png','??','left=750px,top=300px,width=200px,height=200px')">${ott.ott_thumb }</a></td>
                                         </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>왓챠</td>
-                                            <td>미디어</td>
-                                            <td>4명</td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>닌텐도</td>
-                                            <td>게임</td>
-                                            <td>2명</td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td>케이크</td>
-                                            <td>교육/도서</td>
-                                            <td>4명</td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>5</td>
-                                            <td>오피스365</td>
-                                            <td>유틸리티</td>
-                                            <td>4명</td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>6</td>
-                                            <td>네이버플러스</td>
-                                            <td>멤버쉽</td>
-                                            <td>4명</td>
-                                            <td></td>
-                                        </tr>
+                                    </c:forEach>
                                     </tbody>
                                     <tfoot>
                                         <tr>
@@ -195,6 +168,12 @@
                 </footer>
             </div>
         </div>
+         <script>
+        var a = ${muser.marchUser};
+        var b = ${muser.juneUser};
+        var c = ${muser.sepUser};
+        var d = ${muser.decUser};
+		</script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="${path}/js/admin/script.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
@@ -203,13 +182,5 @@
         <script src="${path}/js/admin/ottTable.js"></script>
         <script src="${path}/js/admin/bar.js"></script>
         <script src="${path}/js/admin/pie.js"></script>
-
-<script>
-            $(document).ready(function() {
-        $('#datatablesSimple2').DataTable();
-
-
-});
-        </script>
     </body>
 </html>

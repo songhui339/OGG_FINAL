@@ -1,6 +1,7 @@
 package com.project.ogg.admin.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;
@@ -11,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -24,10 +27,14 @@ import org.springframework.web.servlet.ModelAndView;
 import com.project.ogg.admin.model.mapper.AdminMapper;
 import com.project.ogg.admin.model.service.AdminService;
 import com.project.ogg.admin.model.vo.Answer;
+import com.project.ogg.admin.model.vo.MUser;
+import com.project.ogg.admin.model.vo.MemberAD;
 import com.project.ogg.admin.model.vo.Notice;
+import com.project.ogg.admin.model.vo.OttAdmin;
 import com.project.ogg.admin.model.vo.PhotoVo;
 import com.project.ogg.admin.model.vo.Question;
 import com.project.ogg.common.util.MultipartFileUtil;
+import com.project.ogg.common.util.MultipartFileUtil2;
 import com.project.ogg.common.util.PageInfo;
 
 import lombok.extern.slf4j.Slf4j;
@@ -42,36 +49,100 @@ public class AdminController {
 	@Autowired
 	private AdminMapper mapper;
 	
+	@Autowired
+	private ResourceLoader resourceLoader;
 	
 	@GetMapping("/admin/home")
-	public String goAdmin() {
-//		List<MemberAD> list = service.getMemberList();
+	public ModelAndView goAdmin(ModelAndView model) {
+		List<MemberAD> list = service.getMemberList();
+		MUser muser = new MUser();
+		muser.setMarchUser(service.getMarchUserCount());
+		muser.setJuneUser(service.getJuneUserCount());
+		muser.setSepUser(service.getSepUserCount());
+		muser.setDecUser(service.getDecUserCount());
 		
-//		model.addObject("list",list);
-//		model.setViewName("admin/ad_main");
+		System.out.println(muser);
+		model.addObject("muser",muser);
+
+		model.addObject("list", list);
+		model.setViewName("admin/ad_main");
 		
-		return "admin/ad_main";
+		return model;
 	}
-//	@GetMapping("/admin/home")
-//	public ModelAndView goAdmin(ModelAndView model) {
-////		List<MemberAD> list = service.getMemberList();
-//		
-////		model.addObject("list",list);
-//		model.setViewName("admin/ad_main");
-//		
-//		return model;
-//	}
 	
 	@GetMapping("/admin/OTT")
-	public String goOTT() {
+	public ModelAndView goOTT(ModelAndView model) {
+		List<OttAdmin> list = service.getOTTList();
 		
-		return "admin/ad_OTT";
+		MUser muser = new MUser();
+		muser.setMarchUser(service.getMarchUserCount());
+		muser.setJuneUser(service.getJuneUserCount());
+		muser.setSepUser(service.getSepUserCount());
+		muser.setDecUser(service.getDecUserCount());
+		
+		model.addObject("muser",muser);
+		model.addObject("list",list);
+		model.setViewName("admin/ad_OTT");
+		return model;
+	}
+	@GetMapping("/admin/addOTT")
+	public String addOTT() {
+		return "admin/addOTT";
+	}
+	
+	@PostMapping("/admin/addOTT")
+	public ModelAndView addOTT(ModelAndView model, 
+								@ModelAttribute OttAdmin ott,
+								@RequestParam("img") MultipartFile upfile) {
+		
+		int result = 0;
+		
+		if(upfile !=null &&  !upfile.isEmpty()) {
+			//파일을 저장하는 로직 작성
+			String location = null;
+			String ott_thumb = null;
+			try {
+				location = resourceLoader.getResource("resources/images/party")
+										 .getFile()
+										 .getPath();
+				
+				ott_thumb = MultipartFileUtil2.save(upfile, location,ott.getOtt_name());
+				
+				System.out.println(location);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			if(ott_thumb != null) {
+				ott.setOtt_thumb(ott_thumb);
+			}
+		}
+		
+		System.out.println("111board.getNo()"+ott.getOtt_no());
+		result = service.addOTT(ott);
+		System.out.println("222board.getNo()"+ott.getOtt_no());
+		
+		if(result > 0) {
+			// 탈퇴 성공
+    		model.addObject("msg", "정상적으로 OTT 추가 되었습니다.");
+    		model.addObject("script", "opener.document.location.reload();self.close()");
+		} else {
+			// 탈퇴 실패
+			model.addObject("msg", "OTT 추가 실패 하였습니다.");
+			model.addObject("location", "/admin/addOTT");		
+		}
+		model.setViewName("common/msg");
+		
+		return model;
 	}
 	
 	@GetMapping("/admin/member")
-	public String goMember() {
+	public ModelAndView goMember(ModelAndView model) {
 		
-		return "admin/ad_member";
+		List<MemberAD> list = service.getMemberList();
+		
+		model.addObject("list",list);
+		model.setViewName("admin/ad_member");
+		return model;
 	}
 	
 	@GetMapping("/admin/notice")
@@ -151,10 +222,16 @@ public class AdminController {
 	@PostMapping("/notice/write")
 	public ModelAndView noticeWrite(@ModelAttribute Notice notice,ModelAndView model) {
 		
-		System.out.println(notice);
-		int result = service.noticeSave(notice);
-		System.out.println(notice.getN_no());
 		
+		String content = notice.getN_content();
+		
+		if(content.indexOf("/img/smarteditor/") != -1) {
+			String path = content.substring(content.indexOf("/img/smarteditor/")+17,content.indexOf("/img/smarteditor/")+(17+36));
+			System.out.println(path);
+			notice.setN_path(path);
+			}
+		
+		int result = service.noticeSave(notice);
 		if(result > 0) {
 			model.addObject("msg","공지사항 작성 성공");
 			model.addObject("location","/admin/notice/view?no="+notice.getN_no());
@@ -180,7 +257,9 @@ public class AdminController {
 	}
 	
 	@PostMapping("/notice/update")
-	public ModelAndView noticeUpdate(@ModelAttribute Notice notice,ModelAndView model, HttpServletRequest rq) {
+	public ModelAndView noticeUpdate(@ModelAttribute Notice notice,
+									ModelAndView model,
+									HttpServletRequest rq) {
 		
 		System.out.println(notice);
 		
@@ -263,6 +342,7 @@ public class AdminController {
 
 		Question question = service.getQuestionView(no);
 
+		//답변상태가 Y이면 답변을 찾는 로직
 		if(question.getQ_status().equals("Y")) {
 			Answer answer = service.getAnswer(question.getQ_no());
 			model.addObject("answer",answer);
@@ -274,6 +354,139 @@ public class AdminController {
 		return model;
 	}
 	
+	@GetMapping("/question/write")
+	public String questionWriting() {
+		return "admin/ad_questionWrite";
+	}
+	
+	@PostMapping("/question/write")
+	public ModelAndView questionWriting(@ModelAttribute Question question,
+										ModelAndView model) {
+		
+		int result = service.writeQuestion(question);
+		int no = question.getQ_no();
+		System.out.println("no : "+no);
+		
+		if(result > 0) {
+			model.addObject("msg","문의 작성 완료");
+			model.addObject("location","/admin/question/view?no="+no);
+		}else{
+			model.addObject("msg","문의 작성 실패");
+			model.addObject("location","/admin/question/view?no="+no);
+		}
+
+		
+		model.setViewName("common/msg");
+		
+		return model;
+	}
+	@GetMapping("/admin/question/update")
+	public ModelAndView questionUpdate(@RequestParam int no,
+										ModelAndView model) {
+		
+		Question question = service.getQuestionView(no);
+		Answer answer = service.getAnswer(question.getQ_no());
+		
+		if(answer != null) {
+			model.addObject("msg","답변이 있을 경우 질문 수정이 불가능합니다.");
+			model.addObject("location","/admin/question/view?no="+no);
+			model.setViewName("common/msg");
+			return model;
+		}
+		
+		model.addObject("question",question);
+		model.setViewName("admin/ad_questionUpdate");
+		
+		return model;
+	}
+	@PostMapping("/admin/question/update")
+	public ModelAndView questionUpdate(@RequestParam int no,
+									ModelAndView model,
+									@ModelAttribute Question question) {
+		
+		System.out.println(question);
+		int result = service.updateQuestion(question);
+		
+		if(result > 0) {
+			model.addObject("msg","문의 수정 완료");
+			model.addObject("location","/admin/question/view?no="+no);
+		}else{
+			model.addObject("msg","문의 수정 실패");
+			model.addObject("location","/admin/question/view?no="+no);
+		}
+		model.setViewName("common/msg");
+		return model;
+	}
+		
+	@GetMapping("/admin/answer")
+	public ModelAndView answering(@RequestParam("no")int no,ModelAndView model) {
+		
+		Question question = service.getQuestionView(no);
+		model.addObject("question", question);
+		model.setViewName("admin/ad_questionAnswer");
+		
+		return model;
+	}
+	
+	@PostMapping("/admin/answer")
+	public ModelAndView answering(@RequestParam("no")int no,
+							ModelAndView model,
+							@ModelAttribute Answer answer) {
+		
+		answer.setQ_no(no);
+		int result = service.insertAnswer(answer);
+		
+		if(answer.getA_no() != 0) {
+			int updateQs = service.updateQnA(answer);
+		}
+		
+		if(result > 0) {
+			model.addObject("msg","답변 작성 완료");
+			model.addObject("location","/admin/question/view?no="+no);
+		}else{
+			model.addObject("msg","답변 작성 실패");
+			model.addObject("location","/admin/question/view?no="+no);
+		}
+		
+		model.setViewName("common/msg");
+		return model;
+	}
+	
+	@GetMapping("/admin/answer/update")
+	public ModelAndView answerUpdate(@RequestParam("no") int no, ModelAndView model) {
+
+		Question question = service.getQuestionView(no);
+
+		if (question.getQ_status().equals("Y")) {
+			Answer answer = service.getAnswer(question.getQ_no());
+			model.addObject("answer", answer);
+		}
+
+		model.addObject("question", question);
+		model.setViewName("admin/ad_answerUpdate");
+
+		return model;
+	}
+	
+	@PostMapping("/admin/answer/update")
+	public ModelAndView answerUpdate(@RequestParam("no") int no,
+									ModelAndView model,
+									@ModelAttribute Answer answer) {
+		System.out.println(answer);
+		
+		int result = service.answerUpdate(answer);
+		
+		if(result > 0) {
+			model.addObject("msg","답변 수정 완료");
+			model.addObject("location","/admin/question/view?no="+no);
+		}else{
+			model.addObject("msg","답변 수정 실패");
+			model.addObject("location","/admin/question/view?no="+no);
+		}
+		
+		model.setViewName("common/msg");
+		return model;
+	}
 	
 	
 	

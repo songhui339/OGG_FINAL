@@ -3,29 +3,48 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <c:set var="path" value="${ pageContext.request.contextPath }"/>
-<html>
-<head>
-	<title>Home</title>
-</head>
-<body>
-<h1>
-	예비 메인화면
-</h1>
 
-<p>
-	<a href="${ path }/review/film_list">작품 리스트 페이지 </a><br><br>
-	<a href="${ path }/review/review_list">리뷰 리스트 페이지 </a><br><br>
-</p>
+<script src="${ path }/js/jquery-3.6.0.min.js"></script>
 
-	<input type="button" value="로그인" onclick="location.href='${ path }/member/goLogin.do'">
-	<input type="button" value="회원가입" onclick="location.href='${ path }/member/goAgreementBeforJoin.do'">
-	<br><br><br>
-	<a href="${ path }/member/goLogout.do">로그아웃</a>
-	<a href="${ path }/party/ottlist">파티 만들기</a>
-	<a href="${ path }/party/write">파티 만들기(작성페이지)</a>
-	
-	<button onclick="location.assign('${path}/admin/home')">관리자 페이지</button>
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
-</body>
-</html>
+	<!-- 메인 페이지 CSS -->
+    <link rel="stylesheet" href="${path}/css/main/ogg_mainPage.css" class="css">
+
+	<ul class="gallery">
+    <li>
+      <div class="content">
+        
+      </div>
+    </li>
+    <li>
+      <div class="content">
+        
+      </div>
+    </li>
+    <li>
+      <div class="content">
+        
+      </div>
+    </li>
+    <li>
+      <div class="content">
+        
+      </div>
+    </li>
+    <li>
+      <div class="content">
+        
+      </div>
+    </li>
+  </ul>
+  
+  <div>
+        <p style="text-align: center; padding: 200px 0; font-size: 2rem; margin: 0;">메인 페이지 내용</p>
+    </div>
+  
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

@@ -11,8 +11,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="${ path }/member/customLogout.do" method="post">
+	<form action="/member/customLogout.do" method="post">
 		<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
+		<!-- security 이동하는데 post면 토큰 붙여주기 (공식처럼) -->
 		<input type="submit">
 	</form>
 </body>

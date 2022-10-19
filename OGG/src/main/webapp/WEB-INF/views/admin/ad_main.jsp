@@ -38,9 +38,13 @@
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
-                            <a class="nav-link" href="${path}/admin/home">
+                            <a class="nav-link" href="${path}">
                                 <div class="sb-nav-link-icon"><i class="fa-sharp fa-solid fa-house"></i></div>
-                                메인
+                                홈으로
+                            </a>
+                            <a class="nav-link" href="${path}/admin/home">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-toolbox"></i></div>
+                                관리자 메인
                             </a>
                             <a class="nav-link" href="${path}/admin/OTT">
                                 <div class="sb-nav-link-icon"><i class="fa-sharp fa-solid fa-video"></i></div>
@@ -76,7 +80,7 @@
                             <div class="col-xl-6">
                                 <div class="card mb-4">
                                     <div class="card-header">
-                                        <i class="fas fa-chart-area me-1"></i>
+                                        <i class="fa-solid fa-signal"></i>
                                         이용자 수 그래프
                                     </div>
                                     <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
@@ -103,47 +107,34 @@
                                     <thead>
                                         <tr>
                                             <th>이름</th>
-                                            <th>나이</th>
-                                             <!--
                                             <th>이용 OTT 종류</th>
-                                            --> 
                                             <th>가입일</th>
                                             <th>권한</th>
+                                            <th>포인트</th>
                                             <th>신고횟수</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     <c:if test="${not empty list }">
-                                    	<c:forEach var="member" items="${ list }">
-	                                        <tr>
-	                                            <td><a href="javascript:del()">${member.m_name}</a></td>
-	                                            <td>${member.m_age}</td>
-	                                            <!--<td>넷플릭스, 디즈니 플러스</td>-->
-	                                            <td>${member.m_joindate}</td>
-	                                            <td>${member.m_authority}</td>
-	                                            <td>${member.r_time}</td>
-	                                        </tr>
-	                                     </c:forEach>
-                                    </c:if>
-                                    <c:if test="${empty list }">
-                                   
+                                    <c:forEach var="member" items="${list}">
                                         <tr>
-                                            <td>조회결과가 없습니다.</td>
-                                            <td></td>
-                                            <!--<td>넷플릭스, 디즈니 플러스</td>-->
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            <td><a href="javascript:del()">${member.m_name }</a></td>
+                                            <td>넷플릭스, 디즈니 플러스</td>
+                                            <td><fmt:formatDate type="date" value="${ member.m_joindate }" /></td>
+                                            <td>${member.m_authority}</td>
+                                            <td>${member.m_point}</td>
+                                            <td>${member.r_time}</td>
                                         </tr>
-                                         </c:if>
+                                    </c:forEach>
+                                    </c:if>
                                     </tbody>
                                     <tfoot>
                                         <tr>
                                             <th>이름</th>
-                                            <th>나이</th>
                                             <th>이용 OTT 종류</th>
                                             <th>가입일</th>
                                             <th>권한</th>
+                                            <th>포인트</th>
                                             <th>신고횟수</th>
                                         </tr>
                                     </tfoot>
@@ -166,6 +157,12 @@
                 </footer>
             </div>
         </div>
+         <script>
+        var a = ${muser.marchUser};
+        var b = ${muser.juneUser};
+        var c = ${muser.sepUser};
+        var d = ${muser.decUser};
+		</script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="${path}/js/admin/script.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>

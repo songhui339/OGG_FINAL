@@ -12,11 +12,17 @@
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
-	<annotation-driven />
+	
+	<annotation-driven>
+		<argument-resolvers>
+			<beans:bean class="org.springframework.security.web.method.annotation.AuthenticationPrincipalArgumentResolver" />
+		</argument-resolvers>
+	</annotation-driven>
 	
 	<resources mapping="/js/**" location="/resources/js/" ></resources>
 	<resources mapping="/css/**" location="/resources/css/" ></resources>
 	<resources mapping="/images/**" location="/resources/images/" ></resources>
+	<resources mapping="/summernote/**" location="/resources/summernote/" ></resources>
 	<resources mapping="/smarteditor2/**" location="/resources/smarteditor2/" ></resources>
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->

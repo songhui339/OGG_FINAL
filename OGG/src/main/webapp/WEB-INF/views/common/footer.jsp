@@ -10,7 +10,7 @@
         <div class="width-container">
             <div class="contentWrap">
                 <div class="logoBox">
-                    <img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/small-butslogo-glay.png" alt="lgooIcon">
+                    <img src="${ path }/images/logo/OGG_logo_footer.png"  alt="logo">
                 </div>
                 <a href="javascript:" target="_blank" class="v-bar">회사 소개</a>
                 <a href="javascript:" target="_blank" class="v-bar">제휴문의</a>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>커뮤니티</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="ogg_community.css" class="css">
+    <link rel="stylesheet" href="../Header&Footer/ogg_common.css" class="css">
+</head>
+<body>
+    <header>
+        <div class="width-container">
+            <div class="logoBox">
+                <a href="javascript:">
+                    <img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/small-butslogo.png" srcset="https://buts.co.kr/thema/Buts/colorset/Basic/img/2x/small-butslogo.png 2x" alt="loogo" title=""></a>
+            </div>
+
+            <div class="btnBox">
+                <a href="javascript:" class="loginBtn">로그인</a>
+            </div>
+        </div>
+
+        <div class="menu-container">
+            <ul class="menuBox">
+                <li>
+                    <a href="javascript:">파티 만들기</a>
+                </li>
+                <li>
+                    <a href="javascript:">파티 찾기</a>
+                </li>
+                <li>
+                    <a href="javascript:">리뷰</a>
+                </li>
+                <li>
+                    <a href="javascript:">커뮤니티</a>
+                </li>
+                <li>
+                    <a href="javascript:">이벤트</a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+        <section class="community_section">
+
+            <div class="pageTitleBox">
+                <h2 class="titleText" onclick="location.href='${ path }/cummunity'">💬 커뮤니티</h2>
+                <div class="btnBox">
+
+                    <button type="button" 
+                    onclick="location.href='${ path }/cummunity/goModify.do?c_no=${ community.c_no }'" class="btn modifyBtn">수정 <i class="bi bi-pencil"></i></button>
+                    <button type="button" id="btnDelete" class="btn deleteBtn">삭제 <i class="bi bi-trash3"></i></button>
+                </div>
+            </div>
+
+            <!-- 게시글 내용 -->
+            <div class="articleWrap">
+                <!-- 타이틀 -->
+                <div class="titleBox">
+                    <h2>${C_TITLE}</h2>
+                </div>
+
+                <!-- 정보 -->
+                <div class="infoBox">
+                    <span class="writerText">${C_WRITER}</span>
+                    <span class="dateText">작성일 : ${C_DATE}</span>
+                    <div class="info_right">
+                        <span class="viewCount c_gray">
+                            👀 ${C_VIEWCOUNT}
+                        </span>
+                        <span class="commentCount c_gray">
+                            💬 ${C_COMENTCOUNT}
+                        </span>
+                    </div>
+                </div>
+
+                <!-- 내용 -->
+                <div class="contentBox">
+                    <p>
+                        벤자민은 6회말 이정후에게 3루수 키를 넘기는 절묘한 좌익수 쪽 2루타를 내줬으나, 김혜성을 바깥쪽 공으로 루킹 삼진으로 돌려세우면서 무실점 피칭을 이어갔다. 마지막 위기는 7회말 2사에 있었다. 이지영, 대타 전병우가 연속 안타로 기회를 만들었지만, 이번에도 송성문을 유격수 땅볼로 잡아내면서 뛰어난 위기 관리 능력을 보여줬다.
+
+                        결국 벤자민은 7이닝 5피안타 1볼넷 9탈삼진 무실점으로 승리 투수가 됐다. 경기 후 홍원기 키움 감독은 "벤자민의 호투에 밀려 찬스를 못 만든 것이 직접적인 패인이다. 어제 타격감이 좋아서 기대했는데 벤자민 구위가 워낙 좋았다"고 감탄했다.
+
+                        압도적인 피칭을 상대하면서도 이정후는 3타수 2안타 1볼넷으로 멀티히트를 달성하면서 대기록을 만들어냈다. 4회말 1사에서 벤자민의 2구째 커터를 받아 쳐 만든 안타는 포스트시즌 연속 안타 신기록이었다. 이정후는 2019년 LG 트윈스와 준플레이오프 2차전부터 이어온 포스트시즌 연속 안타 기록을 15경기로 늘리면서 류중일(삼성 라이온즈), 이정훈(한화 이글스), 안경현(두산 베어스)의 14경기 연속 안타를 넘어섰다.
+                    </p>
+                    <img src="${ path }/resources/images/file.png" width="20px" height="20px">
+					<a href="javascript:" id="fileDown" class="fileLink">
+						<span>${ community.c_file }</span>
+					</a>
+                </div>
+
+                <!-- 댓글 header -->
+                <div class="replyHeader">
+                    <h3>댓글 <span>${C_COMENTCOUNT}</span></h3>
+                </div>
+
+                <!-- 댓글 내용 -->
+                <div class="replyBox">
+                    <!-- 민정 요 아래 replyItem div를 c:if로 묶으시면 됩니당 -->
+                    <div class="replyItem">
+                        <p class="replyWriter">
+                            ${communityReply.m_nickname}
+                            <span class="date">작성일 : <fmt:formatDate value="${communityReply.cr_writeDate}" pattern="yyyy-MM-dd" /></span>
+                        </p>
+                        <p class="replyText">
+                            이정후, 신기록 세우고도 외롭게 울었다
+                        </p>
+                        <div class="btnBox">
+                            <button type="button" class="btn purpleBtn" onclick="location.href='${ path }/cummunity/replyModify.do?cr_no=${ communityReply.cr_no }'">수정</button>
+                            <button type="button" class="btn redBtn" onclick="location.href='${ path }/cummunity/replyDelete.do?cr_no=${ communityReply.cr_no }'">삭제</button>
+                        </div>
+                    </div>
+
+                    <div class="replyItem">
+                        <p class="replyWriter">
+                            ${communityReply.m_nickname}
+                            <span class="date">작성일 : <fmt:formatDate value="${communityReply.cr_writeDate}" pattern="yyyy-MM-dd" /></span>
+                        </p>
+                        <p class="replyText">
+                            이정후, 신기록 세우고도 외롭게 울었다
+                        </p>
+                        <div class="btnBox">
+                            <button type="button" class="btn purpleBtn" onclick="location.href='${ path }/cummunity/replyModify.do?cr_no=${ communityReply.cr_no }'">수정</button>
+                            <button type="button" class="btn redBtn" onclick="location.href='${ path }/cummunity/replyDelete.do?cr_no=${ communityReply.cr_no }'">삭제</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 로그인 안한 사람들한테 보일 화면 -->
+                <div class="needLoginBox">
+                    <div class="banner">
+                        <p>
+                            <i class="bi bi-chat-dots-fill"></i> 권한이 없습니다. 
+                            <span onclick="location.href='${ path }/member/goLoginPage.do'">로그인</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 댓글 입력 창 -->
+                <div class="writeReplyBox">
+                    <form method="post" action="/community/replyWrite.do">
+                        <textarea rows="3" cols="50" name="cr_content" class="replyTA"></textarea>
+                        <input type="hidden" name="cr_communityNo" value="${community.c_no}">
+                        <input type="hidden" name="cr_writerNo" value="${community.c_writerNo}">
+                        <button type="submit" class="btn replyBtn">댓글 작성</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="btnBox">
+                <button type="button" onclick="location.href='${ path }/community/goList.do'" class="btn backtoListBtn"><i class="bi bi-card-list"></i> 목록으로</button>
+            </div>
+
+
+            
+        </section>
+
+    <footer>
+        <div class="width-container">
+            <div class="contentWrap">
+                <div class="logoBox">
+                    <img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/small-butslogo-glay.png" alt="lgooIcon">
+                </div>
+                <a href="javascript:" target="_blank" class="v-bar">회사 소개</a>
+                <a href="javascript:" target="_blank" class="v-bar">제휴문의</a>
+                <a href="javascript:" target="_blank" class="v-bar">제휴문의</a>
+                <a href="javascript:" target="_blank" class="v-bar">1:1문의하기</a>
+                <a href="javascript:" target="_blank" class="v-bar"><strong>개인정보처리방침</strong></a>
+                <a href="javascript:" target="_blank" class="v-bar">이용약관</a>
+                <a href="javascript:" target="_blank" class="v-bar">FAQ</a>
+                <br><br>
+                <span class="v-bar">상호 : 벗츠</span>
+                <span>대표 : 김시진</span>
+                <br>
+                <span>주소 : 경기도 성남시 분당구 서현동 245-4 엘지분당에클라트2차 1221호</span>
+				<br>
+				<span class="v-bar">사업자등록번호 : 375-36-00640</span>
+				<span class="v-bar"><a href="http://www.ftc.go.kr/info/bizinfo/communicationList.jsp" target="_blank"> <strong>사업자정보확인</strong></a></span>
+				<span>통신판매번호 : 제 2019-의정부송산-040호</span>
+				<br>
+				<span class="v-bar">개인정보보호책임 : 김시진</span> <span>호스팅 사업자 : Amazon Web Service(AWS)</span>
+				<br>
+				<span class="v-bar">이메일 : <a href="mailto:manager@buts.co.kr">manager@buts.co.kr</a></span> <span>대표전화 : 070-4354-1015</span>
+				<br>
+				<br>
+				<span>Copyright © 2022 Buts Inc. All rights reserved.</span>
+            </div>
+        </div>
+    </footer>
+    <footer>
+        <div class="width-container">
+        벗츠는 통신판매중개자이며, 통신판매의 당사자가 아닙니다.파티정보, 구매에 관한 의무와 책임은 판매자에게 있습니다.<br>
+        벗츠는 소비자 보호와 안전거래를 위해고객센터(manager@buts.co.kr)를 운영하고 있으며,분쟁이 발생 된 경우 별도의 분쟁처리절차에 의거분쟁해결 및 청약철회 등이 진행 됩니다.
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

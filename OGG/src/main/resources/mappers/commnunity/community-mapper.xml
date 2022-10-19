@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.project.ogg.community.model.mapper.CommunityMapper">
+	
+	<resultMap type="Community" id="CommunityResultMap">
+		<id property="c_no" column="C_NO"/>
+		<result property="c_writerNo" column="C_WRITERNO" />
+		<result property="c_title" column="C_TITLE" />
+		<result property="c_content" column="C_CONTENT" />
+		<result property="c_file" column="C_FILE" />
+		<result property="c_fileRename" column="C_FILERENAME" />
+		<result property="c_writeDate" column="C_WRITEDATE" />
+		<result property="c_modifyDate" column="C_MODIFYDATE" />
+		<result property="c_viewCount" column="C_VIEWCOUNT" />
+		<result property="c_status" column="C_STATUS" />
+		<result property="c_like" column="C_LIKE" />
+		<result property="m_nickName" column="M_NICKNAME" />
+	</resultMap>
+	
+	<!-- 게시글 목록 조회 -->
+	<select id="selectCommunityCount" resultType="_int" parameterType="com.project.ogg.common.model.CommonVO">
+		SELECT COUNT(C_NO) FROM COMMUNITY WHERE C_STATUS='Y'
+		<if test='sValue != null and sValue != ""'>
+			<if test="sType == 'subject'">
+				AND C_TITLE LIKE '%'|| #{sValue} ||'%'
+			</if>
+			<if test="sType == 'content'">
+				AND C_CONTENT LIKE '%'|| #{sValue} ||'%'
+			</if>
+		</if>
+	</select>
+	
+	<select id="selectAll" resultMap="CommunityResultMap" parameterType="com.project.ogg.common.model.CommonVO">
+		SELECT C_WRITERNO,
+			   C_NO,
+			   C_TITLE,
+			   C_CONTENT,
+			   C_FILE,
+			   C_WRITEDATE,
+			   C_MODIFYDATE,
+			   C_VIEWCOUNT,
+			   C_STATUS,
+			   C_LIKE,
+			   M_NICKNAME
+		FROM COMMUNITY C
+		JOIN MEMBER M ON (M.M_NO = C.C_WRITERNO)
+		WHERE C.C_STATUS = 'Y'
+		<if test='sValue != null and sValue != ""'>
+			<if test="sType == 'subject'">
+				AND C_TITLE LIKE '%'|| #{sValue} ||'%'
+			</if>
+			<if test="sType == 'content'">
+				AND C_CONTENT LIKE '%'|| #{sValue} ||'%'
+			</if>
+		</if>
+		ORDER BY C.C_NO DESC
+	</select>
+
+	<!-- 게시글 상세 조회 (댓글 포함X) -->
+	<select id="findCommunityByNo" parameterType="_int" resultMap="CommunityResultMap">
+		SELECT C.C_NO,
+			   C.C_TITLE,
+			   C.C_WRITERNO,
+			   M.M_NICKNAME,
+			   C.C_VIEWCOUNT,
+			   C.C_FILE,
+			   C.C_FILERENAME,
+			   C.C_CONTENT,
+			   C.C_WRITEDATE,
+			   C.C_MODIFYDATE
+		FROM COMMUNITY C
+		LEFT JOIN MEMBER M ON (C.C_WRITERNO = M.M_NO)
+		WHERE C.C_STATUS = 'Y' AND C.C_NO = #{c_no}
+	</select>
+	
+	<!-- 게시글 등록 -->
+	<insert id="insertCommunity" parameterType="Community" useGeneratedKeys="true" keyProperty="c_no" keyColumn="C_NO">
+		INSERT INTO COMMUNITY (
+			C_NO,
+			C_WRITERNO,
+			C_TITLE,
+			C_CONTENT,
+			C_FILE,
+			C_FILERENAME,
+			C_WRITEDATE,
+			C_MODIFYDATE,
+			C_VIEWCOUNT,
+			C_STATUS,
+			C_LIKE
+		) VALUES (
+			C_NO.NEXTVAL,
+			#{c_writerNo},
+			#{c_title},
+			#{c_content},
+			#{c_file},
+			#{c_fileRename},
+			DEFAULT,
+			DEFAULT,
+			DEFAULT,
+			DEFAULT,
+			DEFAULT
+		)
+	</insert>
+	
+	<!-- Authentication m_no을 통해서 m_id 선택하는 구문 -->
+	<select id="selectMemberId" parameterType="String" resultType="_int">
+		SELECT M_NO
+		FROM MEMBER
+		WHERE M_ID=#{m_id}
+	</select>
+	
+	<!-- 게시글 삭제 -->
+	<update id="communityDelete" parameterType="map">
+		UPDATE COMMUNITY SET C_STATUS=#{c_status} WHERE C_NO=#{c_no}
+	</update>
+	
+	<!-- 게시글 수정 -->
+	<update id="modifyCommunity" parameterType="Community">
+		UPDATE COMMUNITY
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="c_title != null">C_TITLE = #{c_title},</if>
+			<if test="c_content != null">C_CONTENT = #{c_content},</if>
+			<if test="c_file != null">C_FILE = #{c_file},</if>
+			<if test="c_fileRename != null">C_FILERENAME = #{c_fileRename},</if>
+		</trim>
+		WHERE C_NO = #{c_no}
+	</update>
+	
+	<!-- 게시글 조회수 -->
+	<update id="communityViewcount" parameterType="int">
+		UPDATE COMMUNITY SET
+		C_VIEWCOUNT = C_VIEWCOUNT + 1
+		WHERE C_NO = #{c_no}
+	</update>
+	
+</mapper>
