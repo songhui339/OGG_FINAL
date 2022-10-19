@@ -298,6 +298,34 @@ OGG 마이페이지 CSS
     float: right;
 }
 
+/* ========== 비밀번호 확인 ========== */
+.myPage_section .myPage_Wrap .infoBox .formBox .titleText {
+	margin: 30px 0;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.myPage_section .myPage_Wrap .infoBox .formBox input[type='password'] {
+	width: 350px;
+    height: 40px;
+    margin-right: 10px;
+    padding: 0 15px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #333;
+    border: solid 1px #dddddd;
+    border-radius: 0.375rem;
+    background-color: white;
+    outline: none;
+}
+
+
+.myPage_section .myPage_Wrap .infoBox .formBox input:active,
+.myPage_section .myPage_Wrap .infoBox .formBox input:focus {
+    border: solid 1px #7e69fe;
+}
+
 
 /* ========== 내 파티 관리하기 ========== */
 .myPage_section .myPage_Wrap .infoBox .partyBox {
