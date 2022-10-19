@@ -150,7 +150,7 @@ WHERE Q_NO = #{no}
 					#{n_title},
 					#{n_content},
 					#{n_path},
-					12
+					#{n_M_No}
 					)
 	</insert>
 	
@@ -165,7 +165,7 @@ WHERE Q_NO = #{no}
 	VALUES(SEQ_QUESTIONS.NEXTVAL,
 			#{q_title},
 			#{q_content},
-			SYSDATE,
+			#{q_M_no},
 			12)
 	</insert>
 	
@@ -201,7 +201,7 @@ WHERE Q_NO = #{no}
 			#{a_title},
 			#{a_content},
 			SYSDATE,
-			11,
+			#{a_m_no},
 			#{q_no})
 	</insert>
 	<update id="updateQuestion" parameterType="Question">
@@ -245,5 +245,11 @@ WHERE Q_NO = #{no}
 	SET N_STATUS = 'N'
 	WHERE N_NO=#{no}
 	</update>
+	
+	<delete id="deleteOtt" parameterType="_int">
+	DELETE FROM OTT_INFO
+	WHERE OTT_NO = #{no}
+	</delete>
+	
 
 </mapper>
