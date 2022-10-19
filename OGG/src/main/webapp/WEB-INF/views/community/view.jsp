@@ -94,16 +94,21 @@
                     </div>
                 </div>
                 -->
+                <!-- 오류 해결을 위한 빈 div 태그 삭제하지말아주세요!! -->
+                <div style="height: 50px;"></div>
 
                 <!-- 댓글 입력 창 -->
                 <div class="writeReplyBox">
                     <form method="post" action="${path}/community/replyWrite.do" name="communityReplyWrite">
-                        <textarea rows="3" cols="50" name="cr_content" class="replyTA"></textarea>
                         <input type="hidden" name="cr_communityNo" value="${community.c_no}">
                         <input type="hidden" name="cr_writerNo" value="${community.c_writerNo}">
+                        <textarea rows="3" cols="50" name="cr_content" class="replyTA" style="resize: none;width: 85%;height: 80px;border-radius: 0.375rem;"></textarea>
                         <button type="submit" id="communityReplySubmit" class="btn replyBtn">댓글 작성</button>
+                        
                     </form>
                 </div>
+                
+               
             </div>
 
             <div class="btnBox">
