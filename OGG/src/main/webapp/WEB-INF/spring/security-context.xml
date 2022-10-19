@@ -21,7 +21,10 @@
 		<security:intercept-url pattern="/board/**" access="hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')"/>
 		<security:intercept-url pattern="/admin/**" access="hasAuthority('ROLE_ADMIN')"/>
 	-->
+		<security:intercept-url pattern="/commnunity/**" access="hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')"/>
+		<security:intercept-url pattern="/admin/**" access="hasAuthority('ROLE_ADMIN')"/>
 		<security:intercept-url pattern="/**" access="permitAll"/>
+		
 	
 		<security:form-login login-page="/member/cutomLogin.do"
 							 login-processing-url="/member/login.do"

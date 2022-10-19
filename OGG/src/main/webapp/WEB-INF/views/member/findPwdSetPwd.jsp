@@ -34,64 +34,7 @@
             </form>
         </div>
     </section>
-	
-	<script type="text/javascript">
-		
-		$(function(msg){
-			var msg = "<c:out value="${msg}" />";
-			if (msg != "") {
-				alert(msg);
-			}
-		});
-		
-	</script>
-		
-	<script type="text/javascript">
-		var pwJ = /^[A-Za-z0-9]{4,20}$/; // 비밀번호 정규식 : 4~20자의 소문자, 대문자, 숫자
-		$(document).ready(function() {
-			
-			var isPwCheck = true;
-	
-			$('#m_pwd').blur(function() {
-				if (pwJ.test($('#m_pwd').val())) {
-					$('#pwd_check').text('');
-					
-					isPwCheck = true;
-				} else {
-					$('#pwd_check').text('4~20자의 영문, 숫자 사용 가능합니다.');
-					$('#pwd_check').css('color', 'gray');
-					
-					isPwCheck = false;
-				}
-			});
-	
-			$('#m_pwd2').blur(function() {
-				if ($('#m_pwd').val() != $(this).val()) {
-					$('#pwd_check2').text('비밀번호가 일치하지 않습니다.');
-					$('#pwd_check2').css('color', 'gray');
-					
-					isPwCheck = false;
-					
-				} else {
-					$('#pwd_check2').text('');
-					
-					isPwCheck = true;
-				}
-			});
-	
-		
-			$('form').on('submit',function(){
-	
-				if (($('#m_pwd').val() == ($('#m_pwd2').val())) && pwJ.test($('#m_pwd').val())) {
-					inval_Arr[1] = true;
-				} else {
-					inval_Arr[1] = false;
-					alert('비밀번호를 확인하세요.');
-					return false;
-				}
-	     
-			});
-		});
-	
-	</script>
+    
+
+
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

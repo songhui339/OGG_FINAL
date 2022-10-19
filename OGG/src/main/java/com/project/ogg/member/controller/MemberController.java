@@ -61,14 +61,14 @@ public class MemberController {
 		
 		if(result > 0) {
 			model.addObject("msg", "회원가입이 정상적으로 완료되었습니다.");
-			model.setViewName("home");
+			model.addObject("location", "/member/goLoginPage.do");
+			model.setViewName("common/msg");
 		} else {
 			model.addObject("msg", "회원가입을 실패하였습니다.");
-			model.setViewName("member/join");
+			model.addObject("location", "/member/goLoginPage.do");
+			model.setViewName("common/msg");
 		}
-		
-		model.addObject("common/msg");
-		
+
 		return model;
 	}
 	
@@ -207,7 +207,8 @@ public class MemberController {
 			return model;
 		} else {
 			model.addObject("msg", "인증번호가 일치하지 않습니다.");
-			model.setViewName("member/findPwdNext");
+			model.addObject("location", "/member/goFindPwd.do");
+			model.setViewName("common/msg");
 			return model;
 		}
 	}
@@ -220,11 +221,13 @@ public class MemberController {
 		
 		if(result == 1 ) {
 			model.addObject("msg", "비밀번호 변경이 정상적으로 완료되었습니다.");
-			model.setViewName("member/login");
+			model.addObject("location", "/member/goLoginPage.do");
+			model.setViewName("common/msg");
 			return model;
 		} else {
 			model.addObject("msg", "비밀번호 변경을 실패하였습니다.");
-			model.setViewName("member/findPwd");
+			model.addObject("location", "/member/goFindPwd.do");
+			model.setViewName("common/msg");
 			return model;
 		}
 	}

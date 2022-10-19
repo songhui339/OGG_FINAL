@@ -41,31 +41,45 @@
             <div class="logoBox">
                 <a href="${ path }/"><img src="${ path }/images/logo/OGG_logo_menu.png"  alt="logo"></a>
             </div>
-
 			<div class="btnBox">
 			
 				<!-- 로그인 전 -->
-				<security:authorize access="isAnonymous()">
-					<div class="btnBox">
-						<a class="loginBtn" href="${ path }/member/goLoginPage.do">로그인</a>
-					</div> 
-				</security:authorize>
+				<c:if test="${empty sessionScope.kakaoname}">
+					<security:authorize access="isAnonymous()">
+						<div class="btnBox">
+							<a class="loginBtn" href="${ path }/member/goLoginPage.do">로그인</a>
+						</div> 
+					</security:authorize>
+				</c:if>
 				
 				<!-- 로그인 후 -->
+				<!-- 시큐리티 -->
 				<security:authorize access="isAuthenticated()">
-					<security:authentication property="principal.m_name" var="sec_m_name"/> <!-- 로그인한 회원의 이름 -->
+					<security:authentication property="principal.m_name" var="sec_m_name"/>
 					<a href="javascript:" class="myPageBtn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">${ sec_m_name }님</a>
 				</security:authorize>
+				
+				<!-- 카카오 -->
+				<c:if test="${!empty sessionScope.kakaoname}">
+					<a href="javascript:" class="myPageBtn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">${ sessionScope.kakaoname }님</a>
+				</c:if>
 			 
 				<ul class="dropdown-menu" style="z-index: 80;">
 					<li><a class="dropdown-item c_purple" href="${ path }/mypage/main">마이페이지</a></li>
 					<li><a class="dropdown-item c_purple" href="${ path }/admin/home">관리페이지</a></li>
 					<li><hr class="dropdown-divider"></li>
 					
-					<!-- 로그인한 경우에 로그아웃 노출 -->
+					<!-- 로그아웃 -->
+					<!-- 시큐리티 -->
 					<security:authorize access="isAuthenticated()">
 						<li><a class="dropdown-item c_red" href="${ path }/member/doLogout.do">로그아웃</a></li>
 					</security:authorize>
+					
+					<!-- 카카오 -->
+					<c:if test="${!empty sessionScope.kakaoname}">
+						<li><a class="dropdown-item c_red" href="${ path }/member/kakaoLogout.do">로그아웃</a></li>
+					</c:if>
+					
 				</ul>
 			</div> 
             

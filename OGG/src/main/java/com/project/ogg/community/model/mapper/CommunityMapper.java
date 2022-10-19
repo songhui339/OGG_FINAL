@@ -30,4 +30,6 @@ public interface CommunityMapper {
 	
 	public int communityViewcount (int c_no);
 
+	int replyCount(int c_no);
+
 }

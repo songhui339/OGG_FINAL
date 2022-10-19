@@ -134,4 +134,13 @@
 		WHERE C_NO = #{c_no}
 	</update>
 	
+	<!-- 게시글 댓글 수 -->
+	<select id="replyCount" parameterType="int" resultType="int">
+		SELECT COUNT(CR_NO) 
+		FROM COMMUNITY
+		LEFT JOIN COMMUNITY_REPLY ON (C_NO = CR_COMMUNITYNO)
+		WHERE C_NO = #{c_no}
+	</select>
+	
+	
 </mapper>

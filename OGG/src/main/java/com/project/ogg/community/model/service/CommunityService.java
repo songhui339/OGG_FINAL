@@ -24,6 +24,9 @@ public interface CommunityService {
 	
 	// 게시글 조회수
 	int communityViewcount(int c_no);
+	
+	// 댓글 개수
+	int replyCount(int c_no);
 
 
 }
