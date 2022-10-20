@@ -43,10 +43,10 @@ public class FilmController {
 		int no = 0;
 		List<ReviewLikes> list = new ArrayList<ReviewLikes>();
 		
-		// 로그인 넘버값을 넘겨서 필름 검색 가져오기 
 		no = member.getM_no();
 		list = service.getFilmLikes(no);
 		
+		System.out.println(member);
 		System.out.println(list);
 
 		return list;

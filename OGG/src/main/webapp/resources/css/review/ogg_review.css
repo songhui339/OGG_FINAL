@@ -357,3 +357,7 @@
     #dir_film{
     	padding: 50px;
     }
+
+    .c3-event-rect bar{
+        fill: #7e69fe;
+    }

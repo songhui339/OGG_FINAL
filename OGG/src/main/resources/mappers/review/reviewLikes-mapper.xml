@@ -75,9 +75,9 @@
 	
 	<!-- 영화 체크 -->		
 	<select id="checkFilm" parameterType="_int" resultMap="filmResultMap">
-		SELECT *
-		FROM FILM
-		WHERE F_CODE = #{fCode}
+		SELECT  *
+		FROM 	FILM
+		WHERE	F_CODE = #{fCode}
 	</select>
 	
 	<!-- 영화 등록 -->
@@ -94,7 +94,15 @@
 	      	)	
 	</insert>
 	
-	<!-- 평가 조회 (영화 별점) -->
+	<!-- 별점 조회 (영화별) -->
+	<select id="selectStarbyFilm" parameterType="_int" resultMap="reviewLikesResultMap">
+		<include refid="reviewLikesSql" />
+			WHERE 	F_CODE = #{fcode} AND 
+			      	F_STAR > 0 AND
+			      	L_TYPE = 'STAR'
+	</select>
+	
+	<!-- 별점 조회 (개인별) -->
 	<select id="selectStar" parameterType="ReviewLikes" resultMap="reviewLikesResultMap">
 		SELECT *
 			FROM(
@@ -138,9 +146,9 @@
 	</insert>
 	
 	<!-- 좋아요 조회 -->
-	<select id="selectLikes" parameterType="ReviewLikes" resultMap="reviewLikesResultMap">
+<!-- 	<select id="selectLikes" parameterType="ReviewLikes" resultMap="reviewLikesResultMap">
 		<include refid="reviewLikesSql" />
-		WHERE 
+		<trim prefix="WHERE" suffixOverrides="AND">
 			M_NO = #{mNo} AND
 			<choose>
 			    <when test="lType == 'REVIEW'">
@@ -157,6 +165,32 @@
 					L_TYPE = 'FILM'	
 			    </when>
 		    </choose>
+		</trim>
+	</select>	 -->
+	
+	<!-- 리뷰 좋아요 조회 -->
+	<select id="selectReviewLikes" parameterType="ReviewLikes" resultMap="reviewLikesResultMap">
+		<include refid="reviewLikesSql" />
+			WHERE	M_NO = #{mNo} AND
+					RV_NO = #{rvNo} AND 
+					L_TYPE = 'REVIEW'	
+	</select>	
+	
+	<!-- 코멘트 좋아요 조회 -->
+	<select id="selectCmtLikes" parameterType="ReviewLikes" resultMap="reviewLikesResultMap">
+		<include refid="reviewLikesSql" />
+			WHERE	M_NO = #{mNo} AND
+					CMT_NO = #{cmtNo} AND 
+					L_TYPE = 'CMT'	
+	</select>	
+	
+	<!-- 필름 좋아요 조회 -->
+	<select id="selectFilmLikes" parameterType="ReviewLikes" resultMap="reviewLikesResultMap">
+		<include refid="reviewLikesSql" />
+			WHERE	M_NO = #{mNo} AND
+					F_CODE = #{fCode} AND 
+					F_LIKES = 1 AND 
+					L_TYPE = 'FILM'	
 	</select>	
 	
 	<!-- 좋아요 인서트 -->

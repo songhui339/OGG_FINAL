@@ -1,6 +1,8 @@
 package com.project.ogg.review.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,6 +75,23 @@ public class ReviewLikesController {
 		return map;
 	}
 	
+	@PostMapping("/get_starrates")
+	@ResponseBody
+	public List<ReviewLikes> getStarRates(
+			@RequestParam("fCode") String fCode,
+			@RequestParam("ftype") String ftype)  {
+		
+		int fcode = 0;
+		List<ReviewLikes> list = new ArrayList<ReviewLikes>();
+		
+		fcode = Integer.parseInt(fCode);
+		list = service.getStarRates(fcode);
+		
+		System.out.println("레이츠 : " + list);
+		
+		return list;
+	}
+	
 	@PostMapping("/get_likes")
 	@ResponseBody
 	public Map<String, ReviewLikes> getLikes(
@@ -85,7 +104,7 @@ public class ReviewLikesController {
 		reviewLikes.setMNo(member.getM_no());
 		map.put("likes", service.getLikes(reviewLikes));
 		
-		System.out.println("조회" + map);
+//		System.out.println("조회" + map);
 		
 		return map;
 	}
@@ -159,7 +178,7 @@ public class ReviewLikesController {
 		reviewLikes.setMNo(member.getM_no());
 		map.put("likeFilm", service.getLikes(reviewLikes));
 		
-		System.out.println("조회" + map);
+//		System.out.println("조회" + map);
 		
 		return map;
 	}

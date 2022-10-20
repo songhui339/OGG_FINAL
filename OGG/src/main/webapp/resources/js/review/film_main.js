@@ -17,7 +17,7 @@ $.ajax({
 
     },
     error: function (error) {
-        console.log('통신 오류');
+        console.log('영화 찜 데이터 통신 오류1');
     }
 });
 
@@ -57,9 +57,12 @@ if(arr.length <= 5){
             html0 += "<div id='card-text3'> 평점 : "+ vote_average +"</div>";
             html0 += "</div></div></a></div><br>";
 
+            $('#likebutton1').hide();
+            $('#likebutton2').hide();
+
             },
             error: function (error) {
-                alert("서버호출 실패1")
+                console.log('영화 찜 데이터 통신 오류2');
             }
         });
     }
@@ -110,7 +113,7 @@ if(arr.length <= 5){
             }
         },
         error: function (error) {
-            alert("서버호출 실패2")
+            console.log('영화 찜 데이터 통신 오류3');
         }
     });
 }
@@ -174,7 +177,7 @@ $.ajax({
             $("#carousel2").append(html2);
         },
         error: function (error) {
-            alert("서버호출 실패")
+            console.log('인기 영화 통신 오류');
         }
     });
 
@@ -229,7 +232,7 @@ $.ajax({
             $("#carousel4").append(html2);
         },
         error: function (error) {
-            alert("서버호출 실패")
+            console.log('인기 드라마 통신 오류');
         }
     });
 
@@ -284,7 +287,7 @@ $.ajax({
             $("#carousel6").append(html2);
         },
         error: function (error) {
-            alert("서버호출 실패")
+            console.log('별점 높은 영화 통신 오류');
         }
     });
 });

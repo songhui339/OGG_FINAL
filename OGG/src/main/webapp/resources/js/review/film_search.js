@@ -33,6 +33,7 @@ $(document).ready(function() {
                 html += "</div></div></a></div><br>";
             })
             $("#search1").append(html);
+            // html = "";
         },
         error: function (error) {
             alert("검색어를 입력해주세요")
