@@ -71,6 +71,12 @@
 
 
 	<script type="text/javascript">
+		var msg = "${errorMessage}";
+		
+		if (msg != "") {
+		alert(msg);
+		}
+	
 	   window.Kakao.init("e127f699354ca9704b0b5501b9c80ff3");
 	
 	   function kakaoLogin(){
@@ -100,25 +106,5 @@
 	   }
 	</script>
 
-	<!-- 네이버 
-	<script type="text/javascript">
-	
-	
-		$("#naverLogin").on("click",function(){
-		    $.ajax({
-		        url: 'navergo',
-		        type: 'get',
-		        success: function(res){
-			    	 location.href = res;
-			    },
-				error : function(req, status, error){
-	                console.log("에러");
-	                console.log(req.responseText);
-	        	}
-		    
-			});
-		    })
-	    </script>
-	-->
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

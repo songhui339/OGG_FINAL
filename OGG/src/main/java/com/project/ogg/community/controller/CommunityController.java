@@ -64,7 +64,7 @@ public class CommunityController {
 		String preventSearchValue = "";
 		String preventSearchType = "";
 		
-		// 조회조건 설정
+		// 조회 조건 설정
 		commonVO.setSType(sType);
 		commonVO.setSValue(sValue);
 		
@@ -90,10 +90,10 @@ public class CommunityController {
 	    return model;
 	}
 
-	@GetMapping("/community/goList.do")
-	public String list() {
-		return"community/list";
-	}
+//	@GetMapping("/community/goList.do")
+//	public String list() {
+//		return"community/list";
+//	}
 	
 	// 게시글 상세보기
 	@GetMapping("/community/view.do")
@@ -102,6 +102,10 @@ public class CommunityController {
 		Community community = null;
 		community = service.findCommunityByNo(c_no);
 		
+		// 댓글 수
+		int cr_replyCount = service.replyCount(c_no);
+		community.setCr_replyCount(cr_replyCount);
+		
 		// 댓글
 		List<CommunityReply> communityReply = null;
 		communityReply = replyService.communityReplyList(c_no);
@@ -109,8 +113,8 @@ public class CommunityController {
 		model.addObject("communityReply", communityReply);
 		
 		// 조회수
-		int communityCount = service.communityViewcount(c_no);
-		community.setC_viewCount(communityCount);
+//		int communityCount = service.communityViewcount(c_no);
+//		community.setC_viewCount(communityCount);
 		
 		// 화면 출력
 		model.addObject("community", community);
@@ -201,13 +205,15 @@ public class CommunityController {
 	
 	// 게시글 삭제
 	@GetMapping("/community/delete.do")
-	public ModelAndView delete(ModelAndView model, @AuthenticationPrincipal Member member, @RequestParam int c_no) {
+	public ModelAndView delete(ModelAndView model,
+							  @AuthenticationPrincipal Member member, // 현재 로그인한 회원 정보
+							  @RequestParam int c_no) {
 		
 		int result = 0;
 		Community community = null;
 		community = service.findCommunityByNo(c_no);
 		
-		if(community.getC_writerNo() == member.getM_no()) {
+		if(community.getC_writerNo() == member.getM_no()) { // 작성자 회원번호 = 로그인한 회원의 번호
 			result = service.communityDelete(c_no);
 			
 			if(result > 0) {
@@ -242,7 +248,7 @@ public class CommunityController {
 			model.setViewName("community/modify");
 		} else {
 			model.addObject("msg", "잘못된 접근입니다.");
-			model.addObject("location", "/community/goList.do");
+			model.addObject("location", "/community/list.do");
 			model.setViewName("common/msg");
 		}
 		

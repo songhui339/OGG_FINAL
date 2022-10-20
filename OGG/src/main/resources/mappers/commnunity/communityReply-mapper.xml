@@ -11,6 +11,7 @@
 		<result property="cr_status" column="CR_STATUS" />
 		<result property="cr_writeDate" column="CR_WRITEDATE" />
 		<result property="cr_modifyDate" column="CR_MODIFYDATE" />
+		<result property="cr_replyCount" column="CR_REPLYCOUNT"/>
 	</resultMap>
 
 	<!-- 댓글 조회 -->
@@ -24,7 +25,7 @@
 		FROM COMMUNITY_REPLY CR
         JOIN MEMBER M ON (M.M_NO = CR.CR_WRITERNO)
 		WHERE CR_COMMUNITYNO = #{cr_communityNo}
-		ORDER BY CR.CR_NO DESC
+		ORDER BY CR.CR_NO ASC
 	</select>
 
 	<!-- 댓글 작성 -->

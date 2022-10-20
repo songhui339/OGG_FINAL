@@ -1,12 +1,29 @@
 package com.project.ogg.mypage.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.project.ogg.admin.model.vo.Answer;
+import com.project.ogg.admin.model.vo.Question;
+import com.project.ogg.common.util.PageInfo;
+import com.project.ogg.member.model.vo.Member;
+import com.project.ogg.mypage.model.service.MypageService;
 
 @Controller
 @RequestMapping("/mypage")
 public class MypageController {
+	
+	@Autowired
+	private MypageService service;
     
     // 마이페이지 메인
     @GetMapping("/main")
@@ -97,16 +114,39 @@ public class MypageController {
     
     // 마이페이지 - 1:1 문의
     @GetMapping("/ask")
-    public String mypageAsk () {
-        
-        return "mypage/mypage_ask";
-    }
+	public ModelAndView mypageAsk(@RequestParam(value = "page", defaultValue = "1") int page,
+								ModelAndView model,
+								@AuthenticationPrincipal Member member) {
+
+		List<Question> list = null;
+		PageInfo pageInfo = null;
+		int qmno = member.getM_no();
+		pageInfo = new PageInfo(page, 5, service.getQuestionCount(qmno), 5);
+
+		list = service.getQuestionList(pageInfo,qmno);
+
+		model.addObject("pageInfo", pageInfo);
+		model.addObject("list", list);
+		model.setViewName("mypage/mypage_ask");
+		return model;
+	}
     
     @GetMapping("/ask/view")
-    public String mypageAskDetail () {
-        
-        return "mypage/mypage_ask_detail";
-    }
+	public ModelAndView mypageAskDetail(@RequestParam("no") int no, ModelAndView model) {
+
+		Question question = service.getQuestionView(no);
+
+		//답변상태가 Y이면 답변을 찾는 로직
+		if (question.getQ_status().equals("Y")) {
+			Answer answer = service.getAnswer(question.getQ_no());
+			model.addObject("answer", answer);
+		}
+
+		model.addObject("question", question);
+		model.setViewName("mypage/mypage_ask_detail");
+
+		return model;
+	}
     
     @GetMapping("/ask/write")
     public String writeAsk () {
@@ -114,6 +154,65 @@ public class MypageController {
         return "mypage/mypage_ask_write";
     }
     
+    @PostMapping("/ask/write")
+	public ModelAndView questionWriting(@ModelAttribute Question question,
+										ModelAndView model,
+										@AuthenticationPrincipal Member member) {
+
+    	question.setQ_m_no(member.getM_no());
+		int result = service.writeQuestion(question);
+		int no = question.getQ_no();
+		System.out.println("no : " + no);
+
+		if (result > 0) {
+			model.addObject("msg", "문의 작성 완료");
+			model.addObject("location", "/mypage/ask/view?no="+ no);
+		} else {
+			model.addObject("msg", "문의 작성 실패");
+			model.addObject("location", "/mypage/ask/write");
+		}
+
+		model.setViewName("common/msg");
+
+		return model;
+	}
+//    @GetMapping("/ask/update")
+//	public ModelAndView questionUpdate(@RequestParam int no,
+//										ModelAndView model) {
+//		
+//		Question question = service.getQuestionView(no);
+//		Answer answer = service.getAnswer(question.getQ_no());
+//		
+//		if(answer != null) {
+//			model.addObject("msg","답변이 있을 경우 질문 수정이 불가능합니다.");
+//			model.addObject("location","/admin/question/view?no="+no);
+//			model.setViewName("common/msg");
+//			return model;
+//		}
+//		
+//		model.addObject("question",question);
+//		model.setViewName("admin/ad_questionUpdate");
+//		
+//		return model;
+//	}
+//	@PostMapping("/ask/update")
+//	public ModelAndView questionUpdate(@RequestParam int no,
+//									ModelAndView model,
+//									@ModelAttribute Question question) {
+//		
+//		System.out.println(question);
+//		int result = service.updateQuestion(question);
+//		
+//		if(result > 0) {
+//			model.addObject("msg","문의 수정 완료");
+//			model.addObject("location","/admin/question/view?no="+no);
+//		}else{
+//			model.addObject("msg","문의 수정 실패");
+//			model.addObject("location","/admin/question/view?no="+no);
+//		}
+//		model.setViewName("common/msg");
+//		return model;
+//	}
     
     
     

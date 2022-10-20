@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <c:set var="path" value="${ pageContext.request.contextPath }"/>
 
 <script src="${ path }/js/jquery-3.6.0.min.js"></script>
@@ -26,6 +27,7 @@
 
             <!-- 게시글 내용 -->
             <div class="articleWrap">
+            
                 <!-- 타이틀 -->
                 <div class="titleBox">
                     <h2>${ community.c_title }</h2>
@@ -40,7 +42,7 @@
                             👀 ${ community.c_viewCount }
                         </span>
                         <span class="commentCount c_gray">
-                            💬 댓글갯수카운트넣어야행
+                            💬 ${ community.cr_replyCount }
                         </span>
                     </div>
                 </div>
@@ -61,7 +63,7 @@
 
                 <!-- 댓글 header -->
                 <div class="replyHeader">
-                    <h3>댓글 <span>댓글 개수 카운트해야행</span></h3>
+                    <h3>댓글 <span>${community.cr_replyCount}</span></h3>
                 </div>
 
                 <!-- 댓글 내용 -->
@@ -94,16 +96,22 @@
                     </div>
                 </div>
                 -->
+                <!-- 오류 해결을 위한 빈 div 태그 삭제하지말아주세요!! -->
+                <div style="height: 50px;"></div>
 
                 <!-- 댓글 입력 창 -->
                 <div class="writeReplyBox">
                     <form method="post" action="${path}/community/replyWrite.do" name="communityReplyWrite">
-                        <textarea rows="3" cols="50" name="cr_content" class="replyTA"></textarea>
                         <input type="hidden" name="cr_communityNo" value="${community.c_no}">
-                        <input type="hidden" name="cr_writerNo" value="${community.c_writerNo}">
+                        <security:authentication property="principal.m_no" var="sec_m_no"/>
+                        <input type="hidden" name="cr_writerNo" value="${sec_m_no}">
+                        <textarea rows="3" cols="50" name="cr_content" class="replyTA" style="resize: none;width: 85%;height: 80px;border-radius: 0.375rem;"></textarea>
                         <button type="submit" id="communityReplySubmit" class="btn replyBtn">댓글 작성</button>
+                        
                     </form>
                 </div>
+                
+               
             </div>
 
             <div class="btnBox">
@@ -113,63 +121,71 @@
 
             
         </section>
-<script type="text/javascript">
-	$(document).ready(() => {
-		
-		// 파일 다운
-		$("#fileDown").on("click", () => {
-			location.assign("${ path }/community/fileDown.do?oname=${ community.c_file }&rname=${ community.c_fileRename }");
-		});
-
-		// '등록하기' 버튼 클릭시 모두 입력되었는지 검사
-		document.getElementById('communityReplySubmit').onclick = function() {			
-			if (document.communityReplyWrite.cr_content.value.length == 0) {
-				alert('내용을 입력하셔야 합니다.');
-				return false;
-			}
+        
+	<script type="text/javascript">
+		$(document).ready(() => {
 			
-			document.communityReplyWrite.submit();
-		};
-		
-		// 댓글 수정
-		/*
-		$('#communityReplyModifyModalButton').click(function(e){
-			e.preventDefault();
-			
-			var cr_no = $(this).attr("cr_no");
-			$("#cr_no").val(cr_no);
-			
-			$('#communityReplyModal').modal("show");
-		});
-		
-
-		$('#modalY').click(function(e){
-			
-			var cr_no = $('#cr_no').val();
-			var cr_content = $('#cr_content').val();
-			
-			$.ajax({
-				type : 'post',
-				url : '/cummunity/replyModify.do',
-				data : { cr_no , cr_content },
-				dateType: 'json',
-				contentType: "application/json; charset=UTF-8",
-				success : function(data) {
-					if(data > 0) {
-						alert("수정 완");
-						$("#communityReplyModal").modal("hide");
-					} else {
-						alert("수정 실패 관리자에게 문의해");
-						$("#communityReplyModal").modal("hide");
-						
-					}
+			// 게시글 삭제
+			$("#btnDelete").on("click", () => {
+				if(confirm("정말로 게시글을 삭제 하시겠습니까?")) {
+					location.replace("${ path }/community/delete.do?c_no=${ community.c_no }");
 				}
 			});
 			
+			// 파일 다운
+			$("#fileDown").on("click", () => {
+				location.assign("${ path }/community/fileDown.do?oname=${ community.c_file }&rname=${ community.c_fileRename }");
+			});
+	
+			// '등록하기' 버튼 클릭시 모두 입력되었는지 검사
+			document.getElementById('communityReplySubmit').onclick = function() {			
+				if (document.communityReplyWrite.cr_content.value.length == 0) {
+					alert('내용을 입력하셔야 합니다.');
+					return false;
+				}
+				
+				document.communityReplyWrite.submit();
+			};
+			
+			// 댓글 수정
+			/*
+			$('#communityReplyModifyModalButton').click(function(e){
+				e.preventDefault();
+				
+				var cr_no = $(this).attr("cr_no");
+				$("#cr_no").val(cr_no);
+				
+				$('#communityReplyModal').modal("show");
+			});
+			
+	
+			$('#modalY').click(function(e){
+				
+				var cr_no = $('#cr_no').val();
+				var cr_content = $('#cr_content').val();
+				
+				$.ajax({
+					type : 'post',
+					url : '/cummunity/replyModify.do',
+					data : { cr_no , cr_content },
+					dateType: 'json',
+					contentType: "application/json; charset=UTF-8",
+					success : function(data) {
+						if(data > 0) {
+							alert("수정 완");
+							$("#communityReplyModal").modal("hide");
+						} else {
+							alert("수정 실패 관리자에게 문의해");
+							$("#communityReplyModal").modal("hide");
+							
+						}
+					}
+				});
+				
+			});
+			*/
+	
 		});
-		*/
-
-	});
-</script>
+	</script>
 
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

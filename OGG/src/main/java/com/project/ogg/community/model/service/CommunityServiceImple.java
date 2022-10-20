@@ -79,4 +79,10 @@ public class CommunityServiceImple implements CommunityService {
 		return mapper.communityViewcount(c_no);
 	}
 
+	@Override
+	public int replyCount(int c_no) {
+
+		return mapper.replyCount(c_no);
+	}
+
 }

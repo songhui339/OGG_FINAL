@@ -66,34 +66,39 @@
 
         <!-- 정보 영역 -->
         <div class="infoBox">
-            <p class="titleText">${Q_TITLE}</p>
+            <p class="titleText">${question.q_title}</p>
             <div class="line"></div>
             <div class="noticeBox">
                 <div class="subTextBox">
-                    <p class="createDate">작성일자 : ${Q_ENROLLDATE}</p>
-                    <p class="readCount">${Q_STATUS}</p>
+                    <p class="createDate">작성일자 : <fmt:formatDate type="date" value="${ question.q_enrolldate }" /></p>
+                    <p class="readCount">${question.q_status}</p>
                 </div>
 
                 <div class="contentBox" style="height: auto !important;">
                     <p style="margin-bottom: 0;">
-                        ${N_CONTENT}
+                        ${question.q_content}
                     </p>
                 </div>
-
+                
+				<c:if test="${not empty answer}">
                 <div class="contentBox" style="height: auto !important;">
                     <p class="answerTitle" style="    margin-bottom: 10px;
                     font-size: 1rem;
                     font-weight: 600;">
-                        ${N_CONTENT}
+                        ${answer.a_title}
                         <span style="float: right;
                     color: #999999; font-weight: 500;">답변</span>
                     </p>
                     <p class="answerText" style="margin-bottom: 0;">
-                        ${N_CONTENT}
+                        ${answer.a_content}
                     </p>
                 </div>
+				</c:if>
                 <div class="btnBox">
-                    <button type="" class="btn">목록으로</button>
+                <!-- 
+                    <button type="" class="btn" onclick="location.href='${path}/mypage/ask/write?no=${question.q_no} }'">문의수정</button>
+                 -->
+                    <button type="" class="btn" onclick="location.href='${path}/mypage/ask?page=1'">목록으로</button>
                 </div>
             </div>
 

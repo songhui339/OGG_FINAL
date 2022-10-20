@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.project.ogg.mypage.model.mapper.MypageMapper">
+
+<resultMap type="Question" id="questionListResultMap">
+	<result column="ROWNUM" property="q_rno"/>
+	<result column="M_NAME" property="q_m_name"/>
+</resultMap>
+
+<resultMap type="Answer" id="answerResultMap">
+	<result column="M_NAME" property="a_m_name"/>
+</resultMap>
+
+<select id="getQuestionCount" resultType="_int" parameterType="_int">
+	SELECT COUNT(*)
+	FROM QUESTION
+    WHERE Q_M_NO = #{no}
+</select>
+
+<select id="getQuestionList" resultMap="questionListResultMap">
+	SELECT ROWNUM,
+	       Q.* 
+	FROM (
+	SELECT Q_NO,
+	       Q_TITLE,
+	       M.M_NAME,
+	       Q_ENROLLDATE,
+	       Q_STATUS
+	FROM QUESTION Q
+	JOIN MEMBER M ON(Q.Q_M_NO = M.M_NO)
+	WHERE Q_M_NO = #{no}
+    ORDER BY Q_STATUS
+	) Q
+</select>
+
+<select id="getQuestionView" resultMap="questionListResultMap" parameterType="_int">
+	SELECT ROWNUM,
+		   Q.*
+	FROM (
+	SELECT  Q_NO,
+			Q_TITLE,
+			Q_CONTENT,
+			M.M_NAME,
+			Q_ENROLLDATE,
+			Q_STATUS
+	FROM QUESTION Q
+	JOIN MEMBER M ON(Q.Q_M_NO = M.M_NO)
+	WHERE Q_NO =#{no}
+	) Q 
+</select>
+
+<select id="getAnswer" parameterType="_int"
+	resultMap="answerResultMap">
+	SELECT A_NO,A_TITLE, A_DATE,A_CONTENT,M.M_NAME
+	FROM ANSWER A
+	JOIN MEMBER M ON(M.M_NO=A.A_M_NO)
+	WHERE Q_NO = #{no}
+</select>
+
+<insert id="writeQuestion" parameterType="Question"
+	useGeneratedKeys="true" keyProperty="q_no" keyColumn="Q_NO">
+	INSERT INTO QUESTION(
+				Q_NO,
+				Q_TITLE,
+				Q_CONTENT,
+				Q_ENROLLDATE,
+				Q_M_NO)
+	VALUES(SEQ_QUESTIONS.NEXTVAL,
+			#{q_title},
+			#{q_content},
+			SYSDATE,
+			#{q_m_no})
+</insert>
+	
+<update id="updateQuestion" parameterType="Question">
+	UPDATE QUESTION
+	SET
+	Q_TITLE = #{q_title},
+	Q_CONTENT = #{q_content},
+	Q_ENROLLDATE = SYSDATE
+	WHERE Q_NO = #{q_no}
+</update>
+
+
+</mapper>
+
+

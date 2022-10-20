@@ -294,8 +294,8 @@ public class AdminController {
 		else {
 			model.addObject("msg","관리자만 작성 가능합니다.");
 			model.addObject("location","/");
+			model.setViewName("common/msg");
 		}
-		model.setViewName("common/msg");
 		
 		return model;
 	}
