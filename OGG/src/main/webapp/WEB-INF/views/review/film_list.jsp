@@ -85,7 +85,7 @@
         <!-- 2nd row 끝 -->        
 
         <div style="margin-top: 40px; margin-bottom: 20px;">
-            <p class="row_name" style="margin-left: 5%;">내가 찜한 작품</p>
+            <p class="row_name" style="margin-left: 5%;">평점이 높은 작품</p>
             <hr>
         </div>
 
@@ -112,6 +112,34 @@
         </div>
         <!-- 3rd row 끝 -->  
         
+        <div style="margin-top: 40px; margin-bottom: 20px;">
+            <p class="row_name" style="margin-left: 5%;">내가 찜한 작품</p>
+            <hr>
+        </div>
+
+        <!-- 찜한 영화 -->
+        <div id="carouselExampleControls0" class="carousel slide" data-bs-touch="false"">
+            <div class="carousel-inner">
+            <!-- 첫번째 슬라이드 -->
+            <div class="carousel-item active" id="carousel0">
+            </div>
+
+            <!-- 두번째 슬라이드 -->
+            <div class="carousel-item" id="carousel9">
+            </div>
+
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls0" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls0" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+        </div>
+        <!-- 찜한 영화 끝 -->
+
     </div>
     <!-- 내용 전체 컨테이너 끝 -->
     

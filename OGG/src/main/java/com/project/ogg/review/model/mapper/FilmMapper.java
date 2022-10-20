@@ -5,9 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.RowBounds;
 
-import com.project.ogg.review.model.vo.Film;
 import com.project.ogg.review.model.vo.Review;
-import com.project.ogg.review.model.vo.ReviewCmt;
 import com.project.ogg.review.model.vo.ReviewLikes;
 
 @Mapper
@@ -20,4 +18,6 @@ public interface FilmMapper {
 	int selectReviewCount(int fcode);
 
 	int selectCmtCount(int no);
+
+	List<ReviewLikes> selectFilmLikes(int no);
 }

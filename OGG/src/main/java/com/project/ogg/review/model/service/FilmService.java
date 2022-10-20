@@ -3,9 +3,7 @@ package com.project.ogg.review.model.service;
 import java.util.List;
 
 import com.project.ogg.common.util.PageInfo;
-import com.project.ogg.review.model.vo.Film;
 import com.project.ogg.review.model.vo.Review;
-import com.project.ogg.review.model.vo.ReviewCmt;
 import com.project.ogg.review.model.vo.ReviewLikes;
 
 
@@ -18,5 +16,7 @@ public interface FilmService {
 	int getReviewCount(int fcode);
 
 	int getCmtCountByNo(int no);
+
+	List<ReviewLikes> getFilmLikes(int no);
 
 }

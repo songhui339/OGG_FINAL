@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.project.ogg.common.util.PageInfo;
 import com.project.ogg.review.model.mapper.FilmMapper;
 import com.project.ogg.review.model.vo.Review;
+import com.project.ogg.review.model.vo.ReviewLikes;
 
 @Service
 public class FilmServiceImpl implements FilmService {
@@ -42,6 +43,11 @@ public class FilmServiceImpl implements FilmService {
 	@Override
 	public int getCmtCountByNo(int no) {
 		return mapper.selectCmtCount(no);
+	}
+
+	@Override
+	public List<ReviewLikes> getFilmLikes(int no) {
+		return mapper.selectFilmLikes(no);
 	}
 
 }

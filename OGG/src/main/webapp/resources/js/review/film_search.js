@@ -7,7 +7,7 @@ $(document).ready(function() {
     
     $.ajax({
         async: true, 
-        url: "https://api.themoviedb.org/3/search/"+ type1 +"?api_key="+key+"&language=ko&query=" + searchkeyword + "&page=1&include_adult=false" ,
+        url: "https://api.themoviedb.org/3/search/"+ type1 +"?api_key=" + key + "&language=ko&query=" + searchkeyword + "&page=1&include_adult=false" ,
         type: "GET",
         timeout: 3000,
         dataType: "json", 

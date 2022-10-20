@@ -17,7 +17,7 @@
 		       L_DATE,
 		       L_UPDATE,
 		       L_TYPE
-		FROM REVIEW_LIKES
+		FROM   REVIEW_LIKES
 	</sql>
 	
 	<!-- FILM resultMap-->
@@ -98,19 +98,21 @@
 	<select id="selectStar" parameterType="ReviewLikes" resultMap="reviewLikesResultMap">
 		SELECT *
 			FROM(
-				SELECT L_NO,
-				       M_NO,
-				       RV_NO,
-				       CMT_NO,
-				       F_CODE,
-				       F_TYPE,
-				       F_LIKES,
-				       F_STAR,
-				       L_DATE,
-				       L_UPDATE,
-				       L_TYPE
-				FROM REVIEW_LIKES
-				WHERE M_NO = #{mNo} AND F_STAR > 0 AND F_CODE=#{fCode}
+				SELECT   L_NO,
+				       	 M_NO,
+				         RV_NO,
+				         CMT_NO,
+				         F_CODE,
+				         F_TYPE,
+				         F_LIKES,
+				         F_STAR,
+				         L_DATE,
+				         L_UPDATE,
+				         L_TYPE
+				FROM     REVIEW_LIKES
+				WHERE    M_NO = #{mNo} AND 
+						 F_STAR > 0 AND 
+						 F_CODE=#{fCode}
 				ORDER BY L_UPDATE DESC)
 			WHERE ROWNUM = 1
 	</select>
@@ -134,25 +136,6 @@
 		            'STAR'
 		      )
 	</insert>
-	
-	<!-- 리뷰 좋아요 조회 -->
-<!-- 	<select id="selectLikes" parameterType="ReviewLikes" resultMap="reviewLikesResultMap">
-		<include refid="reviewLikesSql" />
-		WHERE 
-			M_NO = #{mNo} 
-			<choose>
-			    <when test="lType == 'REVIEW'">
-					AND RV_NO = #{rvNo} 
-					AND L_TYPE = 'REVIEW'	
-				</when>
-			    <when test="lType == 'CMT'">
-					AND L_TYPE = 'CMT'	
-			    </when>
-			    <when test="lType == 'FILM'">
-					AND L_TYPE = 'FILM'	
-			    </when>
-		    </choose>
-	</select> -->	
 	
 	<!-- 좋아요 조회 -->
 	<select id="selectLikes" parameterType="ReviewLikes" resultMap="reviewLikesResultMap">

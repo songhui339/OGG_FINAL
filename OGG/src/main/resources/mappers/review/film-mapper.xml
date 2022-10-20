@@ -18,8 +18,8 @@
 		       RV_READ_COUNT,
 		       RV_CMT_COUNT,
 		       M.M_NICKNAME	
-		FROM REVIEW R
-		JOIN MEMBER M ON (M.M_NO = R.RV_WRITER_NO)
+		FROM   REVIEW R
+		JOIN   MEMBER M ON (M.M_NO = R.RV_WRITER_NO)
 	</sql>
 	
 	<!-- REVIEW resultMap-->
@@ -38,29 +38,71 @@
 		<result property="rvNickname" column="M_NICKNAME" />
 	</resultMap>	
 
+	<!-- REVIEW_LIKES resultMap-->
+	<resultMap type="ReviewLikes" id="reviewLikesResultMap">
+		<id property="lNo" column="L_NO" />
+		<result property="fTitle" column="F_TITLE" />
+		<result property="mNo" column="M_NO" />
+		<result property="rvNo" column="RV_NO" />
+		<result property="cmtNo" column="CMT_NO" />
+		<result property="fCode" column="F_CODE" />
+		<result property="fType" column="F_TYPE" />
+		<result property="fLikes" column="F_LIKES" />
+		<result property="fStar" column="F_STAR" />
+		<result property="lDate" column="L_DATE" />
+		<result property="lUpdate" column="L_UPDATE" />
+		<result property="lType" column="L_TYPE" />
+	</resultMap>
 	<!-- 리뷰 조회 (전체) -->
 	<select id="selectReviewAll" resultMap="reviewResultMap">
 		<include refid="reviewSql"></include>
-		WHERE RV_STATUS = 'Y'
+		WHERE 	 RV_STATUS = 'Y'
 		ORDER BY RV_LIKES DESC
 	</select>
 
 	<!-- 리뷰 조회 (영화 별, 좋아요 많은 순) -->
 	<select id="selectReviewByFilm" parameterType="_int" resultMap="reviewResultMap">
 		<include refid="reviewSql"></include>
-		WHERE F_CODE = #{fcode} AND F_TYPE = 'movie' AND RV_STATUS = 'Y'
+		WHERE 	 F_CODE = #{fcode} AND 
+				 F_TYPE = 'movie' AND 
+				 RV_STATUS = 'Y'
 		ORDER BY R.RV_LIKES DESC
 	</select>
 	
 	<!-- 리뷰 조회 (리뷰 개수) -->
 	<select id="selectReviewCount" parameterType="_int" resultType="_int">
-		SELECT COUNT(*) FROM REVIEW 
-		WHERE F_CODE = #{fcode} AND F_TYPE = 'movie' AND RV_STATUS = 'Y'
+		SELECT  COUNT(*) 
+		FROM 	REVIEW 
+		WHERE  	F_CODE = #{fcode} AND 
+				F_TYPE = 'movie' AND 
+				RV_STATUS = 'Y'
 	</select>
 	
 	<!-- 댓글수 조회 (리뷰별) -->
 	<select id="selectCmtCount" parameterType="_int" resultType="_int">
-		SELECT COUNT(*) FROM REVIEW_CMT WHERE CMT_STATUS = 'Y' AND RV_NO= #{no}
+		SELECT  COUNT(*) 
+		FROM 	REVIEW_CMT 
+		WHERE 	CMT_STATUS = 'Y' AND 
+				RV_NO= #{no}
 	</select>
+	
+	<!-- 찜한 영화 가져오기 -->
+	<select id="selectFilmLikes" parameterType="ReviewLikes" resultMap="reviewLikesResultMap">
+		SELECT  L_NO,
+		        M_NO,
+		        RV_NO,
+		        CMT_NO,
+		        F_CODE,
+		        F_TYPE,
+		        F_LIKES,
+		        F_STAR,
+		        L_DATE,
+		        L_UPDATE,
+		        L_TYPE
+		FROM    REVIEW_LIKES
+		WHERE 	M_NO = #{mNo} AND 
+				L_TYPE = 'FILM' AND 
+				F_LIKES = 1
+	</select>	
 	
 </mapper>

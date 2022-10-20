@@ -45,8 +45,8 @@
 						<hr>
 					    <div class="row" id="detail-text">
 					        <div class="col-sm-1">
-								<img src="${path}/images/review/heart2.png" id="reviewLikes" style="margin-left: 10px;" height="30px;">
-								<img src="${path}/images/review/heart3.png" id="reviewDisLikes" style="margin-left: 10px; display: none;" height="30px;">
+								<img src="${ path }/images/review/heart2.png" id="reviewLikes" style="margin-left: 10px;" height="30px;">
+								<img src="${ path }/images/review/heart3.png" id="reviewDisLikes" style="margin-left: 10px; display: none;" height="30px;">
 								<span id="rvLikes">${ review.rvLikes }</span>
 					        </div>
 					        <div class="col-sm-8">

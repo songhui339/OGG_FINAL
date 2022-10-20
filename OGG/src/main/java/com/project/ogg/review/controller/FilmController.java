@@ -1,5 +1,6 @@
 package com.project.ogg.review.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,8 +10,10 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -18,6 +21,7 @@ import com.project.ogg.common.util.PageInfo;
 import com.project.ogg.member.model.vo.Member;
 import com.project.ogg.review.model.service.FilmService;
 import com.project.ogg.review.model.vo.Review;
+import com.project.ogg.review.model.vo.ReviewLikes;
 
 @Controller
 @RequestMapping("/film")
@@ -30,6 +34,22 @@ public class FilmController {
 	public String filmList() {
 		
 		return "review/film_list";
+	}
+
+	@PostMapping("/list")
+	@ResponseBody
+	public List<ReviewLikes> filmList(@AuthenticationPrincipal Member member) {
+		
+		int no = 0;
+		List<ReviewLikes> list = new ArrayList<ReviewLikes>();
+		
+		// 로그인 넘버값을 넘겨서 필름 검색 가져오기 
+		no = member.getM_no();
+		list = service.getFilmLikes(no);
+		
+		System.out.println(list);
+
+		return list;
 	}
 	
 	@GetMapping("/search")
