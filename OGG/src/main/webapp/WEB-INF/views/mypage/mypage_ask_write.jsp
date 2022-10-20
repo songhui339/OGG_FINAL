@@ -69,19 +69,19 @@
             <p class="titleText">1:1 문의 작성</p>
             <div class="line"></div>
 
-            <form action="">    
+            <form action="${path}/mypage/ask/write" method="post">    
                 <div class="titleBox">
-                    <label for="c_title" class="c_title">제목</label>
-                    <input type="text" name="c_title" id="c_title">
+                    <label for="q_title" class="c_title">제목</label>
+                    <input type="text" name="q_title" id="c_title">
                 </div>
 
                 <div class="contentBox">
-                    <textarea placeholder="문의 내용을 입력해 주세요." name="c_content" cols="50" rows="15" ></textarea>
+                    <textarea placeholder="문의 내용을 입력해 주세요." name="q_content" cols="50" rows="15" ></textarea>
                 </div>
 
 
                 <div class="btnBox">
-                    <button type="button" class="btn askSubmitBtn">등록</button>
+                    <input type="submit" class="btn askSubmitBtn" value="등록"></input>
                 </div>
             </form>
 
