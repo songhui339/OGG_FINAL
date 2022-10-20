@@ -71,7 +71,12 @@
             <div class="noticeBox">
                 <div class="subTextBox">
                     <p class="createDate">작성일자 : <fmt:formatDate type="date" value="${ question.q_enrolldate }" /></p>
-                    <p class="readCount">${question.q_status}</p>
+                    <c:if test="${question.q_status == 'Y'}">
+                    	<p class="readCount">답변 완료</p>
+                    </c:if>
+                    <c:if test="${question.q_status == 'N'}">
+                    	<p class="readCount">답변 대기</p>
+                    </c:if>
                 </div>
 
                 <div class="contentBox" style="height: auto !important;">
