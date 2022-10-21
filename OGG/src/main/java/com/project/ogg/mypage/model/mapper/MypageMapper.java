@@ -11,6 +11,7 @@ import com.project.ogg.admin.model.vo.Notice;
 import com.project.ogg.admin.model.vo.OttAdmin;
 import com.project.ogg.admin.model.vo.Question;
 import com.project.ogg.community.model.vo.Community;
+import com.project.ogg.member.model.vo.Member;
 
 @Mapper
 public interface MypageMapper {
@@ -38,6 +39,8 @@ public interface MypageMapper {
 	int getCommnityCount(int m_no);
 
 	List<Community> getCommunityList(int m_no, RowBounds rowBounds);
+
+    Member selectMemberById(String id);
 
 
 }

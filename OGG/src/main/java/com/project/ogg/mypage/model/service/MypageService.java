@@ -9,6 +9,7 @@ import com.project.ogg.admin.model.vo.OttAdmin;
 import com.project.ogg.admin.model.vo.Question;
 import com.project.ogg.common.util.PageInfo;
 import com.project.ogg.community.model.vo.Community;
+import com.project.ogg.member.model.vo.Member;
 
 public interface MypageService {
 
@@ -34,5 +35,7 @@ public interface MypageService {
 	List<Notice> getNoticeList(PageInfo pageInfo);
 
 	Notice getNoticeView(int no);
+
+    Member findMemberById(String id);
 
 }

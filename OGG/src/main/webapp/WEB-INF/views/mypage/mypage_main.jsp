@@ -85,11 +85,11 @@
                         </li> -->
                         <li>
                             <label for="">이름</label>
-                            <p class="text">${ m_name }</p>
+                            <p class="text">${ member.m_name }</p>
                         </li>
                         <li>
                             <label for="">닉네임</label>
-                            <p class="text">${ m_nickname }</p>
+                            <p class="text">${ member.m_nickname }</p>
                         </li>
                         <li>
                             <label for="">이메일</label>
@@ -97,7 +97,7 @@
                         </li>
                         <li>
                             <label for="">휴대폰 번호</label>
-                            <p class="text">${ m_phone }</p>
+                            <p class="text">${ m_phonenumber }</p>
                         </li>
 
                         <li>

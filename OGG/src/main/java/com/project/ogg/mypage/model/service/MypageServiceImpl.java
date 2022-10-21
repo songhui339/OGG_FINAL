@@ -12,6 +12,7 @@ import com.project.ogg.admin.model.vo.Notice;
 import com.project.ogg.admin.model.vo.Question;
 import com.project.ogg.common.util.PageInfo;
 import com.project.ogg.community.model.vo.Community;
+import com.project.ogg.member.model.vo.Member;
 import com.project.ogg.mypage.model.mapper.MypageMapper;
 
 @Service
@@ -104,6 +105,12 @@ public class MypageServiceImpl implements MypageService {
 		return notice;
 	}
 
+	
+	@Override
+    public Member findMemberById(String id) {
+        
+        return mapper.selectMemberById(id);
+    }
 	
 
 }

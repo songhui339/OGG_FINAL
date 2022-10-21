@@ -38,10 +38,17 @@ public class MypageController {
     
     // 마이페이지 메인
     @GetMapping("/main")
-    public String main () {
+    public ModelAndView main (ModelAndView model,
+                             @AuthenticationPrincipal Member member) {
         
-        return "mypage/mypage_main";
+        model.setViewName("mypage/mypage_main");
+        
+        return model;
     }
+    
+    
+    
+    
     
     // 회원 정보 수정을 위한 비밀번호 체크
     @GetMapping("/pwdCheck")
