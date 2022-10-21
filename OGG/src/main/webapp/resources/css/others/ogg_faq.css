@@ -66,7 +66,7 @@ OGG FAQ 페이지 CSS
     text-decoration: none;
     border-radius: 15px;
     margin-bottom: 15px;
-    padding: 0.933rem 1.4rem 0.933rem 3.4rem; /* 14px 20px 14px 50px */
+    padding: 1.5rem 1.4rem 1.5rem 3.4rem; /* 14px 20px 14px 50px */
     /* border-top: 0.5px solid #1f1f1f; */
     /* border-bottom: 0.5px solid #1f1f1f; */
     background-color: #7e69fe;
@@ -81,7 +81,7 @@ OGG FAQ 페이지 CSS
     font-size: 1.4rem; /* 20px */
     line-height: 1;
     position: absolute;
-    top: 0.8rem; /* 12px */
+    top: 1.57rem; /* 12px */
     left: 1.6rem; /* 24px */
 }
 

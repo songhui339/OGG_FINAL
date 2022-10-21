@@ -91,11 +91,11 @@ header .width-container .btnBox a.myPageBtn:hover {
     color: #7e69fe;
 }
 
-header .width-container .btnBox ul li a.c_purple:hover {
+header .width-container .btnBox ul li a.hover_purple:hover {
 	background-color : #7d69fe20 !important;
 }
 
-header .width-container .btnBox ul li a.c_red:hover {
+header .width-container .btnBox ul li a.hover_red:hover {
 	background-color : rgba(255, 99, 71, 0.20) !important;
 }
 

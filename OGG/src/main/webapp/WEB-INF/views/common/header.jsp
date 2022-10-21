@@ -65,14 +65,14 @@
 				</c:if>
 			 
 				<ul class="dropdown-menu" style="z-index: 80;">
-					<li><a class="dropdown-item c_purple" href="${ path }/mypage/main">마이페이지</a></li>
-					<li><a class="dropdown-item c_purple" href="${ path }/admin/home">관리페이지</a></li>
+					<li><a class="dropdown-item hover_purple" href="${ path }/mypage/main">마이페이지</a></li>
+					<li><a class="dropdown-item hover_purple" href="${ path }/admin/home">관리페이지</a></li>
 					<li><hr class="dropdown-divider"></li>
 					
 					<!-- 로그아웃 -->
 					<!-- 시큐리티 -->
 					<security:authorize access="isAuthenticated()">
-						<li><a class="dropdown-item c_red" href="${ path }/member/doLogout.do">로그아웃</a></li>
+						<li><a class="dropdown-item hover_red" href="${ path }/member/doLogout.do">로그아웃</a></li>
 					</security:authorize>
 					
 					<!-- 카카오 -->
