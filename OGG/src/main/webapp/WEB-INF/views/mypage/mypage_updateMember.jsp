@@ -125,7 +125,7 @@
 							
 							$("#btnDelete").on("click", () => {
 								if(confirm("정말로 탈퇴하시겠습니까?")) {
-									location.replace("${ path }/member/delete");
+									location.replace("${ path }/mypage/delete");
 								}			
 							});
 						});

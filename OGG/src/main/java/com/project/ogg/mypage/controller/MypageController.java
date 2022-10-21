@@ -58,7 +58,6 @@ public class MypageController {
         return model;
     }
     
-    
     // 회원 정보 수정을 위한 비밀번호 체크
     @GetMapping("/pwdCheck")
     public String pwdCheck () {
@@ -71,7 +70,11 @@ public class MypageController {
     							@AuthenticationPrincipal Member member,
     							@RequestParam(value = "m_pwd") String m_pwd) {
     	
+    	Member myPageMember = null;
+    	myPageMember = service.selectMemberByNo(member.getM_no());
+    	
     	if(passwordEncoder.matches(m_pwd, member.getM_pwd())) {
+    		model.addObject("myPageMember", myPageMember); 
     		model.setViewName("mypage/mypage_updateMember");
     	} else {
     		model.addObject("msg", "비밀번호가 일치하지 않습니다.");
@@ -81,52 +84,18 @@ public class MypageController {
     	return model;
     }
     
-    
-    // 회원 정보 수정 기존 정보 가져오기...ㅜ 
-    @GetMapping("/updateMember")
-    public ModelAndView updateMemberInfo (ModelAndView model,
-                             @AuthenticationPrincipal Member member) {
-        
-        int m_no = member.getM_no();
-        
-        Member myPageMember = null;
-        myPageMember = service.selectMemberByNo(m_no);
-        
-        model.addObject("myPageMember", myPageMember);
-        model.setViewName("mypage/mypage_updateMember");
-        
-        return model;
-    }
-    
-    
     // 회원 정보 수정
     @PostMapping("/updateMember")
     public ModelAndView updateMember (ModelAndView model, 
 			@AuthenticationPrincipal Member loginMember,
 			@ModelAttribute Member member) {
-        
-//    	int m_no = member.getM_no();
-    	
-//    	Member myPageMember = null;
-    	
-//        myPageMember = service.selectMemberByNo(m_no);
     	
     	int result = 0;
-    	
     	member.setM_no(loginMember.getM_no());
-    	
     	result = service.save(member);
-
     	
     	if(result > 0) {
-//    		model.addObject("myPageMember", myPageMember);
     		model.addObject("loginMember", service.selectMemberByNo(loginMember.getM_no()));
-    		
-//    		loginMember.setM_name(member.getM_name());
-//    		loginMember.setM_nickname(member.getM_nickname());
-//    		loginMember.setM_email(member.getM_email());
-//    		loginMember.setM_phonenumber(member.getM_phonenumber());
-
 			model.addObject("msg", "회원 정보 수정을 완료했습니다.");
 		} else {
 			model.addObject("msg", "회원 정보 수정을 실패했습니다.");
@@ -139,7 +108,7 @@ public class MypageController {
     }
     
     // 회원 탈퇴 관련 핸들러
-    @GetMapping("deleteMember")
+    @GetMapping("/delete")
     public ModelAndView delete (
                 ModelAndView model,
                 @AuthenticationPrincipal Member member) {
@@ -150,18 +119,17 @@ public class MypageController {
         
         if(result > 0) {
             model.addObject("msg", "정상적으로 탈퇴 처리 되었습니다.");
-            model.addObject("location", "/logout");
+            model.addObject("location", "/member/doLogout.do");
         } else {
             model.addObject("msg", "회원 탈퇴 처리에 실패했습니다");
-            model.addObject("location", "/updateMember");
+            model.addObject("location", "/mypage/main");
         }
         
         model.setViewName("common/msg");
         
         return model;
     }
-    
-    
+       
     // 비밀번호 변경 핸들러 
     @GetMapping("/updatePwd")
     public String updatePwd () {
@@ -284,14 +252,7 @@ public class MypageController {
         return "mypage/mypage_content";
     }
     
-    
-    // 마이페이지 - 내 게시글
-//    @GetMapping("/board")
-//    public String mypageBoard () {
-//        
-//        return "mypage/mypage_board";
-//    }
-    
+    // 마이페이지 - 커뮤니티
     @GetMapping("/board")
     public ModelAndView boardList(ModelAndView model,
     							@AuthenticationPrincipal Member member,
