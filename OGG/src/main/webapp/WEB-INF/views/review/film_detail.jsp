@@ -16,7 +16,6 @@
     
     <!-- my JS -->
     <script defer src="${ path }/js/review/film_detail.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
     <!-- 내용 전체 컨테이너 -->
     <div class="container" style="margin-bottom: 100px; margin-top: 40px; padding-left: 60px; padding-right: 60px; ">
@@ -149,19 +148,70 @@
 	ftype = "${ ftype }";
 	m_no = "${ m_no }";
 	contextpath = "${ pageContext.request.contextPath }";
-	</script>
-	
-	<script>
+
+	// $(document).ready(function() {
+        $.ajax({
+            async: false,
+            type : 'POST',
+            url : contextpath + '/review/get_starrates',
+            data : {
+                'fCode' : fcode,
+                'ftype' : ftype
+            },
+            success : function (data) {
+            arr = [];
+            result1 = 0;
+            result2 = 0;
+            result3 = 0;
+            result4 = 0;
+            result5 = 0;
+
+            for (let i = 0; i < data.length; i++) {
+                if (data[i].fstar == 1) {
+                    result1++;
+                }
+                if (data[i].fstar == 2) {
+                    result2++;
+                }
+                if (data[i].fstar == 3) {
+                    result3++;
+                }
+                if (data[i].fstar == 4) {
+                    result4++;
+                }
+                if (data[i].fstar == 5) {
+                    result5++;
+                }
+            }
+                // console.log('시작');
+                // console.log(result1);
+                // console.log(result2);
+                // console.log(result3);
+                // console.log(result4);
+                // console.log(result5);
+                // console.log('끝');
+
+            },
+            error: function (error) {
+                console.log('그래프 통신 에러');
+            }
+        });
+
 	var chart = c3.generate({
 	bindto: "#linechart",
 	data: {
-	    columns: [
-	    ['data1', 30, 200, 100, 400, 150, 250],
-	    ['data2', 50, 20, 10, 40, 15, 25]
-	    ]
-	}
-	});
-	
+        json:{
+            num: [ 1, 2, 3, 4, 5 ],
+            '평가자수': [ result1, result2, result3, result4, result5 ],
+        },
+        x: 'num',
+        types:{
+            num: 'line',
+            평가자수: 'bar'
+        }
+    }
+    });
+
 	reviewModal = document.getElementById('reviewModal')
 
 	reviewModal.addEventListener('show.bs.modal', function (event) {
@@ -174,7 +224,6 @@
         modalBodyInput.value = recipient
 	});
     </script>
-    
     <!-- footer -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	

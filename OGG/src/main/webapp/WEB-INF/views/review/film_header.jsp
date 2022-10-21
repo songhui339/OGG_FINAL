@@ -40,7 +40,7 @@
 								</p>
 								<p id="dislikeFilm" style="display: none;" onclick="dislikeFilm(event)"> 
 									<img src="${path}/images/review/checked.png" style ="height:30px;" id="filmAfter">
-									&nbsp;추가됨
+									&nbsp;추가된 영화
 								</p>
 						</c:if>
 	                    <c:if test="${ loginMember == null }">
@@ -89,11 +89,10 @@
 					console.log(num)
 
 					$('#' + num + '-star').attr('checked', 'checked');
-					console.log('got star');
 				}
 			},
 			error: function (error) {
-				console.log('do nothing');
+				console.log('별점 통신 에러');
 			}
 		});
 
@@ -107,17 +106,18 @@
 				'ftype' : ftype
 			},
 			success : (data) => {
-				console.log(data);
-				if(data.likeFilm.fcode == null || data.likeFilm.flikes == 0){
-					console.log('가가가가가가');
-				}else{
-					$('#likeFilm').hide();
-					$('#dislikeFilm').show();
-					console.log('마마마마마마');
+				// console.log(data);
+				if(!data){
+					if(data.likeFilm.fcode == null || data.likeFilm.flikes == 0){
+						console.log('가가가가가가');
+					}else{
+						$('#likeFilm').hide();
+						$('#dislikeFilm').show();
+					}
 				}
 			},
 			error: function (error) {
-				console.log('통신 오류');
+				console.log('영화 찜 가져오기 통신 오류');
 			}
 		});
 	});
@@ -137,10 +137,9 @@
 			},
 			success : (data) => {
 				alert('별점이 등록되었습니다');
-				// console.log(data.star)
 			},
 			error : (error) => {
-				alert('서버와 연결에 실패하였습니다');
+				alert('로그인 후 이용 가능합니다');
 			}
 		});
 	}
@@ -162,7 +161,7 @@
 				$(event.target).next().show();
 			},
 			error : (error) => {
-				alert('서버와 연결에 실패하였습니다');
+				alert('영화 찜하기 통신오류');
 			}
 		});
 	}
@@ -184,7 +183,7 @@
 				$(event.target).prev().show();
 			},
 			error : (error) => {
-				alert('서버와 연결에 실패하였습니다');
+				alert('영화 찜취소 통신오류');
 			}
 		});
 	}

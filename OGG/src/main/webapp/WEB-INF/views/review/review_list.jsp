@@ -13,7 +13,6 @@
     
     <!-- my JS -->
     <script defer src="${path}/js/review/film_detail.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
     <!-- 내용 전체 컨테이너 -->
     <div class="container" style="margin-bottom: 100px; margin-top: 40px; padding-left: 60px; padding-right: 60px;">
@@ -35,7 +34,7 @@
 			<c:if test="${ not empty list }">
 				<c:forEach var="review" items="${ list }">
 					<div id="div_review">
-						<a style="z-index:9999;" href="${ path }/review/review_detail?no=${ review.rvNo }&fcode=${ fcode }&ftype=${ ftype }">
+						<a href="${ path }/review/review_detail?no=${ review.rvNo }&fcode=${ fcode }&ftype=${ ftype }">
 						    <span id="board-text1">${ review.rvNickname }</span>
 						    <hr>
 						    <span id="board-text3">

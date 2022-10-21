@@ -78,31 +78,24 @@
                     </tr>
                 </thead>
                 <tbody class="partyitem">
-                    <tr onclick="location.href='';">
-                        <th scope="row">${N_NO}</th>
-                        <td>${N_TITLE}</td>
-                        <td>${N_CREATE_DATE}</td>
-                        <td>${N_READCOUNT}</td>
+					<c:if test="${empty list }">
+						<tr>
+							<th>게시글이 없습니다.</th>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</c:if>
+					<c:if test="${not empty list }">
+					<c:forEach var="notice" items="${list}">
+					<tr onclick="location.href='${path}/mypage/notice/view?no=${notice.n_no}'">
+                        <th scope="row">${notice.n_no}</th>
+                        <td>${notice.n_title}</td>
+                        <td><fmt:formatDate type="date" value="${ notice.n_Create_Date }" /></td>
+                        <td>${notice.n_readcount}</td>
                     </tr>
-                    <tr onclick="location.href='';">
-                        <th scope="row">${N_NO}</th>
-                        <td>${N_TITLE}</td>
-                        <td>${N_CREATE_DATE}</td>
-                        <td>${N_READCOUNT}</td>
-                    </tr>
-                    <tr onclick="location.href='';">
-                        <th scope="row">${N_NO}</th>
-                        <td>${N_TITLE}</td>
-                        <td>${N_CREATE_DATE}</td>
-                        <td>${N_READCOUNT}</td>
-                    </tr>
-                    <tr onclick="location.href='';">
-                        <th scope="row">${N_NO}</th>
-                        <td>${N_TITLE}</td>
-                        <td>${N_CREATE_DATE}</td>
-                        <td>${N_READCOUNT}</td>
-                    </tr>
-                    
+					</c:forEach>
+					</c:if>
                 </tbody>
             </table>
            </div>
@@ -121,8 +114,4 @@
 
     </div>
 </section>
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
-
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

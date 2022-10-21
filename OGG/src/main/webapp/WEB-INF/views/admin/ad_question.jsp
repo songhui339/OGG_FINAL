@@ -93,7 +93,9 @@
                                 <!-- board seach area -->
                                 <div id="board-search">
                                     <div class="container">
+                                    <!-- 
                                         <button id="goWrite" onclick="location='${path }/question/write'">글쓰기</button>
+                                     -->
                                         <div class="search-window">
                                                 <div class="search-wrap">
                                                 </div>

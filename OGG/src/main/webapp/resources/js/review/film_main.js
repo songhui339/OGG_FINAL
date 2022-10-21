@@ -5,123 +5,6 @@ $(document).ready(function() {
     let poster = 'https://image.tmdb.org/t/p/w500/';
 
 $.ajax({
-    async: false,
-    type : 'POST',
-    url : contextpath + '/film/list',
-    success : function (data) {
-        arr = [];
-
-        for (let i = 0; i < data.length; i++) {
-            arr[i] = data[i].fcode;
-        }
-
-    },
-    error: function (error) {
-        console.log('통신 오류');
-    }
-});
-
-let html0 = "<div class='row row-cols-1 row-cols-sm-2 row-cols-md-5' id='carousel01'>";
-let html9 = "<div class='row row-cols-1 row-cols-sm-2 row-cols-md-5' id='carousel01'>";
-
-if(arr.length <= 5){
-
-    for(let i = 0; i < 5; i++){
-        $.ajax({
-            async: false, 
-            url : "https://api.themoviedb.org/3/" + type1 + "/" + arr[i] + "?api_key=" + key + "&language=ko" ,
-            type: "GET",
-            timeout: 3000,
-            dataType: "json", 
-            success: function (result) { 
-
-            console.log(result);
-
-            // let html0 = "<div class='row row-cols-1 row-cols-sm-2 row-cols-md-5' id='carousel01'>";
-            
-            let img = poster + poster + result.poster_path;
-            let orig_title = result.original_title;
-            let title = result.title;
-            let vote_average = result.vote_average;
-            let date = result.release_date.replace(/-/gi, "").slice(0,-4);
-            let id = result.id;
-            
-            html0 += "<div class='col'>";
-            html0 += "<a href='"+ contextpath +"/film/detail?fcode="+ id +"&ftype="+ type1 +"'>";
-            html0 += "<div class='card' id='card_film'>";
-            html0 += "<img src='" + img + "' id='img_film'>";
-            html0 += "<input id='fcode' hidden value='" + id +"'>";
-            html0 += "<div class='card-body'>";
-            html0 += "<div id='card-text1'>"+ title +"</div>";
-            html0 += "<div id='card-text2'>"+ orig_title + " " + date +"</div>";
-            html0 += "<div id='card-text3'> 평점 : "+ vote_average +"</div>";
-            html0 += "</div></div></a></div><br>";
-
-            },
-            error: function (error) {
-                alert("서버호출 실패1")
-            }
-        });
-    }
-    $("#carousel0").append(html0);
-    html0 = "";
-}else{
-    for(let i = 0; i < arr.length; i++){
-        $.ajax({
-            async: false, 
-            url : "https://api.themoviedb.org/3/" + type1 + "/" + arr[i] + "?api_key=" + key + "&language=ko" ,
-            type: "GET",
-            timeout: 3000,
-            dataType: "json", 
-            success: function (result) { 
-
-            console.log(result);
-
-            // let html0 = "<div class='row row-cols-1 row-cols-sm-2 row-cols-md-5' id='carousel01'>";
-            
-            let img = poster + poster + result.poster_path;
-            let orig_title = result.original_title;
-            let title = result.title;
-            let vote_average = result.vote_average;
-            let date = result.release_date.replace(/-/gi, "").slice(0,-4);
-            let id = result.id;
-
-            if(i < 5){
-                html0 += "<div class='col'>";
-                html0 += "<a href='"+ contextpath +"/film/detail?fcode="+ id +"&ftype="+ type1 +"'>";
-                html0 += "<div class='card' id='card_film'>";
-                html0 += "<img src='" + img + "' id='img_film'>";
-                html0 += "<input id='fcode' hidden value='" + id +"'>";
-                html0 += "<div class='card-body'>";
-                html0 += "<div id='card-text1'>"+ title +"</div>";
-                html0 += "<div id='card-text2'>"+ orig_title + " " + date +"</div>";
-                html0 += "<div id='card-text3'> 평점 : "+ vote_average +"</div>";
-                html0 += "</div></div></a></div><br>";
-            }else{
-                html9 += "<div class='col' >";
-                html9 += "<a href='"+ contextpath +"/film/detail?fcode="+ id +"&ftype="+ type1 +"'>";
-                html9 += "<div class='card' id='card_film'>";
-                html9 += "<img src='" + img + "' id='img_film'>";
-                html9 += "<div class='card-body'>";
-                html9 += "<div id='card-text1'>"+ title +"</div>";
-                html9 += "<div id='card-text2'>"+ orig_title + " " + date +"</div>";
-                html9 += "<div id='card-text3'> 평점 : "+ vote_average +"</div>";
-                html9 += "</div></div></a></div><br>";
-            }
-        },
-        error: function (error) {
-            alert("서버호출 실패2")
-        }
-    });
-}
-    $("#carousel9").append(html9);
-    html9 = "";          
-}
-
-$("#carousel0").append(html0);
-html0 = "";
-
-$.ajax({
         async: true, 
         url: "https://api.themoviedb.org/3/discover/movie?api_key=" + key + "&language=ko&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate" ,
         type: "GET",
@@ -174,7 +57,7 @@ $.ajax({
             $("#carousel2").append(html2);
         },
         error: function (error) {
-            alert("서버호출 실패")
+            console.log('인기 영화 통신 오류');
         }
     });
 
@@ -229,7 +112,7 @@ $.ajax({
             $("#carousel4").append(html2);
         },
         error: function (error) {
-            alert("서버호출 실패")
+            console.log('인기 드라마 통신 오류');
         }
     });
 
@@ -284,7 +167,130 @@ $.ajax({
             $("#carousel6").append(html2);
         },
         error: function (error) {
-            alert("서버호출 실패")
+            console.log('별점 높은 영화 통신 오류');
         }
     });
+
+    $.ajax({
+        async: false,
+        type : 'POST',
+        url : contextpath + '/film/list',
+        success : function (data) {
+            arr = [];
+    
+            for (let i = 0; i < data.length; i++) {
+                arr[i] = data[i].fcode;
+            }
+        },
+        error: function (error) {
+            console.log('영화 찜 데이터 통신 오류1');
+        }
+    });
+    
+    let html0 = "<div class='row row-cols-1 row-cols-sm-2 row-cols-md-5' id='carousel01'>";
+    let html9 = "<div class='row row-cols-1 row-cols-sm-2 row-cols-md-5' id='carousel01'>";
+    
+    if(arr == ""){
+        $('#mylikes').hide();
+        console.log('로그인 x');
+    }
+
+    if(0 <= arr.length && arr.length <= 5){
+        for(let i = 0; i < arr.length; i++){
+            $.ajax({
+                async: false, 
+                url : "https://api.themoviedb.org/3/" + type1 + "/" + arr[i] + "?api_key=" + key + "&language=ko" ,
+                type: "GET",
+                timeout: 3000,
+                dataType: "json", 
+                success: function (result) { 
+    
+                // console.log(result);
+    
+                // let html0 = "<div class='row row-cols-1 row-cols-sm-2 row-cols-md-5' id='carousel01'>";
+                let img = poster + poster + result.poster_path;
+                let orig_title = result.original_title;
+                let title = result.title;
+                let vote_average = result.vote_average;
+                let date = result.release_date.replace(/-/gi, "").slice(0,-4);
+                let id = result.id;
+                
+                html0 += "<div class='col'>";
+                html0 += "<a href='"+ contextpath +"/film/detail?fcode="+ id +"&ftype="+ type1 +"'>";
+                html0 += "<div class='card' id='card_film'>";
+                html0 += "<img src='" + img + "' id='img_film'>";
+                html0 += "<input id='fcode' hidden value='" + id +"'>";
+                html0 += "<div class='card-body'>";
+                html0 += "<div id='card-text1'>"+ title +"</div>";
+                html0 += "<div id='card-text2'>"+ orig_title + " " + date +"</div>";
+                html0 += "<div id='card-text3'> 평점 : "+ vote_average +"</div>";
+                html0 += "</div></div></a></div><br>";
+    
+                $('#likebutton1').hide();
+                $('#likebutton2').hide();
+
+                },
+                error: function (error) {
+                    console.log('영화 찜 데이터 통신 오류2');
+                    $('#mylikes').hide();
+                }
+            });
+        }
+        $("#carousel0").append(html0);
+        html0 = "";
+    }else{
+        for(let i = 0; i < arr.length; i++){
+            $.ajax({
+                async: false, 
+                url : "https://api.themoviedb.org/3/" + type1 + "/" + arr[i] + "?api_key=" + key + "&language=ko" ,
+                type: "GET",
+                timeout: 3000,
+                dataType: "json", 
+                success: function (result) { 
+    
+                console.log(result);
+    
+                // let html0 = "<div class='row row-cols-1 row-cols-sm-2 row-cols-md-5' id='carousel01'>";
+                
+                let img = poster + poster + result.poster_path;
+                let orig_title = result.original_title;
+                let title = result.title;
+                let vote_average = result.vote_average;
+                let date = result.release_date.replace(/-/gi, "").slice(0,-4);
+                let id = result.id;
+    
+                if(i < 5){
+                    html0 += "<div class='col'>";
+                    html0 += "<a href='"+ contextpath +"/film/detail?fcode="+ id +"&ftype="+ type1 +"'>";
+                    html0 += "<div class='card' id='card_film'>";
+                    html0 += "<img src='" + img + "' id='img_film'>";
+                    html0 += "<input id='fcode' hidden value='" + id +"'>";
+                    html0 += "<div class='card-body'>";
+                    html0 += "<div id='card-text1'>"+ title +"</div>";
+                    html0 += "<div id='card-text2'>"+ orig_title + " " + date +"</div>";
+                    html0 += "<div id='card-text3'> 평점 : "+ vote_average +"</div>";
+                    html0 += "</div></div></a></div><br>";
+                }else{
+                    html9 += "<div class='col' >";
+                    html9 += "<a href='"+ contextpath +"/film/detail?fcode="+ id +"&ftype="+ type1 +"'>";
+                    html9 += "<div class='card' id='card_film'>";
+                    html9 += "<img src='" + img + "' id='img_film'>";
+                    html9 += "<div class='card-body'>";
+                    html9 += "<div id='card-text1'>"+ title +"</div>";
+                    html9 += "<div id='card-text2'>"+ orig_title + " " + date +"</div>";
+                    html9 += "<div id='card-text3'> 평점 : "+ vote_average +"</div>";
+                    html9 += "</div></div></a></div><br>";
+                }
+            },
+            error: function (error) {
+                console.log('영화 찜 데이터 통신 오류3');
+            }
+        });
+    }
+        $("#carousel9").append(html9);
+        html9 = "";          
+    }
+    
+    $("#carousel0").append(html0);
+    html0 = "";
 });

@@ -62,21 +62,22 @@ public class ReviewController {
 		int insertFilm = 0;
 		int reviewWrite = 0;
 		Film filmCheck = null;
+		if(member != null) {
 
-		review.setRvWriterNo(member.getM_no());
-		fcode = Integer.parseInt(review.getFCode());
-		filmCheck = service.filmcheck(fcode);
-		
-		if(filmCheck == null) {
-			insertFilm = service.filmInsert(film);
+			review.setRvWriterNo(member.getM_no());
+			fcode = Integer.parseInt(review.getFCode());
+			filmCheck = service.filmcheck(fcode);
 			
-			if(insertFilm > 0) {
+			if(filmCheck == null) {
+				insertFilm = service.filmInsert(film);
+				
+				if(insertFilm > 0) {
+					reviewWrite = service.reviewWrite(review);
+				} 
+			} else {
 				reviewWrite = service.reviewWrite(review);
-			} 
-		} else {
-			reviewWrite = service.reviewWrite(review);
+			}
 		}
-
 		model.addObject("loginMember", member);
 		model.setViewName("review/film_detail");
 		
@@ -91,16 +92,17 @@ public class ReviewController {
 			@ModelAttribute Review review) {
 		
 		int reviewUpdate = 0;
+		if(member != null) {
 
-		review.setRvWriterNo(member.getM_no());
-		reviewUpdate = service.reviewUpdate(review);
-		
-		if(reviewUpdate > 0) {
-			System.out.println("리뷰 수정 성공");
-		}else {
-			System.out.println("리뷰 수정 실패");
+			review.setRvWriterNo(member.getM_no());
+			reviewUpdate = service.reviewUpdate(review);
+			
+			if(reviewUpdate > 0) {
+				System.out.println("리뷰 수정 성공");
+			}else {
+				System.out.println("리뷰 수정 실패");
+			}
 		}
-		
 		model.setViewName("review/review_list");
 
 		return model;

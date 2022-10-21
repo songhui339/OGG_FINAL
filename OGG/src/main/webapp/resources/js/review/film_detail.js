@@ -27,7 +27,7 @@ $(document).ready(function() {
             $("#filmDetail0").append(html);
         },
         error: function (error) {
-            alert("서버호출 실패")
+            console.log('영화포스터 가져오기 통신 오류');
         }
     });
     
@@ -59,7 +59,7 @@ $(document).ready(function() {
             $("#filmDetail1").append(html);
         },
         error: function (error) {
-            alert("서버호출 실패")
+            console.log('영화정보 가져오기 통신 오류');
         }
     })
     
@@ -84,7 +84,7 @@ $(document).ready(function() {
             $("#filmDetail2").append(html);
         },
         error: function (error) {
-            alert("서버호출 실패")
+            alert("영화줄거리 가져오기 통신 오류")
         }
     });
 
@@ -110,7 +110,7 @@ $(document).ready(function() {
             $("#detail-text1").append(html);
         },
         error: function (error) {
-            alert("서버호출 실패4")
+            console.log('영화감독 가져오기 통신 오류');
         }
     });
     
@@ -156,7 +156,7 @@ $(document).ready(function() {
             $("#carousel1").append(html);
         },
         error: function (error) {
-            alert("서버호출 실패5")
+            console.log('영화 추천 통신 오류');
         }
     });
 
@@ -375,7 +375,7 @@ $(document).ready(function() {
                         $("#message-cmt").val('');
                 },
                 error : (error) => {
-                    alert('서버와 연결에 실패하였습니다');
+                    alert('댓글 등록에 실패하였습니다');
                 }
             });
         }

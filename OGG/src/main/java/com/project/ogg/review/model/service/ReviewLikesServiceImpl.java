@@ -1,5 +1,7 @@
 package com.project.ogg.review.model.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -52,8 +54,17 @@ public class ReviewLikesServiceImpl implements ReviewLikesService {
 	@Override
 	@Transactional
 	public ReviewLikes getLikes(ReviewLikes reviewLikes) {
+		String type = reviewLikes.getLType();
 		
-		return mapper.selectLikes(reviewLikes);
+		if(type.equals("REVIEW")) {
+			return mapper.selectReviewLikes(reviewLikes);
+			
+		}else if (type.equals("CMT")) {
+			return mapper.selectCmtLikes(reviewLikes);
+			
+		}else {
+			return mapper.selectFilmLikes(reviewLikes);
+		}
 	}
 
 	@Override
@@ -65,6 +76,7 @@ public class ReviewLikesServiceImpl implements ReviewLikesService {
 		
 		if (type.equals("INSERT")) {
 			insertLikes = insertLikes(reviewLikes);
+			
 		}else if (type.equals("DELETE")) {
 			deleteLikes = deleteLikes(reviewLikes);
 		}
@@ -85,6 +97,7 @@ public class ReviewLikesServiceImpl implements ReviewLikesService {
 			if(insertLikes > 0 && reviewLikes.getLType().equals("REVIEW")) {
 				review = this.getRTotalLikes(reviewLikes);
 				reviewLikes.setNum(review.getRvLikes()+1);
+				
 			}else if(insertLikes > 0 && reviewLikes.getLType().equals("CMT")) {
 				cmt = this.getCTotalLikes(reviewLikes);
 				reviewLikes.setNum(cmt.getCmtLikes()+1);
@@ -95,6 +108,7 @@ public class ReviewLikesServiceImpl implements ReviewLikesService {
 			if(deleteLikes > 0 && reviewLikes.getLType().equals("REVIEW") ) {
 				review = this.getRTotalLikes(reviewLikes);
 				reviewLikes.setNum(review.getRvLikes()-1);
+				
 			}else if(deleteLikes > 0 && reviewLikes.getLType().equals("CMT")) {
 				cmt = this.getCTotalLikes(reviewLikes);
 				reviewLikes.setNum(cmt.getCmtLikes()-1);
@@ -123,6 +137,11 @@ public class ReviewLikesServiceImpl implements ReviewLikesService {
 	@Override
 	public ReviewCmt getCTotalLikes(ReviewLikes reviewLikes) {
 		return mapper.selectCTotalLikes(reviewLikes);
+	}
+
+	@Override
+	public List<ReviewLikes> getStarRates(int fcode) {
+		return mapper.selectStarbyFilm(fcode);
 	}
 
 

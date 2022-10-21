@@ -13,7 +13,6 @@
     
     <!-- my JS -->
     <script defer src="${path}/js/review/film_search.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     
     <!-- 내용 전체 컨테이너 -->
     <div class="container" style="margin-bottom: 100px; margin-top: 40px;">
@@ -24,7 +23,7 @@
             </div>
             <div class="col">
             </div>
-            <div class="col" style="z-index:999;">
+            <div class="col">
                 <input type="text" id="searchInput" style="margin-left: 35%; margin-top:5px; 
                         height: 34px; width:140px; border: 1px solid lightgray">
                 <button class="btn btn-primary" type="button" style="display: inline; height: 35px; margin-bottom: 5px;"

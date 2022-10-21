@@ -33,7 +33,7 @@
     <!-- javascript -->
     <script src="https://d3js.org/d3.v3.min.js"></script>
     <script src="${ path }/js/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
     <!-- 메인 로고와 상단 우측 메뉴 포함한 header> -->
     <header>

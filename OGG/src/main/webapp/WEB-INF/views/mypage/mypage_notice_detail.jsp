@@ -66,21 +66,21 @@
 
         <!-- 정보 영역 -->
         <div class="infoBox">
-		    <p class="titleText">${N_TITLE}</p>
+		    <p class="titleText">${notice.n_no}</p>
 		    <div class="line"></div>
 		    <div class="noticeBox">
 		        <div class="subTextBox">
-		            <p class="createDate">작성일자 : ${N_CREATE_DATE}</p>
-		            <p class="readCount">조회수 : ${N_READCOUNT} </p>
+		            <p class="createDate">작성일자 : <fmt:formatDate type="date" value="${ notice.n_Create_Date }" /></p>
+		            <p class="readCount">조회수 : ${notice.n_readcount} </p>
 		        </div>
 		
 		        <div class="contentBox">
 		            <p>
-		                ${N_CONTENT}
+		                ${notice.n_content}
 		            </p>
 		        </div>
 		        <div class="btnBox">
-		            <button type="" class="btn">목록으로</button>
+		            <button type="" onclick="location.href='${path}/mypage/notice?page=1'" class="btn">목록으로</button>
 		        </div>
 		    </div>
 		
@@ -100,8 +100,5 @@
 
     </div>
 </section>
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

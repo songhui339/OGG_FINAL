@@ -24,8 +24,15 @@ public interface MypageService {
 
 	int updateQuestion(Question question);
 
+
 	int getCommnityCount(int m_no);
 
 	List<Community> getCommunityList(int m_no, PageInfo pageInfo);
+
+	int getNoticeCount();
+
+	List<Notice> getNoticeList(PageInfo pageInfo);
+
+	Notice getNoticeView(int no);
 
 }
