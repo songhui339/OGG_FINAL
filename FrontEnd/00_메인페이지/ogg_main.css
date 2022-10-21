@@ -1,0 +1,94 @@
+/* 
+====================================================
+OGG 메인 페이지 CSS
+====================================================
+*/
+
+.mainHeader_section .gallery a {
+    text-decoration: none;
+}
+
+.mainHeader_section .gallery {
+    list-style: none;
+    padding: 0;
+    line-height: 1.5em;
+    margin: 0;
+    display: flex;
+    /* height: 100vh; */
+    height: 80vh;
+}
+.mainHeader_section .gallery li {
+  /* border-right: 5px solid #000; */
+    flex: 1;
+    transition: 0.5s;
+    position: relative;
+    overflow: hidden;
+}
+.mainHeader_section .gallery li:last-child {
+    border-right: none;
+}
+.mainHeader_section .gallery li:nth-child(1) {
+    background: url(mainHeader_01.png) no-repeat center center;
+}
+.mainHeader_section .gallery li:nth-child(2) {
+    background: url(mainHeader_02.png) no-repeat center center;
+}
+.mainHeader_section .gallery li:nth-child(3) {
+    background: url(mainHeader_03.png) no-repeat center center;
+}
+.mainHeader_section .gallery li:nth-child(4) {
+    background: url(mainHeader_04.png) no-repeat center center;
+}
+.mainHeader_section .gallery li:nth-child(5) {
+    background: url(mainHeader_05.png) no-repeat center center;
+}
+
+.mainHeader_section .gallery:hover li {
+    flex: 1;
+}
+.mainHeader_section .gallery li:hover {
+    flex: 3;
+    /* filter: grayscale(1) */
+}
+
+.content {
+    position: absolute;
+    background-color: #7e69fe;
+    color: #fff;
+    text-align: center;
+    height: 250px;
+    bottom: -320px;
+    transition: 0.5s;
+    padding: 20px;
+    box-sizing: border-box;
+    padding-top: 50px;
+    width: 100%;
+}
+.sns a {
+    color: #333;
+}
+
+.mainHeader_section .gallery li:hover .content {
+    bottom: 0;
+    transition-delay: 0.5s;
+}
+.content:before {
+    content: '';
+    position: absolute;
+    background-color: #7e69fe;
+    width: 100%;
+    height: 80px;
+    left: 0;
+    top: -10px;
+    transform-origin: left bottom;
+    transform: rotate(-3deg) scale(1.3)
+}
+
+
+
+
+
+
+
+
+
