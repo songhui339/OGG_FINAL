@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <c:set var="path" value="${ pageContext.request.contextPath }"/>
 
 <script src="${ path }/js/jquery-3.6.0.min.js"></script>
@@ -78,44 +79,48 @@
                     </tr>
                 </thead>
                 <tbody class="partyitem">
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>${C_TITLE}</td>
-                        <td>${C_WRITEDATE}</td>
-                        <td>${C_VIEWCOUNT}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>${C_TITLE}</td>
-                        <td>${C_WRITEDATE}</td>
-                        <td>${C_VIEWCOUNT}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>${C_TITLE}</td>
-                        <td>${C_WRITEDATE}</td>
-                        <td>${C_VIEWCOUNT}</td>
-                    </tr>
+		                <c:if test="${ empty list }">
+								<tr>
+									<td colspan="4">
+										조회된 게시글이 없습니다.
+									</td>
+								</tr>	
+						</c:if>
+						<c:if test="${ not empty list }">
+								<c:forEach var="community" items="${ list }">
+			                        <tr onclick="location.href='${ path }/community/view.do?c_no=${ community.c_no }';" class="boardItem">
+			                            <th scope="row">${ community.c_no }</th>
+			                            <td>${ community.c_title }</td>
+			                            <td><fmt:formatDate type="date" value="${ community.c_writeDate }"/></td>
+			                            <td>${ community.c_viewCount }</td>
+			                        </tr>
+		                        </c:forEach>
+		                   </c:if>
                 </tbody>
             </table>
 
             <!-- Page 네비게이션 -->
             <div class="pageNav" id="pageBar">
                 <!-- 맨 처음으로 -->
-                <button class="btn arrowBtn" onclick="location.href=''">&lt;&lt;</button>
+                <button class="btn arrowBtn" onclick="location.href='${ path }/mypage/board?page=1'">&lt;&lt;</button>
     
                 <!-- 이전 페이지로 -->
-                <button class="btn arrowBtn" onclick="location.href=''">&lt;</button>
+                <button class="btn arrowBtn" onclick="location.href='${ path }/mypage/board?page=${ pageInfo.prevPage }'">&lt;</button>
     
                 <!--  10개 페이지 목록 -->
-                    <button class="btn" disabled>${ status.current }</button>
-                    <button class="btn pageNoBtn" onclick="location.href=''">2</button>
-    
+                <c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" varStatus="status">
+					<c:if test="${ status.current == pageInfo.currentPage }">
+                    	<button class="btn" disabled>${ status.current }</button>
+                    </c:if>
+                    <c:if test="${ status.current != pageInfo.currentPage }">
+                    	<button class="btn pageNoBtn" onclick="location.href='${ path }/mypage/board?page=${ status.current }'">${ status.current }</button>
+    				</c:if>
+    			</c:forEach>
                 <!-- 다음 페이지로 -->
-                <button class="btn arrowBtn" onclick="location.href=''">&gt;</button>
+                <button class="btn arrowBtn" onclick="location.href='${ path }/mypage/board?page=${ pageInfo.nextPage }'">&gt;</button>
     
                 <!-- 맨 끝으로 -->
-                <button class="btn arrowBtn" onclick="location.href=''">&gt;&gt;</button>
+                <button class="btn arrowBtn" onclick="location.href='${ path }/mypage/board?page=${ pageInfo.maxPage }'">&gt;&gt;</button>
             </div>
 
         </div>

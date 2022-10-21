@@ -60,6 +60,7 @@ public class CommunityController {
 		
 		List<Community> list = null;
 		PageInfo pageInfo = null;
+		
 		CommonVO commonVO = new CommonVO();
 		String preventSearchValue = "";
 		String preventSearchType = "";
@@ -73,7 +74,6 @@ public class CommunityController {
 		
 		
 		// 조회 조건 기입 후 검색 시 직전 검색 데이터 jsp로 return
-		
 		if ( !StringUtils.isEmpty(sValue) ) {
 			preventSearchType = sType;
 			preventSearchValue = sValue;

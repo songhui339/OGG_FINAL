@@ -12,6 +12,21 @@
 	<result column="M_NAME" property="a_m_name"/>
 </resultMap>
 
+<resultMap type="Community" id="CommunityResultMap">
+	<id property="c_no" column="C_NO"/>
+	<result property="c_writerNo" column="C_WRITERNO" />
+	<result property="c_title" column="C_TITLE" />
+	<result property="c_content" column="C_CONTENT" />
+	<result property="c_file" column="C_FILE" />
+	<result property="c_fileRename" column="C_FILERENAME" />
+	<result property="c_writeDate" column="C_WRITEDATE" />
+	<result property="c_modifyDate" column="C_MODIFYDATE" />
+	<result property="c_viewCount" column="C_VIEWCOUNT" />
+	<result property="c_status" column="C_STATUS" />
+	<result property="c_like" column="C_LIKE" />
+	<result property="m_nickName" column="M_NICKNAME" />
+</resultMap>
+
 <select id="getQuestionCount" resultType="_int" parameterType="_int">
 	SELECT COUNT(*)
 	FROM QUESTION
@@ -81,6 +96,31 @@
 	Q_ENROLLDATE = SYSDATE
 	WHERE Q_NO = #{q_no}
 </update>
+
+<select id="getCommnityCount" resultType="_int">
+	SELECT COUNT(C_NO) 
+	FROM COMMUNITY C 
+	JOIN MEMBER M ON (M.M_NO = C.C_WRITERNO) 
+	WHERE C_STATUS = 'Y' AND M_NO = ${m_no}
+</select>
+
+<select id="getCommunityList" resultMap="CommunityResultMap">
+	SELECT C_WRITERNO,
+		   C_NO,
+		   C_TITLE,
+		   C_CONTENT,
+		   C_FILE,
+		   C_WRITEDATE,
+		   C_MODIFYDATE,
+		   C_VIEWCOUNT,
+		   C_STATUS,
+		   C_LIKE,
+		   M_NICKNAME
+	FROM COMMUNITY C
+	JOIN MEMBER M ON (M.M_NO = C.C_WRITERNO)
+	WHERE C.C_STATUS = 'Y' AND M.M_NO = ${m_no}
+	ORDER BY C.C_NO DESC
+</select>
 
 
 </mapper>

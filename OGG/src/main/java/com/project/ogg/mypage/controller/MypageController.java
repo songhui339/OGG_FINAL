@@ -15,6 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.project.ogg.admin.model.vo.Answer;
 import com.project.ogg.admin.model.vo.Question;
 import com.project.ogg.common.util.PageInfo;
+import com.project.ogg.community.model.service.CommunityService;
+import com.project.ogg.community.model.vo.Community;
 import com.project.ogg.member.model.vo.Member;
 import com.project.ogg.mypage.model.service.MypageService;
 
@@ -106,10 +108,28 @@ public class MypageController {
     
     
     // 마이페이지 - 내 게시글
+//    @GetMapping("/board")
+//    public String mypageBoard () {
+//        
+//        return "mypage/mypage_board";
+//    }
+    
     @GetMapping("/board")
-    public String mypageBoard () {
-        
-        return "mypage/mypage_board";
+    public ModelAndView boardList(ModelAndView model,
+    							@AuthenticationPrincipal Member member,
+    							@RequestParam(value = "page", defaultValue = "1") int page) {
+    	List<Community> list = null;
+    	PageInfo pageInfo = null;
+    	int m_no = member.getM_no();
+    	
+    	pageInfo = new PageInfo(page, 10, service.getCommnityCount(m_no), 10);
+    	list = service.getCommunityList(m_no, pageInfo);
+    	
+    	model.addObject("list", list);
+    	model.addObject("pageInfo", pageInfo);
+    	model.setViewName("mypage/mypage_board");
+    	
+    	return model;
     }
     
     // 마이페이지 - 1:1 문의
