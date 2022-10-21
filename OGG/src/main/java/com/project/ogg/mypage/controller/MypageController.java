@@ -27,6 +27,8 @@ import com.project.ogg.member.model.vo.Member;
 import com.project.ogg.mypage.model.mapper.MypageMapper;
 import com.project.ogg.mypage.model.service.MypageService;
 
+import oracle.jdbc.proxy.annotation.GetProxy;
+
 @Controller
 @RequestMapping("/mypage")
 public class MypageController {
@@ -80,6 +82,23 @@ public class MypageController {
     }
     
     
+    // 회원 정보 수정 기존 정보 가져오기...ㅜ 
+    @GetMapping("/updateMember")
+    public ModelAndView updateMemberInfo (ModelAndView model,
+                             @AuthenticationPrincipal Member member) {
+        
+        int m_no = member.getM_no();
+        
+        Member myPageMember = null;
+        myPageMember = service.selectMemberByNo(m_no);
+        
+        model.addObject("myPageMember", myPageMember);
+        model.setViewName("mypage/mypage_updateMember");
+        
+        return model;
+    }
+    
+    
     // 회원 정보 수정
     @PostMapping("/updateMember")
     public ModelAndView updateMember (ModelAndView model, 
@@ -118,6 +137,38 @@ public class MypageController {
     	
         return model;
     }
+    
+    // 회원 탈퇴 관련 핸들러
+    @GetMapping("deleteMember")
+    public ModelAndView delete (
+                ModelAndView model,
+                @AuthenticationPrincipal Member member) {
+       
+        int result = 0;
+        
+        result = service.delete(member.getM_no());
+        
+        if(result > 0) {
+            model.addObject("msg", "정상적으로 탈퇴 처리 되었습니다.");
+            model.addObject("location", "/logout");
+        } else {
+            model.addObject("msg", "회원 탈퇴 처리에 실패했습니다");
+            model.addObject("location", "/updateMember");
+        }
+        
+        model.setViewName("common/msg");
+        
+        return model;
+    }
+    
+    
+    // 비밀번호 변경 핸들러 
+    @GetMapping("/updatePwd")
+    public String updatePwd () {
+        
+        return "mypage/mypage_updatePwd";
+    }
+    
     
     // 공지사항
     @GetMapping("/notice")

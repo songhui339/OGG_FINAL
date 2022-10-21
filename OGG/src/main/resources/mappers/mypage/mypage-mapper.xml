@@ -186,7 +186,7 @@
 	ORDER BY C.C_NO DESC
 </select>
 
-<select id="selectMemberByNo" parameterType="int" resultMap="memberResultMap">
+<select id="selectMemberByNo" parameterType="_int" resultMap="memberResultMap">
 	SELECT *
 	FROM MEMBER
 	WHERE M_NO = #{m_no} AND M_STATUS = 'Y'
@@ -201,6 +201,12 @@ SET
 	M_EMAIL = #{m_email},
 	M_PHONENUMBER = #{m_phonenumber}
 WHERE M_NO = #{m_no}
+</update>
+
+<update id="deleteMember" parameterType="_int">
+		UPDATE MEMBER SET
+		M_STATUS = 'N'
+		WHERE M_NO = #{m_no}
 </update>
 
 

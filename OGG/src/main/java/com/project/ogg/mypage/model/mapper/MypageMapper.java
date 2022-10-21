@@ -43,4 +43,6 @@ public interface MypageMapper {
 
     Member selectMemberByNo(int m_no);
 	int updateMember(Member member);
+
+    int deleteMember(int m_no);
 }

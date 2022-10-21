@@ -66,72 +66,48 @@
 
         <!-- 정보 영역 -->
         <div class="infoBox">
-            <p class="titleText">회원 정보 수정</p>
+            <p class="titleText">비밀번호 변경</p>
             <div class="line"></div>
-            <form action="${path}/mypage/updateMember" method="post">
+            <form action="${path}/mypage/updatePwd" method="post">
                 <div class="formBox">
                     <ul class="form-list">
                         <li>
-                            <label for="">아이디</label>
-                            <p class="text">${ myPageMember.m_id }</p>
+                            <label for="m_pwd">현재 비밀번호</label>
+                            <input type="password" name="m_pwd" id="m_pwd" minlength="3" maxlength="20" id="">
+                            
                         </li>
                         <li>
-                            <label for="">비밀번호</label>
-                            <button type="button" id="btnUpdatePwd" onclick="location.href='${ path }/mypage/updatePwd';">비밀번호 변경</button>
+                            <label for="newpassword">신규 비밀번호</label>
+                            <input type="password" name="newpassword" id="newpassword" minlength="3" maxlength="20" id="">
                         </li>
                         <li>
-                            <label for="">이름</label>
-                            <input type="text" value="${myPageMember.m_name}" name="m_name"  minlength="3" maxlength="20" id="">
+                            <label for="newpasswordcheck">비밀번호 확인</label>
+                            <input type="password" name="newpasswordcheck" id="newpasswordcheck" minlength="3" maxlength="20" id="">
+                            <div id="password_check" style="width: 50px;"></div>
                         </li>
-                        <li>
-                            <label for="">닉네임</label>
-                            <input type="text" value="${myPageMember.m_nickname}" name="m_nickname"  minlength="3" maxlength="20" id="">
-                        </li>
-                        <li>
-                            <label for="">이메일</label>
-                            <input type="email" value="${myPageMember.m_email}" name="m_email"  minlength="3" maxlength="20" id="">
-                        </li>
-                        <li>
-                            <label for="">휴대폰 번호</label>
-                            <input type="tel" value="${myPageMember.m_phonenumber}" name="m_phonenumber"  minlength="3" maxlength="20" id="">
-                        </li>
-						<!-- 
-                        <li>
-                            <span class="subject">이메일 수신</span>
-                            <input type="checkbox" name="" id="">
-                            <span class="subject">SMS 수신</span>
-                            <input type="checkbox" name="" id="">
-                        </li>
-                        -->
                     </ul>
 
                     <div class="btnBox">
-                    	<input  type="submit" class="btn" value="수정하기">
-                       	<input type="button" id="btnDelete" class="btn redBtn" value="탈퇴하기">
-                        <!-- 
-                        <button type="submit" class="btn">수정하기</button>
-                        <button type="button" id="deleteMember" class="btn redBtn">탈퇴하기</button> 
-                        -->
+                        <button type="submit" id="btn_updateMember" class="btn">변경</button>
                     </div>
 					
-					<script type="text/javascript">
-						$(document).ready(() => {
-							/* $("#btnUpdatePwd").on("click", () => {
-								let url = "${ path }/member/updatePwd";
-								let status = "left=500px,top=200px,width=500px,height=300px";
-								
-								open(url, "", status);
-							}); */
-							
-							$("#btnDelete").on("click", () => {
-								if(confirm("정말로 탈퇴하시겠습니까?")) {
-									location.replace("${ path }/member/delete");
-								}			
-							});
-						});
 					
+					<script>
+						function validate() {
+							let pass1 = $("#newpassword").val();
+							let pass2 = $("#newpasswordcheck").val();
+							
+							if(pass1.trim() != pass2.trim()){
+								alert("비밀번호가 일치하지 않습니다.");
+								$("#pass1").val("");
+								$("#pass2").val("");
+								$("#pass1").focus();
+								
+								return false;
+							}
+						}
 					</script>
-                    
+				                    
 
                 </div>
             </form>

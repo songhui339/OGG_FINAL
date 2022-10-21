@@ -40,4 +40,6 @@ public interface MypageService {
 
 	int save(Member member);
 
+    int delete(int m_no);
+
 }
