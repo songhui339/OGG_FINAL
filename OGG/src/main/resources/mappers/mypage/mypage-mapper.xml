@@ -12,6 +12,17 @@
 	<result column="M_NAME" property="a_m_name"/>
 </resultMap>
 
+<resultMap type="Notice" id="noticeListResultMap">
+	<result column="ROWNUM" property="n_rno"/>
+	<result column="M_NAME" property="n_m_name"/>
+</resultMap>
+
+<select id="getNoticeCount" resultType="_int">
+	SELECT COUNT(*)
+	FROM NOTICE
+	WHERE N_STATUS = 'Y'
+</select>
+
 <select id="getQuestionCount" resultType="_int" parameterType="_int">
 	SELECT COUNT(*)
 	FROM QUESTION
@@ -32,6 +43,41 @@
 	WHERE Q_M_NO = #{no}
     ORDER BY Q_STATUS
 	) Q
+</select>
+
+<select id="selectNoticeList" resultMap="noticeListResultMap">
+	SELECT ROWNUM,
+	       N.* 
+	FROM (
+	SELECT N_NO,
+	       N_TITLE,
+	       M.M_NAME,
+	       N_CREATE_DATE,
+	       N_READCOUNT
+	       
+	FROM NOTICE N
+	JOIN MEMBER M ON(N.N_M_NO = M.M_NO)
+	WHERE N_STATUS = 'Y'
+	) N
+	ORDER BY N_NO DESC
+</select>
+
+<select id="getNoticeView" resultMap="noticeListResultMap" parameterType="_int">
+	SELECT  ROWNUM,
+			N.*
+			FROM (
+			SELECT N_NO,
+			N_TITLE,
+			N_CONTENT,
+			M.M_NAME,
+			N_CREATE_DATE,
+			N_PATH,
+			N_READCOUNT
+	FROM NOTICE N
+	JOIN MEMBER M ON(N.N_M_NO = M.M_NO)
+	WHERE N_STATUS = 'Y' AND N_NO = #{page}
+	) N
+	ORDER BY N_NO
 </select>
 
 <select id="getQuestionView" resultMap="questionListResultMap" parameterType="_int">
@@ -73,13 +119,11 @@
 			#{q_m_no})
 </insert>
 	
-<update id="updateQuestion" parameterType="Question">
-	UPDATE QUESTION
-	SET
-	Q_TITLE = #{q_title},
-	Q_CONTENT = #{q_content},
-	Q_ENROLLDATE = SYSDATE
-	WHERE Q_NO = #{q_no}
+
+<update id="updateReadCount" parameterType="Notice">
+	UPDATE NOTICE
+	SET N_READCOUNT=#{n_readcount}+1
+	WHERE N_NO=#{n_no}
 </update>
 
 

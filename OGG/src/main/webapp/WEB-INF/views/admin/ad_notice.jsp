@@ -131,7 +131,7 @@
 										<tbody>
 											<c:if test="${empty list }">
 												<tr>
-													<td>1</td>
+													<td></td>
 													<th><a href="#!">게시글이 없습니다.</a></th>
 													<td></td>
 													<td></td>

@@ -18,7 +18,7 @@ public interface MypageMapper {
 
 	List<Notice> selectNoticeList(RowBounds rowBounds);
 
-	Notice getNoticeView(int page);
+	Notice getNoticeView(int no);
 
 	int updateReadCount(Notice notice);
 

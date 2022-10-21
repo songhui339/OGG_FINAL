@@ -23,4 +23,10 @@ public interface MypageService {
 
 	int updateQuestion(Question question);
 
+	int getNoticeCount();
+
+	List<Notice> getNoticeList(PageInfo pageInfo);
+
+	Notice getNoticeView(int no);
+
 }

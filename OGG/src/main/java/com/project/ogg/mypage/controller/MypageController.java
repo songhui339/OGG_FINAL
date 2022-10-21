@@ -2,6 +2,10 @@ package com.project.ogg.mypage.controller;
 
 import java.util.List;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -13,9 +17,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.ogg.admin.model.vo.Answer;
+import com.project.ogg.admin.model.vo.Notice;
 import com.project.ogg.admin.model.vo.Question;
 import com.project.ogg.common.util.PageInfo;
 import com.project.ogg.member.model.vo.Member;
+import com.project.ogg.mypage.model.mapper.MypageMapper;
 import com.project.ogg.mypage.model.service.MypageService;
 
 @Controller
@@ -24,6 +30,9 @@ public class MypageController {
 	
 	@Autowired
 	private MypageService service;
+	
+	@Autowired
+	private MypageMapper mapper;
     
     // 마이페이지 메인
     @GetMapping("/main")
@@ -48,16 +57,72 @@ public class MypageController {
     
     // 공지사항
     @GetMapping("/notice")
-    public String mypageNotice () {
-        
-        return "mypage/mypage_notice";
-    }
-    
+	public ModelAndView goNotice(@RequestParam(value = "page", defaultValue="1") int page,ModelAndView model) {
+		
+		List<Notice> list = null;
+		PageInfo pageInfo = null;
+		pageInfo = new PageInfo(page, 5, service.getNoticeCount(), 5);
+		
+		list = service.getNoticeList(pageInfo);
+		
+		model.addObject("pageInfo",pageInfo);
+		model.addObject("list",list);
+		model.setViewName("mypage/mypage_notice");
+		return model;
+	}
+	
     @GetMapping("/notice/view")
-    public String mypageNoticeDetail () {
-        
-        return "mypage/mypage_notice_detail";
-    }
+	public ModelAndView noticeView(@RequestParam("no")int no,
+							ModelAndView model,
+							HttpServletRequest request,
+							HttpServletResponse response) {
+		
+		Cookie[] cookies = request.getCookies();
+    	String noticeHistory = ""; // 조회한 게시글 번호를 저장하는 변수
+    	boolean hasRead = false; // 읽은 글이면 true, 안 읽었으면 false
+    	
+    	if(cookies != null) {
+    		String name = null;
+    		String value = null;
+    		for (Cookie cookie : cookies) {
+				name = cookie.getName();
+				value = cookie.getValue();
+				
+				// boardHistory인 쿠키 값을 찾기
+				if(name.equals("noticeHistory")) {
+					noticeHistory = value;
+					
+					if(value.contains("|" + no + "|")) {
+						hasRead = true;
+						
+						break;
+					}
+				}
+			}
+    	}
+    	
+    	// 2. 읽지 않은 게시글이면 cookie에 기록
+    	if(!hasRead) {
+    		Cookie cookie = new Cookie("noticeHistory", noticeHistory + "|" + no + "|");
+        	
+        	cookie.setMaxAge(-1); // 브라우저 종료 시 삭제
+        	response.addCookie(cookie);
+    	}    	
+    	
+		
+		Notice notice = service.getNoticeView(no);
+		
+		if(notice != null && !hasRead) {
+			 mapper.updateReadCount(notice);
+		}
+		
+		notice = service.getNoticeView(no);
+		
+		model.addObject("notice",notice);
+		model.setViewName("mypage/mypage_notice_detail");
+		
+		return model;
+	}
     
     // 마이페이지 - 파티
     @GetMapping("/party")
@@ -176,43 +241,7 @@ public class MypageController {
 
 		return model;
 	}
-//    @GetMapping("/ask/update")
-//	public ModelAndView questionUpdate(@RequestParam int no,
-//										ModelAndView model) {
-//		
-//		Question question = service.getQuestionView(no);
-//		Answer answer = service.getAnswer(question.getQ_no());
-//		
-//		if(answer != null) {
-//			model.addObject("msg","답변이 있을 경우 질문 수정이 불가능합니다.");
-//			model.addObject("location","/admin/question/view?no="+no);
-//			model.setViewName("common/msg");
-//			return model;
-//		}
-//		
-//		model.addObject("question",question);
-//		model.setViewName("admin/ad_questionUpdate");
-//		
-//		return model;
-//	}
-//	@PostMapping("/ask/update")
-//	public ModelAndView questionUpdate(@RequestParam int no,
-//									ModelAndView model,
-//									@ModelAttribute Question question) {
-//		
-//		System.out.println(question);
-//		int result = service.updateQuestion(question);
-//		
-//		if(result > 0) {
-//			model.addObject("msg","문의 수정 완료");
-//			model.addObject("location","/admin/question/view?no="+no);
-//		}else{
-//			model.addObject("msg","문의 수정 실패");
-//			model.addObject("location","/admin/question/view?no="+no);
-//		}
-//		model.setViewName("common/msg");
-//		return model;
-//	}
+    
     
     
     
