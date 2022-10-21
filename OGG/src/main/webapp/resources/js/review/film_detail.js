@@ -84,7 +84,7 @@ $(document).ready(function() {
             $("#filmDetail2").append(html);
         },
         error: function (error) {
-            alert("서버호출 실패")
+            alert("영화줄거리 가져오기 통신 오류")
         }
     });
 

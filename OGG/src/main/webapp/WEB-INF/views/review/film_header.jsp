@@ -106,12 +106,14 @@
 				'ftype' : ftype
 			},
 			success : (data) => {
-				console.log(data);
-				if(data.likeFilm.fcode == null || data.likeFilm.flikes == 0){
-					console.log('가가가가가가');
-				}else{
-					$('#likeFilm').hide();
-					$('#dislikeFilm').show();
+				// console.log(data);
+				if(!data){
+					if(data.likeFilm.fcode == null || data.likeFilm.flikes == 0){
+						console.log('가가가가가가');
+					}else{
+						$('#likeFilm').hide();
+						$('#dislikeFilm').show();
+					}
 				}
 			},
 			error: function (error) {
@@ -137,7 +139,7 @@
 				alert('별점이 등록되었습니다');
 			},
 			error : (error) => {
-				alert('별점 등록에 실패하였습니다');
+				alert('로그인 후 이용 가능합니다');
 			}
 		});
 	}

@@ -44,14 +44,16 @@ public class ReviewLikesController {
 		reviewLikes.setMNo(member.getM_no());
 		fcode = Integer.parseInt(reviewLikes.getFCode());
 		filmCheck = service.filmcheck(fcode);
-		
-		if(filmCheck == null) {
-			filmSave = service.filmInsert(film);
-			insertStar = service.insertStar(reviewLikes);
-			map.put("star", service.getStar(reviewLikes));
-		}else {
-			insertStar = service.insertStar(reviewLikes);
-			map.put("star", service.getStar(reviewLikes));
+		if(member != null) {
+			
+			if(filmCheck == null) {
+				filmSave = service.filmInsert(film);
+				insertStar = service.insertStar(reviewLikes);
+				map.put("star", service.getStar(reviewLikes));
+			}else {
+				insertStar = service.insertStar(reviewLikes);
+				map.put("star", service.getStar(reviewLikes));
+			}
 		}
 		return map;
 	}
@@ -66,12 +68,13 @@ public class ReviewLikesController {
 		int fcode = 0;
 		Film filmCheck = null;
 		Map<String, ReviewLikes> map = new HashMap<>(); 
-		
-		reviewLikes.setMNo(member.getM_no());
-		fcode = Integer.parseInt(reviewLikes.getFCode());
-		filmCheck = service.filmcheck(fcode);
-		map.put("star", service.getStar(reviewLikes));
-
+		if(member != null) {
+			
+			reviewLikes.setMNo(member.getM_no());
+			fcode = Integer.parseInt(reviewLikes.getFCode());
+			filmCheck = service.filmcheck(fcode);
+			map.put("star", service.getStar(reviewLikes));
+		}
 		return map;
 	}
 	
@@ -100,10 +103,11 @@ public class ReviewLikesController {
 			@ModelAttribute ReviewLikes reviewLikes)  {
 
 		Map<String, ReviewLikes> map = new HashMap<>(); 
-		
-		reviewLikes.setMNo(member.getM_no());
-		map.put("likes", service.getLikes(reviewLikes));
-		
+		if(member != null) {
+			
+			reviewLikes.setMNo(member.getM_no());
+			map.put("likes", service.getLikes(reviewLikes));
+		}
 //		System.out.println("조회" + map);
 		
 		return map;
@@ -127,20 +131,21 @@ public class ReviewLikesController {
 		reviewLikes.setMNo(member.getM_no());
 		fcode = Integer.parseInt(reviewLikes.getFCode());
 		filmCheck = service.filmcheck(fcode);
-		
-		if(filmCheck == null) {
-			insertFilm = service.filmInsert(film);
-			insertLikes = service.updateTotalLikes(reviewLikes, "INSERT");
-			if(insertLikes > 0) {
-				map.put("likes", service.getLikes(reviewLikes));
-			}
-		}else {
-			insertLikes = service.updateTotalLikes(reviewLikes, "INSERT");
-			if(insertLikes > 0) {
-				map.put("likes", service.getLikes(reviewLikes));
+		if(member != null) {
+			
+			if(filmCheck == null) {
+				insertFilm = service.filmInsert(film);
+				insertLikes = service.updateTotalLikes(reviewLikes, "INSERT");
+				if(insertLikes > 0) {
+					map.put("likes", service.getLikes(reviewLikes));
+				}
+			}else {
+				insertLikes = service.updateTotalLikes(reviewLikes, "INSERT");
+				if(insertLikes > 0) {
+					map.put("likes", service.getLikes(reviewLikes));
+				}
 			}
 		}
-		
 		return map;
 	}
 	
@@ -155,14 +160,15 @@ public class ReviewLikesController {
 		int deleteLikes = 0;
 		Map<String, ReviewLikes> map = new HashMap<>(); 
 		Review review = new Review();
-
-		reviewLikes.setMNo(member.getM_no());
-		deleteLikes = service.updateTotalLikes(reviewLikes, "DELETE");
-		
-		if(deleteLikes > 0) {
-			map.put("likes", service.getLikes(reviewLikes));
+		if(member != null) {
+			
+			reviewLikes.setMNo(member.getM_no());
+			deleteLikes = service.updateTotalLikes(reviewLikes, "DELETE");
+			
+			if(deleteLikes > 0) {
+				map.put("likes", service.getLikes(reviewLikes));
+			}
 		}
-		
 		return map;
 	}
 
@@ -174,10 +180,11 @@ public class ReviewLikesController {
 			@ModelAttribute ReviewLikes reviewLikes)  {
 
 		Map<String, ReviewLikes> map = new HashMap<>(); 
-		
-		reviewLikes.setMNo(member.getM_no());
-		map.put("likeFilm", service.getLikes(reviewLikes));
-		
+		if(member != null) {
+			
+			reviewLikes.setMNo(member.getM_no());
+			map.put("likeFilm", service.getLikes(reviewLikes));
+		}
 //		System.out.println("조회" + map);
 		
 		return map;
@@ -201,16 +208,17 @@ public class ReviewLikesController {
 		reviewLikes.setMNo(member.getM_no());
 		fcode = Integer.parseInt(reviewLikes.getFCode());
 		filmCheck = service.filmcheck(fcode);
-		
-		if(filmCheck == null) {
-			insertFilm = service.filmInsert(film);
-			service.setTotalLikes(reviewLikes, "INSERT");
-			map.put("likeFilm", service.getLikes(reviewLikes));
-		}else {
-			service.setTotalLikes(reviewLikes, "INSERT");
-			map.put("likeFilm", service.getLikes(reviewLikes));
+		if(member != null) {
+			
+			if(filmCheck == null) {
+				insertFilm = service.filmInsert(film);
+				service.setTotalLikes(reviewLikes, "INSERT");
+				map.put("likeFilm", service.getLikes(reviewLikes));
+			}else {
+				service.setTotalLikes(reviewLikes, "INSERT");
+				map.put("likeFilm", service.getLikes(reviewLikes));
+			}
 		}
-		
 		return map;
 	}
 

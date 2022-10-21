@@ -45,20 +45,21 @@ public class ReviewCmtController {
 		int cmtWrite = 0;
 		int reviewCountUpdate = 0;
 		Map<String, ReviewCmt> map = new HashMap<>(); 
-		
-		cmt.setCmtWriterNo(member.getM_no());
-		cmtWrite = service.cmtWrite(cmt);
+		if(member != null) {
 
-		if(cmtWrite > 0) {
-			reviewCountUpdate = service.updateCmtCount(cmt.getRvNo());
-			if(reviewCountUpdate > 0) {
-				map.put("cmt", service.getCmtByCmtNo(cmt.getCmtNo()));
-				System.out.println("댓글 등록 성공");
+			cmt.setCmtWriterNo(member.getM_no());
+			cmtWrite = service.cmtWrite(cmt);
+	
+			if(cmtWrite > 0) {
+				reviewCountUpdate = service.updateCmtCount(cmt.getRvNo());
+				if(reviewCountUpdate > 0) {
+					map.put("cmt", service.getCmtByCmtNo(cmt.getCmtNo()));
+					System.out.println("댓글 등록 성공");
+				}
+			}else {
+				System.out.println("댓글 등록 실패");
 			}
-		}else {
-			System.out.println("댓글 등록 실패");
 		}
-		
 		return map;
 	}
 	
@@ -76,16 +77,17 @@ public class ReviewCmtController {
 		cmt.setCmtWriterNo(member.getM_no());
 		cmtUpdate = service.cmtUpdate(cmt);
 		rvNo = cmt.getRvNo();
-		
-		if(cmtUpdate > 0) {
-			reviewCountUpdate = service.updateCmtCount(rvNo);
-			if(reviewCountUpdate > 0) {
-				System.out.println("댓글 수정 성공");
+		if(member != null) {
+
+			if(cmtUpdate > 0) {
+				reviewCountUpdate = service.updateCmtCount(rvNo);
+				if(reviewCountUpdate > 0) {
+					System.out.println("댓글 수정 성공");
+				}
+			}else {
+					System.out.println("댓글 수정 실패");
 			}
-		}else {
-				System.out.println("댓글 수정 실패");
 		}
-		
 		model.setViewName("common/msg");
 		
 		return model;

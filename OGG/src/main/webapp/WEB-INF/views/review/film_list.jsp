@@ -13,7 +13,6 @@
     
     <!-- my JS -->
     <script defer src="${path}/js/review/film_main.js"></script>
-   	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
     <!-- 내용 전체 컨테이너 -->
     <div class="container" style="margin-bottom: 100px; margin-top: 40px;">
@@ -24,7 +23,7 @@
             </div>
             <div class="col">
             </div>
-            <div class="col" style="z-index:9999;">
+            <div class="col">
                 <input type="text" id="searchInput" style="margin-left: 35%; margin-top:5px; 
                         height: 34px; width:140px; border: 1px solid lightgray">
                 <button class="btn btn-primary" type="button" style="display: inline; height: 35px; margin-bottom: 5px;"
@@ -111,7 +110,7 @@
         </button>
         </div>
         <!-- 3rd row 끝 -->  
-        
+        <div id="mylikes">
         <div style="margin-top: 40px; margin-bottom: 20px;">
             <p class="row_name" style="margin-left: 5%;">내가 찜한 작품</p>
             <hr>
@@ -137,6 +136,7 @@
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
         </button>
+        </div>
         </div>
         <!-- 찜한 영화 끝 -->
 

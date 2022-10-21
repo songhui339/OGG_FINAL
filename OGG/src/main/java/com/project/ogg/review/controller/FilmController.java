@@ -42,9 +42,13 @@ public class FilmController {
 		
 		int no = 0;
 		List<ReviewLikes> list = new ArrayList<ReviewLikes>();
-		
-		no = member.getM_no();
-		list = service.getFilmLikes(no);
+
+		if(member != null) {
+			no = member.getM_no();
+			list = service.getFilmLikes(no);
+		}else {
+			list = service.getFilmLikes(no);
+		}
 		
 		System.out.println(member);
 		System.out.println(list);
