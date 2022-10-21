@@ -184,6 +184,16 @@ OGG 마이페이지 CSS
     margin-bottom: 10px;
 }
 
+.myPage_section .myPage_Wrap .infoBox .formBox .form-list li button.pwdBtn {
+    border: 1px solid #7e69fe;
+    color: #7e69fe;
+}
+
+.myPage_section .myPage_Wrap .infoBox .formBox .form-list li button.pwdBtn:hover {
+	color: #ffffff;
+	background-color: #7e69fe;
+}
+
 .myPage_section .myPage_Wrap .infoBox .formBox .form-list li label {
     display: inline-block;
     width: 160px;

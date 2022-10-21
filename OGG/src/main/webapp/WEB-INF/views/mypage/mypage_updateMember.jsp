@@ -77,7 +77,7 @@
                         </li>
                         <li>
                             <label for="">비밀번호</label>
-                            <button type="button" id="btnUpdatePwd" onclick="location.href='${ path }/mypage/updatePwd';">비밀번호 변경</button>
+                            <button type="button" class="btn pwdBtn"  id="btnUpdatePwd" onclick="location.href='${ path }/mypage/updatePwd';">비밀번호 변경</button>
                         </li>
                         <li>
                             <label for="">이름</label>
