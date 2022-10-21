@@ -44,7 +44,6 @@
   <div>
         <p style="text-align: center; padding: 200px 0; font-size: 2rem; margin: 0;">메인 페이지 내용</p>
     </div>
-  
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+ 
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
