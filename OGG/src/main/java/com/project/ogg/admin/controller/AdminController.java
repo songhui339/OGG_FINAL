@@ -404,70 +404,70 @@ public class AdminController {
 		return model;
 	}
 	
-	@GetMapping("/question/write")
-	public String questionWriting() {
-		
-		return "admin/ad_questionWrite";
-	}
-	
-	@PostMapping("/question/write")
-	public ModelAndView questionWriting(@ModelAttribute Question question,
-										ModelAndView model) {
-		
-		int result = service.writeQuestion(question);
-		int no = question.getQ_no();
-		System.out.println("no : "+no);
-		
-		if(result > 0) {
-			model.addObject("msg","문의 작성 완료");
-			model.addObject("location","/admin/question/view?no="+no);
-		}else{
-			model.addObject("msg","문의 작성 실패");
-			model.addObject("location","/admin/question/view?no="+no);
-		}
-
-		
-		model.setViewName("common/msg");
-		
-		return model;
-	}
-	@GetMapping("/admin/question/update")
-	public ModelAndView questionUpdate(@RequestParam int no,
-										ModelAndView model) {
-		
-		Question question = service.getQuestionView(no);
-		Answer answer = service.getAnswer(question.getQ_no());
-		
-		if(answer != null) {
-			model.addObject("msg","답변이 있을 경우 질문 수정이 불가능합니다.");
-			model.addObject("location","/admin/question/view?no="+no);
-			model.setViewName("common/msg");
-			return model;
-		}
-		
-		model.addObject("question",question);
-		model.setViewName("admin/ad_questionUpdate");
-		
-		return model;
-	}
-	@PostMapping("/admin/question/update")
-	public ModelAndView questionUpdate(@RequestParam int no,
-									ModelAndView model,
-									@ModelAttribute Question question) {
-		
-		System.out.println(question);
-		int result = service.updateQuestion(question);
-		
-		if(result > 0) {
-			model.addObject("msg","문의 수정 완료");
-			model.addObject("location","/admin/question/view?no="+no);
-		}else{
-			model.addObject("msg","문의 수정 실패");
-			model.addObject("location","/admin/question/view?no="+no);
-		}
-		model.setViewName("common/msg");
-		return model;
-	}
+//	@GetMapping("/question/write")
+//	public String questionWriting() {
+//		
+//		return "admin/ad_questionWrite";
+//	}
+//	
+//	@PostMapping("/question/write")
+//	public ModelAndView questionWriting(@ModelAttribute Question question,
+//										ModelAndView model) {
+//		
+//		int result = service.writeQuestion(question);
+//		int no = question.getQ_no();
+//		System.out.println("no : "+no);
+//		
+//		if(result > 0) {
+//			model.addObject("msg","문의 작성 완료");
+//			model.addObject("location","/admin/question/view?no="+no);
+//		}else{
+//			model.addObject("msg","문의 작성 실패");
+//			model.addObject("location","/admin/question/view?no="+no);
+//		}
+//
+//		
+//		model.setViewName("common/msg");
+//		
+//		return model;
+//	}
+//	@GetMapping("/admin/question/update")
+//	public ModelAndView questionUpdate(@RequestParam int no,
+//										ModelAndView model) {
+//		
+//		Question question = service.getQuestionView(no);
+//		Answer answer = service.getAnswer(question.getQ_no());
+//		
+//		if(answer != null) {
+//			model.addObject("msg","답변이 있을 경우 질문 수정이 불가능합니다.");
+//			model.addObject("location","/admin/question/view?no="+no);
+//			model.setViewName("common/msg");
+//			return model;
+//		}
+//		
+//		model.addObject("question",question);
+//		model.setViewName("admin/ad_questionUpdate");
+//		
+//		return model;
+//	}
+//	@PostMapping("/admin/question/update")
+//	public ModelAndView questionUpdate(@RequestParam int no,
+//									ModelAndView model,
+//									@ModelAttribute Question question) {
+//		
+//		System.out.println(question);
+//		int result = service.updateQuestion(question);
+//		
+//		if(result > 0) {
+//			model.addObject("msg","문의 수정 완료");
+//			model.addObject("location","/admin/question/view?no="+no);
+//		}else{
+//			model.addObject("msg","문의 수정 실패");
+//			model.addObject("location","/admin/question/view?no="+no);
+//		}
+//		model.setViewName("common/msg");
+//		return model;
+//	}
 		
 	@GetMapping("/admin/answer")
 	public ModelAndView answering(@RequestParam("no")int no,ModelAndView model,

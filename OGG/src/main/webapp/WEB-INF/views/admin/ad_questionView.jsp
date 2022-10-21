@@ -136,8 +136,8 @@
                                         <!-- 
                                         <button type="button" id="btnUpdate" onclick = "location.href ='${path}/notice/update?no=${notice.no}'">수정</button>
                                         <button type="button" id="btnDelete">삭제</button>
-                                         -->
                                         <button type="button" onclick="location.href='${path}/admin/question/update?no=${question.q_no}'" id="btnDelete">질문수정</button>
+                                         -->
                                          <c:if test="${empty answer}">
                                         	<button type="button" onclick="location.href='${path}/admin/answer?no=${question.q_no}'" id="btnDelete">답변하기</button>
                                          </c:if>
