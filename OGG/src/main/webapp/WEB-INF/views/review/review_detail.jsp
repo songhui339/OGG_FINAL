@@ -35,12 +35,12 @@
 				<hr>
 			    <div class="row" id="detail-text">
 			        <div class="col-sm-1">
-			            <img src="${path}/images/review/heart2.png" id="reviewLikes" style="margin-left: 10px; height:30px;" onclick="ReviewLikes(event)">
-			            <img src="${path}/images/review/heart3.png" id="reviewDisLikes" style="margin-left: 10px; display: none; height:30px;" onclick="ReviewDislikes(event)">
+			            <img src="${ path }/images/review/heart2.png" id="reviewLikes" style="margin-left: 10px; height:30px;" onclick="ReviewLikes(event)">
+			            <img src="${ path }/images/review/heart3.png" id="reviewDisLikes" style="margin-left: 10px; display: none; height:30px;" onclick="ReviewDislikes(event)">
 			            <span id="rvLikes">${ review.rvLikes }</span>
 			        </div>
 			        <div class="col-sm-8">
-			            <img src="${path}/images/review/comment2.png"  height="30px;">
+			            <img src="${ path }/images/review/comment2.png"  height="30px;">
 			            ${ cmtCount }
 			        </div>
 			        <c:if test="${ loginMember.m_no == review.rvWriterNo }">
@@ -82,38 +82,92 @@
             
             <!-- 댓글 테이블 -->
             <div id="div_comment">
-            <table class="table table-hover" id="review_reply">
+            <table class="table table-hover">
                 <tbody id="cmtTbody" >
                 	<c:forEach var="reviewCmt" items="${ reviewCmt }">
-                    <tr id="cmtlist">
-						<input id="cmtNo" type="hidden" value="${ reviewCmt.cmtNo }">
-						<input id="cmtWriterNo" type="hidden" value="${reviewCmt.cmtWriterNo }" >
-						<input id="cmtNickname" type="hidden" value="${reviewCmt.cmtNickname }" >
-                        <td id="board-text4">${ reviewCmt.cmtNickname }</td>
-                        <td id="board-text5">${ reviewCmt.cmtContent }</td>
-                        <td id="board-text7">
-                        	<c:if test="${ loginMember.m_no == reviewCmt.cmtWriterNo }">
-	                            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-	                                <button class="btn btn-primary" type="button" onclick="showUpdateCmt(event)">수정</button>
-	                                <button class="btn btn-primary" type="button" onclick="deleteCmt(event)">삭제</button>
-	                            </div>    
-							</c:if>
-                        </td>
-                    </tr>
-                    <tr id="cmtlist2" style="display: none;">
-                        <td id="board-text4">${ reviewCmt.cmtNickname }</td>
-                        <td id="board-text5-1">
-                        	<textarea id="message-cmt-2" style="border: 1px solid lightgrey; resize: none; width: 100%;"
-                            >${ reviewCmt.cmtContent }</textarea>
-                        </td>
-                        <td id="board-text7-1">
-                            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                                <button class="btn btn-primary" type="button" onclick="updateCmt(event)">수정</button>
-                                <button class="btn btn-primary" type="button" onclick="updateCommentsCancel(event)">취소</button>
-                            </div>    
-                        </td>
-                    </tr>
-                  </c:forEach>
+					<c:if test="${ reviewCmt.cmtDepth eq 0 }">
+						<tr id="cmtlist">
+							<input id="cmtNo" type="hidden" value="${ reviewCmt.cmtNo }">
+							<input id="cmtWriterNo" type="hidden" value="${reviewCmt.cmtWriterNo }" >
+							<input id="cmtNickname" type="hidden" value="${reviewCmt.cmtNickname }" >
+							<td id="board-text4">${ reviewCmt.cmtNickname }</td>
+							<td id="board-text5" onclick="showReCmt(event)">${ reviewCmt.cmtContent }</td>
+							<td id="board-text7">
+								<c:if test="${ loginMember.m_no == reviewCmt.cmtWriterNo }">
+									<div class="btn-group" role="group" aria-label="Basic mixed styles example">
+										<button class="btn btn-primary" type="button" onclick="showUpdateCmt(event)">수정</button>
+										<button class="btn btn-primary" type="button" onclick="deleteCmt(event)">삭제</button>
+									</div>    
+								</c:if>
+							</td>
+						</tr>
+						<tr id="cmtlist1" style="display: none;">
+							<input id="cmtWriterNo" type="hidden" value="${ loginMember.m_no }" >
+							<td id="board-text4-1">↳ &nbsp; ${ loginMember.m_nickname }</td>
+							<td id="board-text5-1">
+								<textarea id="message-cmt-1" style="border: 1px solid lightgrey; resize: none; width: 100%;"></textarea>
+							</td>
+							<td id="board-text7">
+								<button class="btn btn-primary" type="button" onclick="writeReCmt(event)" style="margin-left:45%; height: 35px; vertical-align: middle;">등록</button>
+							</td>
+						</tr>
+						<tr id="cmtlist1-1" style="display: none;">
+							<input id="cmtWriterNo" type="hidden" value="${ loginMember.m_no }" >
+							<td id="board-text4-1">↳ &nbsp; ${ loginMember.m_nickname }</td>
+							<td id="board-text5"></td>
+							<td id="board-text7">
+								<c:if test="${ loginMember.m_no == reviewCmt.cmtWriterNo }">
+									<div class="btn-group" role="group" aria-label="Basic mixed styles example">
+										<button class="btn btn-primary" type="button" onclick="showUpdateCmt(event)">수정</button>
+										<button class="btn btn-primary" type="button" onclick="deleteCmt(event)">삭제</button>
+									</div>    
+								</c:if>
+							</td>
+						</tr>
+						<tr id="cmtlist2" style="display: none;">
+							<td id="board-text4">${ reviewCmt.cmtNickname }</td>
+							<td id="board-text5-1">
+								<textarea id="message-cmt-2" style="border: 1px solid lightgrey; resize: none; width: 100%;"
+								>${ reviewCmt.cmtContent }</textarea>
+							</td>
+							<td id="board-text7-1">
+								<div class="btn-group" role="group" aria-label="Basic mixed styles example">
+									<button class="btn btn-primary" type="button" onclick="updateCmt(event)">수정</button>
+									<button class="btn btn-primary" type="button" onclick="updateCmtCancel(event)">취소</button>
+								</div>    
+							</td>
+						</tr>
+					</c:if>
+					<c:if test="${ reviewCmt.cmtDepth eq 1 }">
+						<tr id="cmtlist1-1">
+							<input id="cmtNo" type="hidden" value="${ reviewCmt.cmtNo }">
+							<input id="cmtWriterNo" type="hidden" value="${ reviewCmt.cmtWriterNo }" >
+							<td id="board-text4-1">↳ &nbsp; ${ reviewCmt.cmtNickname }</td>
+							<td id="board-text5">${ reviewCmt.cmtContent }</td>
+							<td id="board-text7">
+								<c:if test="${ loginMember.m_no == reviewCmt.cmtWriterNo }">
+									<div class="btn-group" role="group" aria-label="Basic mixed styles example">
+										<button class="btn btn-primary" type="button" onclick="showUpdateReCmt(event)">수정</button>
+										<button class="btn btn-primary" type="button" onclick="deleteReCmt(event)">삭제</button>
+									</div>    
+								</c:if>
+							</td>
+						</tr>
+						<tr id="cmtlist2" style="display: none;">
+							<td id="board-text4">${ reviewCmt.cmtNickname }</td>
+							<td id="board-text5-1">
+								<textarea id="message-cmt-2" style="border: 1px solid lightgrey; resize: none; width: 100%;"
+								>${ reviewCmt.cmtContent }</textarea>
+							</td>
+							<td id="board-text7-1">
+								<div class="btn-group" role="group" aria-label="Basic mixed styles example">
+									<button class="btn btn-primary" type="button" onclick="updateReCmt(event)">수정</button>
+									<button class="btn btn-primary" type="button" onclick="updateReCmtCancel(event)">취소</button>
+								</div>    
+							</td>
+						</tr>
+					</c:if>
+                	</c:forEach>
                 </tbody>
             </table>
             <!-- 리뷰 작성 컨테이너 -->
@@ -143,14 +197,119 @@
 
 	function showUpdateCmt(event) {
 		$(event.target).parents('#cmtlist').hide();
-		$(event.target).parents("#cmtlist").next().show();
-		$(event.target).parents("#cmtlist").next().find('#message-cmt-2').val($(event.target).parent().parent().prev().text());
+		$(event.target).parents('#cmtlist').next().next().next().show();
 	}
 
-	function updateCommentsCancel(event) {
+	function showUpdateReCmt(event) {
+		$(event.target).parents('#cmtlist1-1').hide();
+		$(event.target).parents("#cmtlist1-1").next().show();
+		$(event.target).parents("#cmtlist1-1").next().find('#message-cmt-2').val($(event.target).parents('#cmtlist1-1').find('#board-text5').text());
+	}
+
+	function showReCmt(event) {
+		$(event.target).parents("#cmtlist").next().toggle();
+	}
+
+	function updateCmtCancel(event) {
+		$(event.target).parents('#cmtlist2').hide();
+		$(event.target).parents("#cmtlist2").prev().prev().prev().show();
+	}
+
+	function updateReCmtCancel(event) {
 		$(event.target).parents('#cmtlist2').hide();
 		$(event.target).parents("#cmtlist2").prev().show();
 	}
+
+	function writeReCmt(event) {
+		let cmtContent = $(event.target).parent().prev().find('#message-cmt-1').val();
+		let cmtNo = $(event.target).parent().parent().prev().find('#cmtNo').val();
+		if(cmtContent.trim()==""){
+			alert("내용을 입력해주세요");
+        }else{
+			$.ajax({
+				async: true,
+				type : 'POST',
+				url : contextpath + '/review/recmt_write',
+				data : {
+					'rvNo' : rvNo1,
+					'cmtContent' : cmtContent, 
+					'cmtGroup' : cmtNo,					
+					'cmtDepth': 1,
+					'fCode' : fcode,
+					'ftype' : ftype
+				},
+				success : (data) => {
+					$(event.target).parent().parent().hide();
+					$(event.target).parent().parent().next().show();
+					$(event.target).parent().parent().next().find('#board-text5').text(cmtContent);
+				},
+				error : (error) => {
+					alert('대댓글 등록 실패');
+				}
+			});
+		}
+    }
+
+	function updateReCmt(event) {
+
+		let cmtContent = $(event.target).parents('#cmtlist2').find('#message-cmt-2').val();
+		let cmtGroup = $(event.target).parents('#cmtTbody').find('#cmtNo').val();
+		let cmtNo = $(event.target).parents('#cmtlist2').prev().find('#cmtNo').val();
+
+		if(cmtContent.trim()==""){
+			alert("내용을 입력해주세요");
+        }else{
+			$.ajax({
+				async: true,
+				type : 'POST',
+				url : contextpath + '/review/cmt_update',
+				data : {
+					'rvNo' : rvNo1,
+					'cmtNo' : cmtNo,
+					'cmtContent' : cmtContent, 
+					'cmtGroup': cmtGroup,
+					'cmtDepth': 1,
+					'fCode' : fcode,
+					'ftype' : ftype
+				},
+				success : (data) => {
+					$(event.target).parent().parent().parent().hide();
+					$(event.target).parent().parent().parent().prev().show();
+					$(event.target).parent().parent().parent().prev().find('#board-text5').text(cmtContent);
+				},
+				error : (error) => {
+					alert('댓글 수정에 실패하였습니다');
+				}
+			});
+		}
+    }
+
+	function deleteReCmt(event) {
+		let cmtNo = $(event.target).parents('#cmtlist1-1').find('#cmtNo').val();
+
+        if(confirm('댓글을 삭제하시겠습니까?')){
+			$.ajax({
+				async: true,
+				type : 'POST',
+				url : contextpath + '/review/cmt_update',
+				data : {
+					'rvNo' : rvNo1,
+					'cmtNo' : cmtNo,
+					'cmtStatus' : 'N', 
+					'cmtDepth': 1,
+					'fCode' : fcode,
+					'ftype' : ftype
+				},
+				success : (data) => {
+					$(event.target).parents('#cmtlist1-1').remove();
+				},
+				error : (error) => {
+					alert('댓글 삭제에 실패하였습니다');
+
+				}
+			});
+		};
+    }
 
 	function updateCmt(event) {
 		let cmtContent = $(event.target).parent().parent().prev().find('#message-cmt-2').val();
@@ -174,7 +333,7 @@
 					$(event.target).parent().parent().parent().prev().find('#board-text5').text(cmtContent);
 				},
 				error : (error) => {
-					alert('서버와 연결에 실패하였습니다');
+					alert('댓글 수정에 실패하였습니다');
 				}
 			});
 		}
@@ -199,7 +358,7 @@
 					$(event.target).parents("#cmtlist").remove();
 				},
 				error : (error) => {
-					alert('서버와 연결에 실패하였습니다');
+					alert('댓글 삭제에 실패하였습니다');
 
 				}
 			});

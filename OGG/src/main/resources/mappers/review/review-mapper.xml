@@ -104,7 +104,6 @@
 				RV_NO = #{no} 
 	</select>
 
-	
 	<!-- 댓글수 조회 (리뷰별) -->
 	<select id="selectCmtCount" parameterType="_int" resultType="_int">
 		SELECT  COUNT(*) 
@@ -118,8 +117,20 @@
 		<include refid="reviewCmtSql"></include>
 		WHERE 	 CMT_STATUS = 'Y' AND 
 				 RV_NO = #{no}
-		ORDER BY CMT_DATE ASC
+		ORDER BY CMT_GROUP, CMT_UPDATE
 	</select>
+	
+	<!-- 대댓글 조회 (리뷰 번호) -->
+<!-- 	<select id="selectReCmtByReviewNo" parameterType="list" resultMap="reviewCmtResultMap">
+		<foreach collection="list" item="item">
+		<include refid="reviewCmtSql"></include>
+			WHERE 	 CMT_STATUS = 'Y' AND
+					 RV_NO = #{item.rvNo} AND
+					 CMT_GROUP = #{item.cmtGroup} AND
+					 CMT_DEPTH = 1
+			ORDER BY CMT_DATE ASC
+		</foreach>
+	</select> -->
 
 	<!-- 리뷰 등록 -->
 	<insert id="insertReview" parameterType="Review"
@@ -142,8 +153,8 @@
 				#{rvWriterNo},
 				#{fCode},
 				DEFAULT,
-				DEFAULT,
-				DEFAULT,
+				SYSDATE,
+				SYSDATE,
 				#{rvContent},
 				DEFAULT,
 				DEFAULT,

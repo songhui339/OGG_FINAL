@@ -53,6 +53,7 @@
 		<result property="lUpdate" column="L_UPDATE" />
 		<result property="lType" column="L_TYPE" />
 	</resultMap>
+	
 	<!-- 리뷰 조회 (전체) -->
 	<select id="selectReviewAll" resultMap="reviewResultMap">
 		<include refid="reviewSql"></include>

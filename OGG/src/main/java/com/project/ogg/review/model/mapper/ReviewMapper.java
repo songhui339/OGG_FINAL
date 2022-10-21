@@ -26,4 +26,6 @@ public interface ReviewMapper {
 	int insertReview(Review review);
 	
 	int updateReview(Review review);
+
+//	List<ReviewCmt> selectReCmtByReviewNo(List<ReviewCmt> reviewCmt);
 }

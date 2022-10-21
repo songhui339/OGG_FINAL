@@ -1,5 +1,6 @@
 package com.project.ogg.review.model.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
@@ -43,8 +44,18 @@ public class ReviewServiceImpl implements ReviewService {
 	
 	@Override
 	public List<ReviewCmt> getCmtByReviewNo(int no) {
+		// 리뷰로 가져온 댓글의 리스트들 
 		return mapper.selectCmtByReviewNo(no);
 	}
+	
+//	@Override
+//	public List<ReviewCmt> getReCmtByReviewNo(Review review) {
+//		List<ReviewCmt> reviewReCmt = null;
+//
+//		reviewReCmt = mapper.selectReCmtByReviewNo(this.getCmtByReviewNo(review));
+//		
+//		return reviewReCmt;
+//	}
 	
 	@Override
 	@Transactional
@@ -57,4 +68,5 @@ public class ReviewServiceImpl implements ReviewService {
 	public int reviewUpdate(Review review) {
 		return mapper.updateReview(review);
 	}
+
 }

@@ -25,4 +25,6 @@ public interface ReviewService {
 	
 	int reviewUpdate(Review review);
 
+//	List<ReviewCmt> getReCmtByReviewNo(Review review);
+
 }
