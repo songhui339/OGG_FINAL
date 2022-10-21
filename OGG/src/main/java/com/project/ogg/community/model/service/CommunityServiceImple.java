@@ -68,6 +68,7 @@ public class CommunityServiceImple implements CommunityService {
 	@Override
 	public int communityDelete(int c_no) {
 		int result = 0;
+		
 		result = mapper.communityDelete(c_no, "N");
 		
 		return result;

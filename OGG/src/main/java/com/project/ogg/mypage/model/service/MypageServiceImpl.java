@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.project.ogg.admin.model.vo.Answer;
+import com.project.ogg.admin.model.vo.Notice;
 import com.project.ogg.admin.model.vo.Question;
 import com.project.ogg.common.util.PageInfo;
+import com.project.ogg.community.model.vo.Community;
 import com.project.ogg.mypage.model.mapper.MypageMapper;
 
 @Service
@@ -64,6 +66,42 @@ public class MypageServiceImpl implements MypageService {
 	@Transactional
 	public int updateQuestion(Question question) {
 		return mapper.updateQuestion(question);
+	}
+
+	@Override
+
+	public int getCommnityCount(int m_no) {
+
+		return mapper.getCommnityCount(m_no);
+	}
+
+	@Override
+	public List<Community> getCommunityList(int m_no, PageInfo pageInfo) {
+		int offset = (pageInfo.getCurrentPage() - 1) * pageInfo.getListLimit();
+		int limit = pageInfo.getListLimit();
+		RowBounds rowBounds = new RowBounds(offset, limit);	
+		
+		return mapper.getCommunityList(m_no, rowBounds);
+	}
+
+	public int getNoticeCount() {
+		return mapper.getNoticeCount();
+	}
+
+	@Override
+	public List<Notice> getNoticeList(PageInfo pageInfo) {
+		int offset = (pageInfo.getCurrentPage() - 1) * pageInfo.getListLimit();
+	    int limit = pageInfo.getListLimit();
+        RowBounds rowBounds = new RowBounds(offset, limit);
+        
+		return mapper.selectNoticeList(rowBounds);
+	}
+
+	@Override
+	public Notice getNoticeView(int no) {
+		Notice notice = mapper.getNoticeView(no);
+		
+		return notice;
 	}
 
 	

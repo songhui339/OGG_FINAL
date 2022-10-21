@@ -17,12 +17,14 @@
 
             <div class="pageTitleBox">
                 <h2 class="titleText" onclick="location.href='${ path }/community/goList.do'">💬 커뮤니티</h2>
-                <div class="btnBox">
-
-                    <button type="button" 
-                    onclick="location.href='${ path }/cummunity/goModify.do?c_no=${ community.c_no }'" class="btn modifyBtn">수정 <i class="bi bi-pencil"></i></button>
-                    <button type="button" id="btnDelete" class="btn deleteBtn">삭제 <i class="bi bi-trash3"></i></button>
-                </div>
+                <security:authentication property="principal.m_no" var="security_m_no"/>
+				<c:if test="${security_m_no eq community.c_writerNo}">
+	                <div class="btnBox">
+	                    <button type="button" 
+	                    onclick="location.href='${ path }/cummunity/goModify.do?c_no=${ community.c_no }'" class="btn modifyBtn">수정 <i class="bi bi-pencil"></i></button>
+	                    <button type="button" id="btnDelete" class="btn deleteBtn">삭제 <i class="bi bi-trash3"></i></button>
+	                </div>
+                </c:if>
             </div>
 
             <!-- 게시글 내용 -->
@@ -77,10 +79,13 @@
 							<p class="replyText">
 								${communityReply.cr_content }
 							</p>
-							<div class="btnBox">
-								<button type="button" class="btn purpleBtn" onclick="location.href='${ path }/cummunity/replyModify.do?cr_no=${ communityReply.cr_no }'">수정</button>
-								<button type="button" class="btn redBtn" onclick="location.href='${ path }/cummunity/replyDelete.do?cr_no=${ communityReply.cr_no }'">삭제</button>
-							</div>
+							<security:authentication property="principal.m_no" var="security_m_no"/>
+							<c:if test="${security_m_no eq communityReply.cr_writerNo}">
+								<div class="btnBox">
+									<button type="button" class="btn purpleBtn" onclick="location.href='${ path }/cummunity/replyModify.do?cr_no=${ communityReply.cr_no }'">수정</button>
+									<button type="button" class="btn redBtn" onclick="location.href='${ path }/cummunity/replyDelete.do?cr_no=${ communityReply.cr_no }'">삭제</button>
+								</div>
+							</c:if>
 						</div>
 					</div>
 				</c:forEach>
