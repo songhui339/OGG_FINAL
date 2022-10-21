@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -31,6 +32,9 @@ import com.project.ogg.mypage.model.service.MypageService;
 public class MypageController {
 	
 	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
+	
+	@Autowired
 	private MypageService service;
 	
 	@Autowired
@@ -41,15 +45,16 @@ public class MypageController {
     public ModelAndView main (ModelAndView model,
                              @AuthenticationPrincipal Member member) {
         
-        String id = member.getM_id();
+        int m_no = member.getM_no();
         
+        Member myPageMember = null;
+        myPageMember = service.selectMemberByNo(m_no);
+        
+        model.addObject("myPageMember", myPageMember);
         model.setViewName("mypage/mypage_main");
         
         return model;
     }
-    
-    
-    
     
     
     // 회원 정보 수정을 위한 비밀번호 체크
@@ -59,11 +64,59 @@ public class MypageController {
         return "mypage/mypage_pwdCheck";
     }
     
-    // 회원 정보 수정을 위한 비밀번호 체크
-    @GetMapping("/updateMember")
-    public String updateMember () {
+    @PostMapping("/pwdCheck")
+    public ModelAndView pwdCheck(ModelAndView model, 
+    							@AuthenticationPrincipal Member member,
+    							@RequestParam(value = "m_pwd") String m_pwd) {
+    	
+    	if(passwordEncoder.matches(m_pwd, member.getM_pwd())) {
+    		model.setViewName("mypage/mypage_updateMember");
+    	} else {
+    		model.addObject("msg", "비밀번호가 일치하지 않습니다.");
+    		model.setViewName("common/msg");
+    	}
+    	
+    	return model;
+    }
+    
+    
+    // 회원 정보 수정
+    @PostMapping("/updateMember")
+    public ModelAndView updateMember (ModelAndView model, 
+			@AuthenticationPrincipal Member loginMember,
+			@ModelAttribute Member member) {
         
-        return "mypage/updateMember";
+//    	int m_no = member.getM_no();
+    	
+//    	Member myPageMember = null;
+    	
+//        myPageMember = service.selectMemberByNo(m_no);
+    	
+    	int result = 0;
+    	
+    	member.setM_no(loginMember.getM_no());
+    	
+    	result = service.save(member);
+
+    	
+    	if(result > 0) {
+//    		model.addObject("myPageMember", myPageMember);
+    		model.addObject("loginMember", service.selectMemberByNo(loginMember.getM_no()));
+    		
+//    		loginMember.setM_name(member.getM_name());
+//    		loginMember.setM_nickname(member.getM_nickname());
+//    		loginMember.setM_email(member.getM_email());
+//    		loginMember.setM_phonenumber(member.getM_phonenumber());
+
+			model.addObject("msg", "회원 정보 수정을 완료했습니다.");
+		} else {
+			model.addObject("msg", "회원 정보 수정을 실패했습니다.");
+		}
+		
+		model.addObject("location", "/mypage/main");
+		model.setViewName("common/msg");
+    	
+        return model;
     }
     
     // 공지사항

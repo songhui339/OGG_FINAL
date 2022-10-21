@@ -74,7 +74,7 @@
                     <ul class="form-list">
                         <li>
                             <label for="">아이디</label>
-                            <p class="text">${ m_id }</p>
+                            <p class="text">${ myPageMember.m_id }</p>
                         </li>
                         <!-- <li>
                             <label for="">비밀번호</label>
@@ -86,27 +86,28 @@
                         </li> -->
                         <li>
                             <label for="">이름</label>
-                            <p class="text">${ member.m_name }</p>
+                            <p class="text">${ myPageMember.m_name }</p>
                         </li>
                         <li>
                             <label for="">닉네임</label>
-                            <p class="text">${ member.m_nickname }</p>
+                            <p class="text">${ myPageMember.m_nickname }</p>
                         </li>
                         <li>
                             <label for="">이메일</label>
-                            <p class="text">${ m_email }</p>
+                            <p class="text">${ myPageMember.m_email }</p>
                         </li>
                         <li>
                             <label for="">휴대폰 번호</label>
-                            <p class="text">${ m_phonenumber }</p>
+                            <p class="text">${ myPageMember.m_phonenumber }</p>
                         </li>
-
+						<!-- 
                         <li>
                             <span class="subject">이메일 수신</span>
                             <input type="checkbox" name="" id="">
                             <span class="subject">SMS 수신</span>
                             <input type="checkbox" name="" id="">
                         </li>
+                        -->
                     </ul>
 
                     <div class="btnBox">

@@ -41,7 +41,6 @@ public interface MypageMapper {
 
 	List<Community> getCommunityList(int m_no, RowBounds rowBounds);
 
-    Member selectMemberById(@Param("m_id") String id);
-
-
+    Member selectMemberByNo(int m_no);
+	int updateMember(Member member);
 }

@@ -21,6 +21,7 @@ public class MypageServiceImpl implements MypageService {
 	@Autowired
 	private MypageMapper mapper;
 
+
 //	@Override
 //	public List<MemberAD> getMemberList() {
 //
@@ -107,10 +108,16 @@ public class MypageServiceImpl implements MypageService {
 
 	
 	@Override
-    public Member findMemberById(String id) {
+    public Member selectMemberByNo(int m_no) {
         
-        return mapper.selectMemberById(id);
+        return mapper.selectMemberByNo(m_no);
     }
+
+	@Override
+	public int save(Member member) {
+
+		return mapper.updateMember(member);
+	}
 	
 
 }

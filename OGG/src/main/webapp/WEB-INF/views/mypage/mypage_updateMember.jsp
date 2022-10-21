@@ -68,44 +68,41 @@
         <div class="infoBox">
             <p class="titleText">회원 정보 수정</p>
             <div class="line"></div>
-            <form action="">
+            <form action="${path}/mypage/updateMember" method="post">
                 <div class="formBox">
                     <ul class="form-list">
                         <li>
                             <label for="">아이디</label>
-                            <input type="text" name="" value="${m_id}" id="" readonly>
+                            <p class="text">${ loginMember.m_id }</p>
                         </li>
                         <li>
                             <label for="">비밀번호</label>
-                            <input type="password" name="" placeholder="비밀번호" minlength="3" maxlength="20">
-                        </li>
-                        <li>
-                            <label for="">비밀번호 확인</label>
-                            <input type="password" name="" placeholder="비밀번호 확인" minlength="3" maxlength="20">
+                            <button type="button" value="">비밀번호 변경</button>
                         </li>
                         <li>
                             <label for="">이름</label>
-                            <input type="text" value="${m_name}" name="" placeholder="이름" minlength="3" maxlength="20" id="">
+                            <input type="text" value="${loginMember.m_name}" name="m_name"  minlength="3" maxlength="20" id="">
                         </li>
                         <li>
                             <label for="">닉네임</label>
-                            <input type="text" value="${m_name}" name="" placeholder="닉네임" minlength="3" maxlength="20" id="">
+                            <input type="text" value="${loginMember.m_nickname}" name="m_nickname"  minlength="3" maxlength="20" id="">
                         </li>
                         <li>
                             <label for="">이메일</label>
-                            <input type="email" value="${m_email}" name="" placeholder="이메일" minlength="3" maxlength="20" id="">
+                            <input type="email" value="${loginMember.m_email}" name="m_email"  minlength="3" maxlength="20" id="">
                         </li>
                         <li>
                             <label for="">휴대폰 번호</label>
-                            <input type="tel" value="${m_phone}" name="" placeholder="휴대폰 번호 입력" minlength="3" maxlength="20" id="">
+                            <input type="tel" value="${loginMember.m_phonenumber}" name="m_phonenumber"  minlength="3" maxlength="20" id="">
                         </li>
-
+						<!-- 
                         <li>
                             <span class="subject">이메일 수신</span>
                             <input type="checkbox" name="" id="">
                             <span class="subject">SMS 수신</span>
                             <input type="checkbox" name="" id="">
                         </li>
+                        -->
                     </ul>
 
                     <div class="btnBox">

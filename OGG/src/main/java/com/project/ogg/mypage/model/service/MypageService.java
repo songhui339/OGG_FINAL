@@ -36,6 +36,8 @@ public interface MypageService {
 
 	Notice getNoticeView(int no);
 
-    Member findMemberById(String id);
+	Member selectMemberByNo(int m_no);
+
+	int save(Member member);
 
 }

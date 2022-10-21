@@ -186,16 +186,22 @@
 	ORDER BY C.C_NO DESC
 </select>
 
-<select id="selectMemberById" parameterType="string" resultMap="memberResultMap">
-	SELECT M_ID,
-		   M_NAME,
-		   M_NICKNAME,
-		   M_EMAIL,
-		   M_PHONENUMBER,
-		   M_EMAILAGREEMENT
-	FROMMEMBER
-	WHERE ID = #{ m_id } ANDSTATUS = 'Y'
+<select id="selectMemberByNo" parameterType="int" resultMap="memberResultMap">
+	SELECT *
+	FROM MEMBER
+	WHERE M_NO = #{m_no} AND M_STATUS = 'Y'
 </select>
+
+	
+<update id="updateMember" parameterType="Member">
+UPDATE MEMBER
+SET
+	M_NAME = #{m_name},
+	M_NICKNAME = #{m_nickname},
+	M_EMAIL = #{m_email},
+	M_PHONENUMBER = #{m_phonenumber}
+WHERE M_NO = #{m_no}
+</update>
 
 
 </mapper>
