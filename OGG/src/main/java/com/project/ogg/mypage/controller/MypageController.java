@@ -41,6 +41,8 @@ public class MypageController {
     public ModelAndView main (ModelAndView model,
                              @AuthenticationPrincipal Member member) {
         
+        String id = member.getM_id();
+        
         model.setViewName("mypage/mypage_main");
         
         return model;

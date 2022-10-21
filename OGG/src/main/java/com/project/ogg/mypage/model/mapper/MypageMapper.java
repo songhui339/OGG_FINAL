@@ -3,6 +3,7 @@ package com.project.ogg.mypage.model.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
 import com.project.ogg.admin.model.vo.Answer;
@@ -40,7 +41,7 @@ public interface MypageMapper {
 
 	List<Community> getCommunityList(int m_no, RowBounds rowBounds);
 
-    Member selectMemberById(String id);
+    Member selectMemberById(@Param("m_id") String id);
 
 
 }
