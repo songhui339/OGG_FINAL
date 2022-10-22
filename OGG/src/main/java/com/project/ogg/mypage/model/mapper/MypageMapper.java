@@ -45,4 +45,6 @@ public interface MypageMapper {
 	int updateMember(Member member);
 
     int deleteMember(int m_no);
+
+    int updatePwd(@Param("m_no") int m_no, @Param("password") String password);
 }

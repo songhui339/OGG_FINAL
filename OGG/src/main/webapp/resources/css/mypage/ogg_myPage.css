@@ -200,6 +200,14 @@ OGG 마이페이지 CSS
     padding: 10px 0;
 }
 
+.myPage_section .myPage_Wrap .infoBox .formBox .form-list.updatePwd li label {
+	width: 120px !important;
+}
+
+.form-list.updatePwd input[type='password'] {
+	width: 320px !important;
+}
+
 .form-list input[type='text'], .form-list input[type='password'], .form-list input[type='email'], .form-list input[type='tel'], .form-list select {
     width: 300px;
     height: 38px;

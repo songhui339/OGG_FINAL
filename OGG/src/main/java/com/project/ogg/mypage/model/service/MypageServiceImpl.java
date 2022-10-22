@@ -128,6 +128,18 @@ public class MypageServiceImpl implements MypageService {
         
         return result;
     }
+
+    // 비밀번호 수정
+    @Override
+    @Transactional
+    public int updatePwd(int m_no, String password) {
+        int result = 0;
+        
+        System.out.println(password);
+        result = mapper.updatePwd(m_no, password);
+        
+        return result;
+    }
 	
 
 }

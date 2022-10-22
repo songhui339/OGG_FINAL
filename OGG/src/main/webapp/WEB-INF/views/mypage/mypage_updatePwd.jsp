@@ -70,7 +70,7 @@
             <div class="line"></div>
             <form action="${path}/mypage/updatePwd" method="post">
                 <div class="formBox">
-                    <ul class="form-list">
+                    <ul class="form-list updatePwd">
                         <li>
                             <label for="m_pwd">현재 비밀번호</label>
                             <input type="password" name="m_pwd" id="m_pwd" minlength="3" maxlength="20" id="">

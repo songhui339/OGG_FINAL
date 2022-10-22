@@ -42,4 +42,6 @@ public interface MypageService {
 
     int delete(int m_no);
 
+    int updatePwd(int m_no, String password);
+
 }
