@@ -4,6 +4,13 @@ OGG 메인 페이지 CSS
 ====================================================
 */
 
+@font-face {
+    font-family: 'EliceDigitalBaeum-Bd';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_elice@1.0/EliceDigitalBaeum-Bd.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
 .mainHeader_section .gallery a {
     text-decoration: none;
 }
@@ -56,7 +63,7 @@ OGG 메인 페이지 CSS
     background-color: #7e69fe;
     color: #fff;
     text-align: center;
-    height: 250px;
+    height: 200px;
     bottom: -320px;
     transition: 0.5s;
     padding: 20px;
@@ -75,13 +82,13 @@ OGG 메인 페이지 CSS
 .content:before {
     content: '';
     position: absolute;
-    background-color: #7e69fe;
+    background-color: #7d69fe;
     width: 100%;
-    height: 80px;
+    height: 50px;
     left: 0;
-    top: -10px;
+    top: 20px;
     transform-origin: left bottom;
-    transform: rotate(-3deg) scale(1.3)
+    transform: rotate(-5deg) scale(1.3)
 }
 
 
