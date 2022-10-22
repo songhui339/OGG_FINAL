@@ -20,7 +20,10 @@
         <section class="community_section">
 
             <div class="pageTitleBox">
-                <h2 class="titleText">💬 커뮤니티</h2>
+                <h2 class="titleText">
+	                <img src="${ path }/images/community/icon_chat.png" alt="icon" class="iconImg">
+					 커뮤니티
+				 </h2>
             </div>
             
             <form name="communityWrite" action="${path}/community/modify.do" method="post" enctype="multipart/form-data">

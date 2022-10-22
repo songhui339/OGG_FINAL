@@ -15,7 +15,10 @@
         <section class="community_section">
 
             <div class="pageTitleBox">
-                <h2 class="titleText">💬 커뮤니티</h2>
+                <h2 class="titleText">
+	                <img src="${ path }/images/community/icon_chat.png" alt="icon" class="iconImg">
+					 커뮤니티
+				 </h2>
                 <button onclick="location.href='${path}/community/goWrite.do'" class="btn writeBtn">글쓰기 <i class="bi bi-pencil"></i></button>
             </div>
 

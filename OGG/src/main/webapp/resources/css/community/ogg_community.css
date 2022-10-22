@@ -31,6 +31,12 @@ OGG 커뮤니티 게시판 CSS
     cursor: pointer;
 }
 
+.community_section .pageTitleBox .titleText .iconImg {
+    width: 40px;
+    margin-right: 5px;
+    transform: translateY(-5px);
+}
+
 .community_section .pageTitleBox .writeBtn {
     float: right;
     border: 1px solid #7e69fe;

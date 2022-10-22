@@ -69,7 +69,7 @@
             <p class="titleText">찜한 컨텐츠</p>
             <div class="line"></div>
                 <div class="formBox" style="text-align:center;">
-               		<img src="https://emojipedia-us.s3.amazonaws.com/source/skype/289/clapper-board_1f3ac.png"
+               		<img src="${ path }/images/common/icon_clapperBoard.png"
                			style="width: 30%;">
                     <p style="text-align: center; font-size: 1.2rem; font-weight: 600;  margin: 30px 0;">
                     	찜한 컨텐츠는 리뷰 페이지에서 <br>확인 가능합니다!

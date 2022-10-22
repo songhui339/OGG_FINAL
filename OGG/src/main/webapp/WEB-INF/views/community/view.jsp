@@ -16,7 +16,10 @@
         <section class="community_section">
 
             <div class="pageTitleBox">
-                <h2 class="titleText" onclick="location.href='${ path }/community/goList.do'">💬 커뮤니티</h2>
+                <h2 class="titleText" onclick="location.href='${ path }/community/goList.do'">
+				 <img src="${ path }/images/community/icon_chat.png" alt="icon" class="iconImg">
+				 커뮤니티
+				</h2>
                 <security:authentication property="principal.m_no" var="security_m_no"/>
 				<c:if test="${security_m_no eq community.c_writerNo}">
 	                <div class="btnBox">
@@ -41,10 +44,12 @@
                     <span class="dateText">작성일 : <fmt:formatDate value="${community.c_writeDate}" pattern="yyyy-MM-dd" /></span>
                     <div class="info_right">
                         <span class="viewCount c_gray">
-                            👀 ${ community.c_viewCount }
+                            <img src="${ path }/images/community/icon_eyes.png" alt="icon" style="width:15px; margin-right: 3px;">
+                             ${ community.c_viewCount }
                         </span>
                         <span class="commentCount c_gray">
-                            💬 ${ community.cr_replyCount }
+                            <img src="${ path }/images/community/icon_chat.png" alt="icon" style="width:15px; margin-right: 3px;">
+                             ${ community.cr_replyCount }
                         </span>
                     </div>
                 </div>
