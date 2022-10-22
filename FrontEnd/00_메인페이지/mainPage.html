@@ -4,21 +4,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- 파비콘 테스트 -->
-    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
+    
     <title>메인페이지</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="ogg_main.css" class="css">
-    <link rel="stylesheet" href="YouTubePopUp.css">
+
     <link rel="stylesheet" href="../Header&Footer/ogg_common.css" class="css">
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+    <!-- owl carousel -->
+    <link rel="stylesheet" href="./OwlCarousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="./OwlCarousel/owl.theme.default.min.css">				
     <!-- <script type="text/javascript" src="jquery-1.12.1.min.js"></script> -->
 
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"> 
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> 
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script> 
+
     <!-- 유튜브 팝업창용 코드 -->
+    <script src="owl.carousel.min.js"></script>
     <script type="text/javascript" src="YouTubePopUp.jquery.js"></script>
 	<script type="text/javascript">
 		jQuery(function(){
@@ -103,15 +108,313 @@
     </section>
 
 
-    <div class="scrollDownBOx" style="height: 50px;">
-
+    <div class="scrollDown_new">
+        <a href="#nextSection">
+            <img src="icon_scrollDown.png" alt="scrollDown icon">
+        </a>
     </div>
-    <section class="party_section">
 
+    <section class="party_section" id="nextSection">
+
+        <div class="titleBox">
+            <h2 class="titleText">OGG <span class="c_purple">파티</span></h2>
+            <button onclick="location.href='${path}/community/goWrite.do'" class="btn writeBtn">파티 만들기</button>
+        </div>
+
+        <div class="owl-carousel owl-theme contentBox">
+            <!-- Party Slide Item START -->
+            <div class="item itemBox">
+                <div class="title">
+                    <div class="logoImg">
+                        <img src="../파이널 UI 설계 이미지/logo_netflix.png" alt="logoImg">
+                    </div>
+                    <div class="titleText">
+                        <p class="text">유튜브 프리미엄</p>
+                        <p class="subText">파티모집 / 즉시시청 / 빠른 대응</p>
+                    </div>
+                </div>
+                <div class="item-members">
+                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small.png" alt=""></span>
+                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small-glay.png" alt=""></span>
+                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small-glay.png" alt=""></span>
+                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small-glay.png" alt=""></span>
+                </div>
+                <div class="item-info">
+                    <div class="item-date">
+                        22.11.04<span class="pc-inline">까지 </span>(<strong>24</strong>일)
+                    </div>
+                    <div class="item-price"><span class="price">3,936</span>원</div>
+                </div>
+            </div>
+            <!-- Party Slide Item END -->
+
+            <!-- Party Slide Item START -->
+            <div class="item itemBox">
+                <div class="title">
+                    <div class="logoImg">
+                        <img src="../파이널 UI 설계 이미지/logo_netflix.png" alt="logoImg">
+                    </div>
+                    <div class="titleText">
+                        <p class="text">유튜브 프리미엄</p>
+                        <p class="subText">파티모집 / 즉시시청 / 빠른 대응</p>
+                    </div>
+                </div>
+                <div class="item-members">
+                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small.png" alt=""></span>
+                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small-glay.png" alt=""></span>
+                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small-glay.png" alt=""></span>
+                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small-glay.png" alt=""></span>
+                </div>
+                <div class="item-info">
+                    <div class="item-date">
+                        22.11.04<span class="pc-inline">까지 </span>(<strong>24</strong>일)
+                    </div>
+                    <div class="item-price"><span class="price">3,936</span>원</div>
+                </div>
+            </div>
+            <!-- Party Slide Item END -->
+
+            <!-- Party Slide Item START -->
+            <div class="item itemBox">
+                <div class="title">
+                    <div class="logoImg">
+                        <img src="../파이널 UI 설계 이미지/logo_netflix.png" alt="logoImg">
+                    </div>
+                    <div class="titleText">
+                        <p class="text">유튜브 프리미엄</p>
+                        <p class="subText">파티모집 / 즉시시청 / 빠른 대응</p>
+                    </div>
+                </div>
+                <div class="item-members">
+                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small.png" alt=""></span>
+                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small-glay.png" alt=""></span>
+                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small-glay.png" alt=""></span>
+                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small-glay.png" alt=""></span>
+                </div>
+                <div class="item-info">
+                    <div class="item-date">
+                        22.11.04<span class="pc-inline">까지 </span>(<strong>24</strong>일)
+                    </div>
+                    <div class="item-price"><span class="price">3,936</span>원</div>
+                </div>
+            </div>
+            <!-- Party Slide Item END -->
+
+            <!-- Party Slide Item START -->
+            <div class="item itemBox">
+                <div class="title">
+                    <div class="logoImg">
+                        <img src="../파이널 UI 설계 이미지/logo_netflix.png" alt="logoImg">
+                    </div>
+                    <div class="titleText">
+                        <p class="text">유튜브 프리미엄</p>
+                        <p class="subText">파티모집 / 즉시시청 / 빠른 대응</p>
+                    </div>
+                </div>
+                <div class="item-members">
+                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small.png" alt=""></span>
+                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small-glay.png" alt=""></span>
+                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small-glay.png" alt=""></span>
+                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small-glay.png" alt=""></span>
+                </div>
+                <div class="item-info">
+                    <div class="item-date">
+                        22.11.04<span class="pc-inline">까지 </span>(<strong>24</strong>일)
+                    </div>
+                    <div class="item-price"><span class="price">3,936</span>원</div>
+                </div>
+            </div>
+            <!-- Party Slide Item END -->
+
+            <!-- Party Slide Item START -->
+            <div class="item itemBox">
+                <div class="title">
+                    <div class="logoImg">
+                        <img src="../파이널 UI 설계 이미지/logo_netflix.png" alt="logoImg">
+                    </div>
+                    <div class="titleText">
+                        <p class="text">유튜브 프리미엄</p>
+                        <p class="subText">파티모집 / 즉시시청 / 빠른 대응</p>
+                    </div>
+                </div>
+                <div class="item-members">
+                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small.png" alt=""></span>
+                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small-glay.png" alt=""></span>
+                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small-glay.png" alt=""></span>
+                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small-glay.png" alt=""></span>
+                </div>
+                <div class="item-info">
+                    <div class="item-date">
+                        22.11.04<span class="pc-inline">까지 </span>(<strong>24</strong>일)
+                    </div>
+                    <div class="item-price"><span class="price">3,936</span>원</div>
+                </div>
+            </div>
+            <!-- Party Slide Item END -->
+
+            <!-- Party Slide Item START -->
+            <div class="item itemBox">
+                <div class="title">
+                    <div class="logoImg">
+                        <img src="../파이널 UI 설계 이미지/logo_netflix.png" alt="logoImg">
+                    </div>
+                    <div class="titleText">
+                        <p class="text">유튜브 프리미엄</p>
+                        <p class="subText">파티모집 / 즉시시청 / 빠른 대응</p>
+                    </div>
+                </div>
+                <div class="item-members">
+                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small.png" alt=""></span>
+                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small-glay.png" alt=""></span>
+                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small-glay.png" alt=""></span>
+                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small-glay.png" alt=""></span>
+                </div>
+                <div class="item-info">
+                    <div class="item-date">
+                        22.11.04<span class="pc-inline">까지 </span>(<strong>24</strong>일)
+                    </div>
+                    <div class="item-price"><span class="price">3,936</span>원</div>
+                </div>
+            </div>
+            <!-- Party Slide Item END -->
+
+            <!-- Party Slide Item START -->
+            <div class="item itemBox">
+                <div class="title">
+                    <div class="logoImg">
+                        <img src="../파이널 UI 설계 이미지/logo_netflix.png" alt="logoImg">
+                    </div>
+                    <div class="titleText">
+                        <p class="text">유튜브 프리미엄</p>
+                        <p class="subText">파티모집 / 즉시시청 / 빠른 대응</p>
+                    </div>
+                </div>
+                <div class="item-members">
+                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small.png" alt=""></span>
+                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small-glay.png" alt=""></span>
+                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small-glay.png" alt=""></span>
+                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small-glay.png" alt=""></span>
+                </div>
+                <div class="item-info">
+                    <div class="item-date">
+                        22.11.04<span class="pc-inline">까지 </span>(<strong>24</strong>일)
+                    </div>
+                    <div class="item-price"><span class="price">3,936</span>원</div>
+                </div>
+            </div>
+            <!-- Party Slide Item END -->
+
+            <!-- Party Slide Item START -->
+            <div class="item itemBox">
+                <div class="title">
+                    <div class="logoImg">
+                        <img src="../파이널 UI 설계 이미지/logo_netflix.png" alt="logoImg">
+                    </div>
+                    <div class="titleText">
+                        <p class="text">유튜브 프리미엄</p>
+                        <p class="subText">파티모집 / 즉시시청 / 빠른 대응</p>
+                    </div>
+                </div>
+                <div class="item-members">
+                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small.png" alt=""></span>
+                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small-glay.png" alt=""></span>
+                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small-glay.png" alt=""></span>
+                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small-glay.png" alt=""></span>
+                </div>
+                <div class="item-info">
+                    <div class="item-date">
+                        22.11.04<span class="pc-inline">까지 </span>(<strong>24</strong>일)
+                    </div>
+                    <div class="item-price"><span class="price">3,936</span>원</div>
+                </div>
+            </div>
+            <!-- Party Slide Item END -->
+        </div>
+
+        <script>
+            $('.owl-carousel').owlCarousel({
+                nav:true,
+                loop: true,
+                dots: true,
+                autoplay:true,
+                rewind: true,
+                autoplayTimeout: 2000,
+                margin:10,
+                responsiveClass:true,
+                responsive:{
+                    0:{
+                        items:2,
+                        nav:true
+                    },
+                    600:{
+                        items:3,
+                        nav:false
+                    },
+                    1000:{
+                        items:3,
+                        nav:true,
+                        loop:false
+                    }
+                }
+            });
+        </script>
+        
     </section>
 
+    <section class="info_section">
+        <script> 
+            AOS.init(); 
+        </script>
+        <div class="titleBox">
+            <img src="OGG_logo.png" alt="logoImg" class="logoImg">
+            <!-- <p class="titleText" data-aos="fade-up" data-aos-duration="1000"> -->
+            <p class="titleText">
+                생활 속 모든 구독 서비스 부터<br>다양한 콘텐츠 리뷰와 커뮤니티까지!
+                <br>모두 OGG에서 만나보세요.
+            </p>
+        </div>
 
-
+        <!-- <div class="bannerWrap" data-aos="fade-up" data-aos-duration="5000"> -->
+        <div class="bannerWrap">
+            <div class="bannerBox partybanner" data-aos="zoom-in-down"  data-aos-duration="1500" >
+                <div>
+                    <label>#1 파티 시작하기</label>
+                    <p class="text">내가 원하는, <br>나에게 딱 맞는 최적의 <br>파티를 시작해보세요.</p>
+                </div>
+                <div class="imgBox">
+                    <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/twitter/322/folded-hands_light-skin-tone_1f64f-1f3fb_1f3fb.png" alt="img" >
+                </div>
+            </div>
+            <div class="bannerBox reviewBanner" data-aos="zoom-in-up"  data-aos-duration="2500">
+                <div>
+                    <label>#2 콘텐츠 리뷰</label>
+                    <p class="text">다양한 콘텐츠 <br>정보 확인도 하고 <br>리뷰도 남겨보세요.</p>
+                </div>
+                <div class="imgBox">
+                    <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/joypixels/340/clapper-board_1f3ac.png" alt="img" >
+                </div>
+            </div>
+            <div class="bannerBox communityBanner" data-aos="zoom-in-down"  data-aos-duration="1500">
+                <div>
+                    <label>#3 커뮤니티</label>
+                    <p class="text">OGG 멤버들과 자유롭게 소통해보세요.</p>
+                </div>
+                <div class="imgBox">
+                    <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/325/speech-balloon_1f4ac.png" alt="img" >
+                </div>
+            </div>
+            
+            <div class="bannerBox faqBanner" data-aos="zoom-in-up"  data-aos-duration="3000">
+                <div>
+                    <label>#4 FAQ</label>
+                    <p class="text">OGG 멤버들이 <br>자주 묻는 질문들! <br>보기 좋게 모아봤어요.</p>
+                </div>
+                <div class="imgBox">
+                    <img src="https://emojipedia-us.s3.amazonaws.com/source/skype/289/light-bulb_1f4a1.png" alt="img" >
+                </div>
+            </div>
+        </div>
+    </section>
 
 
     <footer>
