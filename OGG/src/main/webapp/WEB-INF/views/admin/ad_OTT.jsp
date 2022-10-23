@@ -90,7 +90,7 @@
                             
                             <div class="card-body"> 
                                 <table id="datatablesSimple2">
-                                <button type="button" class="btn btn-primary" style="float:right;" onclick="window.open('${path}/admin/addOTT','','left=300px,top=300px,width=1100px,height=100px')" >OTT 추가하기</button>
+                                <button type="button" class="btn btn-primary" style="float:right;" onclick="window.open('${path}/admin/addOTT','','left=300px,top=300px,width=570px,height=430px')" >OTT 추가하기</button>
                                     <br><br>
                                     <thead>
                                         <tr>
