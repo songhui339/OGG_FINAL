@@ -15,7 +15,10 @@
         <meta name="author" content="" />
         <title>관리자페이지 회원관리</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
         <link href="${path }/css/admin/admin.css" rel="stylesheet" />
+        <link href="${path }/css/admin/admin_sh.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     </head>
     <body class="sb-nav-fixed">
@@ -26,6 +29,45 @@
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar-->
         </nav>
+        
+        <!-- MEMBER Modal START -->
+		<div class="modal fade" id="memberModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h1 class="modal-title fs-5" id="exampleModalLabel">회원 상세 정보</h1>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      <div class="modal-body adminMemberModal">
+		        <li>
+                    <label for="">아이디</label>
+                    <p class="text">${ member.m_id }</p>
+                </li>
+                <li>
+                    <label for="">이름</label>
+                    <p class="text">${ member.m_name }</p>
+                </li>
+                <li>
+                    <label for="">닉네임</label>
+                    <p class="text">${ member.m_nickname }</p>
+                </li>
+                <li>
+                    <label for="">이메일</label>
+                    <p class="text">${ member.m_email }</p>
+                </li>
+                <li>
+                    <label for="">휴대폰 번호</label>
+                    <p class="text">${ member.m_phonenumber }</p>
+                </li>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		<!-- MEMBER Modal END -->
+		
         <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
@@ -96,7 +138,7 @@
                                     <c:if test="${not empty list }">
                                     <c:forEach var="member" items="${list}">
                                         <tr>
-                                            <td><a href="javascript:del()">${member.m_name }</a></td>
+                                            <td><a href="javascript:del()" data-bs-toggle="modal" data-bs-target="#memberModal">${member.m_name }</a></td>
                                             <td>넷플릭스, 디즈니 플러스</td>
                                             <td><fmt:formatDate type="date" value="${ member.m_joindate }" /></td>
                                             <td>${member.m_authority}</td>
