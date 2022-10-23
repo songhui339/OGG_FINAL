@@ -1,7 +1,5 @@
 package com.project.ogg.pay.vo;
 
-import com.project.ogg.party.model.vo.Plan;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

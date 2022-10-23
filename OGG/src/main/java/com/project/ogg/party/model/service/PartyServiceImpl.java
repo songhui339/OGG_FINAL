@@ -40,9 +40,21 @@ public class PartyServiceImpl implements PartyService {
 	}
 
 	@Override
-	public Party partyCreate(Party party) {
+	public int partyCreate(Party party) {
 		
 		return mapper.insertParty(party);
+	}
+
+	@Override
+	public List<Party> getPartyList(String ottName) {
+		
+		return mapper.getPartyList(ottName);
+	}
+
+	@Override
+	public Party selectParty(int no) {
+		
+		return mapper.selectParty(no);
 	}
 
 }

@@ -39,4 +39,20 @@ public class Party {
 	private String p_caution2;
 	
 	private String p_caution3;
+	
+	private String ott_name;
+	
+	private String ott_thumb;
+	
+	private String plan_name;
+	
+	private String plan_price;
+	
+	private String p_entry_price_output;
+	
+	private String p_deposit;
+	
+	private String p_accounts;
+	
+	private int accounts_count;
 }

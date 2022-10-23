@@ -19,6 +19,10 @@ public interface PartyMapper {
 
 	Ott selectOttInfo(int modal_ott_no);
 
-	Party insertParty(Party party);
+	int insertParty(Party party);
+
+	List<Party> getPartyList(String ottName);
+
+	Party selectParty(int no);
 	
 }

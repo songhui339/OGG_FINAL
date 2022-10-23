@@ -32,8 +32,8 @@ public class PartyController {
 	@Autowired
 	private PartyService service;
 	
-	@GetMapping("/ottlist")
-	public ModelAndView ottlist(ModelAndView model) {
+	@GetMapping("/ottlist_create")
+	public ModelAndView ottlist_create(ModelAndView model) {
 		
 		List<Ott> list = null;
 		
@@ -41,6 +41,45 @@ public class PartyController {
 		
 		model.addObject("list", list);
 		model.setViewName("party/createParty");
+		
+		return model;
+	}
+	
+	@GetMapping("/ottlist_find")
+	public ModelAndView ottlist_find(ModelAndView model) {
+		
+		List<Ott> list = null;
+		
+		list = service.getOttList();
+		
+		model.addObject("list", list);
+		model.setViewName("party/findParty");
+		
+		return model;
+	}
+	
+	@GetMapping("/findPartyList")
+	public ModelAndView findPartyList(ModelAndView model, @RequestParam String ottName) {
+		
+		List<Party> list = null;
+		
+		list = service.getPartyList(ottName);
+		
+		model.addObject("list", list);
+		model.setViewName("party/submitParty_list");
+		
+		return model;
+	}
+	
+	@GetMapping("/partyDetail")
+	public ModelAndView partyDetail(ModelAndView model, @RequestParam int no) {
+		
+		Party party = null;
+		
+		party = service.selectParty(no);
+		
+		model.addObject("party", party);
+		model.setViewName("party/submitParty_detail");
 		
 		return model;
 	}
@@ -84,13 +123,21 @@ public class PartyController {
 	public ModelAndView createParty(
 			ModelAndView model,
 			@ModelAttribute Party party) {
+		int result = 0;
 		
-		service.partyCreate(party);
+		result = service.partyCreate(party);
 		
-		model.setViewName("party/createPartyThxPage");
+		if(result > 0) {
+			model.addObject("msg", "파티 등록을 성공하였습니다.");
+			model.setViewName("party/createPartyThxPage");			
+		} else {
+			model.addObject("msg", "파티 등록을 실패하였습니다.");
+		}
 		
 		return model;
 	}
+	
+	
 	
 	@GetMapping("/prevPartyPage")
 	public String prevPartyPage() {

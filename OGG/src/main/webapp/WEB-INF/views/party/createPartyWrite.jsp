@@ -15,7 +15,6 @@
 
 <link rel="stylesheet" href="${ path }/css/party/ogg_party_write.css">
 
-<div style="height: 100px;"></div>
 
 	<section class="enrollPage02">
         <div class="contentWrap">
@@ -29,21 +28,19 @@
                 </div>
                 <form name="fregister" id="fregister" method="POST" autocomplete="off" class="form" role="form" action="${ path }/party/createParty">
                     <input type="hidden" name="ott_no" value="${ ott.ott_no }">
+                    <input type="hidden" id="plan_price" value="${ ott.plan_price }">
+                    <input type="hidden" name="p_entry_price" id="p_entry_price" value="">
                     <h3><span class="c_purple">로그인 정보</span> 입력</h3>
                     <div class="form-round-box">
                         <ul class="form-list">
                             <li>
                                 <span class="subject">아이디</span>
-                                <input type="text" name="p_share_id" value="" id="" required="" placeholder="아이디" minlength="3" maxlength="20">
+                                <input type="text" name="p_share_id" value="" id="id_input" required="" placeholder="아이디" minlength="3" maxlength="20">
                                 <span class="lightgrey inline-break"></span>
                             </li>
                             <li>
                                 <span class="subject">비밀번호</span>
-                                <input type="password" name="p_share_pwd" id="" required="" placeholder="비밀번호" minlength="3" maxlength="20">
-                            </li>
-                            <li>
-                                <span class="subject">비밀번호 확인</span>
-                                <input type="password" name="" id="" required="" placeholder="비밀번호 확인" minlength="3" maxlength="20">
+                                <input type="text" name="p_share_pwd" id="pwd_input" required="" placeholder="비밀번호" minlength="3" maxlength="20">
                             </li>
                             </ul>
                             <p class="subInfoText">
@@ -58,7 +55,7 @@
                         <ul class="form-list">
                             <li>
                                 <span class="subject">파티원 수</span>
-                                <select name="p_max_member" class="form-select" aria-label="Default select example" style="width: 300px;">
+                                <select name="p_max_member" class="form-select" aria-label="Default select example" style="width: 300px;" id="p_max_member">
                                     <option selected>본인 제외</option>
                                     <option value="1">1명</option>
                                     <option value="2">2명</option>
@@ -68,14 +65,16 @@
                             </li>
                             <li>
                                 <span class="subject">파티 시작일</span>
-                                <input type="date" name="p_start_date" value="" id="" required="">
+                                <input type="date" name="p_start_date" value="" id="start_date" required="">
                             </li>
                             <li>
                                 <span class="subject">혜택 기간</span>
+                                <input type="text" id="monthly" value="" disabled>
+                                <input type="hidden" id="monthly_val" name="p_period">
                             </li>
                             <li>
                                 <span class="subject">파티 종료일</span>
-                                <input type="date" name="p_end_date" value="" id="" required="">
+                                <input type="date" name="p_end_date" value="" id="end_date" required="">
                             </li>
                         </ul>
                     </div>
@@ -84,17 +83,17 @@
                     <h3><span class="c_purple">파티 규칙</span> 확인</h3>
                     <div class="form-round-box">
                             <div class="ruleBox" style="margin-bottom: 20px;">
-                                <p class="titleText"><i class="bi bi-check-lg" style="color: #7e69fe;"></i> ${ plan.plan_name }의 로그인 정보를 정확하게 입력/관리하겠습니다.</p>
+                                <p class="titleText"><i class="bi bi-check-lg" style="color: #7e69fe;"></i> ${ ott.plan_name }의 로그인 정보를 정확하게 입력/관리하겠습니다.</p>
+                                    <p id="id_output">- 아이디 : 
+                                    <p id="pwd_output">- 비밀번호 : 
                                 <p class="ruleText">
-                                    - 아이디 : <br>
-                                    - 비밀번호 : <br>
                                     잘못된 로그인 정보를 입력하는 경우 위약금이 발생할 수 있습니다.<br>
                                     파티원 변동 시 동시 접속 인원 관리를 위해 비밀번호를 변경해야 합니다.
                                 </p>
                             </div>
 
                             <div class="ruleBox">
-                                <p class="titleText"><i class="bi bi-check-lg" style="color: #7e69fe;"></i> 파티 기간은 2022.08.25 ~ 2023.02.24 약 6개월입니다.</p>
+                                <p class="titleText" id="date_text"><i class="bi bi-check-lg" style="color: #7e69fe;"></i> 파티 기간은 0000-00-00 ~ 0000-00-00 약 0개월 입니다.</p>
                                 <p class="ruleText">
                                     파티 기간은 파티 시작 이후 변경할 수 없습니다. <br>
                                     파티 기간에 따라 추가 적립금 및 위약금 금액이 달라집니다.
@@ -106,12 +105,12 @@
                     <div class="form-round-box">
                         <ul class="form-list">
                             <li>
-                                <span class="subject">결제 카드 번호</span>
-                                <input type="text" name="" value="" id="" required="" placeholder="카드 번호 (16자리)" minlength="16" maxlength="24">
+                                <span class="subject">결제 정보</span>
+                                <input type="text" name="" value="카카오 간편 결제" disabled>
                             </li>
                             <li>
                                 <span class="subject">OGG 정산일</span>
-                                <select class="form-select" aria-label="Default select example" style="width: 300px;">
+                                <select class="form-select" aria-label="Default select example" style="width: 300px;" name="p_accounts">
                                     <option selected>선택</option>
                                     <option value="1">매달 1일</option>
                                     <option value="5">매달 5일</option>
@@ -152,8 +151,8 @@
 	  		pg: 'kakaopay',
 	  		pay_method: 'card',
 	  		merchant_uid: "order_monthly_"+new Date().getTime(),
-	  		customer_uid: '124222122112333333312', // 카드(빌링키)와 1:1로 대응하는 값, 유저 ID값으로 설정 예정
-	  		name: 'test012',
+	  		customer_uid: 'test013', // 카드(빌링키)와 1:1로 대응하는 값, 유저 ID값으로 설정 예정
+	  		name: 'test013',
 	  		amount: 4000, 
 	  		buyer_email: 'gildong@gmail.com',
 	  		buyer_name: '홍길동',
@@ -165,10 +164,10 @@
 					type: 'POST',
 					dataType: "json",
 					data: {
-						customer_uid: '124222122112333333312',
+						customer_uid: 'test013',
 				        merchant_uid: "order_monthly_"+new Date().getTime(),
-				        schedule_at: 1666235386,
-				        amount: 8900	
+				        schedule_at: 1666778970,
+				        amount: 8900
 					},
 					success: (result) => {
 						alert(result);
@@ -179,6 +178,32 @@
 		    	alert('결제 예약 실패');		    	 
 	      	}
 	  	});
-	};	
+	};
+	
+	$(document).ready(() => {
+		$('#id_input').on('keyup', () => {
+			document.getElementById('id_output').innerHTML = "- 아이디 : " + $('#id_input').val();
+		});
+		
+		$('#pwd_input').on('keyup', () => {
+			document.getElementById('pwd_output').innerHTML = "- 비밀번호 : " + $('#pwd_input').val();
+		});
+		
+		
+		$('#end_date').change(() => {
+			let cDay = 24 * 60 * 60 * 1000;
+		    let cMonth = cDay * 30;
+			let start_month = new Date($('#start_date').val()).getTime();
+			let end_month = new Date($('#end_date').val()).getTime();
+			
+			document.querySelector('#monthly').value = Math.floor((end_month - start_month) / cMonth) + " 개월";				
+			document.querySelector('#monthly_val').value = Math.floor((end_month - start_month) / cMonth);				
+			document.getElementById('date_text').innerHTML = "<i class='bi bi-check-lg' style='color: #7e69fe;'></i> 파티 기간은 "+ $('#start_date').val() + " ~ " + $('#end_date').val() + " 약 " + $('#monthly').val() + " 입니다.";
+		});
+		
+		$('#p_max_member').change(() => {
+			document.querySelector('#p_entry_price').value = $('#plan_price').val() / $('#p_max_member').val();
+		})
+	});
 </script>
    

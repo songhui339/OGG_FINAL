@@ -21,84 +21,35 @@
 
         <div class="itemBoxWrap">
             <!-- 파티 가입하기 박스 -->
-            <div class="itemBox" onclick="location.href='';">
-                <div class="title">
-                    <div class="logoImg">
-                        <img src="../파이널 UI 설계 이미지/logo_netflix.png" alt="logoImg">
-                    </div>
-                    <div class="titleText">
-                        <p class="text">유튜브 프리미엄</p>
-                        <p class="subText">파티모집 / 즉시시청 / 빠른 대응</p>
-                    </div>
-                </div>
+            <c:if test="${ not empty list }">
+            	<c:forEach var="list" items="${ list }">
+            		<div class="itemBox" onclick="location.href='${path}/party/partyDetail?no=${list.p_no}'">
+                		<div class="title">
+                    		<div class="logoImg">
+                        		<img src="${ path }/images/party/${ list.ott_thumb }.png" alt="logoImg">
+                    		</div>
+		                    <div class="titleText">
+		                        <p class="text">${ list.plan_name }</p>
+		                        <p class="subText">파티모집 / 즉시시청 / 빠른 대응</p>
+		                    </div>
+                		</div>
                 
-                <div class="item-members">
-                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small.png" alt=""></span>
-                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small-glay.png" alt=""></span>
-                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small-glay.png" alt=""></span>
-                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small-glay.png" alt=""></span>
-                </div>
+		                <div class="item-members">
+		                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small.png" alt=""></span>
+		                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small-glay.png" alt=""></span>
+		                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small-glay.png" alt=""></span>
+		                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small-glay.png" alt=""></span>
+		                </div>
                 
-                <div class="item-info">
-                    <div class="item-date">
-                        22.11.04<span class="pc-inline">까지</span>(<strong>24</strong>일)
-                    </div>
-                    <div class="item-price"><span class="price">3,936</span>원</div>
-                </div>
-            </div>
-
-            <div class="itemBox" onclick="location.href='';">
-                <div class="title">
-                    <div class="logoImg">
-                        <img src="../파이널 UI 설계 이미지/logo_netflix.png" alt="logoImg">
-                    </div>
-                    <div class="titleText">
-                        <p class="text">유튜브 프리미엄</p>
-                        <p class="subText">파티모집 / 즉시시청 / 빠른 대응</p>
-                    </div>
-                </div>
-                
-                <div class="item-members">
-                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small.png" alt=""></span>
-                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small-glay.png" alt=""></span>
-                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small-glay.png" alt=""></span>
-                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small-glay.png" alt=""></span>
-                </div>
-                
-                <div class="item-info">
-                    <div class="item-date">
-                        22.11.04<span class="pc-inline">까지</span>(<strong>24</strong>일)
-                    </div>
-                    <div class="item-price"><span class="price">3,936</span>원</div>
-                </div>
-            </div>
-
-            <div class="itemBox" onclick="location.href='';">
-                <div class="title">
-                    <div class="logoImg">
-                        <img src="../파이널 UI 설계 이미지/logo_netflix.png" alt="logoImg">
-                    </div>
-                    <div class="titleText">
-                        <p class="text">유튜브 프리미엄</p>
-                        <p class="subText">파티모집 / 즉시시청 / 빠른 대응</p>
-                    </div>
-                </div>
-                
-                <div class="item-members">
-                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small.png" alt=""></span>
-                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small-glay.png" alt=""></span>
-                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small-glay.png" alt=""></span>
-                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small-glay.png" alt=""></span>
-                </div>
-                
-                <div class="item-info">
-                    <div class="item-date">
-                        22.11.04<span class="pc-inline">까지</span>(<strong>24</strong>일)
-                    </div>
-                    <div class="item-price"><span class="price">3,936</span>원</div>
-                </div>
-            </div>
-
+		                <div class="item-info">
+		                    <div class="item-date">
+		                        ${ list.p_end_date }<span class="pc-inline">까지</span>(<strong>24</strong>일)
+		                    </div>
+		                    <div class="item-price"><span class="price">3,936</span>원</div>
+		                </div>
+            		</div>
+                </c:forEach>
+            </c:if>
         </div>
     </div>
     <!-- 하단 배너 -->

@@ -74,10 +74,10 @@
         <div class="menu-container">
             <ul class="menuBox">
                 <li>
-                    <a href="${ path }/party/ottlist">파티 만들기</a>
+                    <a href="${ path }/party/ottlist_create">파티 만들기</a>
                 </li>
                 <li>
-                    <a href="javascript:">파티 찾기</a>
+                    <a href="${ path }/party/ottlist_find">파티 찾기</a>
                 </li>
                 <li>
                     <a href="${ path }/review/film_list">리뷰</a>
