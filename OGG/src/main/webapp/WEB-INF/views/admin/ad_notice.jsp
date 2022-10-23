@@ -32,17 +32,6 @@
 			id="sidebarToggle" href="#!">
 			<i class="fas fa-bars"></i>
 		</button>
-		<!-- Navbar Search-->
-		<form
-			class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-			<div class="input-group">
-				<input class="form-control" type="text" placeholder="Search for..."
-					aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-				<button class="btn btn-primary" id="btnNavbarSearch" type="button">
-					<i class="fas fa-search"></i>
-				</button>
-			</div>
-		</form>
 		<!-- Navbar-->
 	</nav>
 	<div id="layoutSidenav">
@@ -103,11 +92,6 @@
 							<!-- board seach area -->
 							<div id="board-search">
 								<div class="container">
-								<!--  
-									<c:if test='${member.authority=="M" }'>
-										<button id="goWrite" onclick="location='${path}/notice/write'">글쓰기</button>
-									</c:if>
-								-->
 									<button id="goWrite" onclick="location='${path}/notice/write'">글쓰기</button>
 									<div class="search-window">
 										<div class="search-wrap"></div>
