@@ -332,6 +332,7 @@ o_accordion li .textBox p #linkText:hover {
     color: #aaaaaa;
     padding: 0;
     margin-bottom: 0;
+    border-bottom: 2px solid #ffffff;
 }
 
 .faqTab_row_01 .btn_container section .btnBox.active .textItem p  {
