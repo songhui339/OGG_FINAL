@@ -76,7 +76,7 @@ $(document).ready(function() {
             let html = "";
                 html += "<p id='detail-text1'>기본 정보</p>";
                 html += "<hr>";
-                html += "<br>";
+                // html += "<br>";
                 html += "<p id='detail-text6'>";
                 html += overview;
                 html += "</p></p>";
@@ -333,6 +333,7 @@ $(document).ready(function() {
     ////////////
     /////댓글////
     ////////////
+    // ok
     $('#writeCmt').on("click", function() {
         let cmtContent = document.getElementById('message-cmt').value;
         let rvNo = document.getElementById('rvNo').value;
@@ -367,11 +368,11 @@ $(document).ready(function() {
                         html += "<textarea id='message-cmt-2' style='border: 1px solid lightgrey; resize: none; width: 100%;'>${ reviewCmt.cmtContent }</textarea>";
                         html += "</td><td id='board-text7-1'>";
                         html += "<div class='btn-group' role='group' aria-label='Basic mixed styles example'>";
-                        html += "<button class='btn btn-primary' type='button' onclick='updateCmt(event)' >수정</button>";
+                        html += "<button class='btn btn-primary' type='button' onclick='updateCmt(event)'>수정</button>";
                         html += "<button class='btn btn-primary' type='button' onclick='updateCommentsCancel(event)'>취소</button>";
                         html += "</div></td></tr>";
 
-                        $("#cmtTbody").append(html);
+                        $("#cmtbody").append(html);
                         $("#message-cmt").val('');
                 },
                 error : (error) => {

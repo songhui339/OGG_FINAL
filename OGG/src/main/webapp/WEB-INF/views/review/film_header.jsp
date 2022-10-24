@@ -52,10 +52,18 @@
 	                </div>
 	                <div class="col-3 col-sm-3">
         				<c:if test="${ loginMember != null }">
-		                    <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="남기기">
-		                		<img src="${path}/images/review/pen.png" height="30px;">
-		                        리뷰
-		                    </a>
+							<c:if test="${ review == null }">
+								<a href="" data-bs-toggle="modal" data-bs-target="#reviewModal" data-bs-whatever="남기기">
+									<img src="${path}/images/review/pen.png" height="30px;">
+									리뷰
+								</a>
+            				</c:if>
+							<c:if test="${ review != null }">
+								<a href="" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="남기기">
+									<img src="${path}/images/review/pen.png" height="30px;">
+									수정
+								</a>
+            				</c:if>
 						</c:if>
 						<c:if test="${ loginMember == null }">
 		                    <a href="" onclick="alert('로그인 후 이용 가능합니다')">
@@ -64,7 +72,54 @@
 		                    </a>
 	                    </c:if>
 	                </div>
-	                <div class="col-3 col-sm-3"></div>
+	                <div class="col-3 col-sm-3">
+					<!-- 모달 -->
+					<div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+							<div class="modal-content">
+								<div class="modal-header"id="modal-header">
+									<h5 class="modal-title" id="reviewModalLabel">영화 이름</h5>
+									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+								</div>
+								<div class="modal-body">
+									<form>
+									<div class="mb-3">
+										<label for="message-text" class="col-form-label"></label>
+										<textarea class="form-control" id="message-text" placeholder="이 작품에 대한 생각을 자유롭게 표현해주세요." style="height: 300px;"></textarea>
+									</div>
+									</form>
+								</div>
+								<div class="modal-footer">
+									<span id="textLengthCheck">(0 / 2000)</span>
+									<button type="button" class="btn btn-primary" id="writeReview" data-bs-dismiss="modal">저장</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<%-- 모달 2 --%>
+					<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+							<div class="modal-content">
+								<div class="modal-header"id="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">리뷰 수정</h5>
+									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+								</div>
+								<div class="modal-body">
+									<form>
+									<div class="mb-3">
+										<label for="message-text" class="col-form-label"></label>
+										<textarea class="form-control" id="message-text" style="height: 300px;">${ review.rvContent }</textarea>
+									</div>
+									</form>
+								</div>
+								<div class="modal-footer">
+									<span id="textLengthCheck">(0 / 2000)</span>
+									<button type="button" class="btn btn-primary" id="updateReview" data-bs-dismiss="modal">저장</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					</div>
 	            </div>
 	        </div>
 	    </div>

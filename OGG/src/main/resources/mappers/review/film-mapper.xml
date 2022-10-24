@@ -106,4 +106,13 @@
 				F_LIKES = 1
 	</select>	
 	
+	<!-- 리뷰 조회 (로그인 맴버) -->
+	<select id="selectReviewByMember" parameterType="Review" resultMap="reviewResultMap">
+		<include refid="reviewSql"></include>
+		WHERE  	F_CODE = #{fCode} AND 
+				F_TYPE = 'movie' AND 
+				RV_STATUS = 'Y' AND
+				RV_WRITER_NO = #{rvWriterNo}
+	</select>
+	
 </mapper>
