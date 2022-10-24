@@ -106,9 +106,10 @@ public class ReviewLikesController {
 		if(member != null) {
 			
 			reviewLikes.setMNo(member.getM_no());
+			System.out.println(reviewLikes);
 			map.put("likes", service.getLikes(reviewLikes));
 		}
-//		System.out.println("조회" + map);
+		System.out.println("조회" + map);
 		
 		return map;
 	}

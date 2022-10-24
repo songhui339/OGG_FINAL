@@ -196,7 +196,7 @@
     #board-text4{
         width: 13%;
         margin-left: 10px;
-        font-size: 0.9em;
+        font-size: 1em;
         vertical-align: middle;
     }
     #board-text4-1{
@@ -206,11 +206,12 @@
         vertical-align: middle;
     }
     #board-text5{
-        font-size: 0.9em;
+        font-size: 1em;
         vertical-align: middle;
     }
     #board-text5-1{
         font-size: 0.9em;
+        vertical-align: middle;
     }
     #board-text6{
         width: 5%;

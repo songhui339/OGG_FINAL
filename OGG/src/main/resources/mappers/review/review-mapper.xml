@@ -117,7 +117,7 @@
 		<include refid="reviewCmtSql"></include>
 		WHERE 	 CMT_STATUS = 'Y' AND 
 				 RV_NO = #{no}
-		ORDER BY CMT_GROUP, CMT_UPDATE
+		ORDER BY CMT_GROUP, CMT_DATE
 	</select>
 	
 	<!-- 대댓글 조회 (리뷰 번호) -->

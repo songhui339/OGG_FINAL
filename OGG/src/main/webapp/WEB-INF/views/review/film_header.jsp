@@ -86,12 +86,13 @@
 									<div class="mb-3">
 										<label for="message-text" class="col-form-label"></label>
 										<textarea class="form-control" id="message-text" placeholder="이 작품에 대한 생각을 자유롭게 표현해주세요." style="height: 300px;"></textarea>
+										<input type="text" name="content" id="html5" value="" hidden/>
 									</div>
 									</form>
 								</div>
 								<div class="modal-footer">
 									<span id="textLengthCheck">(0 / 2000)</span>
-									<button type="button" class="btn btn-primary" id="writeReview" data-bs-dismiss="modal">저장</button>
+									<button type="button" class="btn btn-primary" id="writeReview" data-bs-dismiss="modal" onclick="convertbr();">저장</button>
 								</div>
 							</div>
 						</div>
@@ -242,5 +243,4 @@
 			}
 		});
 	}
-	
 	</script>

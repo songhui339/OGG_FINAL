@@ -77,7 +77,7 @@ public class FilmController {
 			@RequestParam("ftype") String ftype)  {
 		
 	    String requestUrl = null;
-		List<Review> list = null;
+		List<Review> list = new ArrayList<Review>();
 		PageInfo pageInfo = null;
 		int fcode = 0;
 		Review review = new Review();
@@ -91,10 +91,6 @@ public class FilmController {
 			review.setFCode(fcodes);
 			review.setRvWriterNo(member.getM_no());
 			review = service.getReviewByMember(review);
-		}else {
-//			review.setFCode(fcodes);
-//			review.setRvWriterNo(0);
-//			review = service.getReviewByMember(review);
 		}
 		
 		System.out.println(review);

@@ -42,6 +42,7 @@
 		WHERE 	CMT_STATUS = 'Y' AND 
 				CMT_NO = #{cmtNo} AND
 				CMT_DEPTH = 0
+		ORDER BY CMT_DATE DESC
 	</select>
 	
 	<!-- 대댓글 조회 (댓글 번호) -->
@@ -51,6 +52,7 @@
 				RV_NO = #{rvNo} AND
 				CMT_GROUP = #{cmtGroup} AND
 				CMT_DEPTH = 1
+		ORDER BY CMT_DATE DESC
 	</select>
 	
 	<!-- 리뷰 테이블 댓글수 업데이트 -->

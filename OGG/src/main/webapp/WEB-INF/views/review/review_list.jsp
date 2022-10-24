@@ -101,7 +101,8 @@
 		var ftype = "${ftype}";
 		var contextpath = "${ pageContext.request.contextPath }";
 	</script>	
-	<script>
+	
+	<%-- <script>
 	$(document).ready(function() {
 		$.ajax({
 			async: true,
@@ -181,7 +182,7 @@
 			}
 		});
 	};
-	</script>
+	</script> --%>
 
     <!-- footer -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

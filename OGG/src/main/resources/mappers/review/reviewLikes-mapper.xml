@@ -291,12 +291,10 @@
 			</if>
 		SET
 		  	<if test="lType == 'REVIEW'">
-				RV_LIKES = #{num},
-				L_UPDATE = SYSDATE
+				RV_LIKES = #{num}
 			</if>
 		  	<if test="lType == 'CMT'">
-				CMT_LIKES = #{num},
-				L_UPDATE = SYSDATE
+				CMT_LIKES = #{num}
 			</if>
 		WHERE
 		  	<if test="lType == 'REVIEW'">
