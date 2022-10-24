@@ -13,10 +13,8 @@
     
     <!-- my JS -->
     <script defer src="${path}/js/review/film_main.js"></script>
-   	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
     <!-- 내용 전체 컨테이너 -->
-    <br><br><br><br><br>
     <div class="container" style="margin-bottom: 100px; margin-top: 40px;">
 
         <div class="row">
@@ -86,7 +84,7 @@
         <!-- 2nd row 끝 -->        
 
         <div style="margin-top: 40px; margin-bottom: 20px;">
-            <p class="row_name" style="margin-left: 5%;">내가 찜한 작품</p>
+            <p class="row_name" style="margin-left: 5%;">평점이 높은 작품</p>
             <hr>
         </div>
 
@@ -112,7 +110,36 @@
         </button>
         </div>
         <!-- 3rd row 끝 -->  
-        
+        <div id="mylikes">
+        <div style="margin-top: 40px; margin-bottom: 20px;">
+            <p class="row_name" style="margin-left: 5%;">내가 찜한 작품</p>
+            <hr>
+        </div>
+
+        <!-- 찜한 영화 -->
+        <div id="carouselExampleControls0" class="carousel slide" data-bs-touch="false"">
+            <div class="carousel-inner">
+            <!-- 첫번째 슬라이드 -->
+            <div class="carousel-item active" id="carousel0">
+            </div>
+
+            <!-- 두번째 슬라이드 -->
+            <div class="carousel-item" id="carousel9">
+            </div>
+
+        </div>
+        <button id="likebutton1" class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls0" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button id="likebutton2" class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls0" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+        </div>
+        </div>
+        <!-- 찜한 영화 끝 -->
+
     </div>
     <!-- 내용 전체 컨테이너 끝 -->
     
@@ -120,7 +147,7 @@
 		$("#searchBtn").on("click", () => {
 			var keyword = $("#searchInput").val();
 			
-		    location.href="${path}/review/film_search?keyword="+keyword;
+		    location.href="${path}/film/search?keyword=" + keyword;
 		});
 		
 		let searchkeyword = "[[${searchkeyword}]]";

@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- mybatis mapper 설정 파일임을 선언한다. -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+	<mapper namespace="com.project.ogg.review.model.mapper.ReviewLikesMapper">
+	
+	<!-- REVIEW_LIKES sql-->
+	<sql id="reviewLikesSql">
+		SELECT L_NO,
+		       M_NO,
+		       RV_NO,
+		       CMT_NO,
+		       F_CODE,
+		       F_TYPE,
+		       F_LIKES,
+		       F_STAR,
+		       L_DATE,
+		       L_UPDATE,
+		       L_TYPE
+		FROM   REVIEW_LIKES
+	</sql>
+	
+	<!-- FILM resultMap-->
+	<resultMap type="Film" id="filmResultMap">
+		<id property="fCode" column="F_CODE" />
+		<result property="fTitle" column="F_TITLE" />
+	</resultMap>	
+
+	<!-- REVIEW resultMap-->
+	<resultMap type="Review" id="reviewResultMap">
+		<id property="rvNo" column="RV_NO" />
+		<result property="rvWriterNo" column="RV_WRITER_NO" />
+		<result property="fCode" column="F_CODE" />
+		<result property="fType" column="F_TYPE" />
+		<result property="rvDate" column="RV_DATE" />
+		<result property="rvUpdate" column="RV_UPDATE" />
+		<result property="rvContent" column="RV_CONTENT" />
+		<result property="rvStatus" column="RV_STATUS" />
+		<result property="rvLikes" column="RV_LIKES" />
+		<result property="rvReadCount" column="RV_READ_COUNT" />
+		<result property="rvCmtCount" column="RV_CMT_COUNT" />
+		<result property="rvNickname" column="M_NICKNAME" />
+	</resultMap>
+	
+	<!-- REVIEW_CMT resultMap-->
+	<resultMap type="ReviewCmt" id="reviewCmtResultMap">
+		<id property="cmtNo" column="CMT_NO" />
+		<result property="rvNo" column="RV_NO" />
+		<result property="cmtWriterNo" column="CMT_WRITER_NO" />
+		<result property="cmtDate" column="CMT_DATE" />
+		<result property="cmtUpDate" column="CMT_UPDATE" />
+		<result property="cmtContent" column="CMT_CONTENT" />
+		<result property="cmtStatus" column="CMT_STATUS" />
+		<result property="cmtLikes" column="CMT_LIKES" />
+		<result property="cmtGroup" column="CMT_GROUP" />
+		<result property="cmtDepth" column="CMT_DEPTH" />
+		<result property="cmtNickname" column="M_NICKNAME" />
+	</resultMap>
+
+	<!-- REVIEW_LIKES resultMap-->
+	<resultMap type="ReviewLikes" id="reviewLikesResultMap">
+		<id property="lNo" column="L_NO" />
+		<result property="fTitle" column="F_TITLE" />
+		<result property="mNo" column="M_NO" />
+		<result property="rvNo" column="RV_NO" />
+		<result property="cmtNo" column="CMT_NO" />
+		<result property="fCode" column="F_CODE" />
+		<result property="fType" column="F_TYPE" />
+		<result property="fLikes" column="F_LIKES" />
+		<result property="fStar" column="F_STAR" />
+		<result property="lDate" column="L_DATE" />
+		<result property="lUpdate" column="L_UPDATE" />
+		<result property="lType" column="L_TYPE" />
+	</resultMap>	
+	
+	<!-- 영화 체크 -->		
+	<select id="checkFilm" parameterType="_int" resultMap="filmResultMap">
+		SELECT  *
+		FROM 	FILM
+		WHERE	F_CODE = #{fCode}
+	</select>
+	
+	<!-- 영화 등록 -->
+	<insert id="insertFilm" parameterType="Film">
+		INSERT INTO FILM (
+	            F_CODE,
+	            F_TYPE,
+	            F_TITLE 
+			)
+			VALUES(
+				#{fCode},
+				DEFAULT,
+				#{fTitle}
+	      	)	
+	</insert>
+	
+	<!-- 별점 조회 (영화별) -->
+	<select id="selectStarbyFilm" parameterType="_int" resultMap="reviewLikesResultMap">
+		<include refid="reviewLikesSql" />
+			WHERE 	F_CODE = #{fcode} AND 
+			      	F_STAR > 0 AND
+			      	L_TYPE = 'STAR'
+	</select>
+	
+	<!-- 별점 조회 (개인별) -->
+	<select id="selectStar" parameterType="ReviewLikes" resultMap="reviewLikesResultMap">
+		SELECT *
+			FROM(
+				SELECT   L_NO,
+				       	 M_NO,
+				         RV_NO,
+				         CMT_NO,
+				         F_CODE,
+				         F_TYPE,
+				         F_LIKES,
+				         F_STAR,
+				         L_DATE,
+				         L_UPDATE,
+				         L_TYPE
+				FROM     REVIEW_LIKES
+				WHERE    M_NO = #{mNo} AND 
+						 F_STAR > 0 AND 
+						 F_CODE=#{fCode}
+				ORDER BY L_UPDATE DESC)
+			WHERE ROWNUM = 1
+	</select>
+	
+	<!-- 별점 저장 -->
+	<insert id="insertStar" parameterType="ReviewLikes">
+		INSERT INTO REVIEW_LIKES(
+	            L_NO,
+	            M_NO,
+	            F_CODE,
+	            F_TYPE,
+	            F_STAR,
+	            L_TYPE
+		      )
+		      VALUES(
+		            SEQ_LIKES_NO.NEXTVAL,
+		            #{mNo},
+		            #{fCode},
+		            'movie',
+		            #{fStar},
+		            'STAR'
+		      )
+	</insert>
+	
+	<!-- 좋아요 조회 -->
+<!-- 	<select id="selectLikes" parameterType="ReviewLikes" resultMap="reviewLikesResultMap">
+		<include refid="reviewLikesSql" />
+		<trim prefix="WHERE" suffixOverrides="AND">
+			M_NO = #{mNo} AND
+			<choose>
+			    <when test="lType == 'REVIEW'">
+					RV_NO = #{rvNo} AND 
+					L_TYPE = 'REVIEW'	
+				</when>
+			    <when test="lType == 'CMT'">
+					CMT_NO = #{cmtNo} AND 
+					L_TYPE = 'CMT'	
+			    </when>
+			    <when test="lType == 'FILM'">
+					F_CODE = #{fCode} AND 
+					F_LIKES = 1 AND 
+					L_TYPE = 'FILM'	
+			    </when>
+		    </choose>
+		</trim>
+	</select>	 -->
+	
+	<!-- 리뷰 좋아요 조회 -->
+	<select id="selectReviewLikes" parameterType="ReviewLikes" resultMap="reviewLikesResultMap">
+		<include refid="reviewLikesSql" />
+			WHERE	M_NO = #{mNo} AND
+					RV_NO = #{rvNo} AND 
+					L_TYPE = 'REVIEW'	
+	</select>	
+	
+	<!-- 코멘트 좋아요 조회 -->
+	<select id="selectCmtLikes" parameterType="ReviewLikes" resultMap="reviewLikesResultMap">
+		<include refid="reviewLikesSql" />
+			WHERE	M_NO = #{mNo} AND
+					CMT_NO = #{cmtNo} AND 
+					L_TYPE = 'CMT'	
+	</select>	
+	
+	<!-- 필름 좋아요 조회 -->
+	<select id="selectFilmLikes" parameterType="ReviewLikes" resultMap="reviewLikesResultMap">
+		<include refid="reviewLikesSql" />
+			WHERE	M_NO = #{mNo} AND
+					F_CODE = #{fCode} AND 
+					F_LIKES = 1 AND 
+					L_TYPE = 'FILM'	
+	</select>	
+	
+	<!-- 좋아요 인서트 -->
+	<insert id="insertLikes" parameterType="ReviewLikes">
+		INSERT INTO REVIEW_LIKES(
+		            L_NO,
+		            M_NO,
+					<choose>
+					    <when test="lType == 'REVIEW'">
+							RV_NO,
+						</when>
+					    <when test="lType == 'CMT'">
+				            CMT_NO,
+					    </when>
+					    <when test="lType == 'FILM'">
+				            F_CODE,
+				            F_TYPE,
+				            F_LIKES,
+					    </when>
+				    </choose>
+		            L_TYPE
+		      )
+		      VALUES(
+		            SEQ_LIKES_NO.NEXTVAL,
+		            #{mNo},
+					<choose>
+					    <when test="lType == 'REVIEW'">
+				            #{rvNo},
+							'REVIEW'	
+						</when>
+					    <when test="lType == 'CMT'">
+				            #{cmtNo},
+							'CMT'	
+					    </when>
+					    <when test="lType == 'FILM'">
+				            #{fCode},
+				            DEFAULT,
+				            1,
+							'FILM'	
+					    </when>
+				    </choose>
+		      )
+	</insert>
+	
+	<!-- 좋아요 삭제 -->
+	<delete id="deleteLikes" parameterType="ReviewLikes">
+		DELETE 
+		FROM REVIEW_LIKES
+		WHERE 
+			M_NO = #{mNo} AND 
+			<choose>
+			    <when test="lType == 'REVIEW'">
+					RV_NO = #{rvNo} AND 
+					L_TYPE = 'REVIEW'	
+				</when>
+			    <when test="lType == 'CMT'">
+					CMT_NO = #{cmtNo} AND 
+					L_TYPE = 'CMT'	
+			    </when>
+			    <when test="lType == 'FILM'">
+					F_CODE = #{fCode} AND 
+					F_LIKES = 1 AND
+					L_TYPE = 'FILM'	
+			    </when>
+		    </choose>
+	</delete>		
+
+	<!-- 리뷰 테이블에서 총 좋아요 수 가져오기 -->
+	<select id="selectRTotalLikes" parameterType="ReviewLikes" resultMap="reviewResultMap">
+		SELECT	RV_LIKES
+		FROM	REVIEW
+		WHERE	RV_NO = #{rvNo}
+	</select>	
+
+	<!-- 코멘트 테이블에서 총 좋아요 수 가져오기 -->
+	<select id="selectCTotalLikes" parameterType="ReviewLikes" resultMap="reviewCmtResultMap">
+		SELECT	CMT_LIKES
+		FROM	REVIEW_CMT
+		WHERE	RV_NO = #{rvNo} AND
+				CMT_NO = #{cmtNo} AND
+				CMT_WRITER_NO = #{mNo}
+	</select>	
+	
+	<!-- 각 테이블에서 총 좋아요 수 업데이트 -->
+	<update id="updateTotalLikes" parameterType="ReviewLikes">
+		UPDATE
+		  	<if test="lType == 'REVIEW'">
+				REVIEW
+			</if>
+		  	<if test="lType == 'CMT'">
+				REVIEW_CMT
+			</if>
+		SET
+		  	<if test="lType == 'REVIEW'">
+				RV_LIKES = #{num}
+			</if>
+		  	<if test="lType == 'CMT'">
+				CMT_LIKES = #{num}
+			</if>
+		WHERE
+		  	<if test="lType == 'REVIEW'">
+				RV_NO = #{rvNo}
+			</if>
+		  	<if test="lType == 'CMT'">
+				RV_NO = #{rvNo} AND
+				CMT_NO = #{cmtNo} AND
+				CMT_WRITER_NO = #{mNo}
+			</if>
+	</update>
+	
+</mapper>

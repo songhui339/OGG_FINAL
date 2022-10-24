@@ -24,13 +24,6 @@
             <a class="navbar-brand ps-3" href="${path}/admin/home">관리자 페이지</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
-            <!-- Navbar Search-->
-            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-                <div class="input-group">
-                    <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
-                </div>
-            </form>
             <!-- Navbar-->
         </nav>
         <div id="layoutSidenav">
@@ -38,7 +31,7 @@
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
-                           <a class="nav-link" href="${path}">
+                           <a class="nav-link" href="/">
                                 <div class="sb-nav-link-icon"><i class="fa-sharp fa-solid fa-house"></i></div>
                                 홈으로
                             </a>
@@ -90,7 +83,7 @@
                             
                             <div class="card-body"> 
                                 <table id="datatablesSimple2">
-                                <button type="button" class="btn btn-primary" style="float:right;" onclick="window.open('${path}/admin/addOTT','','left=300px,top=300px,width=1100px,height=100px')" >OTT 추가하기</button>
+                                <button type="button" class="btn btn-primary" style="float:right;" onclick="window.open('${path}/admin/addOTT','','left=300px,top=300px,width=570px,height=430px')" >OTT 추가하기</button>
                                     <br><br>
                                     <thead>
                                         <tr>
@@ -106,8 +99,8 @@
                                     <tbody>
                                     <c:forEach var="ott" items="${list}">
                                         <tr>
-                                            <td>${ott.ott_no }</td>
-                                            <td>${ott.ott_name }</td>
+                                            <td>${ott.ott_no}</td>
+                                            <td><a href="javascript:ottdel(${ott.ott_no})">${ott.ott_name }</a></td>
                                             <td>${ott.ott_class }</td>
                                             <td>${ott.ott_max_member }명</td>
                                             <td>${ott.plan_name }</td>
@@ -173,6 +166,13 @@
         var b = ${muser.juneUser};
         var c = ${muser.sepUser};
         var d = ${muser.decUser};
+        
+        function ottdel(e){
+            if(confirm("정말로 OTT를 삭제 하시겠습니까?")) {
+            	location.replace("${ path }/ott/delete?ott_no="+e);
+            }	
+        }
+            
 		</script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="${path}/js/admin/script.js"></script>

@@ -25,13 +25,6 @@
             <a class="navbar-brand ps-3" href="${path}/admin/home">관리자 페이지</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
-            <!-- Navbar Search-->
-            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-                <div class="input-group">
-                    <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
-                </div>
-            </form>
             <!-- Navbar-->
         </nav>
         <div id="layoutSidenav">
@@ -39,7 +32,7 @@
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
-                            <a class="nav-link" href="${path}">
+                            <a class="nav-link" href="/">
                                 <div class="sb-nav-link-icon"><i class="fa-sharp fa-solid fa-house"></i></div>
                                 홈으로
                             </a>
@@ -136,8 +129,8 @@
                                         <!-- 
                                         <button type="button" id="btnUpdate" onclick = "location.href ='${path}/notice/update?no=${notice.no}'">수정</button>
                                         <button type="button" id="btnDelete">삭제</button>
-                                         -->
                                         <button type="button" onclick="location.href='${path}/admin/question/update?no=${question.q_no}'" id="btnDelete">질문수정</button>
+                                         -->
                                          <c:if test="${empty answer}">
                                         	<button type="button" onclick="location.href='${path}/admin/answer?no=${question.q_no}'" id="btnDelete">답변하기</button>
                                          </c:if>

@@ -19,10 +19,10 @@
             <form action="/member/findPwd.do" method="POST">
             	<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
                 <div class="email-input">
-                    <input type="text" name="m_id" id="m_id" maxlength="20" placeholder="아이디를 입력하세요">
+                    <input type="text" name="m_id" id="m_id" maxlength="50" placeholder="아이디를 입력하세요">
                 </div>
                 <div class="email-input">
-                    <input type="email" name="m_email" id="m_email" maxlength="20" placeholder="이메일을 입력하세요">
+                    <input type="email" name="m_email" id="m_email" maxlength="50" placeholder="이메일을 입력하세요">
                 </div>
                 <div class="buttonBox">
                     <button type="button" class="button" onclick="location.href='${ path }/member/goHome.do'">닫기</button>

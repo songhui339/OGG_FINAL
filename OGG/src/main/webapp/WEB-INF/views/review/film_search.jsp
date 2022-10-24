@@ -13,10 +13,8 @@
     
     <!-- my JS -->
     <script defer src="${path}/js/review/film_search.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     
     <!-- 내용 전체 컨테이너 -->
-    <br><br><br><br><br>
     <div class="container" style="margin-bottom: 100px; margin-top: 40px;">
 
         <div class="row">
@@ -47,7 +45,7 @@
 		$("#searchBtn").on("click", () => {
 			var keyword = $("#searchInput").val();
 			
-		    location.href="${path}/review/film_search?keyword="+keyword;
+		    location.href="${path}/film/search?keyword=" + keyword;
 		});
 	
 		let searchkeyword = "[[${searchkeyword}]]";

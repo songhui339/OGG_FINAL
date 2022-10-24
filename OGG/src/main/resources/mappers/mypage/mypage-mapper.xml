@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.project.ogg.mypage.model.mapper.MypageMapper">
+
+<resultMap type="Member" id="memberResultMap">
+	<result property="m_id" column="M_ID"/>
+	<result property="m_pwd" column="M_PWD" />
+	<result property="m_name" column="M_NAME" />
+	<result property="m_nickname" column="M_NICKNAME" />
+	<result property="m_phonenumber" column="M_PHONENUMBER" />
+	<result property="m_email" column="M_EMAIL" />
+	<result property="m_joindate" column="M_JOINDATE" />
+	<result property="m_emailagreement" column="M_EMAILAGREEMENT" />
+	<result property="m_recommend" column="M_RECOMMEND" />
+	<result property="m_agreement" column="M_JOINAGREEMENT" />
+	<result property="m_status" column="M_STATUS" />
+	<result property="m_authority" column="M_AUTHORITY" />
+	<result property="m_enabled" column="M_ENABLED" />
+	<result property="m_account" column="M_ACCOUNT" />
+	<result property="m_card_name" column="M_CARD_NAME" />
+	<result property="m_card_num" column="M_CARD_NUM" />
+	<result property="m_point" column="M_POINT" />
+</resultMap>
+
+<resultMap type="Question" id="questionListResultMap">
+	<result column="ROWNUM" property="q_rno"/>
+	<result column="M_NAME" property="q_m_name"/>
+</resultMap>
+
+<resultMap type="Answer" id="answerResultMap">
+	<result column="M_NAME" property="a_m_name"/>
+</resultMap>
+
+<resultMap type="Community" id="CommunityResultMap">
+	<id property="c_no" column="C_NO"/>
+	<result property="c_writerNo" column="C_WRITERNO" />
+	<result property="c_title" column="C_TITLE" />
+	<result property="c_content" column="C_CONTENT" />
+	<result property="c_file" column="C_FILE" />
+	<result property="c_fileRename" column="C_FILERENAME" />
+	<result property="c_writeDate" column="C_WRITEDATE" />
+	<result property="c_modifyDate" column="C_MODIFYDATE" />
+	<result property="c_viewCount" column="C_VIEWCOUNT" />
+	<result property="c_status" column="C_STATUS" />
+	<result property="c_like" column="C_LIKE" />
+	<result property="m_nickName" column="M_NICKNAME" />
+</resultMap>
+
+<resultMap type="Notice" id="noticeListResultMap">
+	<result column="ROWNUM" property="n_rno"/>
+	<result column="M_NAME" property="n_m_name"/>
+</resultMap>
+
+<select id="getNoticeCount" resultType="_int">
+	SELECT COUNT(*)
+	FROM NOTICE
+	WHERE N_STATUS = 'Y'
+</select>
+
+<select id="getQuestionCount" resultType="_int" parameterType="_int">
+	SELECT COUNT(*)
+	FROM QUESTION
+    WHERE Q_M_NO = #{no}
+</select>
+
+<select id="getQuestionList" resultMap="questionListResultMap">
+	SELECT ROWNUM,
+	       Q.* 
+	FROM (
+	SELECT Q_NO,
+	       Q_TITLE,
+	       M.M_NAME,
+	       Q_ENROLLDATE,
+	       Q_STATUS
+	FROM QUESTION Q
+	JOIN MEMBER M ON(Q.Q_M_NO = M.M_NO)
+	WHERE Q_M_NO = #{no}
+    ORDER BY Q_STATUS
+	) Q
+</select>
+
+<select id="selectNoticeList" resultMap="noticeListResultMap">
+	SELECT ROWNUM,
+	       N.* 
+	FROM (
+	SELECT N_NO,
+	       N_TITLE,
+	       M.M_NAME,
+	       N_CREATE_DATE,
+	       N_READCOUNT
+	       
+	FROM NOTICE N
+	JOIN MEMBER M ON(N.N_M_NO = M.M_NO)
+	WHERE N_STATUS = 'Y'
+	) N
+	ORDER BY N_NO DESC
+</select>
+
+<select id="getNoticeView" resultMap="noticeListResultMap" parameterType="_int">
+	SELECT  ROWNUM,
+			N.*
+			FROM (
+			SELECT N_NO,
+			N_TITLE,
+			N_CONTENT,
+			M.M_NAME,
+			N_CREATE_DATE,
+			N_PATH,
+			N_READCOUNT
+	FROM NOTICE N
+	JOIN MEMBER M ON(N.N_M_NO = M.M_NO)
+	WHERE N_STATUS = 'Y' AND N_NO = #{page}
+	) N
+	ORDER BY N_NO
+</select>
+
+<select id="getQuestionView" resultMap="questionListResultMap" parameterType="_int">
+	SELECT ROWNUM,
+		   Q.*
+	FROM (
+	SELECT  Q_NO,
+			Q_TITLE,
+			Q_CONTENT,
+			M.M_NAME,
+			Q_ENROLLDATE,
+			Q_STATUS
+	FROM QUESTION Q
+	JOIN MEMBER M ON(Q.Q_M_NO = M.M_NO)
+	WHERE Q_NO =#{no}
+	) Q 
+</select>
+
+<select id="getAnswer" parameterType="_int"
+	resultMap="answerResultMap">
+	SELECT A_NO,A_TITLE, A_DATE,A_CONTENT,M.M_NAME
+	FROM ANSWER A
+	JOIN MEMBER M ON(M.M_NO=A.A_M_NO)
+	WHERE Q_NO = #{no}
+</select>
+
+<insert id="writeQuestion" parameterType="Question"
+	useGeneratedKeys="true" keyProperty="q_no" keyColumn="Q_NO">
+	INSERT INTO QUESTION(
+				Q_NO,
+				Q_TITLE,
+				Q_CONTENT,
+				Q_ENROLLDATE,
+				Q_M_NO)
+	VALUES(SEQ_QUESTIONS.NEXTVAL,
+			#{q_title},
+			#{q_content},
+			SYSDATE,
+			#{q_m_no})
+</insert>
+	
+
+<update id="updateReadCount" parameterType="Notice">
+	UPDATE NOTICE
+	SET N_READCOUNT=#{n_readcount}+1
+	WHERE N_NO=#{n_no}
+</update>
+
+<select id="getCommnityCount" resultType="_int">
+	SELECT COUNT(C_NO) 
+	FROM COMMUNITY C 
+	JOIN MEMBER M ON (M.M_NO = C.C_WRITERNO) 
+	WHERE C_STATUS = 'Y' AND M_NO = ${m_no}
+</select>
+
+<select id="getCommunityList" resultMap="CommunityResultMap">
+	SELECT C_WRITERNO,
+		   C_NO,
+		   C_TITLE,
+		   C_CONTENT,
+		   C_FILE,
+		   C_WRITEDATE,
+		   C_MODIFYDATE,
+		   C_VIEWCOUNT,
+		   C_STATUS,
+		   C_LIKE,
+		   M_NICKNAME
+	FROM COMMUNITY C
+	JOIN MEMBER M ON (M.M_NO = C.C_WRITERNO)
+	WHERE C.C_STATUS = 'Y' AND M.M_NO = ${m_no}
+	ORDER BY C.C_NO DESC
+</select>
+
+<select id="selectMemberByNo" parameterType="_int" resultMap="memberResultMap">
+	SELECT *
+	FROM MEMBER
+	WHERE M_NO = #{m_no} AND M_STATUS = 'Y'
+</select>
+
+	
+<update id="updateMember" parameterType="Member">
+UPDATE MEMBER
+SET
+	M_NAME = #{m_name},
+	M_NICKNAME = #{m_nickname},
+	M_EMAIL = #{m_email},
+	M_PHONENUMBER = #{m_phonenumber}
+WHERE M_NO = #{m_no}
+</update>
+
+<update id="deleteMember" parameterType="_int">
+		UPDATE MEMBER SET
+		M_STATUS = 'N'
+		WHERE M_NO = #{m_no}
+</update>
+
+<update id="updatePwd">
+	UPDATE MEMBER SET
+	M_PWD = #{password}
+	WHERE M_NO = #{m_no}
+</update>
+
+</mapper>
+
+

@@ -15,7 +15,10 @@
         <section class="community_section">
 
             <div class="pageTitleBox">
-                <h2 class="titleText">💬 커뮤니티</h2>
+                <h2 class="titleText">
+	                <img src="${ path }/images/community/icon_chat.png" alt="icon" class="iconImg">
+					 커뮤니티
+				 </h2>
                 <button onclick="location.href='${path}/community/goWrite.do'" class="btn writeBtn">글쓰기 <i class="bi bi-pencil"></i></button>
             </div>
 
@@ -113,6 +116,5 @@
 			    }
 			}
 		</script>
- 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
     
    		 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

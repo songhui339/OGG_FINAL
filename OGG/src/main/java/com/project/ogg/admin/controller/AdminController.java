@@ -36,6 +36,7 @@ import com.project.ogg.admin.model.vo.Question;
 import com.project.ogg.common.util.MultipartFileUtil;
 import com.project.ogg.common.util.MultipartFileUtil2;
 import com.project.ogg.common.util.PageInfo;
+import com.project.ogg.member.model.vo.Member;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -53,7 +54,8 @@ public class AdminController {
 	private ResourceLoader resourceLoader;
 	
 	@GetMapping("/admin/home")
-	public ModelAndView goAdmin(ModelAndView model) {
+	public ModelAndView goAdmin(ModelAndView model,@AuthenticationPrincipal Member member) {
+		if(member.getM_authority().equals("ROLE_ADMIN")) {
 		List<MemberAD> list = service.getMemberList();
 		MUser muser = new MUser();
 		muser.setMarchUser(service.getMarchUserCount());
@@ -68,6 +70,14 @@ public class AdminController {
 		model.setViewName("admin/ad_main");
 		
 		return model;
+		}
+		else {
+			model.addObject("msg", "관리자만 접근 가능합니다..");
+			model.addObject("location", "/");
+			model.setViewName("common/msg");
+			return model;
+			
+		}
 	}
 	
 	@GetMapping("/admin/OTT")
@@ -132,6 +142,21 @@ public class AdminController {
 		}
 		model.setViewName("common/msg");
 		
+		return model;
+	}
+	@GetMapping("/ott/delete")
+	public ModelAndView ottDelete(ModelAndView model,@RequestParam int ott_no) {
+		System.out.println(ott_no);
+		int result = service.deleteOtt(ott_no);
+		
+		if(result > 0) {
+			model.addObject("msg","ott 삭제 성공");
+			model.addObject("location","/admin/OTT");
+		}else {
+			model.addObject("msg","ott 삭제 실패");
+			model.addObject("location","/admin/OTT");
+		}
+		model.setViewName("common/msg");
 		return model;
 	}
 	
@@ -214,16 +239,27 @@ public class AdminController {
 	}
 	
 	@GetMapping("/notice/write")
-	public String noticeWrite() {
-		
-		return "/admin/ad_noticeWrite";
+	public ModelAndView noticeWrite(ModelAndView model,@AuthenticationPrincipal Member member) {
+		System.out.println(member.getM_authority());
+		if(member.getM_authority().equals("ROLE_ADMIN")) {
+			model.setViewName("/admin/ad_noticeWrite");
+			return model;
+		}
+		else {
+			model.addObject("msg","관리자만 작성 가능합니다.");
+			model.addObject("location","/");
+			model.setViewName("common/msg");
+			return model;
+		}
 	}
 	
 	@PostMapping("/notice/write")
-	public ModelAndView noticeWrite(@ModelAttribute Notice notice,ModelAndView model) {
+	public ModelAndView noticeWrite(@ModelAttribute Notice notice,ModelAndView model,
+			@AuthenticationPrincipal Member member) {
 		
 		
 		String content = notice.getN_content();
+		notice.setN_M_No(member.getM_no());
 		
 		if(content.indexOf("/img/smarteditor/") != -1) {
 			String path = content.substring(content.indexOf("/img/smarteditor/")+17,content.indexOf("/img/smarteditor/")+(17+36));
@@ -246,12 +282,20 @@ public class AdminController {
 		return model;
 	}
 	@GetMapping("/notice/update")
-	public ModelAndView noticeUpdate(@RequestParam("no")int no, ModelAndView model) {
+	public ModelAndView noticeUpdate(@RequestParam("no")int no, ModelAndView model,
+			@AuthenticationPrincipal Member member) {
 		
 		Notice notice = service.getNoticeView(no);
 		
-		model.addObject("notice",notice);
-		model.setViewName("admin/ad_noticeUpdate");
+		if(member.getM_authority().equals("ROLE_ADMIN")) {
+			model.addObject("notice",notice);
+			model.setViewName("admin/ad_noticeUpdate");
+		}
+		else {
+			model.addObject("msg","관리자만 작성 가능합니다.");
+			model.addObject("location","/");
+			model.setViewName("common/msg");
+		}
 		
 		return model;
 	}
@@ -304,17 +348,23 @@ public class AdminController {
 	}
 	
 	@GetMapping("/notice/delete")
-	public ModelAndView deleteNotice(@RequestParam("no") int no,ModelAndView model) {
-		
-		System.out.println(no);
-		int result = service.deleteNotice(no);
-		
-		if(result > 0) {
-			model.addObject("msg","공지사항 삭제 성공");
-			model.addObject("location","/admin/notice");
-		}else{
-			model.addObject("msg","공지사항 삭제 실패");
-			model.addObject("location","/admin/notice/view?no="+no);
+	public ModelAndView deleteNotice(@RequestParam("no") int no,ModelAndView model,
+			@AuthenticationPrincipal Member member) {
+		if (member.getM_authority().equals("ROLE_ADMIN")) {
+
+			System.out.println(no);
+			int result = service.deleteNotice(no);
+
+			if (result > 0) {
+				model.addObject("msg", "공지사항 삭제 성공");
+				model.addObject("location", "/admin/notice");
+			} else {
+				model.addObject("msg", "공지사항 삭제 실패");
+				model.addObject("location", "/admin/notice/view?no=" + no);
+			}
+		} else {
+			model.addObject("msg", "관리자만 삭제 가능합니다.");
+			model.addObject("location", "/");
 		}
 		
 		model.setViewName("common/msg");
@@ -354,76 +404,84 @@ public class AdminController {
 		return model;
 	}
 	
-	@GetMapping("/question/write")
-	public String questionWriting() {
-		return "admin/ad_questionWrite";
-	}
-	
-	@PostMapping("/question/write")
-	public ModelAndView questionWriting(@ModelAttribute Question question,
-										ModelAndView model) {
-		
-		int result = service.writeQuestion(question);
-		int no = question.getQ_no();
-		System.out.println("no : "+no);
-		
-		if(result > 0) {
-			model.addObject("msg","문의 작성 완료");
-			model.addObject("location","/admin/question/view?no="+no);
-		}else{
-			model.addObject("msg","문의 작성 실패");
-			model.addObject("location","/admin/question/view?no="+no);
-		}
-
-		
-		model.setViewName("common/msg");
-		
-		return model;
-	}
-	@GetMapping("/admin/question/update")
-	public ModelAndView questionUpdate(@RequestParam int no,
-										ModelAndView model) {
-		
-		Question question = service.getQuestionView(no);
-		Answer answer = service.getAnswer(question.getQ_no());
-		
-		if(answer != null) {
-			model.addObject("msg","답변이 있을 경우 질문 수정이 불가능합니다.");
-			model.addObject("location","/admin/question/view?no="+no);
-			model.setViewName("common/msg");
-			return model;
-		}
-		
-		model.addObject("question",question);
-		model.setViewName("admin/ad_questionUpdate");
-		
-		return model;
-	}
-	@PostMapping("/admin/question/update")
-	public ModelAndView questionUpdate(@RequestParam int no,
-									ModelAndView model,
-									@ModelAttribute Question question) {
-		
-		System.out.println(question);
-		int result = service.updateQuestion(question);
-		
-		if(result > 0) {
-			model.addObject("msg","문의 수정 완료");
-			model.addObject("location","/admin/question/view?no="+no);
-		}else{
-			model.addObject("msg","문의 수정 실패");
-			model.addObject("location","/admin/question/view?no="+no);
-		}
-		model.setViewName("common/msg");
-		return model;
-	}
+//	@GetMapping("/question/write")
+//	public String questionWriting() {
+//		
+//		return "admin/ad_questionWrite";
+//	}
+//	
+//	@PostMapping("/question/write")
+//	public ModelAndView questionWriting(@ModelAttribute Question question,
+//										ModelAndView model) {
+//		
+//		int result = service.writeQuestion(question);
+//		int no = question.getQ_no();
+//		System.out.println("no : "+no);
+//		
+//		if(result > 0) {
+//			model.addObject("msg","문의 작성 완료");
+//			model.addObject("location","/admin/question/view?no="+no);
+//		}else{
+//			model.addObject("msg","문의 작성 실패");
+//			model.addObject("location","/admin/question/view?no="+no);
+//		}
+//
+//		
+//		model.setViewName("common/msg");
+//		
+//		return model;
+//	}
+//	@GetMapping("/admin/question/update")
+//	public ModelAndView questionUpdate(@RequestParam int no,
+//										ModelAndView model) {
+//		
+//		Question question = service.getQuestionView(no);
+//		Answer answer = service.getAnswer(question.getQ_no());
+//		
+//		if(answer != null) {
+//			model.addObject("msg","답변이 있을 경우 질문 수정이 불가능합니다.");
+//			model.addObject("location","/admin/question/view?no="+no);
+//			model.setViewName("common/msg");
+//			return model;
+//		}
+//		
+//		model.addObject("question",question);
+//		model.setViewName("admin/ad_questionUpdate");
+//		
+//		return model;
+//	}
+//	@PostMapping("/admin/question/update")
+//	public ModelAndView questionUpdate(@RequestParam int no,
+//									ModelAndView model,
+//									@ModelAttribute Question question) {
+//		
+//		System.out.println(question);
+//		int result = service.updateQuestion(question);
+//		
+//		if(result > 0) {
+//			model.addObject("msg","문의 수정 완료");
+//			model.addObject("location","/admin/question/view?no="+no);
+//		}else{
+//			model.addObject("msg","문의 수정 실패");
+//			model.addObject("location","/admin/question/view?no="+no);
+//		}
+//		model.setViewName("common/msg");
+//		return model;
+//	}
 		
 	@GetMapping("/admin/answer")
-	public ModelAndView answering(@RequestParam("no")int no,ModelAndView model) {
-		
+	public ModelAndView answering(@RequestParam("no")int no,ModelAndView model,
+			@AuthenticationPrincipal Member member) {
+		if (member.getM_authority().equals("ROLE_ADMIN")) {
+			
 		Question question = service.getQuestionView(no);
 		model.addObject("question", question);
 		model.setViewName("admin/ad_questionAnswer");
+		
+		}else {
+			model.addObject("msg","관리자만 답변 가능합니다.");
+			model.addObject("location","/");
+		}
 		
 		return model;
 	}
@@ -431,8 +489,10 @@ public class AdminController {
 	@PostMapping("/admin/answer")
 	public ModelAndView answering(@RequestParam("no")int no,
 							ModelAndView model,
-							@ModelAttribute Answer answer) {
+							@ModelAttribute Answer answer,
+							@AuthenticationPrincipal Member member) {
 		
+		answer.setA_m_no(member.getM_no());
 		answer.setQ_no(no);
 		int result = service.insertAnswer(answer);
 		

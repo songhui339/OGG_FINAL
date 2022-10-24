@@ -7,7 +7,7 @@ $(document).ready(function() {
     
     $.ajax({
         async: true, 
-        url: "https://api.themoviedb.org/3/search/"+ type1 +"?api_key="+key+"&language=ko&query=" + searchkeyword + "&page=1&include_adult=false" ,
+        url: "https://api.themoviedb.org/3/search/"+ type1 +"?api_key=" + key + "&language=ko&query=" + searchkeyword + "&page=1&include_adult=false" ,
         type: "GET",
         timeout: 3000,
         dataType: "json", 
@@ -23,7 +23,7 @@ $(document).ready(function() {
                 let id = item.id;
 
                 html += "<div class='col' >";
-             	html += "<a href='"+ contextpath +"/review/film_detail?fcode="+ id +"&ftype="+ type1 +"'>";
+             	html += "<a href='"+ contextpath +"/film/detail?fcode="+ id +"&ftype="+ type1 +"'>";
                 html += "<div class='card' id='card_film3'>";
                 html += "<img src='" + img + "' id='img_film'>";
                 html += "<div class='card-body'>";
@@ -33,6 +33,7 @@ $(document).ready(function() {
                 html += "</div></div></a></div><br>";
             })
             $("#search1").append(html);
+            // html = "";
         },
         error: function (error) {
             alert("검색어를 입력해주세요")

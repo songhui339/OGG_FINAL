@@ -33,7 +33,7 @@
     <!-- javascript -->
     <script src="https://d3js.org/d3.v3.min.js"></script>
     <script src="${ path }/js/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
     <!-- 메인 로고와 상단 우측 메뉴 포함한 header> -->
     <header>
@@ -41,31 +41,45 @@
             <div class="logoBox">
                 <a href="${ path }/"><img src="${ path }/images/logo/OGG_logo_menu.png"  alt="logo"></a>
             </div>
-
 			<div class="btnBox">
 			
 				<!-- 로그인 전 -->
-				<security:authorize access="isAnonymous()">
-					<div class="btnBox">
-						<a class="loginBtn" href="${ path }/member/goLoginPage.do">로그인</a>
-					</div> 
-				</security:authorize>
+				<c:if test="${empty sessionScope.kakaoname}">
+					<security:authorize access="isAnonymous()">
+						<div class="btnBox">
+							<a class="loginBtn" href="${ path }/member/goLoginPage.do">로그인</a>
+						</div> 
+					</security:authorize>
+				</c:if>
 				
 				<!-- 로그인 후 -->
+				<!-- 시큐리티 -->
 				<security:authorize access="isAuthenticated()">
-					<security:authentication property="principal.m_name" var="sec_m_name"/> <!-- 로그인한 회원의 이름 -->
+					<security:authentication property="principal.m_name" var="sec_m_name"/>
 					<a href="javascript:" class="myPageBtn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">${ sec_m_name }님</a>
 				</security:authorize>
+				
+				<!-- 카카오 -->
+				<c:if test="${!empty sessionScope.kakaoname}">
+					<a href="javascript:" class="myPageBtn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">${ sessionScope.kakaoname }님</a>
+				</c:if>
 			 
 				<ul class="dropdown-menu" style="z-index: 80;">
-					<li><a class="dropdown-item c_purple" href="${ path }/mypage/main">마이페이지</a></li>
-					<li><a class="dropdown-item c_purple" href="${ path }/admin/home">관리페이지</a></li>
+					<li><a class="dropdown-item hover_purple" href="${ path }/mypage/main">마이페이지</a></li>
+					<li><a class="dropdown-item hover_purple" href="${ path }/admin/home">관리페이지</a></li>
 					<li><hr class="dropdown-divider"></li>
 					
-					<!-- 로그인한 경우에 로그아웃 노출 -->
+					<!-- 로그아웃 -->
+					<!-- 시큐리티 -->
 					<security:authorize access="isAuthenticated()">
-						<li><a class="dropdown-item c_red" href="${ path }/member/doLogout.do">로그아웃</a></li>
+						<li><a class="dropdown-item hover_red" href="${ path }/member/doLogout.do">로그아웃</a></li>
 					</security:authorize>
+					
+					<!-- 카카오 -->
+					<c:if test="${!empty sessionScope.kakaoname}">
+						<li><a class="dropdown-item c_red" href="${ path }/member/kakaoLogout.do">로그아웃</a></li>
+					</c:if>
+					
 				</ul>
 			</div> 
             
@@ -80,13 +94,13 @@
                     <a href="${ path }/party/ottlist_find">파티 찾기</a>
                 </li>
                 <li>
-                    <a href="${ path }/review/film_list">리뷰</a>
+                    <a href="${ path }/film/list">리뷰</a>
                 </li>
                 <li>
                     <a href="${ path }/community/list.do">커뮤니티</a>
                 </li>
                 <li>
-                    <a href="javascript:">이벤트</a>
+                    <a href="${ path }/faq">FAQ</a>
                 </li>
             </ul>
         </div>

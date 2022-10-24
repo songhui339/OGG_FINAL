@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>OTT 추가하기</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="admin_addOTT.css" class="css">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+</head>
+<body>
+    <form action="${path}/admin/addOTT" method="POST" enctype="multipart/form-data">
+        <div class="formBox">
+            <ul class="form-list">
+                <li>
+                    <label>OTT 이름</label>
+                    <input type="text" name="ott_name">
+                </li>
+                <li>
+                    <label for="">서비스 종류</label>
+                    <select name="ott_class" class="form-select" aria-label="Default select example">
+                        <optgroup label="서비스 종류">
+                            <option value="mediaService">미디어 서비스</option>
+                            <option value="gameService">게임 서비스</option>
+                            <option value="eduService">교육 서비스</option>
+                            <option value="utilityService">유틸리티</option>
+                            <option value="membershipService">멤버쉽 서비스</option>
+                        </optgroup>
+                        <option selected>============</option>
+                    </select>
+                </li>
+                <li>
+                    <label for="">파티별 최대 인원</label>
+                    <input type="number" name="ott_max_member">
+                </li>
+                <li>
+                    <label for="">플랜 이름</label>
+                    <input type="text" name="plan_name">
+                </li>
+                <li>
+                    <label for="">플랜 금액</label>
+                    <input type="number" name="plan_price">
+                </li>
+                <li>
+                    <label for="">이미지 소스</label>
+                    <input type="file" name="img">
+                </li>
+            </ul>
+
+            <div class="btnBox">
+                <button type="submit" class="btn">추가</button>
+                <button type="button" class="btn" id="quit">닫기</button>
+            </div>
+
+            
+
+        </div>
+    </form>
+
+
+
+    <script>
+        $(document).ready(function(){
+
+            $("#quit").on('click',function(){
+                window.close();
+            });
+            
+        });
+    </script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

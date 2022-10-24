@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- mybatis mapper 설정 파일임을 선언한다. -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+	<mapper namespace="com.project.ogg.review.model.mapper.FilmMapper">
+	
+	<!-- REVIEW sql-->
+	<sql id="reviewSql">
+		SELECT RV_NO, 
+		       RV_WRITER_NO,
+		       F_CODE,
+		       F_TYPE,
+		       RV_DATE, 
+		       RV_UPDATE, 
+		       RV_CONTENT, 
+		       RV_STATUS, 
+		       RV_LIKES,
+		       RV_READ_COUNT,
+		       RV_CMT_COUNT,
+		       M.M_NICKNAME	
+		FROM   REVIEW R
+		JOIN   MEMBER M ON (M.M_NO = R.RV_WRITER_NO)
+	</sql>
+	
+	<!-- REVIEW resultMap-->
+	<resultMap type="Review" id="reviewResultMap">
+		<id property="rvNo" column="RV_NO" />
+		<result property="rvWriterNo" column="RV_WRITER_NO" />
+		<result property="fCode" column="F_CODE" />
+		<result property="fType" column="F_TYPE" />
+		<result property="rvDate" column="RV_DATE" />
+		<result property="rvUpdate" column="RV_UPDATE" />
+		<result property="rvContent" column="RV_CONTENT" />
+		<result property="rvStatus" column="RV_STATUS" />
+		<result property="rvLikes" column="RV_LIKES" />
+		<result property="rvReadCount" column="RV_READ_COUNT" />
+		<result property="rvCmtCount" column="RV_CMT_COUNT" />
+		<result property="rvNickname" column="M_NICKNAME" />
+	</resultMap>	
+
+	<!-- REVIEW_LIKES resultMap-->
+	<resultMap type="ReviewLikes" id="reviewLikesResultMap">
+		<id property="lNo" column="L_NO" />
+		<result property="fTitle" column="F_TITLE" />
+		<result property="mNo" column="M_NO" />
+		<result property="rvNo" column="RV_NO" />
+		<result property="cmtNo" column="CMT_NO" />
+		<result property="fCode" column="F_CODE" />
+		<result property="fType" column="F_TYPE" />
+		<result property="fLikes" column="F_LIKES" />
+		<result property="fStar" column="F_STAR" />
+		<result property="lDate" column="L_DATE" />
+		<result property="lUpdate" column="L_UPDATE" />
+		<result property="lType" column="L_TYPE" />
+	</resultMap>
+	<!-- 리뷰 조회 (전체) -->
+	<select id="selectReviewAll" resultMap="reviewResultMap">
+		<include refid="reviewSql"></include>
+		WHERE 	 RV_STATUS = 'Y'
+		ORDER BY RV_LIKES DESC
+	</select>
+
+	<!-- 리뷰 조회 (영화 별, 좋아요 많은 순) -->
+	<select id="selectReviewByFilm" parameterType="_int" resultMap="reviewResultMap">
+		<include refid="reviewSql"></include>
+		WHERE 	 F_CODE = #{fcode} AND 
+				 F_TYPE = 'movie' AND 
+				 RV_STATUS = 'Y'
+		ORDER BY R.RV_LIKES DESC
+	</select>
+	
+	<!-- 리뷰 조회 (리뷰 개수) -->
+	<select id="selectReviewCount" parameterType="_int" resultType="_int">
+		SELECT  COUNT(*) 
+		FROM 	REVIEW 
+		WHERE  	F_CODE = #{fcode} AND 
+				F_TYPE = 'movie' AND 
+				RV_STATUS = 'Y'
+	</select>
+	
+	<!-- 댓글수 조회 (리뷰별) -->
+	<select id="selectCmtCount" parameterType="_int" resultType="_int">
+		SELECT  COUNT(*) 
+		FROM 	REVIEW_CMT 
+		WHERE 	CMT_STATUS = 'Y' AND 
+				RV_NO= #{no}
+	</select>
+	
+	<!-- 찜한 영화 가져오기 -->
+	<select id="selectFilmLikes" parameterType="ReviewLikes" resultMap="reviewLikesResultMap">
+		SELECT  L_NO,
+		        M_NO,
+		        RV_NO,
+		        CMT_NO,
+		        F_CODE,
+		        F_TYPE,
+		        F_LIKES,
+		        F_STAR,
+		        L_DATE,
+		        L_UPDATE,
+		        L_TYPE
+		FROM    REVIEW_LIKES
+		WHERE 	M_NO = #{mNo} AND 
+				L_TYPE = 'FILM' AND 
+				F_LIKES = 1
+	</select>	
+	
+</mapper>

@@ -32,17 +32,6 @@
 			id="sidebarToggle" href="#!">
 			<i class="fas fa-bars"></i>
 		</button>
-		<!-- Navbar Search-->
-		<form
-			class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-			<div class="input-group">
-				<input class="form-control" type="text" placeholder="Search for..."
-					aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-				<button class="btn btn-primary" id="btnNavbarSearch" type="button">
-					<i class="fas fa-search"></i>
-				</button>
-			</div>
-		</form>
 		<!-- Navbar-->
 	</nav>
 	<div id="layoutSidenav">
@@ -51,7 +40,7 @@
 				id="sidenavAccordion">
 				<div class="sb-sidenav-menu">
 					<div class="nav">
-						<a class="nav-link" href="${path}">
+						<a class="nav-link" href="/">
                                 <div class="sb-nav-link-icon"><i class="fa-sharp fa-solid fa-house"></i></div>
                                 홈으로
                             </a>
@@ -103,11 +92,6 @@
 							<!-- board seach area -->
 							<div id="board-search">
 								<div class="container">
-								<!--  
-									<c:if test='${member.authority=="M" }'>
-										<button id="goWrite" onclick="location='${path}/notice/write'">글쓰기</button>
-									</c:if>
-								-->
 									<button id="goWrite" onclick="location='${path}/notice/write'">글쓰기</button>
 									<div class="search-window">
 										<div class="search-wrap"></div>
@@ -131,7 +115,7 @@
 										<tbody>
 											<c:if test="${empty list }">
 												<tr>
-													<td>1</td>
+													<td></td>
 													<th><a href="#!">게시글이 없습니다.</a></th>
 													<td></td>
 													<td></td>

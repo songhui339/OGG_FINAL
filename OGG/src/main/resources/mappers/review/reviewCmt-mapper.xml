@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- mybatis mapper 설정 파일임을 선언한다. -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+	<mapper namespace="com.project.ogg.review.model.mapper.ReviewCmtMapper">
+	
+	<!-- REVIEW_CMT sql-->
+	<sql id="reviewCmtSql">
+		SELECT  CMT_NO, 
+		        RV_NO, 
+		        CMT_WRITER_NO, 
+		        CMT_DATE, 
+		        CMT_UPDATE, 
+		        CMT_CONTENT, 
+		        CMT_STATUS, 
+		        CMT_LIKES, 
+		        CMT_GROUP, 
+		        CMT_DEPTH, 
+		        M.M_NICKNAME
+		FROM 	REVIEW_CMT R
+		JOIN 	MEMBER M ON (M.M_NO = R.CMT_WRITER_NO)
+	</sql>
+	
+	<!-- REVIEW_CMT resultMap-->
+	<resultMap type="ReviewCmt" id="reviewCmtResultMap">
+		<id property="cmtNo" column="CMT_NO" />
+		<result property="rvNo" column="RV_NO" />
+		<result property="cmtWriterNo" column="CMT_WRITER_NO" />
+		<result property="cmtDate" column="CMT_DATE" />
+		<result property="cmtUpDate" column="CMT_UPDATE" />
+		<result property="cmtContent" column="CMT_CONTENT" />
+		<result property="cmtStatus" column="CMT_STATUS" />
+		<result property="cmtLikes" column="CMT_LIKES" />
+		<result property="cmtGroup" column="CMT_GROUP" />
+		<result property="cmtDepth" column="CMT_DEPTH" />
+		<result property="cmtNickname" column="M_NICKNAME" />
+	</resultMap>	
+	
+	<!-- 댓글 조회 (댓글 번호) -->
+	<select id="selectCmtByCmtNo" parameterType="ReviewCmt" resultMap="reviewCmtResultMap">
+		<include refid="reviewCmtSql"></include>
+		WHERE 	CMT_STATUS = 'Y' AND 
+				CMT_NO = #{cmtNo}
+	</select>
+	
+	<!-- 리뷰 테이블 댓글수 업데이트 -->
+	<update id="updateCmtCount" parameterType="_int">
+		UPDATE  REVIEW
+		SET 	RV_CMT_COUNT = (SELECT  COUNT(CMT_NO)
+			                FROM 	REVIEW_CMT
+			                WHERE 	RV_NO = #{rvNo} AND 
+			                  		CMT_STATUS = 'Y')
+		WHERE 	RV_NO = #{rvNo}
+	</update>
+	
+	<!-- 댓글 등록 -->
+	<insert id="writeCmt" parameterType="ReviewCmt"
+		useGeneratedKeys="true" keyProperty="cmtNo" keyColumn="CMT_NO">
+		INSERT INTO REVIEW_CMT (
+		            CMT_NO, 
+		            RV_NO, 
+		            CMT_WRITER_NO, 
+		            CMT_DATE,  
+		            CMT_UPDATE, 
+		            CMT_CONTENT, 
+		            CMT_STATUS, 
+		            CMT_LIKES, 
+		            CMT_GROUP,
+		            CMT_DEPTH
+				)
+				VALUES(
+					SEQ_CMT_NO.NEXTVAL,
+					#{rvNo},
+					#{cmtWriterNo},
+					DEFAULT,
+					DEFAULT,
+					#{cmtContent},
+					DEFAULT,
+					DEFAULT,
+					SEQ_CMT_NO.NEXTVAL,
+		         	DEFAULT
+		      )
+	</insert>	
+	
+	<!-- 댓글 수정 및 삭제 -->
+	<update id="updateCmt" parameterType="ReviewCmt">
+		UPDATE  REVIEW_CMT
+		SET 
+				CMT_UPDATE = SYSDATE,
+		<choose>
+		    <when test="cmtContent != null">
+			  	CMT_CONTENT = #{cmtContent}
+		    </when>
+		    <when test="cmtStatus != null">
+				CMT_STATUS = #{cmtStatus}
+		    </when>
+	    </choose>
+		WHERE 	CMT_NO = #{cmtNo}
+	</update>
+	
+</mapper>

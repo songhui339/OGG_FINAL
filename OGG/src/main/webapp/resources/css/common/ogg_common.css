@@ -4,6 +4,12 @@ OGG Common CSS
 ====================================================
 */
 
+/* 모든 체크박스 체크 시 박스 배경 색 보라색으로 세팅 */
+input[type="checkbox"]:checked{
+	background-color : #7e69fe !important;
+	accent-color: #7e69fe50 !important;
+}
+
 /* ********************* */
 /* ****** 상단 메뉴 ****** */
 /* ********************* */
@@ -91,11 +97,11 @@ header .width-container .btnBox a.myPageBtn:hover {
     color: #7e69fe;
 }
 
-header .width-container .btnBox ul li a.c_purple:hover {
+header .width-container .btnBox ul li a.hover_purple:hover {
 	background-color : #7d69fe20 !important;
 }
 
-header .width-container .btnBox ul li a.c_red:hover {
+header .width-container .btnBox ul li a.hover_red:hover {
 	background-color : rgba(255, 99, 71, 0.20) !important;
 }
 

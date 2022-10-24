@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <c:set var="path" value="${ pageContext.request.contextPath }"/>
 
 <script src="${ path }/js/jquery-3.6.0.min.js"></script>
@@ -73,7 +74,7 @@
                     <ul class="form-list">
                         <li>
                             <label for="">아이디</label>
-                            <p class="text">${ m_id }</p>
+                            <p class="text">${ myPageMember.m_id }</p>
                         </li>
                         <!-- <li>
                             <label for="">비밀번호</label>
@@ -85,27 +86,28 @@
                         </li> -->
                         <li>
                             <label for="">이름</label>
-                            <p class="text">${ m_name }</p>
+                            <p class="text">${ myPageMember.m_name }</p>
                         </li>
                         <li>
                             <label for="">닉네임</label>
-                            <p class="text">${ m_nickname }</p>
+                            <p class="text">${ myPageMember.m_nickname }</p>
                         </li>
                         <li>
                             <label for="">이메일</label>
-                            <p class="text">${ m_email }</p>
+                            <p class="text">${ myPageMember.m_email }</p>
                         </li>
                         <li>
                             <label for="">휴대폰 번호</label>
-                            <p class="text">${ m_phone }</p>
+                            <p class="text">${ myPageMember.m_phonenumber }</p>
                         </li>
-
+						<!-- 
                         <li>
                             <span class="subject">이메일 수신</span>
                             <input type="checkbox" name="" id="">
                             <span class="subject">SMS 수신</span>
                             <input type="checkbox" name="" id="">
                         </li>
+                        -->
                     </ul>
 
                     <div class="btnBox">
@@ -131,8 +133,5 @@
 
     </div>
 </section>
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

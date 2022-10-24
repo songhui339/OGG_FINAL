@@ -68,14 +68,14 @@
         <div class="infoBox">
             <p class="titleText">회원 정보 수정</p>
             <div class="line"></div>
-            <form action="">
-                <div class="formBox">
-                    <p>본인 확인을 위해 비밀번호를 입력 해주세요.</p>
-                    <input type="password" name="" placeholder="비밀번호" minlength="3" maxlength="20">
+            <form action="${ path }/mypage/pwdCheck" method="post">
+                <div class="formBox" style="text-align:center;">
+                    <p class="titleText">본인 확인을 위해 비밀번호를 입력 해주세요.</p>
+                    <input type="password" name="m_pwd" placeholder="비밀번호를 입력해주세요." minlength="3" maxlength="20">
                     
 
                     <div class="btnBox">
-                        <button onclick="location.href='${ path }/mypage/updateMember';" type="button" class="btn">비밀번화 확인</button>
+                        <button type="submit" class="btn">비밀번호 확인</button>
                     </div>
 
                     
@@ -98,7 +98,5 @@
     </div>
 </section>
 
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

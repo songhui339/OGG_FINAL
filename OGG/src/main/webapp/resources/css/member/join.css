@@ -94,6 +94,15 @@ body {
     overflow-y: auto;
     background-color: #f9f9f9;
 }
+
+.enrollPage01 .contentWrap .formBox .form-round.scroll {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+.enrollPage01 .contentWrap .formBox .form-round.scroll::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+}
+
 .enrollPage01 .contentWrap .formBox .input-check {
     position: relative;
     display: inline-block;
@@ -159,8 +168,8 @@ body {
     padding: 10px 0;
 }
 
-.form-list input[type='text'], .form-list input[type='password'] {
-    width: 180px;
+.form-list input[type='text'], .form-list input[type='password'], .form-list input[type='tel'] {
+    width: 250px;
     height: 38px;
     margin-right: 10px;
     padding: 0 15px;
@@ -168,8 +177,17 @@ body {
     color: #333;
     border: solid 1px #dddddd;
     background-color: white;
+    border-radius: 0.367rem;
     outline: none;
 
+}
+
+.form-list input:active,
+.form-list input:focus,
+.form-list input:focus-visible {
+	border: solid 1px #7e69fe;
+    box-shadow: none;
+    outline: none;
 }
 
 .enrollPage01 .contentWrap .formBox .buttonBox,

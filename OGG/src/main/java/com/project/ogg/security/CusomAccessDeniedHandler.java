@@ -22,7 +22,7 @@ public class CusomAccessDeniedHandler implements AccessDeniedHandler {
 		
 		if(accessDeniedException instanceof AccessDeniedException) {
 
-			request.setAttribute("accessDeniedMessage", "접근 권한이 없는 계정입니다.");
+//			request.setAttribute("accessDeniedMessage", "접근 권한이 없는 계정입니다.");
 			request.getRequestDispatcher("/member/accessDenied.do").forward(request, response);
 		}
 	

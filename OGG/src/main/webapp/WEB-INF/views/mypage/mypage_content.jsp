@@ -63,12 +63,31 @@
 
             
         </div>
-
+        
         <!-- 정보 영역 -->
         <div class="infoBox">
             <p class="titleText">찜한 컨텐츠</p>
             <div class="line"></div>
-            <!-- 노출 최대 8개 -->
+                <div class="formBox" style="text-align:center;">
+               		<img src="${ path }/images/common/icon_clapperBoard.png"
+               			style="width: 30%;">
+                    <p style="text-align: center; font-size: 1.2rem; font-weight: 600;  margin: 30px 0;">
+                    	찜한 컨텐츠는 리뷰 페이지에서 <br>확인 가능합니다!
+                   	</p>
+
+                    <div class="btnBox">
+                        <button type="button" class="btn" onclick="location.href='${ path }/film/list#mylikes'">리뷰 페이지 바로가기</button>
+                    </div>
+
+                    
+
+                </div>
+        </div>
+
+        <!-- 정보 영역 
+        <div class="infoBox">
+            <p class="titleText">찜한 컨텐츠</p>
+            <div class="line"></div>
             <table class="table">
                 <thead>
                     <tr>
@@ -115,26 +134,7 @@
                     </tr>
                 </tbody>
             </table>
-
-            <!-- Page 네비게이션 -->
-            <div class="pageNav" id="pageBar">
-                <!-- 맨 처음으로 -->
-                <button class="btn arrowBtn" onclick="location.href=''">&lt;&lt;</button>
-    
-                <!-- 이전 페이지로 -->
-                <button class="btn arrowBtn" onclick="location.href=''">&lt;</button>
-    
-                <!--  10개 페이지 목록 -->
-                    <button class="btn" disabled>${ status.current }</button>
-                    <button class="btn pageNoBtn" onclick="location.href=''">2</button>
-    
-                <!-- 다음 페이지로 -->
-                <button class="btn arrowBtn" onclick="location.href=''">&gt;</button>
-    
-                <!-- 맨 끝으로 -->
-                <button class="btn arrowBtn" onclick="location.href=''">&gt;&gt;</button>
-            </div>
-        </div>
+        -->
 
 
         <!-- 배너 영역 -->
@@ -151,7 +151,5 @@
     </div>
 </section>
 
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

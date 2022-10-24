@@ -62,4 +62,6 @@ public interface AdminMapper {
 
 	int getDecUserCount();
 
+	int deleteOtt(int no);
+
 }

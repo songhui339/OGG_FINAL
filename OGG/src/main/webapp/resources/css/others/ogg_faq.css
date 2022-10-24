@@ -1,0 +1,342 @@
+@charset "UTF-8";
+/* 
+====================================================
+OGG FAQ 페이지 CSS
+====================================================
+*/
+
+.faq_section {
+    /* padding:100px 0; */
+    /* height: 100vh; */
+    /* width: 100vw; */
+    min-height: 100vh;
+} 
+
+
+.faq_title div {
+    text-align: center;
+    /* margin-bottom: 30px; */
+    padding-top : 100px
+}
+.faq_title div h2 {
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 1.2;
+    padding-bottom: 1rem;
+    margin: 0;
+    color: #1f1f1f;
+    transform: translateX(-1%);
+}
+.faq_title div h2 img.logo {
+    width: 200px;
+    transform: translate(15px, -9%);
+}
+.faq_title div p {
+    font-size: 1.1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    margin: 0;
+    color: #666666;
+    padding-bottom: 20px;
+}
+
+.faq_title div p span.c_purple {
+    color: #7e69fe;
+}
+
+
+/* ********** ********** ********** */
+ /* ****** */
+.faqTab_row_02 {
+    position: relative;
+}
+
+.faqTab_row_02 .o_accordion_section {
+    display: none;
+    padding: 0 0 100px 0;
+    width: 50%;
+    margin: 0 auto;
+}
+
+.faqTab_row_02 .o_accordion_section.active {
+    display: block;
+}
+
+.faqTab_row_02 .o_accordion_section div {
+    /* 50px */
+    /* padding-top: 3.4rem; */
+    max-width: 80rem; /* 1200px */
+    margin: 0 auto;
+}
+.o_accordion_section div .inner_box {}
+.o_accordion_section div ul.o_accordion {
+    list-style: none;
+    padding: 0;
+}
+
+.o_accordion li {}
+
+/* Q */
+.o_accordion li a {
+    position: relative;
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: -0.5px;
+    color: #666666 !important;
+    text-decoration: none;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    padding: 1.5rem 1.4rem 1.5rem 3.4rem;
+    /* border-top: 0.5px solid #1f1f1f; */
+    /* border-bottom: 0.5px solid #1f1f1f; */
+    /* background-color: #7e69fe; */
+    cursor: pointer;
+    border: solid 1px #e3e1ee;
+    cursor: pointer;
+}
+
+.o_accordion li:hover a,
+.o_accordion li:active a {
+    border: solid 1px #cec8f1;
+    background-color: #f9f8ff;
+    color: #7e69fe !important;
+}
+
+/* .o_accordion li:nth-child(7) > a{
+    border-bottom: 0.5px solid #1f1f1f;
+} */
+
+.o_accordion li a span.title {
+    font-size: 1.4rem; /* 20px */
+    line-height: 1;
+    position: absolute;
+    top: 1.57rem; /* 12px */
+    left: 1.6rem; /* 24px */
+}
+
+/* A */
+.o_accordion li .textBox {
+    display: none;
+    /* border: 1px solid #E9E9E9;
+    background-color: #ffffff; */
+    padding: 1.6rem 3.4rem; /* 24px 50px */
+}
+.o_accordion li .textBox p {
+    font-size: 1rem; /* 14px */
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: -0.5px;
+    color: #1f1f1f;
+    position: relative;
+}
+
+o_accordion li .textBox p #linkText {
+	color: rgb(73, 119, 245);
+}
+
+o_accordion li .textBox p #linkText:hover {
+	background-color: #7e69fe;
+	color: #ffffff;
+}
+
+.o_accordion li .textBox p span.title {
+    font-size: 1rem;
+    position: absolute;
+    top: 0;
+    left: -1.2rem;
+} 
+
+.o_accordion li .textBox p .o_accordion_text_sub {
+    display: block;
+    font-size: 0.8rem; /* 12px */
+    color: #B4B4B4;
+    padding-top: 0.667rem /* 10px */
+}
+
+.o_accordion li a::after, .o_accordion li a.active::after {
+    content: " ";
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 0.8rem; /* 12px */
+    height: 0.8rem; /* 12px */
+    top: 50%;
+    right: 24px;
+    transform: translateY(-50%);
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+.o_accordion li a::after {
+    /* background-image: url('${path}/images/common/icon_toggleDown_white.png'); */
+}
+
+.o_accordion li a.active::after {
+    /* background-image: url('${path}/images/common/icon_toggleUp_white.png'); */
+}
+
+/* **** */
+@media screen and (max-width: 980px) {
+
+    .faq_section {
+        padding: 70px 0 !important;
+    }
+
+    .faq_title section h2 {
+        font-size: 42px;
+        padding-bottom: 30px;
+    }
+    .faq_title section p {
+        font-size: 30px;
+        padding-bottom: 30px;
+    }
+
+
+    .o_accordion_section div {
+        padding-top: 50px;
+        max-width: 520px;
+    }
+
+    /* Q */
+    .o_accordion li a {
+        font-size: 16px;
+        padding: 14px 20px 14px 50px;
+    }
+    .o_accordion li a span.title {
+        font-size: 20px;
+        top: 12px;
+        left: 24px;
+    }
+
+    /* A */
+    .o_accordion li .textBox {
+        padding: 24px 50px;
+    }
+    .o_accordion li .textBox p {
+        font-size: 14px;
+    }
+    .o_accordion li .textBox p span.title {
+        font-size: 15px;
+        left: -18px;
+    }
+
+    .o_accordion li .textBox p .o_accordion_text_sub {
+        font-size: 12px;
+        padding-top: 10px;
+    }
+
+    .o_accordion li a::after, .o_accordion li a.active::after {
+        width: 12px;
+        height: 12px;
+        right: 24px;
+    }
+}
+
+
+
+@media all and (max-width: 767px) {
+
+    .faq_section {
+        padding: 50px 0 !important;
+    }
+    .faq_section .et_pb_row {
+        width: 90%;
+    }
+
+    .faq_title section h2 {
+        font-size: 30px;
+        padding-bottom: 20px;
+    }
+    .faq_title section p {
+        font-size: 24px;
+        padding-bottom: 20px;
+    }
+
+    /* ****** */
+    .o_accordion_section div {
+        padding-top: 20px;
+        max-width: 100%;
+    }
+
+    /* Q */
+    .o_accordion li a {
+        font-size: 14px;
+        padding: 14px 10px 14px 30px;
+    }
+    .o_accordion li a span.title {
+        font-size: 16px;
+        top: 14px;
+        left: 10px;
+    }
+
+    /* A */
+    .o_accordion li .textBox {
+        padding: 20px 10px 20px 30px;
+    }
+    .o_accordion li .textBox p {
+        font-size: 13px;
+    }
+    .o_accordion li .textBox p span.title {
+        font-size: 14px;
+        left: -16px;
+    }
+
+    .o_accordion li .textBox p .o_accordion_text_sub {
+        font-size: 12px;
+        padding-top: 10px;
+    }
+
+    .o_accordion li a::after, .o_accordion li a.active::after {
+        width: 10px;
+        height: 10px;
+        right: 10px;
+    }
+}
+
+
+/* 버튼 */
+.faqTab_row_01 .btn_container {}
+.faqTab_row_01 .btn_container section {
+    display: flex;
+    justify-content: space-evenly;
+    width: 50%;
+    margin: 20px auto 50px auto;
+    position: relative;
+}
+
+.faqTab_row_01 .btn_container section .btnBox{
+    background-color: #ffffff;
+    cursor: pointer;
+    /* width: 15%; */
+}
+
+/* .faqTab_row_01 .btn_container section .btnBox:hover {
+    box-shadow: 0.4rem 0.4rem 1.2rem 0 rgba(5, 65, 184, 0.12);
+} */
+
+
+.faqTab_row_01 .btn_container section .btnBox .textItem {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.faqTab_row_01 .btn_container section .btnBox .textItem p {
+    font-size: 1.3rem;
+    font-weight: 500;
+    line-height: 1.4;
+    color: #aaaaaa;
+    padding: 0;
+    margin-bottom: 0;
+    border-bottom: 2px solid #ffffff;
+}
+
+.faqTab_row_01 .btn_container section .btnBox.active .textItem p  {
+    color: #7e69fe;
+    font-weight: 600;
+    border-bottom: 2px solid #7e69fe;
+}

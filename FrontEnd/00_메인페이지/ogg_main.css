@@ -1,0 +1,622 @@
+/* 
+====================================================
+OGG 메인 페이지 CSS
+====================================================
+*/
+
+@font-face {
+    font-family: 'EliceDigitalBaeum-Bd';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_elice@1.0/EliceDigitalBaeum-Bd.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'MonoplexKR-Italic';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_Monoplex-kr@1.0/MonoplexKR-Italic.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: '양진체';
+    src: url('https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.mainHeader_section .gallery a {
+    text-decoration: none;
+}
+
+.mainHeader_section .gallery {
+    list-style: none;
+    padding: 0;
+    line-height: 1.5em;
+    margin: 0;
+    display: flex;
+    /* height: 100vh; */
+    height: 80vh;
+}
+.mainHeader_section .gallery li {
+  /* border-right: 5px solid #000; */
+    flex: 1;
+    transition: 0.5s;
+    position: relative;
+    overflow: hidden;
+}
+.mainHeader_section .gallery li:last-child {
+    border-right: none;
+}
+.mainHeader_section .gallery li:nth-child(1) {
+    background: url(mainHeader_01.png) no-repeat center center;
+}
+.mainHeader_section .gallery li:nth-child(2) {
+    background: url(mainHeader_02.png) no-repeat center center;
+}
+.mainHeader_section .gallery li:nth-child(3) {
+    background: url(mainHeader_03.png) no-repeat center center;
+}
+.mainHeader_section .gallery li:nth-child(4) {
+    background: url(mainHeader_04.png) no-repeat center center;
+}
+.mainHeader_section .gallery li:nth-child(5) {
+    background: url(mainHeader_05.png) no-repeat center center;
+}
+
+.mainHeader_section .gallery:hover li {
+    flex: 1;
+}
+.mainHeader_section .gallery li:hover {
+    flex: 3;
+    /* filter: grayscale(1) */
+}
+
+.mainHeader_section .gallery li .content {
+    position: absolute;
+    background-color: #7e69fe;
+    color: #fff;
+    text-align: center;
+    height: 260px;
+    bottom: -320px;
+    transition: 0.5s;
+    padding: 20px;
+    box-sizing: border-box;
+    padding-top: 50px;
+    width: 100%;
+}
+
+.mainHeader_section .gallery li .content h2.titleText {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.mainHeader_section .gallery li .content h2.subText {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.mainHeader_section .gallery li .content .trailerBtn {
+    border: 1px solid #ffffff;
+    color: #ffffff;
+}
+
+.mainHeader_section .gallery li .content .trailerBtn:hover {
+    color: #7d69fe;
+    background-color: #ffffff;
+}
+
+
+.mainHeader_section .gallery li:hover .content {
+    bottom: 0;
+    transition-delay: 0.5s;
+}
+.content:before {
+    content: '';
+    position: absolute;
+    background-color: #7d69fe;
+    width: 100%;
+    height: 60px;
+    left: 0;
+    top: 10px;
+    transform-origin: left bottom;
+    transform: rotate(-5deg) scale(1.3)
+}
+
+
+/*
+    Name: YouTubePopUp
+    Description: jQuery plugin to display YouTube or Vimeo video in PopUp, responsive and retina, easy to use.
+    Version: 1.0.1
+    Plugin URL: http://wp-time.com/youtube-popup-jquery-plugin/
+    Written By: Qassim Hassan
+    Twitter: @QQQHZ
+    Websites: wp-time.com | qass.im | wp-plugins.in
+    Dual licensed under the MIT and GPL licenses:
+        http://www.opensource.org/licenses/mit-license.php
+        http://www.gnu.org/licenses/gpl.html
+    Copyright (c) 2016 - Qassim Hassan
+*/
+
+.YouTubePopUp-Wrap{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background-color:#000;
+    background-color:rgba(0,0,0,0.8);
+    top:0;
+    left:0;
+    z-index:9999999999999;
+}
+
+.YouTubePopUp-animation{
+    opacity: 0;
+    -webkit-animation-duration: 0.5s;
+    animation-duration: 0.5s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-name: YouTubePopUp;
+    animation-name: YouTubePopUp;
+}
+
+@-webkit-keyframes YouTubePopUp {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes YouTubePopUp {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+body.logged-in .YouTubePopUp-Wrap{ /* For WordPress */
+    top:32px;
+    z-index:99998;
+}
+
+.YouTubePopUp-Content{
+    max-width:680px;
+    display:block;
+    margin:0 auto;
+    height:100%;
+    position:relative;
+}
+
+.YouTubePopUp-Content iframe{
+    max-width:100% !important;
+    width:100% !important;
+    display:block !important;
+    height:480px !important;
+    border:none !important;
+    position:absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+}
+
+.YouTubePopUp-Hide{
+    -webkit-animation-duration: 0.5s;
+    animation-duration: 0.5s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-name: YouTubePopUpHide;
+    animation-name: YouTubePopUpHide;
+}
+
+@-webkit-keyframes YouTubePopUpHide {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes YouTubePopUpHide {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+.YouTubePopUp-Close{
+    position:absolute;
+    top:0;
+    cursor:pointer;
+    bottom:528px;
+    right:0px;
+    margin:auto 0;
+    width:24px;
+    height:24px;
+    background:url(../images/close.png) no-repeat;
+    background-size:24px 24px;
+    -webkit-background-size:24px 24px;
+    -moz-background-size:24px 24px;
+    -o-background-size:24px 24px;
+}
+
+.YouTubePopUp-Close:hover{
+    opacity:0.5;
+}
+
+@media all and (max-width: 768px) and (min-width: 10px){
+    .YouTubePopUp-Content{
+        max-width:90%;
+    }
+}
+
+@media all and (max-width: 600px) and (min-width: 10px){
+    .YouTubePopUp-Content iframe{
+        height:320px !important;
+    }
+
+    .YouTubePopUp-Close{
+        bottom:362px;
+    }
+}
+
+@media all and (max-width: 480px) and (min-width: 10px){
+    .YouTubePopUp-Content iframe{
+        height:220px !important;
+    }
+
+    .YouTubePopUp-Close{
+        bottom:262px;
+    }
+}
+
+/*
+    스크롤 다운 효과
+*/
+.scrollDown_new{
+    /* position: absolute; */
+    /* bottom: 1.8rem; */
+    /* left: 50%; */
+    /* transform: translate3d(-50%, 0, 0); */
+    margin: 0 auto;
+    text-align: center;
+    padding: 10px 0 30px 0;
+
+}
+.scrollDown_new a {}
+
+.scrollDown_new a img {
+    margin: 0 auto;
+    width: 5rem;
+    -webkit-animation: sdb 2s infinite;
+    animation: sdb 2s infinite;
+}
+
+@-webkit-keyframes sdb {
+    0% {
+    -webkit-transform: translate(0, 0);
+    }
+    20% {
+    -webkit-transform: translate(0, 10px);
+    }
+    40% {
+    -webkit-transform: translate(0, 0);
+    }
+    }
+    @keyframes sdb {
+    0% {
+    transform: translate(0, 0);
+    }
+    20% {
+    transform: translate(0, 10px);
+    }
+    40% {
+    transform: translate(0, 0);
+    }
+}
+
+/* 메인 페이지 두번째 섹션 */
+.party_section {
+    padding: 50px 0 100px 0;
+    margin: 0 auto;
+    width: 1100px;
+    /* text-align: center; */
+}
+
+.party_section .titleBox {
+    max-width: 1100px;
+    margin: 0 auto 30px auto;
+}
+
+.party_section .titleBox .titleText {
+    display: inline-block;
+    font-size: 1.5rem;
+    vertical-align: bottom;
+    color: #666666;
+    font-weight: 400;
+    margin-bottom: 0;
+}
+
+.party_section .titleBox .titleText .c_purple {
+    color: #7e69fe;
+}
+
+.party_section .titleBox .writeBtn {
+    float: right;
+    border: 1px solid #7e69fe;
+    padding: 5px 15px;
+    color: #ffffff;
+    background-color: #7e69fe;
+    font-weight: 400;
+    transform: translate(-50px, -6px);
+    border-radius: 0.367rem;
+}
+
+.party_section .titleBox .writeBtn:hover {
+    background-color: #ffffff;
+    color: #7e69fe;
+}
+
+.party_section .contentBox {
+    /* width: calc(100% + 26px); */
+    margin-top: -13px;
+    margin-left: -13px;
+    font-size: 0;
+    position: relative;
+    /* height: 1567.94px; */
+}
+
+.party_section .contentBox .itemBox {
+    position: relative;
+    display: inline-block;
+    /* width: calc(45% - 26px); */
+    margin: 13px;
+    padding: 22px 29px;
+    font-size: 13px;
+    color: #666666;
+    vertical-align: top;
+    border-radius: 20px;
+    border: solid 1px #dddddd;
+    background-color: white;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.party_section .contentBox .itemBox:hover {
+    border: solid 1px #7e69fe;
+}
+
+.party_section .contentBox .itemBox .title {}
+
+.party_section .contentBox .itemBox .title .logoImg {
+    display: inline-block;
+}
+.party_section .contentBox .itemBox .title .logoImg img {
+    width: 60px;
+    height: 60px;
+    margin-right: 15px;
+    vertical-align: bottom;
+}
+
+.party_section .contentBox .itemBox .title .titleText {
+    display: inline-block;
+}
+
+.party_section .contentBox .itemBox .title .titleText p.text {
+    margin-bottom: 5px;
+    font-size: 22px;
+    font-weight: 500;
+    color: #333333;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.party_section .contentBox .itemBox:hover .title .titleText p.text {
+    color: #7e69fe !important;
+}
+
+.party_section .contentBox .itemBox .title .titleText p.subText {
+    margin-bottom: 0;
+    font-size: 0.9rem;
+    color: #666666;
+}
+
+.party_section .contentBox .itemBox .item-members {
+    position: relative;
+    margin: 15px 0;
+    /* font-size: 0; */
+    white-space: nowrap;
+    display: flex;
+}
+
+.party_section .contentBox .itemBox .item-members .item-member {}
+
+.party_section .contentBox .itemBox .item-members .item-member img {
+    width: 30px;
+    margin-right: 5px;
+}
+
+.party_section .contentBox .itemBox .item-info {
+    position: relative;
+    font-size: 13px;
+    color: #666666;
+    margin-top: 10px;
+}
+
+.party_section .contentBox .itemBox .item-info .item-price {
+    position: absolute;
+    bottom: -5;
+    right: -5;
+    color: #999;
+}
+
+.party_section .contentBox .itemBox .item-info .item-price .price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #252525;
+    vertical-align: -2px;
+    margin-right: 5px;
+}
+
+#nextSection > div.owl-carousel.owl-theme.contentBox.owl-loaded.owl-drag > div.owl-nav {
+    display: none;
+}
+
+#nextSection > div.owl-carousel.owl-theme.contentBox.owl-loaded.owl-drag > div.owl-dots > button.owl-dot > span {
+    width: 15px;
+    height: 10px;
+    margin: 5px 7px;
+    background: #D6D6D6;
+    display: block;
+    -webkit-backface-visibility: visible;
+    transition: opacity .2s ease;
+    border-radius: 30px;
+}
+
+#nextSection > div.owl-carousel.owl-theme.contentBox.owl-loaded.owl-drag > div.owl-dots > button.owl-dot.active > span {
+    background-color: #7e69fe;
+    width: 30px;
+}
+
+#nextSection > div.owl-carousel.owl-theme.contentBox.owl-loaded.owl-drag > div.owl-dots > button.owl-dot:hover > span  {
+    background-color: #7d69fe;
+}
+
+/* OGG 소개 section */
+.info_section {
+    width: 100%;
+    /* min-height: calc(100vh - 80px); */
+    background-color: rgb(244, 244, 250);
+    display: flex;
+    flex-direction: column;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    padding: 150px 20px;
+}
+
+.info_section img.logoImg {
+    transform: translateY(-35%);
+}
+
+.info_section p.titleText {
+    display: inline-block;
+    margin-bottom: 0;
+    font-size: 1.3rem;
+    line-height: 1.5;
+    font-weight: 500;
+    /* font-family: EliceDigitalBaeum-Bd !important; */
+}
+
+
+.info_section .bannerWrap {
+    margin-top: 50px;
+    max-width: 1120px;
+    width: 100%;
+    display: grid;
+    -webkit-box-pack: center;
+    justify-content: center;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: minmax(200px, auto);
+    gap: 0px 20px;
+}
+
+.info_section .bannerWrap .bannerBox:hover {
+    box-shadow: 0 25px 43px -2px rgb(0 0 0 / 25%);
+    -webkit-box-shadow: 0 25px 43px -2px rgb(0 0 0 / 25%);
+}
+
+.info_section .bannerWrap .bannerBox label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    line-height: 27px;
+    text-align: left;
+}
+
+.info_section .bannerWrap .bannerBox p.text {
+    margin: 15px 0 0 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+    line-height: 1.4;
+    text-align: left;
+}
+
+.info_section .bannerWrap .bannerBox .imgBox {
+    width: 100%;
+    display: flex;
+    margin-top: 20px;
+    -webkit-box-pack: end;
+    justify-content: flex-end;
+}
+
+.info_section .bannerWrap .bannerBox .imgBox>img {
+    width: 80px;
+}
+
+.info_section .bannerWrap .partybanner {
+    cursor: pointer;
+    width: 100%;
+    height: auto;
+    border-radius: 35px;
+    background-color: #90e8d8;
+    color: #1f1f1f;
+    padding: 40px 25px 28px 25px;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+}
+
+.info_section .bannerWrap .reviewBanner {
+    cursor: pointer;
+    width: 100%;
+    height: auto;
+    border-radius: 35px;
+    background-color: tomato;
+    color: #ffffff;
+    padding: 40px 36px 28px 40px;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+}
+
+.info_section .bannerWrap .communityBanner {
+    cursor: pointer;
+    width: 100%;
+    height: auto;
+    border-radius: 35px;
+    background-color: #ffed99;
+    color: #1f1f1f;
+    padding: 40px 36px 28px 40px;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+}
+
+.info_section .bannerWrap .faqBanner {
+    cursor: pointer;
+    width: 100%;
+    height: auto;
+    border-radius: 35px;
+    background-color: #7d69fe;
+    color: #ffffff;
+    padding: 40px 36px 28px 40px;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+}

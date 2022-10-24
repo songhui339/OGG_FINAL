@@ -110,24 +110,24 @@
                 </tbody>
             </table>
 
-            <!-- page 네비게이션 -->
-            <nav aria-label="Page navigation example" class="pageNav">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item">
-                        <a class="page-link c_purple" href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li class="page-item"><a class="page-link c_purple" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link c_purple" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link c_purple" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link c_purple" href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+            <!-- Page 네비게이션 -->
+            <div class="pageNav" id="pageBar">
+                <!-- 맨 처음으로 -->
+                <button class="btn arrowBtn" onclick="location.href=''">&lt;&lt;</button>
+    
+                <!-- 이전 페이지로 -->
+                <button class="btn arrowBtn" onclick="location.href=''">&lt;</button>
+    
+                <!--  10개 페이지 목록 -->
+                    <button class="btn" disabled>${ status.current }</button>
+                    <button class="btn pageNoBtn" onclick="location.href=''">2</button>
+    
+                <!-- 다음 페이지로 -->
+                <button class="btn arrowBtn" onclick="location.href=''">&gt;</button>
+    
+                <!-- 맨 끝으로 -->
+                <button class="btn arrowBtn" onclick="location.href=''">&gt;&gt;</button>
+            </div>
 
             
         </div>
@@ -146,7 +146,5 @@
     </div>
 </section>
 
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

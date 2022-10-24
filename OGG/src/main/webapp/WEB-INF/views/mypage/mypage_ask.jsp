@@ -66,7 +66,7 @@
 
         <!-- 정보 영역 -->
         <div class="infoBox">
-            <p class="titleText">1:1 문의 내역 <a href="#" class="button">문의 작성</a></p>
+            <p class="titleText">1:1 문의 내역 <a href="${path }/mypage/ask/write" class="button">문의 작성</a></p>
             
             <div class="line"></div>
             <table class="table">
@@ -78,53 +78,62 @@
                         <th scope="col">조회수</th>
                     </tr>
                 </thead>
-                <tbody class="partyitem">
-                    <tr onclick="location.href='';">
-                        <th scope="row">${Q_NO}</th>
-                        <td>${Q_TITLE}</td>
-                        <td>${Q_ENROLLDATE}</td>
-                        <td><span class="statusY">답변 완료</span></td>
-                    </tr>
-                    <tr onclick="location.href='';">
-                        <th scope="row">${Q_NO}</th>
-                        <td>${Q_TITLE}</td>
-                        <td>${Q_ENROLLDATE}</td>
-                        <td><span class="statusN">답변 대기</span></td>
-                    </tr>
-                    <tr onclick="location.href='';">
-                        <th scope="row">${Q_NO}</th>
-                        <td>${Q_TITLE}</td>
-                        <td>${Q_ENROLLDATE}</td>
-                        <td><span class="statusN">${Q_STATUS}</span></td>
-                    </tr>
-                    <tr onclick="location.href='';">
-                        <th scope="row">${Q_NO}</th>
-                        <td>${Q_TITLE}</td>
-                        <td>${Q_ENROLLDATE}</td>
-                        <td><span class="statusN">${Q_STATUS}</span></td>
-                    </tr>
-                    
-                    
-                </tbody>
-            </table>
+				<tbody class="partyitem">
+					<c:if test="${empty list }">
+						<tr>
+							<th>문의내역이 없습니다.</th>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</c:if>
+
+					<c:if test="${not empty list }">
+						<c:forEach var="question" items="${list}">
+							<tr
+								onclick="location.href='${path}/mypage/ask/view?no=${question.q_no}';">
+								<th scope="row">${question.q_rno}</th>
+								<td>${question.q_title}</td>
+								<td><fmt:formatDate type="date"
+										value="${ question.q_enrolldate }" /></td>
+								<c:if test="${question.q_status == 'Y'}">
+									<td><span class="statusY">답변 완료</span></td>
+								</c:if>
+								<c:if test="${question.q_status == 'N'}">
+									<td><span class="statusN">답변 대기</span></td>
+								</c:if>
+							</tr>
+
+						</c:forEach>
+					</c:if>
+
+				</tbody>
+			</table>
 
             <!-- Page 네비게이션 -->
             <div class="pageNav" id="pageBar">
                 <!-- 맨 처음으로 -->
-                <button class="btn arrowBtn" onclick="location.href=''">&lt;&lt;</button>
+                <button class="btn arrowBtn" onclick="location.href='${path}/mypage/ask?page=1'">&lt;&lt;</button>
     
                 <!-- 이전 페이지로 -->
-                <button class="btn arrowBtn" onclick="location.href=''">&lt;</button>
+                <button class="btn arrowBtn" onclick="location.href='${path}/mypage/ask?page=${pageInfo.prevPage }'">&lt;</button>
     
                 <!--  10개 페이지 목록 -->
+                <c:forEach begin="${pageInfo.startPage }" end="${pageInfo.endPage }"
+                                    varStatus="status">
+                <c:if test="${status.current == pageInfo.currentPage }">
                     <button class="btn" disabled>${ status.current }</button>
-                    <button class="btn pageNoBtn" onclick="location.href=''">2</button>
+                </c:if>
+                <c:if test="${status.current != pageInfo.currentPage }">
+                    <button class="btn pageNoBtn" onclick="location.href='${path}/mypage/ask?page=${status.current }'">${status.current }</button>
+                </c:if>
+                </c:forEach>
     
                 <!-- 다음 페이지로 -->
-                <button class="btn arrowBtn" onclick="location.href=''">&gt;</button>
+                <button class="btn arrowBtn" onclick="location.href='${path}/mypage/ask?page=${pageInfo.nextPage }'">&gt;</button>
     
                 <!-- 맨 끝으로 -->
-                <button class="btn arrowBtn" onclick="location.href=''">&gt;&gt;</button>
+                <button class="btn arrowBtn" onclick="location.href='${path}/mypage/ask?page=${pageInfo.maxPage }'">&gt;&gt;</button>
             </div>
 
         </div>
@@ -143,8 +152,5 @@
 
     </div>
 </section>
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
