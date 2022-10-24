@@ -28,6 +28,8 @@
 		<result property="p_entry_price_output" column="P_ENTRY_PRICE_OUTPUT"/>
 		<result property="p_deposit" column="P_DEPOSIT"/>
 		<result property="accounts_count" column="ACCOUNTS_COUNT"/>
+		<result property="p_end_date_output" column="P_END_DATE_OUTPUT"/>
+		<result property="p_period_day" column="P_PERIOD_DAY"/>
 	</resultMap>
 	
 	<resultMap type="Ott" id="ottResultMap">
@@ -131,6 +133,9 @@
 		       P.P_END_DATE,
 		       P.P_COMMENT,
 		       P.P_ENTRY_PRICE,
+		       TO_CHAR(P.P_ENTRY_PRICE,'999,999') AS P_ENTRY_PRICE_OUTPUT,
+		       TO_CHAR(P.P_END_DATE,'YYYY-MM-DD') AS P_END_DATE_OUTPUT,
+		       (TO_DATE(P.P_END_DATE) - TO_DATE(SYSDATE)) AS P_PERIOD_DAY,
 		       P.P_STATUS,
 		       P.P_CAUTION1,
 		       P.P_CAUTION2,

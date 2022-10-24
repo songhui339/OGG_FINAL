@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <c:set var="path" value="${ pageContext.request.contextPath }"/>
 
 <!-- jQuery -->
@@ -27,6 +28,8 @@
             </div>
             <form name="fregister" id="fregister" method="POST" autocomplete="off" class="form" role="form">
             <input type="hidden" name="accounts_count" id="accounts_count" value="${ party.accounts_count }">
+            <input type="hidden" id="accounts_date" value="${ party.p_accounts }">
+            <input type="hidden" id="p_no" value="${ party.p_no }">
                 <h3><span class="c_purple">파티 정보</span></h3>
                 <div class="form-round-box">
                     <ul class="form-list">
@@ -46,7 +49,7 @@
                 <div class="form-round-box">
                     <ul class="form-list">
                         <li>
-                            <span class="subject">카카오 간편 결제</span>
+                            <span class="subject"><strong>카카오 간편 결제</strong></span>
                         </li>
                         <li>
                             <span class="subject">정산일</span>
@@ -59,7 +62,7 @@
                 <h3><span class="c_purple">파티 가입 규칙</span> 확인</h3>
                 <div class="form-round-box">
                         <div class="ruleBox" style="margin-bottom: 20px;">
-                            <p class="titleText"><i class="bi bi-check-lg" style="color: #7e69fe;"></i> ${ party.p_entry_price_output }원이 카카오 간편 결제를 통해 결제될 예정이며, 결제 진행에 동의합니다.</p>
+                            <p class="titleText" id="info_text"></p>
                         </div>
 
                         <div class="ruleBox" style="margin-bottom: 20px;">
@@ -114,6 +117,21 @@
 	let amount = '';
 	let monthly_amount = '';
 	
+	let cDay = 24 * 60 * 60 * 1000;
+    let cMonth = cDay * 30;
+	let start_month = new Date($('#start_date').val()).getTime();
+	let end_month = new Date($('#end_date').val()).getTime();
+	let monthly = Math.floor((end_month - new Date().getTime()) / cMonth);
+	
+	let date = new Date();
+	let year = date.getFullYear();
+    let month = ("0" + (1 + date.getMonth())).slice(-2);
+    let day = ("0" + date.getDate()).slice(-2);
+	let accounts_day = $('#accounts_date').val();
+	let accounts_date = year + "-" + month + "-" + accounts_day;
+	let accounts_unix_date = new Date(accounts_date).getTime()/1000;
+	let temp = 00000001;
+	
 	$(document).ready(() => {
 	    let date = new Date($('#end_date').val());
 	    let year = date.getFullYear();
@@ -135,45 +153,77 @@
 	    
 	    price_sum = String(price_sum).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 	    
+	    document.getElementById('info_text').innerHTML = "<i class='bi bi-check-lg' style='color: #7e69fe;''></i>" + price_sum + "원이 카카오 간편 결제를 통해 결제될 예정이며, 결제 진행에 동의합니다.";
 	    document.querySelector('#price_sum').value = price_sum + "원";
 	    document.querySelector('#price_kakao').value = price_sum + "원";
 
-		IMP.init('imp34485120'); //자신의 "가맹점 식별코드"를 사용
 		
 	});
-		function requestPay() {		
-		  	IMP.request_pay({
-		  		pg: 'kakaopay',
-		  		pay_method: 'card',
-		  		merchant_uid: "order_monthly_"+new Date().getTime(),
-		  		customer_uid: 'test014', // 카드(빌링키)와 1:1로 대응하는 값, 유저 ID값으로 설정 예정
-		  		name: 'test014',
-		  		amount: amount,
-		  		buyer_email: 'gildong@gmail.com',
-		  		buyer_name: '홍길동',
-		  		buyer_tel: '010-4242-4242'
-		  	}, function (rsp) {
-		  		if ( rsp.success ) {
+	
+	IMP.init('imp34485120');
+	
+	function requestPay() {		
+	  	IMP.request_pay({
+	  		pg: 'kakaopay',
+	  		pay_method: 'card',
+	  		merchant_uid: "order_monthly_"+new Date().getTime(),
+	  		customer_uid: 'test025', // 카드(빌링키)와 1:1로 대응하는 값, 유저 ID값으로 설정 예정
+	  		name: '최초 결제',
+	  		amount: amount,
+	  		buyer_email: 'gildong@gmail.com',
+	  		buyer_name: '홍길동',
+	  		buyer_tel: '010-4242-4242'
+	  	}, function (rsp) {
+	  		if ( rsp.success ) {
+	  			month = parseInt(month) + 1;
+		  		
+	  			for(let i = 1; i < monthly; i++){
+	  				if(parseInt(month) <= 12){
+		  				accounts_date = year + "-" + month + "-" + accounts_day;
+		  				console.log(accounts_date);
+		  				accounts_unix_date = new Date(accounts_date).getTime()/1000;
+	  				} else {
+	  					year = parseInt(year) + 1;
+	  					month = 1;
+	  					accounts_date = year + "-" + month + "-" + accounts_day;
+	  					console.log(accounts_date);
+		  				accounts_unix_date = new Date(accounts_date).getTime()/1000;
+	  				}
+	  				
 		  			$.ajax({
 						url:"${path}/pay/subpay",
 						type: 'POST',
 						dataType: "json",
 						data: {
-							customer_uid: 'test014',
-					        merchant_uid: "order_monthly_"+new Date().getTime(),
-					        schedule_at: Math.round(new Date($('#end_date').val()).getTime()/1000.0),
+							customer_uid: 'test025',
+					        merchant_uid: "order_monthly_0"+new Date().getTime(),
+					        schedule_at: accounts_unix_date,
 					        amount: monthly_amount
 						},
 						success: (result) => {
-							alert(result);
+							console.log(result);
 						}
 					});
-					alert('결제 예약');
-			    } else {
-			    	alert('결제 예약 실패');		    	 
-		      	}
-		  	});
-		};
+		  			month = parseInt(month) + 1;
+		  			
+		  			$.ajax({
+		  				url:"${path}/party/submitParty",
+		  				type: 'POST',
+		  				data: {
+		  					p_no,
+		  					m_no
+		  				},
+		  				success: (result) => {
+		  					console.log(result);
+		  				}
+		  			});
+	  			}
+	  			
+		    } else {
+		    	alert('결제 예약 실패'); 
+	      	}
+	  	});
+	};
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>

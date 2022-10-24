@@ -53,7 +53,7 @@ public class PartyController {
 		list = service.getOttList();
 		
 		model.addObject("list", list);
-		model.setViewName("party/findParty");
+		model.setViewName("party/submitParty");
 		
 		return model;
 	}
@@ -136,12 +136,5 @@ public class PartyController {
 		
 		return model;
 	}
-	
-	
-	
-	@GetMapping("/prevPartyPage")
-	public String prevPartyPage() {
-		
-		return "forward:/party/ottlist";
-	}
+
 }

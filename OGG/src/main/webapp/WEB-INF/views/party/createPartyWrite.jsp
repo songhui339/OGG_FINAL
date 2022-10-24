@@ -129,8 +129,7 @@
 
                     <div class="buttonBox">                    
                         <button type="submit" class="button button-purple">파티 만들기</button>
-                    	<button type="button" class="button button-purple" id="payTest" onclick="requestPay()">결제 테스트</button>
-                        <button type="button" class="button" onclick="location.href='${path}/party/prevPartyPage'">취소</button>
+                        <button type="button" class="button" onclick="location.href='javascript:history.back()'">취소</button>
                     </div>
 
                 </form>
@@ -144,41 +143,6 @@
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 
 <script>
-	IMP.init('imp34485120'); //자신의 "가맹점 식별코드"를 사용
-
-	function requestPay() {		
-	  	IMP.request_pay({
-	  		pg: 'kakaopay',
-	  		pay_method: 'card',
-	  		merchant_uid: "order_monthly_"+new Date().getTime(),
-	  		customer_uid: 'test013', // 카드(빌링키)와 1:1로 대응하는 값, 유저 ID값으로 설정 예정
-	  		name: 'test013',
-	  		amount: 4000, 
-	  		buyer_email: 'gildong@gmail.com',
-	  		buyer_name: '홍길동',
-	  		buyer_tel: '010-4242-4242'
-	  	}, function (rsp) {
-	  		if ( rsp.success ) {
-	  			$.ajax({
-					url:"${path}/pay/subpay",
-					type: 'POST',
-					dataType: "json",
-					data: {
-						customer_uid: 'test013',
-				        merchant_uid: "order_monthly_"+new Date().getTime(),
-				        schedule_at: 1666778970,
-				        amount: 8900
-					},
-					success: (result) => {
-						alert(result);
-					}
-				});
-				alert('결제 예약');
-		    } else {
-		    	alert('결제 예약 실패');		    	 
-	      	}
-	  	});
-	};
 	
 	$(document).ready(() => {
 		$('#id_input').on('keyup', () => {
@@ -202,7 +166,7 @@
 		});
 		
 		$('#p_max_member').change(() => {
-			document.querySelector('#p_entry_price').value = $('#plan_price').val() / $('#p_max_member').val();
+			document.querySelector('#p_entry_price').value = Math.floor($('#plan_price').val() / $('#p_max_member').val());
 		})
 	});
 </script>

@@ -55,4 +55,8 @@ public class Party {
 	private String p_accounts;
 	
 	private int accounts_count;
+	
+	private String p_end_date_output;
+	
+	private int p_period_day;
 }

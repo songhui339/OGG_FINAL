@@ -14,7 +14,7 @@
 <section class="submitParty_section">
     <div class="itemListWrap">
         <h2 class="titleText">
-            <a href="#" class="titleText">
+            <a href="javascript:history.back()" class="titleText">
                 <i class="bi bi-chevron-left"></i> 파티 가입하기
             </a>
         </h2>
@@ -42,10 +42,11 @@
 		                </div>
                 
 		                <div class="item-info">
-		                    <div class="item-date">
-		                        ${ list.p_end_date }<span class="pc-inline">까지</span>(<strong>24</strong>일)
+		                    <div class="item-date" id="period_day">
+		                    <input type="hidden" id="end_date" value="${ list.p_end_date }">
+		                        ${ list.p_end_date_output }<span class="pc-inline">까지</span>(<strong>${ list.p_period_day }</strong>일)
 		                    </div>
-		                    <div class="item-price"><span class="price">3,936</span>원</div>
+		                    <div class="item-price"><span class="price">${ list.p_entry_price_output }</span>원</div>
 		                </div>
             		</div>
                 </c:forEach>
@@ -59,12 +60,11 @@
             <p class="titleText">원하는 파티가 없다면</p>
             
             <div class="button">
-                <a href="#">파티 만들기</a>
+                <a href="${ path }/party/ottlist">파티 만들기</a>
             </div>
         </div>
     </div>
 </section>
-
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 
