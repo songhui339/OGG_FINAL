@@ -10,10 +10,10 @@ var myLineChart = new Chart(ctx, {
   data: {
     labels: ["March","June","Sep","Dec"],
     datasets: [{
-      label: "이용자 수",
+      label: "이용자 수 (명)",
       backgroundColor: "rgba(2,117,216,1)",
       borderColor: "rgba(2,117,216,1)",
-      data: [a,b,c,d],
+      data: [a,b,c,d]
     }],
   },
   options: {
@@ -32,7 +32,7 @@ var myLineChart = new Chart(ctx, {
       yAxes: [{
         ticks: {
           min: 0,
-          max: 10,
+          max: 20,
           maxTicksLimit: 10
         },
         gridLines: {

@@ -10,6 +10,7 @@ import com.project.ogg.admin.model.vo.MemberAD;
 import com.project.ogg.admin.model.vo.Notice;
 import com.project.ogg.admin.model.vo.OttAdmin;
 import com.project.ogg.admin.model.vo.Question;
+import com.project.ogg.member.model.vo.Member;
 
 @Mapper
 public interface AdminMapper {
@@ -63,5 +64,7 @@ public interface AdminMapper {
 	int getDecUserCount();
 
 	int deleteOtt(int no);
+
+	MemberAD selectMember(String memberid);
 
 }

@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="${path}/css/common/ogg_common.css">
     
    <section class="accessDenied_section">
-   		<img src="https://emojipedia-us.s3.amazonaws.com/source/noto-emoji-animations/344/speak-no-evil-monkey_1f64a.gif" class="emojiIMG" alt="emojiIcon"> 
+   		<img src="${ path }/images/common/icon_Oops.gif" class="emojiIMG" alt="emojiIcon"> 
    		
    		<p class="text">
    			<span class="highlight">앗! 잠시만요</span><br>

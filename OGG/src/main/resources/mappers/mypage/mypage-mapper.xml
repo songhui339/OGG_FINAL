@@ -209,6 +209,11 @@ WHERE M_NO = #{m_no}
 		WHERE M_NO = #{m_no}
 </update>
 
+<update id="updatePwd">
+	UPDATE MEMBER SET
+	M_PWD = #{password}
+	WHERE M_NO = #{m_no}
+</update>
 
 </mapper>
 

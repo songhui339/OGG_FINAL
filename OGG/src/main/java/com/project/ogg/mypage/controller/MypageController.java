@@ -137,6 +137,34 @@ public class MypageController {
         return "mypage/mypage_updatePwd";
     }
     
+    @PostMapping("/updatePwd")
+    public ModelAndView updatePwd (ModelAndView model,
+                                   @AuthenticationPrincipal Member loginMember,
+                                   @RequestParam(value = "m_pwd") String password,
+                                   @RequestParam(value = "newpassword") String newpassword,
+                                   @RequestParam(value = "newpasswordcheck") String newpasswordcheck) {
+        
+        int result = 0;
+        
+        if(passwordEncoder.matches(password, loginMember.getM_pwd())) {
+            result = service.updatePwd(loginMember.getM_no(), passwordEncoder.encode(newpassword));
+            
+            if(result > 0) {
+                model.addObject("msg", "비밀번호 변경이 완료되었습니다. 다시 로그인해주세요.");
+                model.addObject("location", "/member/doLogout.do");
+            } else {
+                model.addObject("msg", "비밀번호 변경에 실패했습니다.");
+                model.addObject("location", "/mypage/updatePwd");
+            }
+        } else {
+            model.addObject("msg", "현재 비밀번호가 일치하지 않습니다");
+            model.addObject("location", "/mypage/updatePwd");
+        }
+        
+        model.setViewName("common/msg");
+        
+        return model;
+    }
     
     // 공지사항
     @GetMapping("/notice")

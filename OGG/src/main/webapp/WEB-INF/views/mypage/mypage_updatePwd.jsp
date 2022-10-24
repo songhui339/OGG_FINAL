@@ -70,7 +70,7 @@
             <div class="line"></div>
             <form action="${path}/mypage/updatePwd" method="post">
                 <div class="formBox">
-                    <ul class="form-list">
+                    <ul class="form-list updatePwd">
                         <li>
                             <label for="m_pwd">현재 비밀번호</label>
                             <input type="password" name="m_pwd" id="m_pwd" minlength="3" maxlength="20" id="">
@@ -78,12 +78,13 @@
                         </li>
                         <li>
                             <label for="newpassword">신규 비밀번호</label>
-                            <input type="password" name="newpassword" id="newpassword" minlength="3" maxlength="20" id="">
+                            <input type="password" name="newpassword" id="newpassword" class="pw" minlength="3" maxlength="20">
                         </li>
                         <li>
                             <label for="newpasswordcheck">비밀번호 확인</label>
-                            <input type="password" name="newpasswordcheck" id="newpasswordcheck" minlength="3" maxlength="20" id="">
-                            <div id="password_check" style="width: 50px;"></div>
+                            <input type="password" name="newpasswordcheck" id="newpasswordcheck" class="pw" minlength="3" maxlength="20">
+                            <span id="alert-success" style="display: none; color: #7d69fe;">비밀번호가 일치합니다.</span>
+    						<span id="alert-danger" style="display: none; color: tomato; font-weight: 600; ">비밀번호가 일치하지 않습니다.</span>
                         </li>
                     </ul>
 
@@ -93,19 +94,23 @@
 					
 					
 					<script>
-						function validate() {
-							let pass1 = $("#newpassword").val();
-							let pass2 = $("#newpasswordcheck").val();
-							
-							if(pass1.trim() != pass2.trim()){
-								alert("비밀번호가 일치하지 않습니다.");
-								$("#pass1").val("");
-								$("#pass2").val("");
-								$("#pass1").focus();
-								
-								return false;
-							}
-						}
+					    $('.pw').focusout(function () {
+					        var pwd1 = $("#newpassword").val();
+					        var pwd2 = $("#newpasswordcheck").val();
+					  
+					        if ( pwd1 != '' && pwd2 == '' ) {
+					            null;
+					        } else if (pwd1 != "" || pwd2 != "") {
+					            if (pwd1 == pwd2) {
+					                $("#alert-success").css('display', 'inline-block');
+					                $("#alert-danger").css('display', 'none');
+					            } else {
+					                alert("비밀번호가 일치하지 않습니다. 비밀번호를 재확인해주세요.");
+					                $("#alert-success").css('display', 'none');
+					                $("#alert-danger").css('display', 'inline-block');
+					            }
+					        }
+					    });
 					</script>
 				                    
 

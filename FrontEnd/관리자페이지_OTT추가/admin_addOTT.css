@@ -1,0 +1,96 @@
+/* 
+====================================================
+OGG AdminPage OTT 추가하기 CSS
+====================================================
+*/
+
+.formBox {}
+
+.formBox .form-list {}
+
+.formBox .form-list {
+    list-style: none;
+}
+
+.formBox .form-list p.text {
+    display: inline;
+}
+
+.formBox .form-list li {
+    margin-bottom: 10px;
+}
+
+.formBox .form-list li label {
+    display: inline-block;
+    width: 160px;
+    padding: 10px 0;
+}
+
+.form-list input[type='text'], .form-list input[type='password'], .form-list input[type='number'], .form-list input[type='tel'], .form-list select {
+    width: 300px;
+    height: 38px;
+    margin-right: 10px;
+    padding: 0 15px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #333;
+    border: solid 1px #dddddd;
+    border-radius: 0.375rem;
+    background-color: white;
+    outline: none;
+}
+
+.form-list select {
+    display: inline-block;
+}
+
+.formBox .form-list li input:active,
+.formBox .form-list li input:focus {
+    border: solid 1px #7e69fe;
+}
+
+.formBox .form-list li .form-select:focus {
+    border-color: #7e69fe !important;
+    box-shadow: 0 0 0 0.25rem #7d69fe25;
+}
+
+.formBox .btnBox {
+    position: relative;
+    /* min-height: 53px; */
+    width: 50%;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.formBox .btnBox .btn {
+    position: relative;
+    display: inline-block;
+    min-width: 150px;
+    height: 50px;
+    margin: 1px 0;
+    padding: 0 10px;
+    font-size: 18px;
+    color: #7e69fe;
+    text-align: center;
+    line-height: 48px;
+    border: 0;
+    border-radius: 5px;
+    background-color: #ffffff;
+    border: 1px solid #7e69fe;
+    overflow: hidden;
+}
+
+.formBox .btnBox .redBtn {
+    border: 1px solid tomato;
+    color: tomato;
+}
+
+.formBox .btnBox .btn:hover {
+    background-color: #7e69fe;
+    color: #ffffff;
+}
+
+.formBox .btnBox .redBtn:hover {
+    background-color: tomato;
+    color: #ffffff;
+}
