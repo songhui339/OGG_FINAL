@@ -29,7 +29,9 @@
             <form name="fregister" id="fregister" method="POST" autocomplete="off" class="form" role="form">
             <input type="hidden" name="accounts_count" id="accounts_count" value="${ party.accounts_count }">
             <input type="hidden" id="accounts_date" value="${ party.p_accounts }">
-            <input type="hidden" id="p_no" value="${ party.p_no }">
+            <input type="hidden" name="p_no" id="p_no" value="${ party.p_no }">
+            <input type="hidden" name="m_no" id="m_no" value="${ member.m_no }">
+            <input type="hidden" name="p_cur_member" id="p_cur_member" value="${ party.p_cur_member }">
                 <h3><span class="c_purple">파티 정보</span></h3>
                 <div class="form-round-box">
                     <ul class="form-list">
@@ -162,7 +164,8 @@
 	
 	IMP.init('imp34485120');
 	
-	function requestPay() {		
+	function requestPay() {	
+		location.href = "${path}/party/submitParty?no=${ party.p_no }";
 	  	IMP.request_pay({
 	  		pg: 'kakaopay',
 	  		pay_method: 'card',
@@ -206,18 +209,8 @@
 					});
 		  			month = parseInt(month) + 1;
 		  			
-		  			$.ajax({
-		  				url:"${path}/party/submitParty",
-		  				type: 'POST',
-		  				data: {
-		  					p_no,
-		  					m_no
-		  				},
-		  				success: (result) => {
-		  					console.log(result);
-		  				}
-		  			});
 	  			}
+	  			location.href = "${path}/party/submitParty?no=${ party.p_no }";
 	  			
 		    } else {
 		    	alert('결제 예약 실패'); 

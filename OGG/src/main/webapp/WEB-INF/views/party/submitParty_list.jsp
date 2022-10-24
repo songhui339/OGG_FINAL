@@ -34,11 +34,17 @@
 		                    </div>
                 		</div>
                 
+		                <input type="hidden" id="max_member" value="${ list.p_max_member }">
+		                <input type="hidden" id="cur_member" value="${ list.p_cur_member }">
 		                <div class="item-members">
-		                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small.png" alt=""></span>
-		                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small-glay.png" alt=""></span>
-		                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small-glay.png" alt=""></span>
-		                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small-glay.png" alt=""></span>
+		                	<c:forEach var="i" begin="0" end="${ list.p_max_member }" step="1">
+		                		<c:if test="${ i <= list.p_cur_member }">
+		                    		<span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small.png" alt=""></span>
+		                		</c:if>
+		                		<c:if test="${ i > list.p_cur_member }">
+				                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small-glay.png" alt=""></span>
+		                		</c:if>
+		                	</c:forEach>
 		                </div>
                 
 		                <div class="item-info">
@@ -65,6 +71,7 @@
         </div>
     </div>
 </section>
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 

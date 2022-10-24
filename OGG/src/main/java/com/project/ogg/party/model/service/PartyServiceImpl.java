@@ -40,9 +40,13 @@ public class PartyServiceImpl implements PartyService {
 	}
 
 	@Override
-	public int partyCreate(Party party) {
+	public int partyCreate(Party party, int m_no) {
+		mapper.insertParty(party);
 		
-		return mapper.insertParty(party);
+		//Party getm_no = mapper.getPartyNo(m_no);
+		
+		
+		return mapper.getPartyNo(m_no);
 	}
 
 	@Override
@@ -55,6 +59,24 @@ public class PartyServiceImpl implements PartyService {
 	public Party selectParty(int no) {
 		
 		return mapper.selectParty(no);
+	}
+
+	@Override
+	public int insertPartyMemeber(Party party) {
+		
+		return mapper.insertPartyMemeber(party);
+	}
+
+	@Override
+	public int partyMemberCheck(Party party) {
+
+		return mapper.partyMemberCheck(party);
+	}
+
+	@Override
+	public void updatePartyMember(Party party) {
+		
+		mapper.updatePartyMember(party);	
 	}
 
 }

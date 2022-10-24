@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.project.ogg.member.model.vo.Member;
 import com.project.ogg.party.model.service.PartyService;
 import com.project.ogg.party.model.vo.Ott;
 import com.project.ogg.party.model.vo.Party;
@@ -122,10 +124,15 @@ public class PartyController {
 	@PostMapping("/createParty")
 	public ModelAndView createParty(
 			ModelAndView model,
-			@ModelAttribute Party party) {
+			@ModelAttribute Party party,
+			@AuthenticationPrincipal Member member) {
 		int result = 0;
+		int m_no = member.getM_no();
+		party.setM_no(member.getM_no());
+		party.setM_status("Y");
+		party.setP_no(service.partyCreate(party, m_no));
 		
-		result = service.partyCreate(party);
+		result = service.insertPartyMemeber(party);
 		
 		if(result > 0) {
 			model.addObject("msg", "파티 등록을 성공하였습니다.");
@@ -136,5 +143,34 @@ public class PartyController {
 		
 		return model;
 	}
+	
 
+	@GetMapping("/submitParty")
+	public ModelAndView submitParty(
+			ModelAndView model,
+			@RequestParam int no,
+			@AuthenticationPrincipal Member member) {
+		
+		int result = 0;
+		Party party = new Party();
+		party.setP_no(no);
+		
+		party = service.selectParty(no);
+		
+		party.setP_cur_member(party.getP_cur_member() + 1);
+		
+		result = service.partyMemberCheck(party);
+		if(result > 0) {
+			party.setM_no(member.getM_no());
+			party.setM_status("N");
+			
+			service.updatePartyMember(party);
+			service.insertPartyMemeber(party);
+			model.setViewName("party/submitPartyThxPage");			
+		} else {
+			model.addObject("msg", "파티 등록을 실패하였습니다.");		
+		}
+				
+		return model;
+	}
 }

@@ -16,7 +16,7 @@
 
 <section class="createParty_section">
         <div class="titleBox">
-            <h2>어떤 파티를 만드시겠어요?</h2>
+            <h2>어떤 파티를 이용하시겠어요?</h2>
         </div>
 
         <!-- 탭 버튼 부분 -->

@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <c:set var="path" value="${ pageContext.request.contextPath }"/>
 
 <!-- jQuery -->
@@ -12,6 +13,8 @@
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <link rel="stylesheet" href="${ path }/css/party/ogg_party_write.css">
 
@@ -28,7 +31,7 @@
                 </div>
                 <form name="fregister" id="fregister" method="POST" autocomplete="off" class="form" role="form" action="${ path }/party/createParty">
                     <input type="hidden" name="ott_no" value="${ ott.ott_no }">
-                    <input type="hidden" id="plan_price" value="${ ott.plan_price }">
+                    <input type="hidden" name="plan_price" id="plan_price" value="${ ott.plan_price }">
                     <input type="hidden" name="p_entry_price" id="p_entry_price" value="">
                     <h3><span class="c_purple">로그인 정보</span> 입력</h3>
                     <div class="form-round-box">
@@ -122,7 +125,7 @@
                                 </select>
                             </li>
                             <li>
-                                <span class="subject"><i class="bi bi-check-lg" style="color: #7e69fe;"></i> OGG 정산일 <i class="bi bi-question-circle-fill" style="color: gray !important;"></i></span>
+                                <span class="subject" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Tooltip on bottom"><i class="bi bi-check-lg" style="color: #7e69fe;"></i> OGG 정산일 <i class="bi bi-question-circle-fill" style="color: gray !important;"></i></span>
                             </li>
                         </ul>
                     </div>
