@@ -19,6 +19,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
         <link href="${path }/css/admin/admin.css" rel="stylesheet" />
         <link href="${path }/css/admin/admin_sh.css" rel="stylesheet" />
+        <script src="${ path }/js/jquery-3.6.0.min.js"></script>
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     </head>
     <body class="sb-nav-fixed">
@@ -39,25 +40,25 @@
 		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		      </div>
 		      <div class="modal-body adminMemberModal">
-		        <li>
+		         <li> 
                     <label for="">아이디</label>
-                    <p class="text">${ member.m_id }</p>
+                    <p class="text" id="mid"></p>
                 </li>
                 <li>
                     <label for="">이름</label>
-                    <p class="text">${ member.m_name }</p>
+                    <p class="text" id="mname"></p>
                 </li>
                 <li>
                     <label for="">닉네임</label>
-                    <p class="text">${ member.m_nickname }</p>
+                    <p class="text" id="mnick"></p>
                 </li>
                 <li>
                     <label for="">이메일</label>
-                    <p class="text">${ member.m_email }</p>
+                    <p class="text" id="memail"></p>
                 </li>
                 <li>
                     <label for="">휴대폰 번호</label>
-                    <p class="text">${ member.m_phonenumber }</p>
+                    <p class="text" id="mphone"></p>
                 </li>
 		      </div>
 		      <div class="modal-footer">
@@ -181,9 +182,31 @@
             </div>
         </div>
         <script>
-        function del(){
-            if(confirm("정말로 회원 추방 하시겠습니까?")) {
-			}	
+        function selectMember(ths) {
+        	let memberName = $(ths).text();
+        	$.ajax({
+    			type: "POST",
+    			url: "${path}/admin/selectMember",
+    			dataType: "json",
+    			data: {
+    				memberName // "userId": userId
+    			},
+    			success: (member) => {
+    				
+    				$('#mid').text(member.m_id);
+    				$('#mname').text(member.m_name);
+    				$('#mnick').text(member.m_nickname);
+    				$('#mphone').text(member.m_phonenumber);
+    				$('#memail').text(member.m_email);
+    				
+    				
+    			}, 
+    			error: (error) => {
+    				console.log(error);
+    			}
+    		});
+        	
+        	
         }
             
         </script>

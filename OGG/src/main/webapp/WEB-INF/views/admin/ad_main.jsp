@@ -40,23 +40,23 @@
 		      <div class="modal-body adminMemberModal">
 		        <li> 
                     <label for="">아이디</label>
-                    <p class="text" id="mid"><c:out value="${member.m_id }"/> ${m_id }</p>
+                    <p class="text" id="mid"></p>
                 </li>
                 <li>
                     <label for="">이름</label>
-                    <p class="text" id="mname">${member.m_name }</p>
+                    <p class="text" id="mname"></p>
                 </li>
                 <li>
                     <label for="">닉네임</label>
-                    <p class="text" id="mnick">${ member.m_nickname }</p>
+                    <p class="text" id="mnick"></p>
                 </li>
                 <li>
                     <label for="">이메일</label>
-                    <p class="text" id="memail">${ member.m_email }</p>
+                    <p class="text" id="memail"></p>
                 </li>
                 <li>
                     <label for="">휴대폰 번호</label>
-                    <p class="text" id="mphone">${ member.m_phonenumber }</p>
+                    <p class="text" id="mphone"></p>
                 </li>
 		      </div>
 		      <div class="modal-footer">
