@@ -12,6 +12,7 @@ import com.project.ogg.admin.model.vo.Notice;
 import com.project.ogg.admin.model.vo.Question;
 import com.project.ogg.common.util.PageInfo;
 import com.project.ogg.community.model.vo.Community;
+import com.project.ogg.member.model.vo.Member;
 import com.project.ogg.mypage.model.mapper.MypageMapper;
 
 @Service
@@ -19,6 +20,7 @@ public class MypageServiceImpl implements MypageService {
 	
 	@Autowired
 	private MypageMapper mapper;
+
 
 //	@Override
 //	public List<MemberAD> getMemberList() {
@@ -104,6 +106,40 @@ public class MypageServiceImpl implements MypageService {
 		return notice;
 	}
 
+	
+	@Override
+    public Member selectMemberByNo(int m_no) {
+        
+        return mapper.selectMemberByNo(m_no);
+    }
+
+	@Override
+	public int save(Member member) {
+
+		return mapper.updateMember(member);
+	}
+
+	// 회원 탈퇴 
+    @Override
+    public int delete(int m_no) {
+        int result = 0;
+        
+        result = mapper.deleteMember(m_no);
+        
+        return result;
+    }
+
+    // 비밀번호 수정
+    @Override
+    @Transactional
+    public int updatePwd(int m_no, String password) {
+        int result = 0;
+        
+        System.out.println(password);
+        result = mapper.updatePwd(m_no, password);
+        
+        return result;
+    }
 	
 
 }

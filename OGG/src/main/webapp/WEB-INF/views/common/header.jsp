@@ -100,7 +100,7 @@
                     <a href="${ path }/community/list.do">커뮤니티</a>
                 </li>
                 <li>
-                    <a href="javascript:">이벤트</a>
+                    <a href="${ path }/faq">FAQ</a>
                 </li>
             </ul>
         </div>

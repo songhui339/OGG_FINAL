@@ -32,4 +32,6 @@ public interface MemberMapper {
 
 	public int insertKakaoMember(Member member);
 
+	public int updateMember(Member member);
+
 }
