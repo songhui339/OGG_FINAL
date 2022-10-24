@@ -64,7 +64,6 @@
                             </ul>
                     </div>
 
-
                     <h3><span class="c_purple">기타</span> 입력</h3>
                     <div class="form-round-box">
                         <ul class="form-list">
@@ -99,7 +98,6 @@
 			alert(msg);
 		}
 	});
-
 
 	var empJ = /\s/g; // 모든 공백 체크 정규식
 	var idJ = /^[A-za-z0-9]{4,12}$/; // 아이디 정규식 : 4~12자 소문자, 숫자

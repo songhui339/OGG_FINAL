@@ -15,7 +15,6 @@
     <!-- 카카오 SDK 로드 -->
 	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
     
-
     <div class="loginPage_section">
         <div class="contentWrap">
             <div class="login-form">
@@ -68,8 +67,6 @@
         </div>
     </div>
 
-
-
 	<script type="text/javascript">
 		var msg = "${errorMessage}";
 		
@@ -96,7 +93,6 @@
 	
 	                  location.assign('${path}/member/kakao.do?kakaoname='+user.kakaoname
 	                                                 +'&kakaoemail='+user.kakaoemail);
-	     
 	               }
 	               
 	            });
@@ -105,6 +101,5 @@
 	      });
 	   }
 	</script>
-
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

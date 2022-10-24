@@ -43,14 +43,14 @@ public class MemberController {
 		return "member/joinAgreement";
 	}
 	
-	@GetMapping("/member/goJoinPage.do")
-	public String join() {
-		return "member/join";
-	}
-	
 	@GetMapping("/member/goLoginPage.do")
 	public String login() {
 		return "member/login";
+	}
+	
+	@GetMapping("/member/goJoinPage.do")
+	public String join() {
+		return "member/join";
 	}
 	
 	@PostMapping("/member/join.do")
@@ -68,13 +68,14 @@ public class MemberController {
 			model.addObject("location", "/member/goLoginPage.do");
 			model.setViewName("common/msg");
 		}
-
 		return model;
 	}
 	
 	@GetMapping("/member/idcheck.do")
 	@ResponseBody
-	public int idcheck(HttpServletRequest req, HttpServletResponse resp, @RequestParam("m_id") String m_id) {
+	public int idcheck(HttpServletRequest req,
+					   HttpServletResponse resp,
+					   @RequestParam("m_id") String m_id) {
 		int result = service.idcheck(m_id);
 		return result;
 	}

@@ -82,7 +82,6 @@
 							<security:authentication property="principal.m_no" var="security_m_no"/>
 							<c:if test="${security_m_no eq communityReply.cr_writerNo}">
 								<div class="btnBox">
-									<button type="button" class="btn purpleBtn" onclick="location.href='${ path }/cummunity/replyModify.do?cr_no=${ communityReply.cr_no }'">수정</button>
 									<button type="button" class="btn redBtn" onclick="location.href='${ path }/cummunity/replyDelete.do?cr_no=${ communityReply.cr_no }'">삭제</button>
 								</div>
 							</c:if>
@@ -90,17 +89,6 @@
 					</div>
 				</c:forEach>
 
-
-                <!-- 로그인 안한 사람들한테 보일 화면 
-                <div class="needLoginBox">
-                    <div class="banner">
-                        <p>
-                            <i class="bi bi-chat-dots-fill"></i> 권한이 없습니다. 
-                            <span onclick="location.href='${ path }/member/goLoginPage.do'">로그인</span>
-                        </p>
-                    </div>
-                </div>
-                -->
                 <!-- 오류 해결을 위한 빈 div 태그 삭제하지말아주세요!! -->
                 <div style="height: 50px;"></div>
 
@@ -115,10 +103,9 @@
                         
                     </form>
                 </div>
-                
-               
             </div>
-
+			
+			<!-- 목록 버튼 -->
             <div class="btnBox">
                 <button type="button" onclick="location.href='${ path }/community/list.do'" class="btn backtoListBtn"><i class="bi bi-card-list"></i> 목록으로</button>
             </div>
@@ -152,43 +139,11 @@
 				document.communityReplyWrite.submit();
 			};
 			
-			// 댓글 수정
-			/*
-			$('#communityReplyModifyModalButton').click(function(e){
-				e.preventDefault();
-				
-				var cr_no = $(this).attr("cr_no");
-				$("#cr_no").val(cr_no);
-				
+			$('#communityReplyModifyModalButton').click(function(){	
 				$('#communityReplyModal').modal("show");
 			});
 			
 	
-			$('#modalY').click(function(e){
-				
-				var cr_no = $('#cr_no').val();
-				var cr_content = $('#cr_content').val();
-				
-				$.ajax({
-					type : 'post',
-					url : '/cummunity/replyModify.do',
-					data : { cr_no , cr_content },
-					dateType: 'json',
-					contentType: "application/json; charset=UTF-8",
-					success : function(data) {
-						if(data > 0) {
-							alert("수정 완");
-							$("#communityReplyModal").modal("hide");
-						} else {
-							alert("수정 실패 관리자에게 문의해");
-							$("#communityReplyModal").modal("hide");
-							
-						}
-					}
-				});
-				
-			});
-			*/
 	
 		});
 	</script>
