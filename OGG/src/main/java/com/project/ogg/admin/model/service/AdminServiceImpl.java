@@ -171,6 +171,12 @@ public class AdminServiceImpl implements AdminService {
 		return mapper.deleteOtt(ott_no);
 	}
 
+	@Override
+	public MemberAD selectMember(String memberid) {
+		// TODO Auto-generated method stub
+		return mapper.selectMember(memberid);
+	}
+
 	
 
 }

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -79,6 +81,19 @@ public class AdminController {
 			
 		}
 	}
+	
+	@PostMapping("/admin/selectMember")
+	@ResponseBody
+	public MemberAD selectMember( @RequestParam("memberName") String membername, 
+			ModelAndView model) {
+		MemberAD member = null;
+		member = service.selectMember(membername);
+		
+		model.addObject("member",member);
+		System.out.println(member);
+		return member;
+	}
+	
 	
 	@GetMapping("/admin/OTT")
 	public ModelAndView goOTT(ModelAndView model) {

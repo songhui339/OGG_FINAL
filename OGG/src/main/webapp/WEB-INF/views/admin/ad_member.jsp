@@ -126,36 +126,39 @@
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
+                                           <th>아이디</th>
                                             <th>이름</th>
                                             <th>이용 OTT 종류</th>
                                             <th>가입일</th>
                                             <th>권한</th>
                                             <th>포인트</th>
-                                            <th>신고횟수</th>
+                                            <th>상태</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     <c:if test="${not empty list }">
                                     <c:forEach var="member" items="${list}">
                                         <tr>
-                                            <td><a href="javascript:del()" data-bs-toggle="modal" data-bs-target="#memberModal">${member.m_name }</a></td>
+                                             <td><a href="#" id="sm" onclick='selectMember(this)' data-bs-toggle="modal" data-bs-target="#memberModal" >${member.m_id }</a></td>
+                                            <td>${member.m_name}</td>
                                             <td>넷플릭스, 디즈니 플러스</td>
                                             <td><fmt:formatDate type="date" value="${ member.m_joindate }" /></td>
                                             <td>${member.m_authority}</td>
                                             <td>${member.m_point}</td>
-                                            <td>${member.r_time}</td>
+                                            <td>${member.m_status}</td>
                                         </tr>
                                     </c:forEach>
                                     </c:if>
                                     </tbody>
                                     <tfoot>
                                         <tr>
+                                            <th>아이디</th>
                                             <th>이름</th>
                                             <th>이용 OTT 종류</th>
                                             <th>가입일</th>
                                             <th>권한</th>
                                             <th>포인트</th>
-                                            <th>신고횟수</th>
+                                            <th>상태</th>
                                         </tr>
                                     </tfoot>
                                 </table>
