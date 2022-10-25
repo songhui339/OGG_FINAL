@@ -85,7 +85,6 @@ public class ReviewCmtController {
 		return model;
 	}
 	
-	
 	@PostMapping("/recmt_write")
 	@ResponseBody
 	public List<ReviewCmt> recmtWrite(

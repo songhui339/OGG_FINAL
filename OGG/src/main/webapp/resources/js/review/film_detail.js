@@ -337,58 +337,66 @@ $(document).ready(function() {
 	// 	});
 	// });
 
-    ////////////
-    /////댓글////
-    ////////////
-    // ok
-    $('#writeCmt').on("click", function() {
-        let cmtContent = document.getElementById('rvCmt').value;
-        let rvNo = document.getElementById('rvNo').value;
+    // ////////////
+    // /////댓글////
+    // ////////////
+    // // ok
+    // $('#writeCmt').on("click", function() {
+    //     let cmtContent = document.getElementById('rvCmt').value;
+    //     let rvNo = document.getElementById('rvNo').value;
 
-		if(cmtContent.trim()==""){
-			alert("내용을 입력해주세요");
-        }else{
-            $.ajax({
-                async: true,
-                type : 'POST',
-                url : contextpath + '/review/cmt_write',
-                data : {
-                    'rvNo' : rvNo,
-                    'cmtContent' : cmtContent, 
-                    'fCode' : fcode,
-                    'ftype' : ftype
-                },
-                success : (data) => {
-                    let html = "<tr id='cmtlist'>";
-                        html += "<input id='cmtNo' type='hidden' value='"+ data.cmt.cmtNo +"'>";
-                        html += "<input id='cmtWriterNo' type='hidden' value='"+ data.cmt.cmtWriterNo +"'>";
-                        html += "<td id='board-text4'>" + data.cmt.cmtNickname + "</td>";
-                        html += "<td id='board-text5'>" + data.cmt.cmtContent + "</td>";
-                        html += "<td id='board-text7'>";
-                        html += "<div class='btn-group' role='group' aria-label='Basic mixed styles example'>";
-                        html += "<button class='btn btn-primary' type='button' onclick='showUpdateCmt(event)'>수정</button>";
-                        html += "<button class='btn btn-primary' type='button' onclick='deleteCmt(event)'>삭제</button>";
-                        html += "</div></td></tr>";
-                        html += "<tr id='cmtlist_up' style='display: none;'>";
-                        html += "<td id='board-text4'>" + data.cmt.cmtNickname + "</td>";
-                        html += "<td id='board-text5-1'>";
-                        html += "<textarea id='message-cmt-2' style='border: 1px solid lightgrey; resize: none; width: 100%;'></textarea>";
-                        html += "</td><td id='board-text7-1'>";
-                        html += "<div class='btn-group' role='group' aria-label='Basic mixed styles example'>";
-                        html += "<button class='btn btn-primary' type='button' onclick='updateCmt(event)'>수정</button>";
-                        html += "<button class='btn btn-primary' type='button' onclick='updateCommentsCancel(event)'>취소</button>";
-                        html += "</div></td></tr>";
-                        html += "<tr id='cmtlist_re_orig' style='display: none;'></tr>";
+	// 	if(cmtContent.trim()==""){
+	// 		alert("내용을 입력해주세요");
+    //     }else{
+    //         $.ajax({
+    //             async: true,
+    //             type : 'POST',
+    //             url : contextpath + '/review/cmt_write',
+    //             data : {
+    //                 'rvNo' : rvNo,
+    //                 'cmtContent' : cmtContent, 
+    //                 'fCode' : fcode,
+    //                 'ftype' : ftype
+    //             },
+    //             success : (data) => {
+    //                 let html = "<tr id='cmtlist'>";
+    //                     html += "<input id='cmtNo' type='hidden' value='"+ data.cmt.cmtNo +"'>";
+    //                     html += "<input id='cmtWriterNo' type='hidden' value='"+ data.cmt.cmtWriterNo +"'>";
+    //                     html += "<td id='board-text4'>" + data.cmt.cmtNickname + "</td>";
+    //                     html += "<td id='board-text5' onclick='showCmt_Re(event)'>" + data.cmt.cmtContent + "</td>";
+    //                     html += "<td id='board-text7'>";
+    //                     html += "<div class='btn-group' role='group' aria-label='Basic mixed styles example'>";
+    //                     html += "<button class='btn btn-primary' type='button' onclick='showUpdateCmt(event)'>수정</button>";
+    //                     html += "<button class='btn btn-primary' type='button' onclick='deleteCmt(event)'>삭제</button>";
+    //                     html += "</div></td></tr>";
+    //                     html += "<tr id='cmtlist_up' style='display: none;'>";
+    //                     html += "<td id='board-text4'>" + data.cmt.cmtNickname + "</td>";
+    //                     html += "<td id='board-text5-1'>";
+    //                     html += "<textarea id='message-cmt-2' style='border: 1px solid lightgrey; resize: none; width: 100%;'></textarea>";
+    //                     html += "</td><td id='board-text7-1'>";
+    //                     html += "<div class='btn-group' role='group' aria-label='Basic mixed styles example'>";
+    //                     html += "<button class='btn btn-primary' type='button' onclick='updateCmt(event)'>수정</button>";
+    //                     html += "<button class='btn btn-primary' type='button' onclick='updateCommentsCancel(event)'>취소</button>";
+    //                     html += "</div></td></tr>";
+    //                     html += "<tr id='cmtlist_re_orig' style='display: none;'></tr>";
+    //                     html += "<tr id='cmtlist_re' style='display: none;'>";
+    //                     html += "<input id='cmtWriterNo' type='hidden' value='${ loginMember.m_no }'>";
+    //                     html += "<td id='board-text4-1'>↳ &nbsp; ${ loginMember.m_nickname }</td>";
+    //                     html += "<td id='board-text5-1'>";
+    //                     html += "<textarea id='message-cmt-1' style='border: 1px solid lightgrey; resize: none; width: 100%;'></textarea>";
+    //                     html += "</td><td id='board-text7' style='padding-top: 15px;'>";
+    //                     html += "<button class='btn btn-primary' type='button' onclick='writeCmt_Re(event)' style='margin-left:25%; height: 35px;'>등록</button>";
+    //                     html += "</td></tr>"
 
-                        $("#cmtbody").append(html);
-                        $("#rvCmt").val('');
-                },
-                error : (error) => {
-                    alert('댓글 등록에 실패하였습니다');
-                }
-            });
-        }
-    });
+    //                     $("#cmtbody").append(html);
+    //                     $("#rvCmt").val('');
+    //             },
+    //             error : (error) => {
+    //                 alert('댓글 등록에 실패하였습니다');
+    //             }
+    //         });
+    //     }
+    // });
 
     $('#tolist').on("click", function() {
         location.href = contextpath + "/film/review_list?fcode=" + fcode + "&ftype=" + ftype;

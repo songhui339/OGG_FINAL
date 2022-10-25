@@ -18,7 +18,6 @@ import com.project.ogg.review.model.service.ReviewService;
 import com.project.ogg.review.model.vo.Film;
 import com.project.ogg.review.model.vo.Review;
 import com.project.ogg.review.model.vo.ReviewCmt;
-import com.project.ogg.review.model.vo.ReviewLikes;
 
 @Controller
 @RequestMapping("/review")
@@ -41,10 +40,6 @@ public class ReviewController {
 		review = service.getReviewByNo(no);
 		cmtCount = service.getCmtCountByNo(no);
 		reviewCmt = service.getCmtByReviewNo(no);
-		
-		System.out.println(review);
-		System.out.println(cmtCount);
-		System.out.println(reviewCmt);
 		
 		model.addObject("fcode", fcode);
 		model.addObject("ftype", ftype);
