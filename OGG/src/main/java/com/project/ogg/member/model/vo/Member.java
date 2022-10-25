@@ -38,51 +38,42 @@ public class Member implements UserDetails {
 	private String m_card_num; // 카드 번호
 	private int m_point; // 포인트
 	
-	private String M_snsId; // SNS 로그인
-	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		Collection<GrantedAuthority> collection = new ArrayList<GrantedAuthority>();
-		
-		collection.add( new SimpleGrantedAuthority(this.m_authority));
-		
+		collection.add( new SimpleGrantedAuthority(this.m_authority));	
 		return collection;
 	}
 
 	@Override
 	public String getPassword() {
-
 		return this.m_pwd;
 	}
 
 	@Override
 	public String getUsername() {
-
 		return this.m_id;
 	}
 
 	@Override
 	public boolean isAccountNonExpired() {
-
 		return true;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
-
 		return true;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
-
 		return true;
 	}
 
 	@Override
 	public boolean isEnabled() {
-
 		return this.m_status.equals("Y");
 	}
-
 }
+
+

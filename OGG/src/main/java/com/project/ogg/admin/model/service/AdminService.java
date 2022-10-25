@@ -8,6 +8,7 @@ import com.project.ogg.admin.model.vo.Notice;
 import com.project.ogg.admin.model.vo.OttAdmin;
 import com.project.ogg.admin.model.vo.Question;
 import com.project.ogg.common.util.PageInfo;
+import com.project.ogg.member.model.vo.Member;
 
 public interface AdminService {
 
@@ -56,6 +57,8 @@ public interface AdminService {
 	int addOTT(OttAdmin ott);
 
 	int deleteOtt(int ott_no);
+
+	MemberAD selectMember(String membername);
 	
 
 }

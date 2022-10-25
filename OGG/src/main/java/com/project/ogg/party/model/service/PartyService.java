@@ -16,7 +16,17 @@ public interface PartyService {
 
 	Ott getOttInfo(int modal_ott_no);
 
-	Party partyCreate(Party party);
+	int partyCreate(Party party, int m_no);
+
+	List<Party> getPartyList(String ottName);
+
+	Party selectParty(int no);
+
+	int insertPartyMemeber(Party party);
+
+	int partyMemberCheck(Party party);
+
+	void updatePartyMember(Party party);
 
 
 

@@ -5,10 +5,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class Party {
 	private int p_no;
+	
+	private int m_no;
 	
 	private String ott_class;
 	
@@ -34,9 +36,25 @@ public class Party {
 	
 	private String p_status;
 	
-	private String p_caution1;
+	private String ott_name;
 	
-	private String p_caution2;
+	private String ott_thumb;
 	
-	private String p_caution3;
+	private String plan_name;
+	
+	private String plan_price;
+	
+	private String p_entry_price_output;
+	
+	private String p_deposit;
+	
+	private String p_accounts;
+	
+	private int accounts_count;
+	
+	private String p_end_date_output;
+	
+	private int p_period_day;
+	
+	private String m_status;
 }

@@ -25,4 +25,6 @@ public class Ott {
 	private String ott_status;
 	
 	private String plan_name;
+	
+	private String plan_each_price;
 }

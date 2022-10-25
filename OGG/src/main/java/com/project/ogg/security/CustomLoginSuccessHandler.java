@@ -25,7 +25,6 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 		for(GrantedAuthority auth : authentication.getAuthorities()) {
 			authName.add(auth.getAuthority());
 		}
-
 		
 		if(authName.contains("ROLE_ADMIN")) {
 			response.sendRedirect("/");
@@ -39,5 +38,4 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 		
 		response.sendRedirect("/member/goLoginPage.do");
 	}
-	
 }

@@ -3,9 +3,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <c:set var="path" value="${ pageContext.request.contextPath }"/>
 
-<script src="${ path }/js/jquery-3.6.0.min.js"></script>
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+<!-- iamport.payment.js -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
@@ -17,21 +22,27 @@
             <div class="serviceInfoBox">
                 <p class="text">
                     이용 서비스
-                    <img src="../파이널 UI 설계 이미지/logo_netflix.png" alt="logoImg" class="logoImg">
-                    <span class="nameText">넷플릭스 프리미엄</span>
+                    <img src="${ path }/images/party/${ party.ott_thumb }.png" alt="logoImg" class="logoImg">
+                    <span class="nameText">${ party.plan_name }</span>
                 </p>
             </div>
             <form name="fregister" id="fregister" method="POST" autocomplete="off" class="form" role="form">
+            <input type="hidden" name="accounts_count" id="accounts_count" value="${ party.accounts_count }">
+            <input type="hidden" id="accounts_date" value="${ party.p_accounts }">
+            <input type="hidden" name="p_no" id="p_no" value="${ party.p_no }">
+            <input type="hidden" name="m_no" id="m_no" value="${ member.m_no }">
+            <input type="hidden" name="p_cur_member" id="p_cur_member" value="${ party.p_cur_member }">
                 <h3><span class="c_purple">파티 정보</span></h3>
                 <div class="form-round-box">
                     <ul class="form-list">
                         <li>
                             <span class="subject">파티 기간</span>
-                            <input type="text" name="" id="" required="" value="오늘 ~ 2023.03.22">
+                            <input type="hidden" id="end_date" value="${ party.p_end_date }">
+                            <input type="text" name="" id="party_period" required="" value="">
                         </li>
                         <li>
                             <span class="subject">파티 요금 (월, VAT 포함)</span>
-                            <input type="text" name="" id="" required="" value="3,450원">
+                            <input type="text" name="" id="" required="" value="${ party.p_entry_price_output.trim() } 원">
                         </li>
                         </ul>
                 </div>
@@ -40,13 +51,11 @@
                 <div class="form-round-box">
                     <ul class="form-list">
                         <li>
-                            <span class="subject">카드 번호</span>
-                            <input type="text" name="" id="" required="" value="[현대] ******9413">
-                            <span><a href="#">변경하기 <i class="bi bi-pencil-square"></i></a></span>
+                            <span class="subject"><strong>카카오 간편 결제</strong></span>
                         </li>
                         <li>
                             <span class="subject">정산일</span>
-                            <input type="text" name="" id="" required="" value="매달 1일">
+                            <input type="text" name="" id="" required="" value="매달 ${ party.p_accounts }일">
                         </li>
                     </ul>
                 </div>
@@ -55,15 +64,15 @@
                 <h3><span class="c_purple">파티 가입 규칙</span> 확인</h3>
                 <div class="form-round-box">
                         <div class="ruleBox" style="margin-bottom: 20px;">
-                            <p class="titleText"><i class="bi bi-check-lg" style="color: #7e69fe;"></i> 3,450원이 등록한 카드를 통해 결제될 예정이며, 결제 진행에 동의합니다.</p>
+                            <p class="titleText" id="info_text"></p>
                         </div>
 
                         <div class="ruleBox" style="margin-bottom: 20px;">
-                            <p class="titleText"><i class="bi bi-check-lg" style="color: #7e69fe;"></i> 파티 가입시 지불하는 파티 보증금 4,080원은 파티가 끝나면 100% 환급되며, 파티 중도 탈퇴 시 환급되지 않습니다.</p>
+                            <p class="titleText"><i class="bi bi-check-lg" style="color: #7e69fe;"></i> 파티 가입시 지불하는 파티 보증금 ${ party.p_deposit }원은 파티가 끝나면 100% 환급되며, 파티 중도 탈퇴 시 환급되지 않습니다.</p>
                         </div>
 
                         <div class="ruleBox" style="margin-bottom: 20px;">
-                            <p class="titleText"><i class="bi bi-check-lg" style="color: #7e69fe;"></i> 다음 정산일(1일) 부터는 OGG 수수료가 포함된 3,450원의 파티 요금이 결제됩니다.</p>
+                            <p class="titleText"><i class="bi bi-check-lg" style="color: #7e69fe;"></i> 다음 정산일(${ party.p_accounts }일) 부터는 OGG 수수료가 포함된 ${ party.p_entry_price_output }원의 파티 요금이 결제됩니다.</p>
                         </div>
 
                         <div class="ruleBox">
@@ -76,34 +85,140 @@
                     <ul class="form-list">
                         <li>
                             <span class="subject">파티 요금(첫 달)</span>
-                            <input type="text" name="" id="" required="" value="889원">
+                            <input type="text" name="" id="monthly_price" required="" value="${ (party.p_entry_price_output).trim() }원">
                         </li>
                         <li>
                             <span class="subject">파티 보증금</span>
-                            <input type="text" name="" id="" required="" value="4,080원">
+                            <input type="text" name="" id="deposit" required="" value="${ (party.p_deposit).trim() }원">
                         </li>
                         <li>
                             <span class="subject">합계</span>
-                            <input type="text" name="" id="" required="" value="4,969원">
+                            <input type="text" name="" id="price_sum" required="" value="">
                         </li>
                         <hr>
                         <li>
-                            <span class="subject price">카드 결제</span>
-                            <input type="text" name="" id="" required="" value="4,969원" class="priceValue">
+                            <span class="subject price">카카오 페이 결제</span>
+                            <input type="text" name="" id="price_kakao" required="" value="" class="priceValue">
                         </li>
                     </ul>
                 </div>
 
                 <div class="buttonBox">
                     <button type="submit" class="button" onclick="location('')">뒤로 가기</button>
-                    <button type="submit" class="button button-purple">결제하고 파티 시작하기</button>
+                    <button type="button" class="button button-purple" onclick="requestPay()">결제하고 파티 시작하기</button>
                 </div>
 
             </form>
+                    
 
         </div>
     </div>
 </section>
 
+<script>
+	let amount = '';
+	let monthly_amount = '';
+	
+	let cDay = 24 * 60 * 60 * 1000;
+    let cMonth = cDay * 30;
+	let start_month = new Date($('#start_date').val()).getTime();
+	let end_month = new Date($('#end_date').val()).getTime();
+	let monthly = Math.floor((end_month - new Date().getTime()) / cMonth);
+	
+	let date = new Date();
+	let year = date.getFullYear();
+    let month = ("0" + (1 + date.getMonth())).slice(-2);
+    let day = ("0" + date.getDate()).slice(-2);
+	let accounts_day = $('#accounts_date').val();
+	let accounts_date = year + "-" + month + "-" + accounts_day;
+	let accounts_unix_date = new Date(accounts_date).getTime()/1000;
+	let temp = 00000001;
+	
+	$(document).ready(() => {
+	    let date = new Date($('#end_date').val());
+	    let year = date.getFullYear();
+	    let month = ("0" + (1 + date.getMonth())).slice(-2);
+	    let day = ("0" + date.getDate()).slice(-2);
+	    
+		let monthly_price = $('#monthly_price').val();
+	    let deposit = $('#deposit').val();
+	    let price_sum = '';
+		
+	    document.querySelector('#party_period').value = "오늘 ~ " + year + "-" + month + "-" + day;
+	    
+	    monthly_price = monthly_price.replace(/[^\d]+/g, "");
+	    monthly_amount = monthly_price;
+	    deposit = deposit.replace(/[^\d]+/g, "");
+	    
+	    price_sum = parseInt(monthly_price) + parseInt(deposit);
+		amount = price_sum;
+	    
+	    price_sum = String(price_sum).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	    
+	    document.getElementById('info_text').innerHTML = "<i class='bi bi-check-lg' style='color: #7e69fe;''></i>" + price_sum + "원이 카카오 간편 결제를 통해 결제될 예정이며, 결제 진행에 동의합니다.";
+	    document.querySelector('#price_sum').value = price_sum + "원";
+	    document.querySelector('#price_kakao').value = price_sum + "원";
+
+		
+	});
+	
+	IMP.init('imp34485120');
+	
+	function requestPay() {	
+		location.href = "${path}/party/submitParty?no=${ party.p_no }";
+	  	IMP.request_pay({
+	  		pg: 'kakaopay',
+	  		pay_method: 'card',
+	  		merchant_uid: "order_monthly_"+new Date().getTime(),
+	  		customer_uid: 'test025', // 카드(빌링키)와 1:1로 대응하는 값, 유저 ID값으로 설정 예정
+	  		name: '최초 결제',
+	  		amount: amount,
+	  		buyer_email: 'gildong@gmail.com',
+	  		buyer_name: '홍길동',
+	  		buyer_tel: '010-4242-4242'
+	  	}, function (rsp) {
+	  		if ( rsp.success ) {
+	  			month = parseInt(month) + 1;
+		  		
+	  			for(let i = 1; i < monthly; i++){
+	  				if(parseInt(month) <= 12){
+		  				accounts_date = year + "-" + month + "-" + accounts_day;
+		  				console.log(accounts_date);
+		  				accounts_unix_date = new Date(accounts_date).getTime()/1000;
+	  				} else {
+	  					year = parseInt(year) + 1;
+	  					month = 1;
+	  					accounts_date = year + "-" + month + "-" + accounts_day;
+	  					console.log(accounts_date);
+		  				accounts_unix_date = new Date(accounts_date).getTime()/1000;
+	  				}
+	  				
+		  			$.ajax({
+						url:"${path}/pay/subpay",
+						type: 'POST',
+						dataType: "json",
+						data: {
+							customer_uid: 'test025',
+					        merchant_uid: "order_monthly_0"+new Date().getTime(),
+					        schedule_at: accounts_unix_date,
+					        amount: monthly_amount
+						},
+						success: (result) => {
+							console.log(result);
+						}
+					});
+		  			month = parseInt(month) + 1;
+		  			
+	  			}
+	  			location.href = "${path}/party/submitParty?no=${ party.p_no }";
+	  			
+		    } else {
+		    	alert('결제 예약 실패'); 
+	      	}
+	  	});
+	};
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

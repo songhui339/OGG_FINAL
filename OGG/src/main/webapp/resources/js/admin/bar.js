@@ -13,7 +13,7 @@ var myLineChart = new Chart(ctx, {
       label: "이용자 수 (명)",
       backgroundColor: "rgba(2,117,216,1)",
       borderColor: "rgba(2,117,216,1)",
-      data: [a,b,c,d],
+      data: [a,b,c,d]
     }],
   },
   options: {

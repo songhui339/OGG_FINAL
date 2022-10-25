@@ -89,11 +89,6 @@ public class CommunityController {
 
 	    return model;
 	}
-
-//	@GetMapping("/community/goList.do")
-//	public String list() {
-//		return"community/list";
-//	}
 	
 	// 게시글 상세보기
 	@GetMapping("/community/view.do")
@@ -113,8 +108,8 @@ public class CommunityController {
 		model.addObject("communityReply", communityReply);
 		
 		// 조회수
-//		int communityCount = service.communityViewcount(c_no);
-//		community.setC_viewCount(communityCount);
+		int communityCount = service.communityViewcount(c_no);
+		community.setC_viewCount(communityCount);
 		
 		// 화면 출력
 		model.addObject("community", community);

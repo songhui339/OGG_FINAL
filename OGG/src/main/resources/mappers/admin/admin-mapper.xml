@@ -17,11 +17,17 @@
 	<result column="M_NAME" property="a_m_name"/>
 </resultMap>
 
+<select id="selectMember" resultType="MemberAD" parameterType="string">
+SELECT M_ID, M_NAME, M_NICKNAME,M_EMAIL,M_PHONENUMBER
+FROM MEMBER
+WHERE M_ID = #{memberid}
+</select>
+
 <select id="getMemberList" resultType="MemberAD">
 	SELECT ROWNUM
 	,M.*
 	FROM (
-	SELECT M_NAME, M_JOINDATE, M_AUTHORITY, M_POINT,R_TIME,m_status
+	SELECT M_NAME,M_ID, M_JOINDATE, M_AUTHORITY, M_POINT,m_status
 	FROM MEMBER
 	ORDER BY M_NAME) M
 </select>

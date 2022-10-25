@@ -3,7 +3,7 @@
 
 <mapper namespace="com.project.ogg.party.model.mapper.PartyMapper">
 
-	<resultMap type="Party" id="partyListResultMap">
+	<resultMap type="Party" id="partyResultMap">
 		<id property="p_no" column="P_NO"/>
 		<result property="ott_class" column="OTT_CLASS"/>
 		<result property="ott_no" column="OTT_NO"/>
@@ -17,12 +17,19 @@
 		<result property="p_comment" column="P_COMMENT"/>
 		<result property="p_entry_price" column="P_ENTRY_PRICE"/>
 		<result property="p_status" column="P_STATUS"/>
-		<result property="p_caution1" column="P_CAUTION1"/>
-		<result property="p_caution2" column="P_CAUTION2"/>
-		<result property="p_caution3" column="P_CAUTION3"/>
+		<result property="ott_name" column="OTT_NAME"/>
+		<result property="ott_thumb" column="OTT_THUMB"/>
+		<result property="plan_name" column="PLAN_NAME"/>
+		<result property="plan_price" column="PLAN_PRICE"/>
+		<result property="p_accounts" column="P_ACCOUNTS"/>
+		<result property="p_entry_price_output" column="P_ENTRY_PRICE_OUTPUT"/>
+		<result property="p_deposit" column="P_DEPOSIT"/>
+		<result property="accounts_count" column="ACCOUNTS_COUNT"/>
+		<result property="p_end_date_output" column="P_END_DATE_OUTPUT"/>
+		<result property="p_period_day" column="P_PERIOD_DAY"/>
 	</resultMap>
 	
-	<resultMap type="Ott" id="ottListResultMap">
+	<resultMap type="Ott" id="ottResultMap">
 		<id property="ott_no" column="OTT_NO"/>
 		<result property="ott_name" column="OTT_NAME"/>
 		<result property="ott_thumb" column="OTT_THUMB"/>
@@ -32,9 +39,10 @@
 		<result property="plan_price_output" column="PLAN_PRICE_OUTPUT"/>
 		<result property="ott_status" column="OTT_STATUS"/>
 		<result property="plan_name" column="PLAN_NAME"/>
+		<result property="plan_each_price" column="PLAN_EACH_PRICE"/>
 	</resultMap>
 	
-	<select id="selectOttList" resultMap="ottListResultMap">
+	<select id="selectOttList" resultMap="ottResultMap">
 		SELECT OTT_NO,
 		       OTT_NAME,
 		       OTT_THUMB,
@@ -42,6 +50,7 @@
 		       OTT_MAX_MEMBER,
 		       PLAN_PRICE,
 		       TO_CHAR(PLAN_PRICE,'999,999') AS PLAN_PRICE_OUTPUT,
+		       TO_CHAR((PLAN_PRICE / OTT_MAX_MEMBER),'999,999') AS PLAN_EACH_PRICE,
 		       PLAN_NAME,
 		       OTT_STATUS
 		FROM (
@@ -52,7 +61,7 @@
 		ORDER BY OTT_NO
 	</select>
 	
-	<select id="selectPlanList" resultMap="ottListResultMap">
+	<select id="selectPlanList" resultMap="ottResultMap">
 		SELECT OTT_NO,
 			   OTT_NAME,
 			   OTT_THUMB,
@@ -66,43 +75,126 @@
         WHERE OTT_NAME = #{ottName}
 	</select>
 	
-	<select id="selectPlan" resultMap="ottListResultMap">
+	<select id="selectPlan" resultMap="ottResultMap">
 		SELECT PLAN_NAME,
 			   OTT_NO
 		FROM OTT_INFO
 		WHERE OTT_NO=#{ottNo}
 	</select>
 
-	<select id="selectOttInfo" resultMap="ottListResultMap">
+	<select id="selectOttInfo" resultMap="ottResultMap">
 		SELECT PLAN_NAME,
 			   OTT_NO,
-			   OTT_THUMB
+			   OTT_THUMB,
+			   PLAN_PRICE
 		FROM OTT_INFO
 		WHERE OTT_NO=#{modal_ott_no}
 	</select>
 	
-	<select id="insertParty" parameterType="Party">
+	<insert id="insertParty" parameterType="Party">
 		INSERT INTO PARTY(
 			P_NO,
+			M_NO,
 			OTT_NO,
 			P_SHARE_ID,
 			P_SHARE_PWD,
 			P_MAX_MEMBER,
 			P_START_DATE,
-			P_END_DATE
+			P_PERIOD,
+			P_END_DATE,
+			P_ACCOUNTS,
+			P_ENTRY_PRICE
 		)
 		VALUES(
 			SEQ_PARTY_NO.NEXTVAL,
+			#{m_no},
 			#{ott_no},
 			#{p_share_id},
 			#{p_share_pwd},
 			#{p_max_member},
 			#{p_start_date},
-			#{p_end_date}
+			#{p_period},
+			#{p_end_date},
+			#{p_accounts},
+			#{p_entry_price}
 		)
+	</insert>
+	
+	<select id="getPartyList" resultMap="partyResultMap">
+		SELECT P.P_NO,
+		       P.OTT_NO,
+		       P.P_SHARE_ID,
+		       P.P_SHARE_PWD,
+		       P.P_MAX_MEMBER,
+		       P.P_CUR_MEMBER,
+		       P.P_START_DATE,
+		       P.P_PERIOD,
+		       P.P_END_DATE,
+		       P.P_COMMENT,
+		       P.P_ENTRY_PRICE,
+		       TO_CHAR(P.P_ENTRY_PRICE,'999,999') AS P_ENTRY_PRICE_OUTPUT,
+		       TO_CHAR(P.P_END_DATE,'YYYY-MM-DD') AS P_END_DATE_OUTPUT,
+		       (TO_DATE(P.P_END_DATE) - TO_DATE(SYSDATE)) AS P_PERIOD_DAY,
+		       P.P_STATUS,
+		       O.OTT_NAME,
+		       O.OTT_THUMB,
+		       O.PLAN_NAME,
+		       O.PLAN_PRICE
+		FROM PARTY P
+		JOIN OTT_INFO O ON(P.OTT_NO = O.OTT_NO)
+		WHERE O.OTT_NAME=#{ottName} AND P.P_CUR_MEMBER != P.P_MAX_MEMBER
+		ORDER BY P.P_NO
 	</select>
 	
+	<select id="selectParty" resultMap="partyResultMap">
+		SELECT P.P_NO,
+		       P.OTT_NO,
+		       P.P_SHARE_ID,
+		       P.P_SHARE_PWD,
+		       P.P_MAX_MEMBER,
+		       P.P_CUR_MEMBER,
+		       P.P_START_DATE,
+		       P.P_PERIOD,
+		       P.P_END_DATE,
+		       P.P_COMMENT,
+		       P.P_ENTRY_PRICE,
+		       P.P_STATUS,
+		       P.P_ACCOUNTS,
+		       TO_CHAR(P.P_ENTRY_PRICE,'999,999') AS P_ENTRY_PRICE_OUTPUT,
+		       TRUNC(MONTHS_BETWEEN(P.P_END_DATE,SYSDATE)) AS ACCOUNTS_COUNT,       
+		       TO_CHAR(((P.P_ENTRY_PRICE * 0.1) * MONTHS_BETWEEN(P.P_END_DATE,SYSDATE)) ,'999,999') AS P_DEPOSIT,
+		       O.OTT_NAME,
+		       O.OTT_THUMB,
+		       O.PLAN_NAME,
+		       O.PLAN_PRICE
+		FROM PARTY P
+		JOIN OTT_INFO O ON(P.OTT_NO = O.OTT_NO)
+		WHERE P.P_NO=#{no}
+	</select>
 	
+	<insert id="insertPartyMemeber" parameterType="Party">
+		INSERT INTO MEMBER_PARTY(
+			P_NO,
+			M_NO,
+			STATUS
+		)
+		VALUES(
+			#{p_no},
+			#{m_no},
+			#{m_status}
+		)
+	</insert>
 	
+	<select id="getPartyNo" resultType="_int">
+		SELECT MAX(P_NO) FROM PARTY WHERE M_NO=#{m_no}
+	</select>
+	
+	<select id="partyMemberCheck" resultType="_int">
+		SELECT COUNT(*) FROM PARTY WHERE P_NO=#{p_no} AND P_MAX_MEMBER != P_CUR_MEMBER
+	</select>
+	
+	<update id="updatePartyMember" parameterType="Party">
+		UPDATE PARTY SET P_CUR_MEMBER=#{p_cur_member} WHERE P_NO=#{p_no}
+	</update>
 	
 </mapper>
