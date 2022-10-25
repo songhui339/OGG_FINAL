@@ -163,7 +163,6 @@ $(document).ready(function() {
     ////////////
     /////키업////
     ////////////
-    
     $("#message-text").keyup(function(e) {
 	    var content = $(this).val();
 	    $("#textLengthCheck").text("(" + content.length + " / 2000)");
@@ -171,6 +170,16 @@ $(document).ready(function() {
 	        alert("최대 2000자까지 입력 가능합니다.");
 	        $(this).val(content.substring(0, 2000));
 	        $('#textLengthCheck').text("(2000 / 2000");
+	    }
+	});
+    
+    $("#message-text2").keyup(function(e) {
+	    var content = $(this).val();
+	    $("#textLengthCheck2").text("(" + content.length + " / 2000)");
+	    if (content.length > 2000) {
+	        alert("최대 2000자까지 입력 가능합니다.");
+	        $(this).val(content.substring(0, 2000));
+	        $('#textLengthCheck2').text("(2000 / 2000");
 	    }
 	});
 
@@ -185,8 +194,7 @@ $(document).ready(function() {
     }
 
     $('#writeReview').on("click", function() {
-        convertbr();
-        let rvContent = str;
+        let rvContent = document.getElementById('message-text').value;
         
 		$.ajax({
 	        async: true,
@@ -210,7 +218,7 @@ $(document).ready(function() {
     });
 
     $('#updateReview').on("click", function() {
-        let rvContent = document.getElementById('message-text').value;
+        let rvContent = document.getElementById('message-text2').value;
         let rvNo = document.getElementById('rvNo').value;
 
 		$.ajax({
@@ -258,145 +266,6 @@ $(document).ready(function() {
 			});
         }
     });
-
-    //////////////
-    //게시글 좋아요//
-    //////////////
-    // $.ajax({
-    //     async: true,
-    //     type : 'POST',
-    //     url : contextpath + '/review/get_likes',
-    //     data : {
-    //         'rvNo' : rvNo,
-    //         'fCode' : fcode,
-    //         'ftype' : ftype
-    //     },
-    //     success : (data) => {
-
-    //         console.log(data);
-
-    //         if(data.likes.rvNo != 0){
-    //             $('#reviewLikes').hide();
-    //             $('#reviewDisLikes').show();
-    //         }
-    //     },
-    //     error: function (error) {
-    //         console.log('좋아요 하지 않음');
-    //     }
-    // });
-
-    // $('#reviewLikes').on("click", function() {
-	// 	$.ajax({
-	// 		async: true,
-	// 		type : 'POST',
-	// 		url : contextpath + '/review/insert_likes',
-	// 		data : {
-	// 			'rvNo' : rvNo,
-	// 			'lType' : 'REVIEW',
-	// 			'fCode' : fcode,
-	// 			'ftype' : ftype
-	// 		},
-	// 		success : (data) => {
-	// 			let no = document.getElementById('rvLikes').innerHTML;
-	// 			no = Number(no) + 1;
-
-	// 			$('#reviewLikes').hide();
-	// 			$('#reviewDisLikes').show();
-	// 			$('#rvLikes').html(no);
-	// 		},
-	// 		error : (error) => {
-	// 			alert('로그인 후 가능합니다');
-	// 		}
-	// 	});
-	// });
-
-    // $('#reviewDisLikes').on("click", function() {
-	// 	$.ajax({
-	// 		async: true,
-	// 		type : 'POST',
-	// 		url : contextpath + '/review/delete_likes',
-	// 		data : {
-	// 			'rvNo' : rvNo,
-	// 			'lType' : 'REVIEW',
-	// 			'fCode' : fcode,
-	// 			'ftype' : ftype
-	// 		},
-	// 		success : (data) => {
-	// 			let no = document.getElementById('rvLikes').innerHTML;
-	// 			no = Number(no) - 1;
-				
-	// 			$('#reviewDisLikes').hide();
-	// 			$('#reviewLikes').show();
-	// 			$('#rvLikes').html(no);
-
-	// 			console.log('unlike it');
-	// 		},
-	// 		error : (error) => {
-	// 			alert('로그인 후 가능합니다');
-	// 		}
-	// 	});
-	// });
-
-    // ////////////
-    // /////댓글////
-    // ////////////
-    // // ok
-    // $('#writeCmt').on("click", function() {
-    //     let cmtContent = document.getElementById('rvCmt').value;
-    //     let rvNo = document.getElementById('rvNo').value;
-
-	// 	if(cmtContent.trim()==""){
-	// 		alert("내용을 입력해주세요");
-    //     }else{
-    //         $.ajax({
-    //             async: true,
-    //             type : 'POST',
-    //             url : contextpath + '/review/cmt_write',
-    //             data : {
-    //                 'rvNo' : rvNo,
-    //                 'cmtContent' : cmtContent, 
-    //                 'fCode' : fcode,
-    //                 'ftype' : ftype
-    //             },
-    //             success : (data) => {
-    //                 let html = "<tr id='cmtlist'>";
-    //                     html += "<input id='cmtNo' type='hidden' value='"+ data.cmt.cmtNo +"'>";
-    //                     html += "<input id='cmtWriterNo' type='hidden' value='"+ data.cmt.cmtWriterNo +"'>";
-    //                     html += "<td id='board-text4'>" + data.cmt.cmtNickname + "</td>";
-    //                     html += "<td id='board-text5' onclick='showCmt_Re(event)'>" + data.cmt.cmtContent + "</td>";
-    //                     html += "<td id='board-text7'>";
-    //                     html += "<div class='btn-group' role='group' aria-label='Basic mixed styles example'>";
-    //                     html += "<button class='btn btn-primary' type='button' onclick='showUpdateCmt(event)'>수정</button>";
-    //                     html += "<button class='btn btn-primary' type='button' onclick='deleteCmt(event)'>삭제</button>";
-    //                     html += "</div></td></tr>";
-    //                     html += "<tr id='cmtlist_up' style='display: none;'>";
-    //                     html += "<td id='board-text4'>" + data.cmt.cmtNickname + "</td>";
-    //                     html += "<td id='board-text5-1'>";
-    //                     html += "<textarea id='message-cmt-2' style='border: 1px solid lightgrey; resize: none; width: 100%;'></textarea>";
-    //                     html += "</td><td id='board-text7-1'>";
-    //                     html += "<div class='btn-group' role='group' aria-label='Basic mixed styles example'>";
-    //                     html += "<button class='btn btn-primary' type='button' onclick='updateCmt(event)'>수정</button>";
-    //                     html += "<button class='btn btn-primary' type='button' onclick='updateCommentsCancel(event)'>취소</button>";
-    //                     html += "</div></td></tr>";
-    //                     html += "<tr id='cmtlist_re_orig' style='display: none;'></tr>";
-    //                     html += "<tr id='cmtlist_re' style='display: none;'>";
-    //                     html += "<input id='cmtWriterNo' type='hidden' value='${ loginMember.m_no }'>";
-    //                     html += "<td id='board-text4-1'>↳ &nbsp; ${ loginMember.m_nickname }</td>";
-    //                     html += "<td id='board-text5-1'>";
-    //                     html += "<textarea id='message-cmt-1' style='border: 1px solid lightgrey; resize: none; width: 100%;'></textarea>";
-    //                     html += "</td><td id='board-text7' style='padding-top: 15px;'>";
-    //                     html += "<button class='btn btn-primary' type='button' onclick='writeCmt_Re(event)' style='margin-left:25%; height: 35px;'>등록</button>";
-    //                     html += "</td></tr>"
-
-    //                     $("#cmtbody").append(html);
-    //                     $("#rvCmt").val('');
-    //             },
-    //             error : (error) => {
-    //                 alert('댓글 등록에 실패하였습니다');
-    //             }
-    //         });
-    //     }
-    // });
 
     $('#tolist').on("click", function() {
         location.href = contextpath + "/film/review_list?fcode=" + fcode + "&ftype=" + ftype;
