@@ -102,32 +102,44 @@
         </div>
 
         <div class="owl-carousel owl-theme contentBox">
-            <!-- Party Slide Item START -->
-            <div class="item itemBox">
-                <div class="title">
-                    <div class="logoImg">
-                        <img src="${ path }/images/party/logo_netflix.png" alt="logoImg">
-                    </div>
-                    <div class="titleText">
-                        <p class="text">유튜브 프리미엄</p>
-                        <p class="subText">파티모집 / 즉시시청 / 빠른 대응</p>
-                    </div>
-                </div>
-                <div class="item-members">
-                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small.png" alt=""></span>
-                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small-glay.png" alt=""></span>
-                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small-glay.png" alt=""></span>
-                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small-glay.png" alt=""></span>
-                </div>
-                <div class="item-info">
-                    <div class="item-date">
-                        22.11.04<span class="pc-inline">까지 </span>(<strong>24</strong>일)
-                    </div>
-                    <div class="item-price"><span class="price">3,936</span>원</div>
-                </div>
-            </div>
-            <!-- Party Slide Item END -->
-
+            <c:if test="${ not empty list }">
+	            <c:forEach var="list" items=" ${ list }">
+		            <!-- Party Slide Item START -->
+		            <div class="item itemBox">
+		                <div class="title">
+		                    <div class="logoImg">
+		                        <img src="${ path }/images/party/${ list.ott_thumb }.png" alt="logoImg">
+		                    </div>
+		                    <div class="titleText">
+		                        <p class="text">${ list.plan_name }</p>
+		                        <p class="subText">파티모집 / 즉시시청 / 빠른 대응</p>
+		                    </div>
+		                </div>
+		                <input type="hidden" id="max_member" value="${ list.p_max_member }">
+		                <input type="hidden" id="cur_member" value="${ list.p_cur_member }">
+		                <div class="item-members">
+		                	<c:forEach var="i" begin="0" end="${ list.p_max_member }" step="1">
+		                		<c:if test="${ i <= list.p_cur_member }">
+		                    		<span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small.png" alt=""></span>
+		                		</c:if>
+		                		<c:if test="${ i > list.p_cur_member }">
+				                    <span class="item-member"><img src="https://buts.co.kr/thema/Buts/colorset/Basic/img/icon-butsicon-small-glay.png" alt=""></span>
+		                		</c:if>
+		                	</c:forEach>
+		                </div>
+		                <div class="item-info">
+		                    <div class="item-date" id="period_day">
+		                    <input type="hidden" id="end_date" value="${ list.p_end_date }">
+		                        ${ list.p_end_date_output }<span class="pc-inline">까지</span>(<strong>${ list.p_period_day }</strong>일)
+		                    </div>
+		                    <div class="item-price"><span class="price">${ list.p_entry_price_output }</span>원</div>
+		                </div>
+		            </div>
+		            <!-- Party Slide Item END -->
+	            </c:forEach>
+			</c:if>
+			
+			
             <!-- Party Slide Item START -->
             <div class="item itemBox">
                 <div class="title">
