@@ -49,7 +49,7 @@
 		FROM PARTY P
 		JOIN OTT_INFO O ON(P.OTT_NO = O.OTT_NO)
 		WHERE P_STATUS = 'Y'
-		ORDER BY P.P_NO
+		ORDER BY P.P_NO 
 	</select>
 
 </mapper>
