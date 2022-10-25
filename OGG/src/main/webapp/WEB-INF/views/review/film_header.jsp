@@ -6,19 +6,20 @@
 <c:set var="path" value="${pageContext.request.contextPath}"/>
  
 	<!-- 1st row -->
-	<div class="container" style="height: 250px;">
-	    <div class="row" style="height: 100%;"> 
-	        <div class="col-sm-3" style="height: 100%; width: 13em;">
-	            <div class="card" id="filmDetail0" style="height: 100%; border: none;">
-	
-	            </div>
+	<div class="container" id="baback">
+	</div>
+	<div class="container" id="aback">
+	</div>
+	<div class="container" id="back">
+	    <div class="row"> 
+	        <div class="col-sm-3" id="filmDetail0" style="height: 100%; width: 13em; padding-top:30px;">
 	        </div>
-	        <div class="col-sm-9" style="margin-top: 5%;" >
+	        <div class="col-sm-9" style="margin-top: 5%; padding-top:30px;">
 	            <div id="filmDetail1">
 	
 	            </div>
 	            <div class="row">
-	                <div class="col-3 col-sm-3" style="margin-bottom: 10px;">
+	                <div class="col-3 col-sm-3" style="margin-bottom: 30px;">
 	                    <div class="star-rating space-x-4 mx-auto">
 	                        <input type="radio" id="5-star" name="rating" value="5" v-model="ratings" onclick="starFilm(event)"/>
 	                        <label for="5-star" class="star pr-4">★&nbsp;</label>
@@ -124,8 +125,7 @@
 	        </div>
 	    </div>
 	</div>
-	<hr>
-
+	<%-- <hr> --%>
 	<script>
 	$(document).ready(function() {
 
@@ -141,10 +141,12 @@
 
 				if(data.star != null){
 					let num = data.star.fstar;
-					console.log(num)
+					console.log(num);
 
 					$('#' + num + '-star').attr('checked', 'checked');
+					console.log('영화 별점 있음');
 				}
+					console.log('영화 별점 없음');
 			},
 			error: function (error) {
 				console.log('별점 통신 에러');
@@ -161,13 +163,15 @@
 				'ftype' : ftype
 			},
 			success : (data) => {
-				// console.log(data);
+
 				if(!data){
+					console.log('영화 찜 없음');
+				}else{
 					if(data.likeFilm.fcode == null || data.likeFilm.flikes == 0){
-						console.log('가가가가가가');
 					}else{
 						$('#likeFilm').hide();
 						$('#dislikeFilm').show();
+						console.log('영화 찜 있음');
 					}
 				}
 			},
@@ -200,7 +204,6 @@
 	}
 
 	function likeFilm(event) {
-		
 		$.ajax({
 			async: true,
 			type : 'POST',
@@ -222,7 +225,6 @@
 	}
 
 	function dislikeFilm(event) {
-		
 		$.ajax({
 			async: true,
 			type : 'POST',

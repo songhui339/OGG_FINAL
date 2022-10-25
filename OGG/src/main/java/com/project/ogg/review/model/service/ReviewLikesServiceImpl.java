@@ -52,7 +52,6 @@ public class ReviewLikesServiceImpl implements ReviewLikesService {
 	}
 
 	@Override
-	@Transactional
 	public ReviewLikes getLikes(ReviewLikes reviewLikes) {
 		String type = reviewLikes.getLType();
 		
@@ -68,6 +67,7 @@ public class ReviewLikesServiceImpl implements ReviewLikesService {
 	}
 
 	@Override
+	@Transactional
 	public ReviewLikes setLikes(ReviewLikes reviewLikes, String type) {
 		int insertLikes = 0;
 		int deleteLikes = 0;

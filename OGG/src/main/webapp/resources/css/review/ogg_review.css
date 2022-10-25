@@ -26,7 +26,6 @@
         height: 265px;
     } 
     #card_film2{
-        /* border: 2px solid rgb(21, 182, 182); */
         width: 13rem; 
         border-radius: 15px;
         margin: auto;
@@ -304,7 +303,7 @@
     }
 
     .star-rating label {
-        -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
+        -webkit-text-fill-color: transparent;
         -webkit-text-stroke-width: 2.3px;
         -webkit-text-stroke-color: #7e69fe;
         cursor: pointer;
@@ -337,11 +336,8 @@
     .carousel-control-next{
         height: 100px;
         width: 50px;
-        /* outline: green; */
         background-size: 100%, 100%;
         border-radius: 50%;
-        /* border: 1px solid blue; */
-        /* background-color: red; */
     }
 
     .carousel-control-next,
@@ -350,13 +346,21 @@
     }
 
     #carousel01 {
-        /* border: 2px solid blue; */
+        padding-left: 50px; 
+        padding-right: 60px;
+    }
+
+    #carousel02 {
+        padding-left: 50px; 
+        padding-right: 60px;
+    }
+
+    #carousel03 {
         padding-left: 50px; 
         padding-right: 60px;
     }
 
     #carousel00 {
-       /*  border: 2px solid blue; */
 		height: 400px;
 		display: flex;
 		justify-content: center;
@@ -369,4 +373,34 @@
 
     .c3-event-rect bar{
         fill: #7e69fe;
+    }
+    
+    /* 검색 */
+    
+    .searchdiv{
+        margin-bottom: 20px;
+    }
+
+    #baback {
+        padding-left: 30%;
+        position:absolute;
+        height: 350px; 
+        width: 90%;
+        background-position: left center;
+        /* box-shadow: inset 0px 0px 50px 5px #7e69fe; */
+        /* box-shadow: inset 0px 0px 50px 5px black; */
+    }
+
+    #aback {
+        height: 230px; 
+    }
+
+    #back {
+        position: relative;
+        height: 290px; 
+    }
+
+    #fafa {
+        padding: 10px 10px 0px 15px;
+        margin-bottom: 100px;
     }

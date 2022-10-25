@@ -5,12 +5,38 @@ $(document).ready(function() {
 	const type1 = "movie";
     const type2 = "tv";
 	let poster = 'https://image.tmdb.org/t/p/w500/';
+	let poster2 = 'https://image.tmdb.org/t/p/original/';
     // var title;
     var name;
 
     ////////////
     //필름 디테일//
     ////////////
+    $.ajax({
+        async: true, 
+        url: url ,
+        type: "GET",
+        timeout: 3000,
+        dataType: "json", 
+        success: function (result) { 
+        
+			let img = poster2 + result.backdrop_path;
+			
+            let html = "";
+                html += "#baback { background-image: url('";
+                html += img + "'); ";
+                html += "background-size : cover; ";
+                html += "background-repeat : no-repeat; ";
+                // html += "background-position : 10px; 50px; ";
+                html += "}";
+
+            $("#hi").append(html);
+        },
+        error: function (error) {
+            console.log('영화포스터 가져오기 통신 오류');
+        }
+    });
+    
     $.ajax({
         async: true, 
         url: url ,
@@ -30,7 +56,7 @@ $(document).ready(function() {
             console.log('영화포스터 가져오기 통신 오류');
         }
     });
-    
+
     $.ajax({
         async: false, 
         url: url ,
@@ -39,21 +65,31 @@ $(document).ready(function() {
         dataType: "json", 
         success: function (result) { 
         
+            console.log(result)
+
 		    let orig_title = (ftype=='movie' ? result.original_title : result.original_name);
 		    title = (ftype=='movie' ? result.title : result.name);
 		    let runtime = (ftype=='movie' ? result.runtime : result.episode_run_time);
-		    let date = (ftype=='movie' ? result.release_date : result.first_air_date);
+		    let date = (ftype=='movie' ? result.release_date.replace(/-/gi, ". ") : result.first_air_date.replace(/-/gi, ". "));
+		    // let date = (ftype=='movie' ? result.release_date.replace(/-/gi, ".").slice(0,-4) : result.first_air_date);
+		    // let date = (ftype=='movie' ? result.release_date : result.first_air_date);
 		    let vote_average = result.vote_average;
 		    let id = result.id;
-
+            let genres = [];
+            for(let i = 0; i < result.genres.length; i++){
+                genres[i] = result.genres[i].name;
+            }
+            let genre = genres.join(' ・ ');
+            
             let html = "";
                 html += "<a href='" + contextpath + "/film/detail?fcode=" + id + "&ftype=" + type1 + "'>";
                 html += "<div class='row' style='font-size: 2em; font-weight: 700; margin-top: 35px; margin-bottom: 1px; margin-left: 1px;'>";
                 html += title;
                 html += "</div>";
                 html += "</a>";
-                html += "<div class='row' style='font-size: 1em; color: grey; margin-bottom: 15px; margin-left: 1px;'>";
-                html += orig_title + " " + date + "<br>" + "평점 : " + vote_average 
+                html += "<div class='row' style='font-size: 0.9em; color: grey; margin-bottom: 15px; margin-left: 7px;'>";
+                // html += orig_title + "<br> 장르 ・ " + genre + " " + "<br> 개봉 ・ " + date + " <br> 러닝타임 ・ " + runtime +"분 " 
+                html += orig_title + " ・ " + genre + " " + "<br> 개봉 ・ " + date + " <br> 러닝타임 ・ " + runtime +"분 " 
                 html += "</div>";
 
             $("#filmDetail1").append(html);
@@ -70,14 +106,21 @@ $(document).ready(function() {
         timeout: 3000,
         dataType: "json", 
         success: function (result) { 
-        
+            
+            console.log(result);
+
 		    let overview = result.overview;
+		    // let production_countries = result.production_countries[0].name;
+		    let belongs_to_collection = (result.belongs_to_collection == null ? " " : result.belongs_to_collection.name);
+		    let tagline = (result.tagline == null ? " " : result.tagline);
 		    
             let html = "";
                 html += "<p id='detail-text1'>기본 정보</p>";
                 html += "<hr>";
                 // html += "<br>";
                 html += "<p id='detail-text6'>";
+                html += belongs_to_collection + " ・ " + tagline;
+                html += "<p id='detail-text3'>";
                 html += overview;
                 html += "</p></p>";
                 

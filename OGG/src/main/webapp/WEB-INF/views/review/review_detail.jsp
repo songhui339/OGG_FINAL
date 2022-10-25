@@ -14,13 +14,18 @@
     <!-- my JS -->
     <script defer src="${path}/js/review/film_detail.js"></script>
     
+	<style id="hi">
+    </style>
+
     <!-- 내용 전체 컨테이너 -->
-    <div class="container" style="margin-bottom: 100px; margin-top: 40px; padding-left: 60px; padding-right: 60px; ">
+    <div class="container">
         
         <!-- 1st row -->
         <jsp:include page="/WEB-INF/views/review/film_header.jsp"/>
         
         <!-- 2nd row -->
+        <div id="fafa">
+        <hr>
         <div class="col-3 col-sm-12" id="div_review">
             <!-- 리뷰 내용 -->
             <div id="div_review">

@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.project.ogg.member.model.vo.Member;
 import com.project.ogg.review.model.service.ReviewLikesService;
 import com.project.ogg.review.model.vo.Film;
-import com.project.ogg.review.model.vo.Review;
 import com.project.ogg.review.model.vo.ReviewLikes;
 
 @Controller
@@ -183,6 +182,8 @@ public class ReviewLikesController {
 			reviewLikes.setMNo(member.getM_no());
 			map.put("likeFilm", service.getLikes(reviewLikes));
 		}
+		
+		System.out.println(map);
 		
 		return map;
 	}

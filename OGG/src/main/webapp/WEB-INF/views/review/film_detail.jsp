@@ -17,16 +17,21 @@
     <!-- my JS -->
     <script defer src="${ path }/js/review/film_detail.js"></script>
 
-    <!-- 내용 전체 컨테이너 -->
-    <div class="container" style="margin-bottom: 100px; margin-top: 40px; padding-left: 60px; padding-right: 60px; ">
-		
-		<!-- 1st row -->
-		<jsp:include page="/WEB-INF/views/review/film_header.jsp"/>
+	<style id="hi">
+    </style>
 
+    <!-- 내용 전체 컨테이너 -->
+    <div class="container">
+		
+    <!-- 1st row -->
+	<jsp:include page="/WEB-INF/views/review/film_header.jsp"/>
+		
         <!-- 2nd row -->
+        <div id="fafa">
+        <hr>
         <c:if test="${ loginMember != null }">
             <c:if test="${ review == null }">
-                <div id="div_review">
+                <div class="col-3 col-sm-12" id="div_review">
                     <div class="row" id="detail-text0">
                         <div class="col-3">이 작품에 대한 평가를 남겨보세요</div>
                         <div class="col-9"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reviewModal" data-bs-whatever="남기기">리뷰 남기기</button></div>
@@ -49,7 +54,7 @@
         </c:if>
 
         <c:if test="${ loginMember == null }">
-	        <div id="div_review">
+	        <div class="col-3 col-sm-12" id="div_review">
 	            <div class="row" id="detail-text0" style="text-align : center;"> 
 	                <div>로그인 후 평가를 남길 수 있습니다</div>
 	            </div>
@@ -78,12 +83,15 @@
 
             <!-- div -->
             <div class="container">
+                <c:if test="${ empty list }">
+					<div style="text-align: center;">
+                        <br><br>
+                        작성된 리뷰가 없습니다.
+                        <br><br><br>
+                    </div>
+				</c:if>
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4" id="card_review_row">
                 
-                <c:if test="${ empty list }">
-					작성된 리뷰가 없습니다.
-					<br><br>
-				</c:if>
                 
                 <c:if test="${ not empty list }">
 					<!-- 기준으로 반복 -->
@@ -130,7 +138,7 @@
 	       </div>
         </div>
         <!-- 6th row 끝 -->
-
+    </div>
     </div>
     <!-- 내용 전체 컨테이너 끝 -->
 
@@ -150,38 +158,31 @@
                 'ftype' : ftype
             },
             success : function (data) {
-            arr = [];
-            result1 = 0;
-            result2 = 0;
-            result3 = 0;
-            result4 = 0;
-            result5 = 0;
+            console.log(data);    
+                arr = [];
+                result1 = 0;
+                result2 = 0;
+                result3 = 0;
+                result4 = 0;
+                result5 = 0;
 
-            for (let i = 0; i < data.length; i++) {
-                if (data[i].fstar == 1) {
-                    result1++;
+                for (let i = 0; i < data.length; i++) {
+                    if (data[i].fstar == 1) {
+                        result1++;
+                    }
+                    if (data[i].fstar == 2) {
+                        result2++;
+                    }
+                    if (data[i].fstar == 3) {
+                        result3++;
+                    }
+                    if (data[i].fstar == 4) {
+                        result4++;
+                    }
+                    if (data[i].fstar == 5) {
+                        result5++;
+                    }
                 }
-                if (data[i].fstar == 2) {
-                    result2++;
-                }
-                if (data[i].fstar == 3) {
-                    result3++;
-                }
-                if (data[i].fstar == 4) {
-                    result4++;
-                }
-                if (data[i].fstar == 5) {
-                    result5++;
-                }
-            }
-                // console.log('시작');
-                // console.log(result1);
-                // console.log(result2);
-                // console.log(result3);
-                // console.log(result4);
-                // console.log(result5);
-                // console.log('끝');
-
             },
             error: function (error) {
                 console.log('그래프 통신 에러');
@@ -189,18 +190,18 @@
         });
 
 	var chart = c3.generate({
-	bindto: "#linechart",
-	data: {
-        json:{
-            num: [ 1, 2, 3, 4, 5 ],
-            '평가자수': [ result1, result2, result3, result4, result5 ],
-        },
-        x: 'num',
-        types:{
-            num: 'line',
-            평가자수: 'bar'
+        bindto: "#linechart",
+        data: {
+            json:{
+                num: [ 1, 2, 3, 4, 5 ],
+                '평가자수': [ result1, result2, result3, result4, result5 ],
+            },
+            x: 'num',
+            types:{
+                num: 'line',
+                평가자수: 'bar'
+            }
         }
-    }
     });
 
 	reviewModal = document.getElementById('reviewModal')

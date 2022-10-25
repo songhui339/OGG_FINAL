@@ -24,9 +24,8 @@
             <div class="col">
             </div>
             <div class="col">
-                <input type="text" id="searchInput" style="margin-left: 35%; margin-top:5px; 
-                        height: 34px; width:140px; border: 1px solid lightgray">
-                <button class="btn btn-primary" type="button" style="display: inline; height: 35px; margin-bottom: 5px;"
+                <input type="text" class="form-control" id="searchInput" style="width:140px; margin-left: 35%; margin-top:5px; display: inline-block; border: 1px solid lightgray;">
+                <button class="btn btn-primary" type="button" style="display: inline; height: 36px; margin-bottom: 5px;"
                 		id="searchBtn">검색</button>
             </div>
             <hr>
@@ -146,11 +145,17 @@
     <script>
 		$("#searchBtn").on("click", () => {
 			var keyword = $("#searchInput").val();
+			var type = $("#searchType").val();
 			
-		    location.href="${path}/film/search?keyword=" + keyword;
+            if(!keyword){
+                alert('검색어를 입력해주세요');
+            }else{
+                location.href="${path}/film/search?type=" + type + "&keyword=" + keyword;
+            }
 		});
-		
+	
 		let searchkeyword = "[[${searchkeyword}]]";
+		let searchtype = "[[${searchtype}]]";
 		var contextpath = "${ pageContext.request.contextPath }";
 	</script>
 
