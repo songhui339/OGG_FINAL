@@ -9,6 +9,7 @@ import com.project.ogg.admin.model.vo.Answer;
 import com.project.ogg.admin.model.vo.MemberAD;
 import com.project.ogg.admin.model.vo.Notice;
 import com.project.ogg.admin.model.vo.OttAdmin;
+import com.project.ogg.admin.model.vo.OttForPie;
 import com.project.ogg.admin.model.vo.Question;
 import com.project.ogg.member.model.vo.Member;
 
@@ -66,5 +67,9 @@ public interface AdminMapper {
 	int deleteOtt(int no);
 
 	MemberAD selectMember(String memberid);
+
+	List<OttForPie> getPieList();
+
+	int getPartyCount();
 
 }

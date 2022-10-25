@@ -33,6 +33,7 @@ import com.project.ogg.admin.model.vo.MUser;
 import com.project.ogg.admin.model.vo.MemberAD;
 import com.project.ogg.admin.model.vo.Notice;
 import com.project.ogg.admin.model.vo.OttAdmin;
+import com.project.ogg.admin.model.vo.OttForPie;
 import com.project.ogg.admin.model.vo.PhotoVo;
 import com.project.ogg.admin.model.vo.Question;
 import com.project.ogg.common.util.MultipartFileUtil;
@@ -57,7 +58,6 @@ public class AdminController {
 	
 	@GetMapping("/admin/home")
 	public ModelAndView goAdmin(ModelAndView model,@AuthenticationPrincipal Member member) {
-		if(member.getM_authority().equals("ROLE_ADMIN")) {
 		List<MemberAD> list = service.getMemberList();
 		MUser muser = new MUser();
 		muser.setMarchUser(service.getMarchUserCount());
@@ -65,21 +65,16 @@ public class AdminController {
 		muser.setSepUser(service.getSepUserCount());
 		muser.setDecUser(service.getDecUserCount());
 		
-		System.out.println(muser);
+		List<OttForPie> pielist = service.getPieList();
+		int partyCount = mapper.getPartyCount();
+		System.out.println(pielist);
+		model.addObject("pc",partyCount);
+		model.addObject("pielist",pielist);
 		model.addObject("muser",muser);
-
 		model.addObject("list", list);
 		model.setViewName("admin/ad_main");
 		
 		return model;
-		}
-		else {
-			model.addObject("msg", "관리자만 접근 가능합니다..");
-			model.addObject("location", "/");
-			model.setViewName("common/msg");
-			return model;
-			
-		}
 	}
 	
 	@PostMapping("/admin/selectMember")
@@ -104,6 +99,12 @@ public class AdminController {
 		muser.setJuneUser(service.getJuneUserCount());
 		muser.setSepUser(service.getSepUserCount());
 		muser.setDecUser(service.getDecUserCount());
+		
+		List<OttForPie> pielist = service.getPieList();
+		int partyCount = mapper.getPartyCount();
+		System.out.println(pielist);
+		model.addObject("pc",partyCount);
+		model.addObject("pielist",pielist);
 		
 		model.addObject("muser",muser);
 		model.addObject("list",list);

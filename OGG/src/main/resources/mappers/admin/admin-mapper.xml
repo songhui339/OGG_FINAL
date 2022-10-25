@@ -41,6 +41,21 @@ FROM OTT_INFO
 	WHERE N_STATUS = 'Y'
 </select>
 
+<select id="getPartyCount" resultType="_int">
+select count(*)
+from party
+</select>
+
+<select id="getPieList" resultType="OttForPie">
+SELECT O.OTT_NAME 
+    ,COUNT(*) "COUNT"
+FROM PARTY P
+JOIN OTT_INFO O ON(O.OTT_NO = P.OTT_NO)
+<![CDATA[WHERE ROWNUM <= 4 ]]>
+GROUP BY O.OTT_NAME
+ORDER BY COUNT(*) DESC
+</select>
+
 <select id="getQuestionCount" resultType="_int">
 	SELECT COUNT(*)
 	FROM QUESTION

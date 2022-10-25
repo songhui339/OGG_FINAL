@@ -7,10 +7,10 @@ var ctx = document.getElementById("myPieChart");
 var myPieChart = new Chart(ctx, {
   type: 'pie',
   data: {
-    labels: ["유튜브", "넷플릭스", "왓챠", "디즈니","기타"],
+    labels: [fn, sn, tn, "g","기타"],
     datasets: [{
-      data: [12.21, 15.58, 11.25, 8.32, 5.25],
-      backgroundColor: ['#007bff', '#dc3545', '#ffc107', '#28a745','#964B00'],
+      data: [fc, sc, tc, 3, pc],
+      backgroundColor: ['#964B00', '#dc3545', '#ffc107', '#28a745','#007bff'],
     }],
   },
 });

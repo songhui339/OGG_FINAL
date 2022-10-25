@@ -12,6 +12,7 @@ import com.project.ogg.admin.model.vo.Answer;
 import com.project.ogg.admin.model.vo.MemberAD;
 import com.project.ogg.admin.model.vo.Notice;
 import com.project.ogg.admin.model.vo.OttAdmin;
+import com.project.ogg.admin.model.vo.OttForPie;
 import com.project.ogg.admin.model.vo.Question;
 import com.project.ogg.common.util.PageInfo;
 
@@ -175,6 +176,11 @@ public class AdminServiceImpl implements AdminService {
 	public MemberAD selectMember(String memberid) {
 		// TODO Auto-generated method stub
 		return mapper.selectMember(memberid);
+	}
+
+	@Override
+	public List<OttForPie> getPieList() {
+		return mapper.getPieList();
 	}
 
 	

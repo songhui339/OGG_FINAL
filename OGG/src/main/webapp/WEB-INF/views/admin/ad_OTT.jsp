@@ -167,6 +167,16 @@
         var c = ${muser.sepUser};
         var d = ${muser.decUser};
         
+        var fn = "${pielist[0].ott_name}";
+        var fc = ${pielist[0].count};
+        var sn = "${pielist[1].ott_name}";
+        var sc = ${pielist[1].count};
+        var tn = "${pielist[2].ott_name}";
+        var tc = ${pielist[2].count};
+        
+        var pc = ${pc}-fc-sc-tc;
+        
+        
         function ottdel(e){
             if(confirm("정말로 OTT를 삭제 하시겠습니까?")) {
             	location.replace("${ path }/ott/delete?ott_no="+e);
