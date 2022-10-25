@@ -3,7 +3,7 @@
 
 <mapper namespace="com.project.ogg.main.model.mapper.MainMapper">
 
-	<resultMap type="HashMap" id="partyListResultMap">
+	<resultMap type="Party" id="partyResultMap">
 		<id property="p_no" column="P_NO"/>
 		<result property="ott_class" column="OTT_CLASS"/>
 		<result property="ott_no" column="OTT_NO"/>
@@ -17,9 +17,20 @@
 		<result property="p_comment" column="P_COMMENT"/>
 		<result property="p_entry_price" column="P_ENTRY_PRICE"/>
 		<result property="p_status" column="P_STATUS"/>
-		<result property="p_caution1" column="P_CAUTION1"/>
-		<result property="p_caution2" column="P_CAUTION2"/>
-		<result property="p_caution3" column="P_CAUTION3"/>
+		<result property="ott_name" column="OTT_NAME"/>
+		<result property="ott_thumb" column="OTT_THUMB"/>
+		<result property="plan_name" column="PLAN_NAME"/>
+		<result property="plan_price" column="PLAN_PRICE"/>
+		<result property="p_accounts" column="P_ACCOUNTS"/>
+		<result property="p_entry_price_output" column="P_ENTRY_PRICE_OUTPUT"/>
+		<result property="p_deposit" column="P_DEPOSIT"/>
+		<result property="accounts_count" column="ACCOUNTS_COUNT"/>
+		<result property="p_end_date_output" column="P_END_DATE_OUTPUT"/>
+		<result property="p_period_day" column="P_PERIOD_DAY"/>
+	</resultMap>
+	
+	<resultMap type="Ott" id="ottResultMap">
+		<id property="ott_no" column="OTT_NO"/>
 		<result property="ott_name" column="OTT_NAME"/>
 		<result property="ott_thumb" column="OTT_THUMB"/>
 		<result property="ott_class" column="OTT_CLASS"/>
@@ -28,11 +39,12 @@
 		<result property="plan_price_output" column="PLAN_PRICE_OUTPUT"/>
 		<result property="ott_status" column="OTT_STATUS"/>
 		<result property="plan_name" column="PLAN_NAME"/>
+		<result property="plan_each_price" column="PLAN_EACH_PRICE"/>
 	</resultMap>
 	
 	
 	
-	<select id="getPartyList" resultMap="partyListResultMap, ottListResultMap">
+	<select id="getPartyList" parameterType="String" resultMap="partyResultMap">
 		SELECT P.P_NO,
 		       P.OTT_NO,
 		       P.P_SHARE_ID,
