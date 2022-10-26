@@ -3,7 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <c:set var="path" value="${ pageContext.request.contextPath }"/>
 
 <!-- jQuery -->
@@ -32,6 +31,7 @@
             <input type="hidden" name="m_name" id="m_name" value="${ party.m_name }">
             <input type="hidden" name="m_email" id="m_email" value="${ party.m_email }">
             <input type="hidden" name="m_tel" id="m_tel" value="${ party.m_tel }">
+            <input type="hidden" name="p_no" id="p_no" value="${ party.p_no }">
                 <h3><span class="c_purple">파티 정보</span></h3>
                 <div class="form-round-box">
                     <ul class="form-list">
@@ -129,6 +129,9 @@
 	let id = $('#m_id').val();
 	let email = $('#m_email').val();
 	let tel = $('#m_tel').val();
+	let p_no = $('#p_no').val();
+	
+	let merchant_uid = "order_monthly_" + new Date().getTime();
 	
 	let date = new Date();
 	let year = date.getFullYear();
@@ -174,7 +177,7 @@
 	  	IMP.request_pay({
 	  		pg: 'kakaopay',
 	  		pay_method: 'card',
-	  		merchant_uid: "order_monthly_"+new Date().getTime(),
+	  		merchant_uid: merchant_uid,
 	  		customer_uid: id, // 카드(빌링키)와 1:1로 대응하는 값, 유저 ID값으로 설정 예정
 	  		name: '최초 결제',
 	  		amount: amount,
@@ -183,10 +186,22 @@
 	  		buyer_tel: tel
 	  	}, function (rsp) {
 	  		if ( rsp.success ) {
+	  			$.ajax({
+					url:"${path}/pay/firstSubpay",
+					type: 'POST',
+					dataType: "json",
+					data: {
+						customer_uid: id,
+				        amount: amount,
+				        merchant_uid: merchant_uid,
+				        p_no: p_no
+					}
+				});
 	  			
 	  			month = parseInt(month) + 1;
 		  		
 	  			for(let i = 1; i < monthly; i++){
+	  				temp += 1;
 	  				if(parseInt(month) <= 12){
 		  				accounts_date = year + "-" + month + "-" + accounts_day;
 		  				accounts_unix_date = new Date(accounts_date).getTime()/1000;
@@ -203,9 +218,10 @@
 						dataType: "json",
 						data: {
 							customer_uid: id,
-					        merchant_uid: "order_monthly_0"+new Date().getTime(),
+					        merchant_uid: "order_monthly_" + new Date().getTime() + temp,
 					        schedule_at: accounts_unix_date,
-					        amount: monthly_amount
+					        amount: monthly_amount,
+					        p_no: p_no
 						},
 						success: (result) => {
 							console.log(result);
@@ -214,7 +230,7 @@
 		  			month = parseInt(month) + 1;
 		  			
 	  			}
-	  			//location.href = "${path}/party/submitParty?no=${ party.p_no }&point=" + point;
+	  			location.href = "${path}/party/submitParty?no=${ party.p_no }&point=" + point;
 	  			
 		    } else {
 		    	alert('결제 예약 실패'); 
@@ -222,7 +238,5 @@
 	  	});
 	};
 </script>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

@@ -1,12 +1,14 @@
 package com.project.ogg.mypage.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -30,6 +32,8 @@ import com.project.ogg.party.model.service.PartyService;
 import com.project.ogg.party.model.vo.MyParty;
 import com.project.ogg.party.model.vo.Party;
 import com.project.ogg.party.model.vo.Point;
+import com.project.ogg.pay.model.service.PayService;
+import com.project.ogg.pay.model.vo.Pay;
 
 import oracle.jdbc.proxy.annotation.GetProxy;
 
@@ -45,6 +49,9 @@ public class MypageController {
 	
 	@Autowired
 	private PartyService partyService;
+	
+	@Autowired
+	private PayService payService;
 	
 	@Autowired
 	private MypageMapper mapper;
@@ -242,7 +249,7 @@ public class MypageController {
 		return model;
 	}
     
-    // 마이페이지 - 파티
+    // 마이페이지 - 파티리스트
     @GetMapping("/party")
     public ModelAndView mypageParty (ModelAndView model,
     		@AuthenticationPrincipal Member member) {
@@ -257,6 +264,7 @@ public class MypageController {
         return model;
     }
     
+    // 마이페이지 - 파티상세(파티장)
     @GetMapping("/party/leader")
     public ModelAndView mypagePartyLeader (ModelAndView model,
     		@RequestParam int no,
@@ -277,6 +285,7 @@ public class MypageController {
         return model;
     }
     
+    // 마이페이지 - 파티상세(파티원)
     @GetMapping("/party/member")
     public ModelAndView mypagePartyMember (ModelAndView model,
     		@RequestParam int no,
@@ -285,6 +294,7 @@ public class MypageController {
     	Party party = new Party();
     	List<MyParty> partyMember = null;
     	int m_no = member.getM_no();
+    	String m_id = member.getM_id();
     	
     	party = partyService.selectParty(no);
     	partyMember = partyService.partyMemberList(no);
@@ -292,12 +302,14 @@ public class MypageController {
     	model.addObject("party", party);
     	model.addObject("memberlist", partyMember);
     	model.addObject("m_no", m_no);
+    	model.addObject("m_id", m_id);
     	model.setViewName("mypage/mypage_party_member");
     	
         return model;
         
     }
     
+    // 마이페이지 - 파티수정
     @PostMapping("/party/updateParty")
     public ModelAndView mypagePartyUpdate (ModelAndView model,
     		@RequestParam int p_no,
@@ -321,6 +333,70 @@ public class MypageController {
     	return model; 
     }
     
+    // 마이페이지 - 파티 탈퇴, 예약 결제 취소 (파티원)
+    @PostMapping("/party/unschedule")
+    private ModelAndView unschedule (ModelAndView model,
+    		@RequestParam String customer_uid,
+    		@RequestParam int p_no,
+    		@AuthenticationPrincipal Member member){
+    	int result = 0;
+    	Party party = new Party();
+    	List<Pay> pay = null;
+    	party.setM_no(member.getM_no());
+    	party.setP_no(p_no);
+    	
+    	partyService.removePartyMember(party);
+    	result = partyService.deleteMemberParty(party);
+    	pay = partyService.memberPayList(party);
+    	
+    	if(result > 0) {
+    		payService.unschedulePay(customer_uid, pay);
+    		partyService.deletePay(party);
+    		model.addObject("msg", "파티를 탈퇴하였습니다.");
+            model.addObject("location", "/mypage/party");
+    	} else {
+    		model.addObject("msg", "파티 탈퇴에 실패했습니다.");
+            model.addObject("location", "/mypage/party");
+    	}
+    	
+    	
+    	model.setViewName("common/msg");
+    	
+    	return model;
+    }
+    // 마이페이지 - 파티 해체, 파티원 예약 결제 취소 (파티장)
+    @PostMapping("/party/deleteParty")
+    private ModelAndView deleteParty (ModelAndView model,
+    		@RequestParam int p_no) {
+    	String customer_uid = "";
+    	List<Pay> payList = null;
+    	List<Pay> merchantList = null;
+    	Party party = new Party();
+    	Pay pay = new Pay();
+    	
+    	payList = partyService.selectMemberParty(p_no);
+    	for(int i = 0; i < payList.size(); i++) {
+    		pay.setM_no(payList.get(i).getM_no());
+    		pay.setP_no(payList.get(i).getP_no());
+    		pay.setStatus(payList.get(i).getStatus());
+    		party.setM_no(payList.get(i).getM_no());
+    		party.setP_no(payList.get(i).getP_no());
+    		
+    		if(pay.getStatus() == "Y") {
+    			partyService.deletePartyMember(pay);
+    			continue;
+    		} else {
+    			customer_uid = partyService.getMemberId(pay.getM_no());
+    			merchantList = partyService.memberPayList(party);
+    			payService.unschedulePay(customer_uid, merchantList);
+    			partyService.deletePartyMember(pay);
+    		}
+    	}
+    	partyService.deleteParty(pay);
+    	
+    	return model;
+    }
+    
     // 마이페이지 - 결제 수단
     @GetMapping("/payment")
     public String mypagePayment () {
@@ -328,12 +404,27 @@ public class MypageController {
         return "mypage/mypage_payment";
     }
     
+    // 마이페이지 - 결제 내역 확인
     @GetMapping("/payment_history")
-    public String mypagePaymentHistory () {
+    public ModelAndView mypagePaymentHistory (ModelAndView model,
+    		@RequestParam(value = "page", defaultValue = "1") int page,
+    		@AuthenticationPrincipal Member member) {
+    	List<Pay> pay = null;
+    	PageInfo pageInfo = null;
+    	
+        int m_no = member.getM_no();
         
-        return "mypage/mypage_paymentList";
+        pageInfo = new PageInfo(page, 10, partyService.getPayCount(m_no), 8);
+    	pay = partyService.getPayListByNo(pageInfo, m_no);    	
+    	
+    	model.addObject("list", pay);
+    	model.addObject("pageInfo", pageInfo);
+    	model.setViewName("mypage/mypage_paymentList");
+    	
+        return model;
     }
     
+    // 마이페이지 - 포인트 내역 확인
     @GetMapping("/point")
     public ModelAndView mypagePoint (ModelAndView model,
     		@RequestParam(value = "page", defaultValue = "1") int page,

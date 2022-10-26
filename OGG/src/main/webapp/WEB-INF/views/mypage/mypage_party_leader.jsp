@@ -70,7 +70,8 @@
             <div class="line"></div>
 
             <form action="${ path }/mypage/party/updateParty" method="POST">
-            <input type="hidden" name="p_no" value="${ party.p_no }">
+            <input type="hidden" name="p_no" id="p_no" value="${ party.p_no }">
+            <input type="hidden" id="m_id" value="${ m_id }">
                 <div class="formBox">
                     <ul class="form-list">
                         <li>
@@ -113,7 +114,7 @@
                     <div class="btnBox">
                     	<button type="button" onclick="goBack()" class="btn">뒤로가기</button>
                         <button type="submit" class="btn">수정하기</button>
-                        <button type="" class="btn redBtn">파티해체</button>
+                        <button type="button" onclick="deleteParty()" class="btn redBtn">파티해체</button>
                     </div>
 
                     
@@ -139,9 +140,27 @@
     </div>
 </section>
 <script>
+	let p_no = $('#p_no').val();
+	
 	function goBack(){
 		window.history.back();
-	}
+	};
+	
+	function deleteParty(){
+		$.ajax({
+			type: "POST",
+			url: "${path}/mypage/party/deleteParty",
+			dataType: "json",
+			data: {
+				p_no: p_no
+			},
+			success: (result) => {
+				alert(result);
+			}
+
+		});
+		location.href="${path}/mypage/main"
+	};
 </script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

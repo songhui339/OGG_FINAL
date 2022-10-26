@@ -78,44 +78,40 @@
                     </tr>
                 </thead>
                 <tbody class="partyitem">
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>${C_TITLE}</td>
-                        <td>${C_WRITEDATE}</td>
-                        <td>${C_VIEWCOUNT}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>${C_TITLE}</td>
-                        <td>${C_WRITEDATE}</td>
-                        <td>${C_VIEWCOUNT}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>${C_TITLE}</td>
-                        <td>${C_WRITEDATE}</td>
-                        <td>${C_VIEWCOUNT}</td>
-                    </tr>
+                    <c:forEach var="list" items="${ list }">
+	                    <tr>
+	                        <th scope="row">${ list.r_num }</th>
+	                        <td>${ list.date }</td>
+	                        <td>${ list.status }</td>
+	                        <td>${ (list.amount_output).trim() }원</td>
+	                    </tr>
+                	</c:forEach>
                 </tbody>
             </table>
 
             <!-- Page 네비게이션 -->
             <div class="pageNav" id="pageBar">
                 <!-- 맨 처음으로 -->
-                <button class="btn arrowBtn" onclick="location.href=''">&lt;&lt;</button>
+                <button class="btn arrowBtn" onclick="location.href='${ path }/mypage/payment_history?page=1'">&lt;&lt;</button>
     
                 <!-- 이전 페이지로 -->
-                <button class="btn arrowBtn" onclick="location.href=''">&lt;</button>
+                <button class="btn arrowBtn" onclick="location.href='${ path }/mypage/payment_history?page=${ pageInfo.prevPage }'">&lt;</button>
     
                 <!--  10개 페이지 목록 -->
-                    <button class="btn" disabled>${ status.current }</button>
-                    <button class="btn pageNoBtn" onclick="location.href=''">2</button>
+                <c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" varStatus="status">
+					<c:if test="${ status.current == pageInfo.currentPage }">
+	                    <button class="btn" disabled>${ status.current }</button>
+					</c:if>
+					<c:if test="${ status.current != pageInfo.currentPage }">
+	                    <button class="btn pageNoBtn" onclick="location.href='${ path }/mypage/payment_history?page=${ status.current }'">${ status.current }</button>
+					</c:if>
+				</c:forEach>
     
                 <!-- 다음 페이지로 -->
-                <button class="btn arrowBtn" onclick="location.href=''">&gt;</button>
+                <button class="btn arrowBtn" onclick="location.href='${ path }/mypage/payment_history?page=${ pageInfo.nextPage }'">&gt;</button>
     
                 <!-- 맨 끝으로 -->
-                <button class="btn arrowBtn" onclick="location.href=''">&gt;&gt;</button>
+                <button class="btn arrowBtn" onclick="location.href='${ path }/mypage/point?page=${ pageInfo.maxPage }'">&gt;&gt;</button>
             </div>
 
         </div>

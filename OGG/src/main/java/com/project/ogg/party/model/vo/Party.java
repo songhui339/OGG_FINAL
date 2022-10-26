@@ -67,4 +67,6 @@ public class Party {
 	private String m_tel;
 	
 	private int point;
+	
+	
 }

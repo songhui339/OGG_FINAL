@@ -11,7 +11,8 @@ import com.project.ogg.party.model.vo.Ott;
 import com.project.ogg.party.model.vo.Party;
 import com.project.ogg.party.model.vo.Plan;
 import com.project.ogg.party.model.vo.Point;
-import com.project.ogg.pay.vo.Pay;
+import com.project.ogg.pay.model.vo.Pay;
+
 
 @Mapper
 public interface PartyMapper {
@@ -53,6 +54,30 @@ public interface PartyMapper {
 	int updateParty(Party party);
 
 	void insertPay(Pay pay);
+
+	void firstSubpay(Pay pay);
+
+	List<Pay> getPayListByNo(RowBounds rowBounds, int m_no);
+
+	int getPayCount(int m_no);
+
+	void removePartyMember(Party party);
+
+	int deleteMemberParty(Party party);
+
+	List<Pay> memberPayList(Party party);
+
+	void deletePay(Party party);
+
+	List<Pay> selectMemberParty(int p_no);
+
+	List<Pay> partyPayList(Party party);
+
+	String getMemberId(int m_no);
+
+	void deletePartyMember(Pay pay);
+
+	void deleteParty(Pay pay);
 
 	
 }

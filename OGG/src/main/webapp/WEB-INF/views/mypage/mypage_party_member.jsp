@@ -68,7 +68,8 @@
         <div class="infoBox">
             <p class="titleText">내 파티 관리</p>
             <div class="line"></div>
-
+			<input type="hidden" id="m_id" value="${ m_id }">
+			<input type="hidden" id="p_no" value="${ party.p_no }">
             <form action="">
                 <div class="formBox">
                     <ul class="form-list">
@@ -137,12 +138,24 @@
     </div>
 </section>
 <script>
+	let id = $('#m_id').val();
+	let p_no = $('#p_no').val();
+	
 	function goBack(){
 		window.history.back();
-	}
+	};
 	
 	function unschedulePay(){
-		
-	}
+		$.ajax({
+			type: "POST",
+			url: "${path}/mypage/party/unschedule",
+			dataType: "json",
+			data: {
+				customer_uid: id,
+				p_no: p_no
+			}
+		});
+		location.href="${path}/mypage/main"
+	};
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

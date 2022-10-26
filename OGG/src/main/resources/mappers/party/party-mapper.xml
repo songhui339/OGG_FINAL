@@ -62,6 +62,17 @@
 		<result property="start_date" column="START_DATE"/>
 	</resultMap>
 	
+	<resultMap type="Pay" id="payResultMap">
+		<id property="pay_no" column="PAY_NO"/>
+		<result property="r_num" column="ROWNUM"/>
+		<result property="status" column="STATUS"/>
+		<result property="date" column="PAY_DATE"/>
+		<result property="amount" column="AMOUNT"/>
+		<result property="m_no" column="M_NO"/>
+		<result property="amount_output" column="AMOUNT_OUTPUT"/>
+		<result property="merchant_uid" column="MERCHANT_UID"/>
+	</resultMap>
+	
 	<select id="selectOttList" resultMap="ottResultMap">
 		SELECT OTT_NO,
 		       OTT_NAME,
@@ -132,7 +143,7 @@
 			#{ott_no},
 			#{p_share_id},
 			#{p_share_pwd},
-			#{p_max_member},
+			#{p_max_member} + 1,
 			#{p_start_date},
 			#{p_period},
 			#{p_comment},
@@ -220,6 +231,10 @@
 		UPDATE PARTY SET P_CUR_MEMBER=#{p_cur_member} WHERE P_NO=#{p_no}
 	</update>
 	
+	<update id="removePartyMember" parameterType="Party">
+		UPDATE PARTY SET P_CUR_MEMBER=P_CUR_MEMBER - 1 WHERE P_NO=#{p_no}
+	</update>
+	
 	<update id="updateMemberPoint" parameterType="Party">
 		UPDATE MEMBER SET M_POINT=M_POINT+#{point} WHERE M_NO=#{m_no}
 	</update>
@@ -291,13 +306,87 @@
 			PAY_NO,
  			M_NO,
  		    PAY_DATE,
- 		    AMOUNT
+ 		    AMOUNT,
+ 		    MERCHANT_UID,
+ 		    P_NO,
+ 		    STATUS
 		)VALUES(
 			SEQ_PAY_NO.NEXTVAL,
 			#{m_no},
 			#{date},
-			#{amount}
+			#{amount},
+			#{merchant_uid},
+			#{p_no},
+			#{status}
 		) 
 	</insert>
 	
+	<insert id="firstSubpay" parameterType="Pay">
+		INSERT INTO PAY(
+			PAY_NO,
+ 			M_NO,
+ 		    AMOUNT,
+ 		    STATUS,
+ 		    MERCHANT_UID,
+ 		    P_NO
+		)VALUES(
+			SEQ_PAY_NO.NEXTVAL,
+			#{m_no},
+			#{amount},
+			#{status},
+			#{merchant_uid},
+			#{p_no}
+		)
+	</insert>
+	
+	<select id="getPayCount" parameterType="_int" resultType="_int">
+		SELECT COUNT(*) FROM PAY WHERE M_NO=#{m_no}
+	</select>
+	
+	<select id="getPayListByNo" resultMap="payResultMap">
+		SELECT ROWNUM,
+			   PAY_NO,
+			   PAY_DATE,
+			   TO_CHAR(AMOUNT,'999,999') AS AMOUNT_OUTPUT,
+			   M_NO,
+			   STATUS
+		FROM (
+			SELECT *
+			FROM PAY
+			ORDER BY PAY_DATE
+		)
+		WHERE M_NO=#{m_no}
+	</select>
+	
+	<delete id="deleteMemberParty" parameterType="Party">
+		DELETE FROM MEMBER_PARTY WHERE (P_NO=#{p_no} AND M_NO=#{m_no})
+	</delete>
+	
+	<delete id="deletePartyMember" parameterType="Pay">
+		DELETE FROM MEMBER_PARTY WHERE (P_NO=#{p_no} AND M_NO=#{m_no})
+	</delete>
+	
+	<select id="memberPayList" parameterType="Party" resultMap="payResultMap">
+		SELECT MERCHANT_UID FROM PAY WHERE (P_NO=#{p_no} AND M_NO=#{m_no} AND STATUS='결제 예약')
+	</select>
+	
+	<delete id="deletePay" parameterType="Party">
+		DELETE FROM PAY WHERE (P_NO=#{p_no} AND M_NO=#{m_no} AND STATUS='결제 예약')
+	</delete>
+	
+	<select id="selectMemberParty" parameterType="_int" resultMap="payResultMap">
+		SELECT P_NO,
+			   M_NO,
+			   STATUS
+		FROM MEMBER_PARTY
+		WHERE P_NO=#{p_no}
+	</select>
+	
+	<select id="getMemberId" resultType="string">
+		SELECT M_ID FROM MEMBER WHERE M_NO=#{m_no}
+	</select>
+	
+	<delete id="deleteParty" parameterType="Pay">
+		DELETE FROM PARTY WHERE P_NO=#{p_no}
+	</delete>
 </mapper>

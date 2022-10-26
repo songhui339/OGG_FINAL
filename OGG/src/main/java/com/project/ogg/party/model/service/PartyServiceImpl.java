@@ -12,6 +12,7 @@ import com.project.ogg.party.model.vo.MyParty;
 import com.project.ogg.party.model.vo.Ott;
 import com.project.ogg.party.model.vo.Party;
 import com.project.ogg.party.model.vo.Point;
+import com.project.ogg.pay.model.vo.Pay;
 
 @Service
 public class PartyServiceImpl implements PartyService {
@@ -126,6 +127,74 @@ public class PartyServiceImpl implements PartyService {
 	public int updateParty(Party party) {
 
 		return mapper.updateParty(party);
+	}
+
+	@Override
+	public List<Pay> getPayListByNo(PageInfo pageInfo, int m_no) {
+		int offset = (pageInfo.getCurrentPage() - 1) * pageInfo.getListLimit();
+	    int limit = pageInfo.getListLimit();
+	    RowBounds rowBounds = new RowBounds(offset, limit);
+	    
+		return mapper.getPayListByNo(rowBounds, m_no);
+	}
+
+	@Override
+	public int getPayCount(int m_no) {
+		
+		return mapper.getPayCount(m_no);
+	}
+
+	@Override
+	public void removePartyMember(Party party) {
+		mapper.removePartyMember(party);
+	}
+
+	@Override
+	public int deleteMemberParty(Party party) {
+		
+		return mapper.deleteMemberParty(party);
+	}
+
+	@Override
+	public List<Pay> memberPayList(Party party) {
+		
+		return mapper.memberPayList(party);
+	}
+
+	@Override
+	public void deletePay(Party party) {
+		
+		mapper.deletePay(party);
+	}
+
+	@Override
+	public List<Pay> selectMemberParty(int p_no) {
+		
+		return mapper.selectMemberParty(p_no);
+	}
+
+	@Override
+	public List<Pay> partyPayList(Party party) {
+
+		return mapper.partyPayList(party);
+	}
+
+	@Override
+	public String getMemberId(int m_no) {
+
+		return mapper.getMemberId(m_no);
+	}
+
+	@Override
+	public void deletePartyMember(Pay pay) {
+		
+		mapper.deletePartyMember(pay);
+	}
+
+	@Override
+	public void deleteParty(Pay pay) {
+		
+		mapper.deleteParty(pay);
 	}
 
 

@@ -181,7 +181,7 @@ public class PartyController {
 			party.setM_status("N");
 			
 			service.updatePartyMember(party);
-			//service.insertPartyMemeber(party);
+			service.insertPartyMemeber(party);
 			model.setViewName("party/submitPartyThxPage");			
 		} else {
 			model.addObject("msg", "파티 등록을 실패하였습니다.");		
