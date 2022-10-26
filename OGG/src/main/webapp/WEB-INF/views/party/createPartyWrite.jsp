@@ -79,6 +79,10 @@
                                 <span class="subject">파티 종료일</span>
                                 <input type="date" name="p_end_date" value="" id="end_date" required="">
                             </li>
+                            <li>
+                                <span class="subject">파티 코멘트</span>
+                                <input type="text" id="p_comment" placeholder="파티 코멘트 입력" maxlength="15">
+                            </li>
                         </ul>
                     </div>
 

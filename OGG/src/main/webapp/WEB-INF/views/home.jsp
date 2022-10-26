@@ -104,7 +104,7 @@
         <div class="owl-carousel owl-theme contentBox">
            <!-- Party Slide Item START -->
             <c:if test="${ not empty list }">
-	            <c:forEach var="list" items=" ${ list }">
+	            <c:forEach var="list" items="${ list }">
 		            <div class="item itemBox" onclick="location.href='${path}/party/partyDetail?no=${list.p_no}'">
 		                <div class="title">
 		                    <div class="logoImg">
@@ -112,7 +112,7 @@
 		                    </div>
 		                    <div class="titleText">
 		                        <p class="text">${ list.plan_name }</p>
-		                        <p class="subText">파티모집 / 즉시시청 / 빠른 대응</p>
+		                        <p class="subText">${ list.p_comment }</p>
 		                    </div>
 		                </div>
 		                <input type="hidden" id="max_member" value="${ list.p_max_member }">
