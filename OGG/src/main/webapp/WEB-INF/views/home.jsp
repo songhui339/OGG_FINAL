@@ -98,7 +98,7 @@
      <section class="party_section" id="nextSection">
         <div class="titleBox">
             <h2 class="titleText">OGG <span class="c_purple">파티</span></h2>
-            <button onclick="location.href='${path}/party/ottlist'" class="btn writeBtn">파티 만들기</button>
+            <button onclick="location.href='${path}/party/ottlist_create'" class="btn writeBtn">파티 만들기</button>
         </div>
 
         <div class="owl-carousel owl-theme contentBox">
