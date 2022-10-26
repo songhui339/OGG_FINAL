@@ -94,7 +94,9 @@ height: 50px;
 background-color: white;
 color: black;
 }
-
+#btn1 button:hover{
+	background-color: #d3d3d3;
+}
 /* reset */
 
 * {

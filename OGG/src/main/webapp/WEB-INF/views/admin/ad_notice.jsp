@@ -20,6 +20,8 @@
 	rel="stylesheet" />
 <link href="${path }/css/admin/admin.css" rel="stylesheet" />
 <link rel="stylesheet" href="${path }/css/admin/notice.css">
+
+
 <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js"
 	crossorigin="anonymous"></script>
 </head>
@@ -77,7 +79,6 @@
 				<div class="container-fluid px-4">
 					<h1 class="mt-4">공지 사항</h1>
 					<br>
-					<div class="card mb-4"></div>
 					<div class="card mb-4">
 						<div class="card-header">
 							<i class="fa-sharp fa-solid fa-bell"></i>&nbsp;공지 사항
@@ -92,7 +93,7 @@
 							<!-- board seach area -->
 							<div id="board-search">
 								<div class="container">
-									<button id="goWrite" onclick="location='${path}/notice/write'">글쓰기</button>
+									<button id="goWrite" class="btn writeBtn" onclick="location='${path}/notice/write'" >글쓰기</button>
 									<div class="search-window">
 										<div class="search-wrap"></div>
 									</div>

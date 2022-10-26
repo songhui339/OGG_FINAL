@@ -40,6 +40,8 @@ import com.project.ogg.common.util.MultipartFileUtil;
 import com.project.ogg.common.util.MultipartFileUtil2;
 import com.project.ogg.common.util.PageInfo;
 import com.project.ogg.member.model.vo.Member;
+import com.project.ogg.party.model.service.PartyService;
+import com.project.ogg.party.model.vo.Ott;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -55,6 +57,9 @@ public class AdminController {
 	
 	@Autowired
 	private ResourceLoader resourceLoader;
+	
+	@Autowired
+	private PartyService service2;
 	
 	@GetMapping("/admin/home")
 	public ModelAndView goAdmin(ModelAndView model,@AuthenticationPrincipal Member member) {
@@ -93,20 +98,11 @@ public class AdminController {
 	@GetMapping("/admin/OTT")
 	public ModelAndView goOTT(ModelAndView model) {
 		List<OttAdmin> list = service.getOTTList();
+		List<Ott> list2 = null;
 		
-		MUser muser = new MUser();
-		muser.setMarchUser(service.getMarchUserCount());
-		muser.setJuneUser(service.getJuneUserCount());
-		muser.setSepUser(service.getSepUserCount());
-		muser.setDecUser(service.getDecUserCount());
+		list2 = service2.getOttList();
+		model.addObject("list2",list2);
 		
-		List<OttForPie> pielist = service.getPieList();
-		int partyCount = mapper.getPartyCount();
-		System.out.println(pielist);
-		model.addObject("pc",partyCount);
-		model.addObject("pielist",pielist);
-		
-		model.addObject("muser",muser);
 		model.addObject("list",list);
 		model.setViewName("admin/ad_OTT");
 		return model;
@@ -180,8 +176,22 @@ public class AdminController {
 	public ModelAndView goMember(ModelAndView model) {
 		
 		List<MemberAD> list = service.getMemberList();
+		MUser muser = new MUser();
+		muser.setMarchUser(service.getMarchUserCount());
+		muser.setJuneUser(service.getJuneUserCount());
+		muser.setSepUser(service.getSepUserCount());
+		muser.setDecUser(service.getDecUserCount());
 		
-		model.addObject("list",list);
+		List<OttForPie> pielist = service.getPieList();
+		int partyCount = mapper.getPartyCount();
+		System.out.println(pielist);
+		model.addObject("pc",partyCount);
+		model.addObject("pielist",pielist);
+		
+		model.addObject("muser",muser);
+		
+		model.addObject("list", list);
+		model.setViewName("party/createParty");
 		model.setViewName("admin/ad_member");
 		return model;
 	}

@@ -201,13 +201,15 @@
         var d = ${muser.decUser};
         
         var fn = "${pielist[0].ott_name}";
-        var fc = ${pielist[0].count};
+        var fc = ${pielist[0].count}/${pc} *100;
         var sn = "${pielist[1].ott_name}";
-        var sc = ${pielist[1].count};
+        var sc = ${pielist[1].count}/${pc} *100;
         var tn = "${pielist[2].ott_name}";
-        var tc = ${pielist[2].count};
+        var tc = ${pielist[2].count}/${pc} *100;
+        var forn = "${pielist[3].ott_name}";
+        var forc = ${pielist[3].count}/${pc} *100;
         
-        var pc = ${pc}-fc-sc-tc;
+        var pc = 100-fc-sc-tc-forc;
         	
         function selectMember(ths) {
         	let memberName = $(ths).text();
