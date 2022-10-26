@@ -366,6 +366,7 @@ body.logged-in .YouTubePopUp-Wrap{ /* For WordPress */
 .party_section .contentBox .itemBox {
     position: relative;
     display: inline-block;
+    width: 300px;
     /* width: calc(45% - 26px); */
     margin: 13px;
     padding: 22px 29px;
