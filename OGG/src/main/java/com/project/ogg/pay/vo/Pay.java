@@ -12,5 +12,8 @@ public class Pay {
 	private String access_token;
 	private long now;
 	private long expired_at;
+	private int m_no;
+	private String date;
+	private int amount;
 	
 }

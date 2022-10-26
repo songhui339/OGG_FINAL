@@ -40,7 +40,7 @@
                         <div class="item">결제 수단 / 계좌 관리</div>
                     </a>
                     <a href="${ path }/mypage/point">
-                        <div class="item">포인트 관리</div>
+                        <div class="item">포인트 내역 확인</div>
                     </a>
                     <a href="${ path }/mypage/payment_history">
                         <div class="item">정산 내역 확인</div>
@@ -75,7 +75,7 @@
                     <span class="text">보유 포인트</span>
                 </div>
                 <div class="pointText">
-                    <span class="text">${POINT} P</span>
+                    <span class="text">${ point } P</span>
                 </div>
             </div>
 
@@ -89,44 +89,46 @@
                     </tr>
                 </thead>
                 <tbody class="partyitem">
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>${C_TITLE}</td>
-                        <td>${C_WRITEDATE}</td>
-                        <td>${C_VIEWCOUNT}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>${C_TITLE}</td>
-                        <td>${C_WRITEDATE}</td>
-                        <td>${C_VIEWCOUNT}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>${C_TITLE}</td>
-                        <td>${C_WRITEDATE}</td>
-                        <td>${C_VIEWCOUNT}</td>
-                    </tr>
+                	<c:forEach var="list" items="${ list }">
+                		<fmt:parseDate var="date" value="${ list.po_date }" pattern="yyyy-MM-dd HH:mm:ss"/>
+	                    <tr>
+	                        <th scope="row">${ list.r_num }</th>
+	                        <td><fmt:formatDate value="${date}" pattern="yyyy-MM-dd(E)"/></td>
+	                        <td>
+	                        	<c:choose>
+	                        	<c:when test="${ list.po_status eq 'PLUS'}">적립</c:when>
+	                        	<c:otherwise>차감</c:otherwise>
+	                        	</c:choose>
+	                        </td>
+	                        <td>${ list.po_point }P</td>
+	                    </tr>
+                	</c:forEach>
                 </tbody>
             </table>
 
             <!-- Page 네비게이션 -->
             <div class="pageNav" id="pageBar">
                 <!-- 맨 처음으로 -->
-                <button class="btn arrowBtn" onclick="location.href=''">&lt;&lt;</button>
+                <button class="btn arrowBtn" onclick="location.href='${ path }/mypage/point?page=1'">&lt;&lt;</button>
     
                 <!-- 이전 페이지로 -->
-                <button class="btn arrowBtn" onclick="location.href=''">&lt;</button>
+                <button class="btn arrowBtn" onclick="location.href='${ path }/mypage/point?page=${ pageInfo.prevPage }'">&lt;</button>
     
                 <!--  10개 페이지 목록 -->
-                    <button class="btn" disabled>${ status.current }</button>
-                    <button class="btn pageNoBtn" onclick="location.href=''">2</button>
+                <c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" varStatus="status">
+					<c:if test="${ status.current == pageInfo.currentPage }">
+	                    <button class="btn" disabled>${ status.current }</button>
+					</c:if>
+					<c:if test="${ status.current != pageInfo.currentPage }">
+	                    <button class="btn pageNoBtn" onclick="location.href='${ path }/mypage/point?page=${ status.current }'">${ status.current }</button>
+					</c:if>
+				</c:forEach>
     
                 <!-- 다음 페이지로 -->
-                <button class="btn arrowBtn" onclick="location.href=''">&gt;</button>
+                <button class="btn arrowBtn" onclick="location.href='${ path }/mypage/point?page=${ pageInfo.nextPage }'">&gt;</button>
     
                 <!-- 맨 끝으로 -->
-                <button class="btn arrowBtn" onclick="location.href=''">&gt;&gt;</button>
+                <button class="btn arrowBtn" onclick="location.href='${ path }/mypage/point?page=${ pageInfo.maxPage }'">&gt;&gt;</button>
             </div>
 
             

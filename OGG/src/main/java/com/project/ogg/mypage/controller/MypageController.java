@@ -26,6 +26,10 @@ import com.project.ogg.community.model.vo.Community;
 import com.project.ogg.member.model.vo.Member;
 import com.project.ogg.mypage.model.mapper.MypageMapper;
 import com.project.ogg.mypage.model.service.MypageService;
+import com.project.ogg.party.model.service.PartyService;
+import com.project.ogg.party.model.vo.MyParty;
+import com.project.ogg.party.model.vo.Party;
+import com.project.ogg.party.model.vo.Point;
 
 import oracle.jdbc.proxy.annotation.GetProxy;
 
@@ -38,6 +42,9 @@ public class MypageController {
 	
 	@Autowired
 	private MypageService service;
+	
+	@Autowired
+	private PartyService partyService;
 	
 	@Autowired
 	private MypageMapper mapper;
@@ -237,21 +244,81 @@ public class MypageController {
     
     // 마이페이지 - 파티
     @GetMapping("/party")
-    public String mypageParty () {
-        
-        return "mypage/mypage_party";
+    public ModelAndView mypageParty (ModelAndView model,
+    		@AuthenticationPrincipal Member member) {
+    	List<MyParty> myParty = null;
+    	int m_no = member.getM_no();
+    	
+    	myParty = partyService.getPartyListByNo(m_no);
+    	
+    	model.addObject("list", myParty);
+    	model.setViewName("mypage/mypage_party");
+    	
+        return model;
     }
     
     @GetMapping("/party/leader")
-    public String mypagePartyLeader () {
+    public ModelAndView mypagePartyLeader (ModelAndView model,
+    		@RequestParam int no,
+    		@AuthenticationPrincipal Member member) {
         
-        return "mypage/mypage_party_leader";
+    	Party party = new Party();
+    	List<MyParty> partyMember = null;
+    	int m_no = member.getM_no();
+    	
+    	party = partyService.selectParty(no);
+    	partyMember = partyService.partyMemberList(no);
+    	
+    	model.addObject("party", party);
+    	model.addObject("memberlist", partyMember);
+    	model.addObject("m_no", m_no);
+    	model.setViewName("mypage/mypage_party_leader");
+    	
+        return model;
     }
     
     @GetMapping("/party/member")
-    public String mypagePartyMember () {
+    public ModelAndView mypagePartyMember (ModelAndView model,
+    		@RequestParam int no,
+    		@AuthenticationPrincipal Member member) {
         
-        return "mypage/mypage_party_member";
+    	Party party = new Party();
+    	List<MyParty> partyMember = null;
+    	int m_no = member.getM_no();
+    	
+    	party = partyService.selectParty(no);
+    	partyMember = partyService.partyMemberList(no);
+    	
+    	model.addObject("party", party);
+    	model.addObject("memberlist", partyMember);
+    	model.addObject("m_no", m_no);
+    	model.setViewName("mypage/mypage_party_member");
+    	
+        return model;
+        
+    }
+    
+    @PostMapping("/party/updateParty")
+    public ModelAndView mypagePartyUpdate (ModelAndView model,
+    		@RequestParam int p_no,
+    		@ModelAttribute Party party) {
+    	
+    	int result = 0;
+    	party.setP_no(p_no);
+    	
+    	result = partyService.updateParty(party);
+    	
+    	if(result > 0) {
+    		model.addObject("msg", "공유 계정이 수정되었습니다.");
+            model.addObject("location", "/mypage/party");
+    	} else {
+    		model.addObject("msg", "공유 계정 수정에 실패하였습니다.");
+            model.addObject("location", "/mypage/party");
+    	}
+    	
+    	model.setViewName("common/msg");
+    	
+    	return model; 
     }
     
     // 마이페이지 - 결제 수단
@@ -268,9 +335,24 @@ public class MypageController {
     }
     
     @GetMapping("/point")
-    public String mypagePoint () {
+    public ModelAndView mypagePoint (ModelAndView model,
+    		@RequestParam(value = "page", defaultValue = "1") int page,
+    		@AuthenticationPrincipal Member member) {
+    	List<Point> point = null;
+    	PageInfo pageInfo = null;
+    	
+        int m_no = member.getM_no();
+        int m_point = member.getM_point();
         
-        return "mypage/mypage_point";
+        pageInfo = new PageInfo(page, 10, partyService.getPointCount(m_no), 8);
+    	point = partyService.getPointList(pageInfo, m_no);    	
+    	
+    	model.addObject("list", point);
+    	model.addObject("point", m_point);
+    	model.addObject("pageInfo", pageInfo);
+    	model.setViewName("mypage/mypage_point");
+    	
+        return model;
     }
     
     // 마이페이지 - 찜한 콘텐츠

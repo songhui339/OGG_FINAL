@@ -2,9 +2,12 @@ package com.project.ogg.party.model.service;
 
 import java.util.List;
 
+import com.project.ogg.common.util.PageInfo;
+import com.project.ogg.party.model.vo.MyParty;
 import com.project.ogg.party.model.vo.Ott;
 import com.project.ogg.party.model.vo.Party;
 import com.project.ogg.party.model.vo.Plan;
+import com.project.ogg.party.model.vo.Point;
 
 public interface PartyService {
 
@@ -27,6 +30,21 @@ public interface PartyService {
 	int partyMemberCheck(Party party);
 
 	void updatePartyMember(Party party);
+
+	void updateMemberPoint(Party party);
+
+	void insertPoint(Point pointVo);
+
+	List<Point> getPointList(PageInfo pageInfo, int m_no);
+
+	int getPointCount(int m_no);
+
+	List<MyParty> getPartyListByNo(int m_no);
+
+	List<MyParty> partyMemberList(int no);
+
+	int updateParty(Party party);
+
 
 
 

@@ -57,4 +57,14 @@ public class Party {
 	private int p_period_day;
 	
 	private String m_status;
+	
+	private String m_id;
+	
+	private String m_email;
+	
+	private String m_name;
+	
+	private String m_tel;
+	
+	private int point;
 }

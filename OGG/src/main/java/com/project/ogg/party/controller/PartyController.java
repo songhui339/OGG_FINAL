@@ -23,6 +23,7 @@ import com.project.ogg.party.model.service.PartyService;
 import com.project.ogg.party.model.vo.Ott;
 import com.project.ogg.party.model.vo.Party;
 import com.project.ogg.party.model.vo.Plan;
+import com.project.ogg.party.model.vo.Point;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -74,11 +75,16 @@ public class PartyController {
 	}
 	
 	@GetMapping("/partyDetail")
-	public ModelAndView partyDetail(ModelAndView model, @RequestParam int no) {
+	public ModelAndView partyDetail(ModelAndView model, @RequestParam int no, @AuthenticationPrincipal Member member) {
 		
 		Party party = null;
 		
 		party = service.selectParty(no);
+		
+		party.setM_id(member.getM_id());
+		party.setM_email(member.getM_email());
+		party.setM_name(member.getM_name());
+		party.setM_tel(member.getM_phonenumber());
 		
 		model.addObject("party", party);
 		model.setViewName("party/submitParty_detail");
@@ -149,23 +155,33 @@ public class PartyController {
 	public ModelAndView submitParty(
 			ModelAndView model,
 			@RequestParam int no,
+			@RequestParam int point,
 			@AuthenticationPrincipal Member member) {
 		
 		int result = 0;
 		Party party = new Party();
-		party.setP_no(no);
+		Point pointVo = new Point();
 		
 		party = service.selectParty(no);
-		
-		party.setP_cur_member(party.getP_cur_member() + 1);
-		
 		result = service.partyMemberCheck(party);
+		
+		System.out.println(party);
+		
+		pointVo.setPo_point(point);
+		pointVo.setM_no(party.getM_no());
+		
 		if(result > 0) {
+			party.setPoint(point);
+			System.out.println(party);
+			service.updateMemberPoint(party);
+			service.insertPoint(pointVo);
+			
+			party.setP_cur_member(party.getP_cur_member() + 1);
 			party.setM_no(member.getM_no());
 			party.setM_status("N");
 			
 			service.updatePartyMember(party);
-			service.insertPartyMemeber(party);
+			//service.insertPartyMemeber(party);
 			model.setViewName("party/submitPartyThxPage");			
 		} else {
 			model.addObject("msg", "파티 등록을 실패하였습니다.");		

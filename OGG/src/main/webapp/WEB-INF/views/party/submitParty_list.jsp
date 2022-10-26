@@ -30,7 +30,7 @@
                     		</div>
 		                    <div class="titleText">
 		                        <p class="text">${ list.plan_name }</p>
-		                        <p class="subText">파티모집 / 즉시시청 / 빠른 대응</p>
+		                        <p class="subText">${ list.p_comment }</p>
 		                    </div>
                 		</div>
                 

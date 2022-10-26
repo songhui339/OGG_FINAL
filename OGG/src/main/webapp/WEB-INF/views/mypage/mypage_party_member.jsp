@@ -78,34 +78,40 @@
                         </li>
                         <li>
                             <label for="">아이디</label>
-                            <input type="text" name="" value="${P_SHARE_ID}" id="" readonly>
+                            <input type="text" name="" value="${party.p_share_id}" id="" disabled>
                         </li>
                         <li>
                             <label for="">비밀번호</label>
-                            <input type="text" name="" value="${P_SHARE_PWD}" readonly>
+                            <input type="text" name="" value="${party.p_share_pwd}" minlength="3" maxlength="20" disabled>
                         </li>
                         <li>
                             <label for="">파티원 수</label>
-                            <p class="text">2 / 5 명</p>
+                            <p class="text">${ party.p_cur_member + 1 } / ${ party.p_max_member + 1 } 명</p>
                         </li>
                         <li>
                             <label for="">파티원 ID</label>
-                            <p class="text">${m_id}, ${m_id}</p>
+                            <p class="text"><c:forEach var="list" varStatus="status" items="${ memberlist }">${ list.m_id }<c:if test="${ not status.last }">, </c:if></c:forEach></p>
                         </li>
                         <li>
-                            <label for="">파티 시작일</label>
-                            <p class="text">${P_START_DATE}</p>
+                            <label for="">파티 시작일</label>                     
+                            <p class="text">
+                            <c:forEach var="date" items="${ memberlist }">
+                            <fmt:parseDate var="startdate" value="${ date.start_date }" pattern="yyyy-MM-dd HH:mm:ss"/>
+                            <c:if test="${ m_no eq date.m_no }"><fmt:formatDate value="${startdate}" pattern="yyyy-MM-dd(E)"/></c:if>
+                            </c:forEach>
+                            </p>
                         </li>
                         <li>
                             <label for="">파티 종료일</label>
-                            <p class="text">${P_END_DATE}</p>
+                            <fmt:parseDate var="enddate" value="${ party.p_end_date }" pattern="yyyy-MM-dd HH:mm:ss"/>
+                            <p class="text"><fmt:formatDate value="${enddate}" pattern="yyyy-MM-dd(E)"/></p>
                         </li>
                         
                     </ul>
 
                     <div class="btnBox">
-                        <button type="submit" class="btn">수정하기</button>
-                        <button type="" class="btn redBtn">삭제하기</button>
+                        <button type="button" onclick="goBack()" class="btn">뒤로가기</button>
+                        <button type="button" onclick="unschedulePay()" class="btn redBtn">탈퇴하기</button>
                     </div>
 
                     
@@ -130,5 +136,13 @@
 
     </div>
 </section>
-
+<script>
+	function goBack(){
+		window.history.back();
+	}
+	
+	function unschedulePay(){
+		
+	}
+</script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

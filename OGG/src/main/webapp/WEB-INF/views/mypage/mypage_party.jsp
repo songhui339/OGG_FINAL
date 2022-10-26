@@ -68,154 +68,29 @@
         <div class="infoBox">
             <p class="titleText">내 파티 관리</p>
             <div class="line"></div>
-
-            <div class="partyBox" onclick="location.href='${ path }/mypage/party/leader';">
-                <div class="logoImg">
-                    <img src="${ path }/images/party/logo_netflix.png" alt="logoImg">
+			<c:forEach var="list" items="${ list }">
+	            <div class="partyBox" <c:choose>
+	            					  <c:when test="${ list.status eq 'Y'}"> onclick="location.href='${ path }/mypage/party/leader?no=${ list.p_no }'" </c:when>
+		            				  <c:otherwise> onclick="location.href='${ path }/mypage/party/member?no=${ list.p_no }'" </c:otherwise>
+									  </c:choose>>        						
+	                <div class="logoImg">
+	                    <img src="${ path }/images/party/${ list.ott_thumb }.png" alt="logoImg">
+	                </div>
+	                <div class="partyTitle">
+	                    <p class="text">${ list.plan_name }</p>
+	                </div>
+	                <div class="partyPosition">
+	                    <c:choose>
+	                    	<c:when test="${ list.status eq 'Y'}"><p class="badge leader">파티장</p></c:when>
+          					<c:otherwise><p class="badge member">파티원</p></c:otherwise>
+						</c:choose>
+	                </div>
+	                <div class="btnBox">
+	                    <button class="button">상세보기</button>
+	                </div>
                 </div>
-                <div class="partyTitle">
-                    <p class="text">유튜브 프리미엄</p>
-                </div>
-                <div class="partyPosition">
-                    <p class="badge leader">파티장</p>
-                </div>
-
-                <div class="btnBox">
-                    <button class="button">상세보기</button>
-                </div>
-            </div>
-
-            <div class="partyBox" onclick="location.href='${ path }/mypage/party/member';">
-                <div class="logoImg">
-                    <img src="${ path }/images/party/logo_disney.png" alt="logoImg">
-                </div>
-                <div class="partyTitle">
-                    <p class="text">디즈니 플러스</p>
-                </div>
-                <div class="partyPosition">
-                    <p class="badge member">파티원</p>
-                </div>
-
-                <div class="btnBox">
-                    <button class="button">상세보기</button>
-                </div>
-            </div>
-
-            <div class="partyBox" onclick="location.href='';">
-                <div class="logoImg">
-                    <img src="${ path }/images/party/logo_disney.png" alt="logoImg">
-                </div>
-                <div class="partyTitle">
-                    <p class="text">디즈니 플러스</p>
-                </div>
-                <div class="partyPosition">
-                    <p class="badge member">파티원</p>
-                </div>
-
-                <div class="btnBox">
-                    <button class="button">상세보기</button>
-                </div>
-            </div>
-
-            <div class="partyBox" onclick="location.href='';">
-                <div class="logoImg">
-                    <img src="${ path }/images/party/logo_disney.png" alt="logoImg">
-                </div>
-                <div class="partyTitle">
-                    <p class="text">디즈니 플러스</p>
-                </div>
-                <div class="partyPosition">
-                    <p class="badge member">파티원</p>
-                </div>
-
-                <div class="btnBox">
-                    <button class="button">상세보기</button>
-                </div>
-            </div>
-
-            <div class="partyBox" onclick="location.href='';">
-                <div class="logoImg">
-                    <img src="${ path }/images/party/logo_disney.png" alt="logoImg">
-                </div>
-                <div class="partyTitle">
-                    <p class="text">디즈니 플러스</p>
-                </div>
-                <div class="partyPosition">
-                    <p class="badge member">파티원</p>
-                </div>
-
-                <div class="btnBox">
-                    <button class="button">상세보기</button>
-                </div>
-            </div>
-
-            <div class="partyBox" onclick="location.href='';">
-                <div class="logoImg">
-                    <img src="${ path }/images/party/logo_disney.png" alt="logoImg">
-                </div>
-                <div class="partyTitle">
-                    <p class="text">디즈니 플러스</p>
-                </div>
-                <div class="partyPosition">
-                    <p class="badge member">파티원</p>
-                </div>
-
-                <div class="btnBox">
-                    <button class="button">상세보기</button>
-                </div>
-            </div>
-
-            <div class="partyBox" onclick="location.href='';">
-                <div class="logoImg">
-                    <img src="${ path }/images/party/logo_disney.png" alt="logoImg">
-                </div>
-                <div class="partyTitle">
-                    <p class="text">디즈니 플러스</p>
-                </div>
-                <div class="partyPosition">
-                    <p class="badge member">파티원</p>
-                </div>
-
-                <div class="btnBox">
-                    <button class="button">상세보기</button>
-                </div>
-            </div>
-
-            <div class="partyBox" onclick="location.href='';">
-                <div class="logoImg">
-                    <img src="${ path }/images/party/logo_disney.png" alt="logoImg">
-                </div>
-                <div class="partyTitle">
-                    <p class="text">디즈니 플러스</p>
-                </div>
-                <div class="partyPosition">
-                    <p class="badge member">파티원</p>
-                </div>
-
-                <div class="btnBox">
-                    <button class="button">상세보기</button>
-                </div>
-            </div>
-
-            <div class="partyBox" onclick="location.href='';">
-                <div class="logoImg">
-                    <img src="${ path }/images/party/logo_disney.png" alt="logoImg">
-                </div>
-                <div class="partyTitle">
-                    <p class="text">디즈니 플러스</p>
-                </div>
-                <div class="partyPosition">
-                    <p class="badge member">파티원</p>
-                </div>
-
-                <div class="btnBox">
-                    <button class="button">상세보기</button>
-                </div>
-            </div>
-
-            
-
-        </div>
+			</c:forEach>
+       	</div>
 
         <!-- 배너 영역 -->
         <div class="bannerBox">
