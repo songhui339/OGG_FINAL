@@ -30,7 +30,7 @@
                     		</div>
 		                    <div class="titleText">
 		                        <p class="text">${ list.plan_name }</p>
-		                        <p class="subText">파티모집 / 즉시시청 / 빠른 대응</p>
+		                        <p class="subText">${ list.p_comment }</p>
 		                    </div>
                 		</div>
                 
@@ -71,8 +71,5 @@
         </div>
     </div>
 </section>
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
