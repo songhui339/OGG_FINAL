@@ -77,7 +77,6 @@
 				<div class="container-fluid px-4">
 					<h1 class="mt-4">공지 사항</h1>
 					<br>
-					<div class="card mb-4"></div>
 					<div class="card mb-4">
 						<div class="card-header">
 							<i class="fa-sharp fa-solid fa-bell"></i>&nbsp;공지 사항

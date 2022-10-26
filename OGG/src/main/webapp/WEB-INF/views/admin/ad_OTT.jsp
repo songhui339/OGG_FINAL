@@ -67,20 +67,12 @@
                 <main>
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">OTT관리</h1>
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                Chart.js is a third party plugin that is used to generate the charts in this template. The charts below have been customized - for further customization options, please visit the official
-                                <a target="_blank" href="https://www.chartjs.org/docs/latest/">Chart.js documentation</a>
-                                .
-                            </div>
-                        </div>
-                        
+                        <br>
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-chart-area me-1"></i>
                                 OTT 관리
                             </div> 
-                            
                             <div class="card-body"> 
                                 <table id="datatablesSimple2">
                                 <button type="button" class="btn btn-primary" style="float:right;" onclick="window.open('${path}/admin/addOTT','','left=500px,top=200px,width=570px,height=430px')" >OTT 추가하기</button>
@@ -168,13 +160,15 @@
         var d = ${muser.decUser};
         
         var fn = "${pielist[0].ott_name}";
-        var fc = ${pielist[0].count};
+        var fc = ${pielist[0].count}/${pc} *100;
         var sn = "${pielist[1].ott_name}";
-        var sc = ${pielist[1].count};
+        var sc = ${pielist[1].count}/${pc} *100;
         var tn = "${pielist[2].ott_name}";
-        var tc = ${pielist[2].count};
+        var tc = ${pielist[2].count}/${pc} *100;
+        var forn = "${pielist[3].ott_name}";
+        var forc = ${pielist[3].count}/${pc} *100;
         
-        var pc = ${pc}-fc-sc-tc;
+        var pc = 100-fc-sc-tc-forc;
         
         
         function ottdel(e){
