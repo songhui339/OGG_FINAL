@@ -71,17 +71,17 @@
                                 <input type="date" name="p_start_date" value="" id="start_date" required="">
                             </li>
                             <li>
-                                <span class="subject">혜택 기간</span>
-                                <input type="text" id="monthly" value="" disabled>
-                                <input type="hidden" id="monthly_val" name="p_period">
-                            </li>
-                            <li>
                                 <span class="subject">파티 종료일</span>
                                 <input type="date" name="p_end_date" value="" id="end_date" required="">
                             </li>
                             <li>
+                                <span class="subject">파티 기간</span>
+                                <input type="text" id="monthly" value="" disabled>
+                                <input type="hidden" id="monthly_val" name="p_period">
+                            </li>
+                            <li>
                                 <span class="subject">파티 코멘트</span>
-                                <input type="text" id="p_comment" placeholder="파티 코멘트 입력" maxlength="15">
+                                <input type="text" name="p_comment" id="p_comment" placeholder="파티 코멘트 입력" maxlength="15">
                             </li>
                         </ul>
                     </div>

@@ -101,6 +101,7 @@
 			P_MAX_MEMBER,
 			P_START_DATE,
 			P_PERIOD,
+			P_COMMENT,
 			P_END_DATE,
 			P_ACCOUNTS,
 			P_ENTRY_PRICE
@@ -114,6 +115,7 @@
 			#{p_max_member},
 			#{p_start_date},
 			#{p_period},
+			#{p_comment},
 			#{p_end_date},
 			#{p_accounts},
 			#{p_entry_price}
