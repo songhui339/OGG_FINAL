@@ -157,8 +157,32 @@
                                     </tfoot>
                                 </table>
                             </div>
+                             
                         </div>
                     </div>
+                     <div class="row">
+                            <div class="col-lg-6">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <i class="fas fa-chart-bar me-1"></i>
+                                        이용자 수 그래프
+                                    </div>
+                                    <div class="card-body"><canvas id="myBarChart" width="100%" height="50"></canvas></div>
+                                    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <i class="fas fa-chart-pie me-1"></i>
+                                        OTT별 이용자 점유 수
+                                    </div>
+                                    <div class="card-body"><canvas id="myPieChart" width="100%" height="50"></canvas></div>
+                                    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                    
                 </main>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
@@ -175,6 +199,22 @@
             </div>
         </div>
         <script>
+        var a = ${muser.marchUser};
+        var b = ${muser.juneUser};
+        var c = ${muser.sepUser};
+        var d = ${muser.decUser};
+        
+        var fn = "${pielist[0].ott_name}";
+        var fc = ${pielist[0].count}/${pc} *100;
+        var sn = "${pielist[1].ott_name}";
+        var sc = ${pielist[1].count}/${pc} *100;
+        var tn = "${pielist[2].ott_name}";
+        var tc = ${pielist[2].count}/${pc} *100;
+        var forn = "${pielist[3].ott_name}";
+        var forc = ${pielist[3].count}/${pc} *100;
+        
+        var pc = 100-fc-sc-tc-forc;
+        
         function selectMember(ths) {
         	let memberName = $(ths).text();
         	$.ajax({
@@ -191,21 +231,20 @@
     				$('#mnick').text(member.m_nickname);
     				$('#mphone').text(member.m_phonenumber);
     				$('#memail').text(member.m_email);
-    				
-    				
     			}, 
     			error: (error) => {
     				console.log(error);
     			}
     		});
         	
-        	
         }
-            
         </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="${path}/js/admin/script.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+        <script src="${path}/js/admin/script.js"></script>
         <script src="${path}/js/admin/datatable.js"></script>
+        <script src="${path}/js/admin/bar.js"></script>
+        <script src="${path}/js/admin/pie.js"></script>
     </body>
 </html>

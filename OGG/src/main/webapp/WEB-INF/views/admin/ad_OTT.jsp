@@ -16,6 +16,7 @@
         <title>관리자페이지 OTT</title>
 		<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="${path }/css/admin/admin.css" rel="stylesheet" />
+        <link href="${path }/css/admin/ottinfo.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>        
     </head>
     <body class="sb-nav-fixed">
@@ -115,28 +116,34 @@
                             </div>
                             <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
                         </div>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="card mb-4">
-                                    <div class="card-header">
-                                        <i class="fas fa-chart-bar me-1"></i>
-                                        이용자 수 그래프
-                                    </div>
-                                    <div class="card-body"><canvas id="myBarChart" width="100%" height="50"></canvas></div>
-                                    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
+                        <div class="col-lg-12">
                                 <div class="card mb-4">
                                     <div class="card-header">
                                         <i class="fas fa-chart-pie me-1"></i>
-                                        OTT별 이용자 점유 수
+                                        서비스 OTT 종류
                                     </div>
-                                    <div class="card-body"><canvas id="myPieChart" width="100%" height="50"></canvas></div>
+                                    <div class="card-body">
+                                    <!-- 탭 콘텐츠 부분 -->
+        <div class="createPartyTab_row_02">
+                <!-- 전체 서비스  -->
+                <section class="content_container">
+                    <div class="contentBox">
+                    	<c:if test="${ not empty list2 }">
+                    		<c:forEach var="list" items="${ list2 }">
+                    			<div class="itemBox ${ list.ott_class }" data-bs-toggle="modal" data-bs-target="#modalWindow" !hidden>
+                    				<input type=hidden value="${ list.ott_name }">
+		                            <img src="${ path }/images/party/${ list.ott_thumb }.png" alt="logoImg" class="logoImg" id="thumb_url">
+		                            <span class="serviceNameText">${ list.ott_name }</span>
+                    			</div>
+                    		</c:forEach>
+                    	</c:if>
+                    </div>
+                </section>
+        </div>
+                                    </div>
                                     <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
                                 </div>
                             </div>
-                        </div>
                     </div>
                 </main>
                 <footer class="py-4 bg-light mt-auto">
@@ -154,21 +161,6 @@
             </div>
         </div>
          <script>
-        var a = ${muser.marchUser};
-        var b = ${muser.juneUser};
-        var c = ${muser.sepUser};
-        var d = ${muser.decUser};
-        
-        var fn = "${pielist[0].ott_name}";
-        var fc = ${pielist[0].count}/${pc} *100;
-        var sn = "${pielist[1].ott_name}";
-        var sc = ${pielist[1].count}/${pc} *100;
-        var tn = "${pielist[2].ott_name}";
-        var tc = ${pielist[2].count}/${pc} *100;
-        var forn = "${pielist[3].ott_name}";
-        var forc = ${pielist[3].count}/${pc} *100;
-        
-        var pc = 100-fc-sc-tc-forc;
         
         
         function ottdel(e){
@@ -179,12 +171,11 @@
             
 		</script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="${path}/js/admin/script.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="${path}/js/admin/chart.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+        <script src="${path}/js/admin/script.js"></script>
+        <script src="${path}/js/admin/chart.js"></script>
         <script src="${path}/js/admin/ottTable.js"></script>
-        <script src="${path}/js/admin/bar.js"></script>
-        <script src="${path}/js/admin/pie.js"></script>
+        
     </body>
 </html>

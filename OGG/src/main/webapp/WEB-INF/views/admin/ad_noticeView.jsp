@@ -119,12 +119,9 @@
                                         
                                         <br>
                                         <div id="btn1">
-                                        <c:if test="${not empty member && member.id == notice.writerId }">
-                                        </c:if>
                                         <button type="button" id="btnUpdate" onclick = "location.href ='${path}/notice/update?no=${notice.n_no}'">수정</button>
                                         <button type="button" id="btnDelete" >삭제</button>
                                         <button onclick="location.href='${path}/admin/notice?page=1'" id="goBack">목록으로</button>
-                                        
                                         </div>
                                     </div>
                                     </div>
