@@ -188,7 +188,7 @@
         <div class="bannerWrap">
             <div class="bannerBox partybanner" 
             		 data-aos="zoom-in-down"  data-aos-duration="1500"
-            		 onclick="location.href='${ path }/party/ottlist';" >
+            		 onclick="location.href='${ path }/party/ottlist_find';" >
                 <div>
                     <label>#1 파티 시작하기</label>
                     <p class="text">내가 원하는, <br>나에게 딱 맞는 최적의 <br>파티를 시작해보세요.</p>
