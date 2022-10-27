@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.project.ogg.common.model.CommonVO;
+import com.project.ogg.common.model.Common;
 import com.project.ogg.common.util.MultipartFileUtil;
 import com.project.ogg.common.util.PageInfo;
 import com.project.ogg.community.model.service.CommunityReplyService;
@@ -61,24 +61,23 @@ public class CommunityController {
 		List<Community> list = null;
 		PageInfo pageInfo = null;
 		
-		CommonVO commonVO = new CommonVO();
+		Common common = new Common();
 		String preventSearchValue = "";
 		String preventSearchType = "";
 		
 		// 조회 조건 설정
-		commonVO.setSType(sType);
-		commonVO.setSValue(sValue);
+		common.setSType(sType);
+		common.setSValue(sValue);
 		
 		// 페이징 설정
-		pageInfo = new PageInfo(page, 10, service.getBoardCount(commonVO), 10);
-		
+		pageInfo = new PageInfo(page, 10, service.getBoardCount(common), 10);
 		
 		// 조회 조건 기입 후 검색 시 직전 검색 데이터 jsp로 return
 		if ( !StringUtils.isEmpty(sValue) ) {
 			preventSearchType = sType;
 			preventSearchValue = sValue;
 		}
-		list = service.getBoardList(pageInfo, commonVO);
+		list = service.getBoardList(pageInfo, common);
 		
 	    model.addObject("list", list);
 	    model.addObject("pageInfo", pageInfo);
@@ -150,7 +149,7 @@ public class CommunityController {
 			}
 		}
 		
-		// 게시글 데이터 저장
+		// 게시글 저장
 		community.setC_writerNo(member.getM_no());
 		result = service.insertCommunity(community);
 		
@@ -168,7 +167,7 @@ public class CommunityController {
 		return model;
 	}
 	
-	// 파일다운
+	// 파일 다운
 	@GetMapping("/community/fileDown.do")
 	public ResponseEntity<Resource> fileDown(
 			@RequestHeader("user-agent") String userAgent,

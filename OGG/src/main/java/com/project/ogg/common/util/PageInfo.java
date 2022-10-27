@@ -82,3 +82,7 @@ public class PageInfo {
 		return endList > this.listCount ? this.listCount : endList;
 	}
 }
+
+
+
+

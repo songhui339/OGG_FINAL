@@ -22,15 +22,11 @@ public class LoginController {
 	
 	@GetMapping("/member/kakao.do")
 	public String kakaoLogin(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
-		System.out.println("카카오 로그인 들어옴");
-		System.out.println(request.getParameter("kakaoemail"));
-		System.out.println(request.getParameter("kakaoname"));
 		
 		// kakaoId를 member id로 셋팅
 		String kakaoid = request.getParameter("kakaoemail");
 		Member member = new Member();	
 		member.setM_id(kakaoid);
-		System.out.println(member);
 		
 		// 카카오 계정으로 로그인한 적이 있는지 확인
 		int resultLookup = service.loginLookup(member);
@@ -38,8 +34,6 @@ public class LoginController {
 		// 회원이 아닌경우 (카카오 계정으로 처음 방문한 경우)
 		// 카카오 회원정보 설정 창으로 이동
 		if(resultLookup == 0) {
-			System.out.println(" 카카오 회원 정보 설정 가야지");
-			
 			request.setAttribute("kakaoid",request.getParameter("kakaoemail"));
 			request.setAttribute("kakaoname",request.getParameter("kakaoname"));
 			
@@ -62,13 +56,8 @@ public class LoginController {
 	// 카카오 회원정보 설정
 	@PostMapping("/member/kakaoJoin.do")
 	public ModelAndView kakaoJoin(ModelAndView model, @ModelAttribute Member member) {
-		
-		System.out.println("post /member/kakaoJoin.do 들어옴");
-
 		int result = 0;
 		result = service.insertKakaoMember(member);
-		
-		System.out.println(member);
 		
 		if(result > 0) {
 			model.addObject("msg", "회원가입이 정상적으로 완료되었습니다.");

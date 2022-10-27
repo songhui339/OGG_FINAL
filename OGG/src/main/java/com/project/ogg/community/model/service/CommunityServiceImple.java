@@ -6,7 +6,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.project.ogg.common.model.CommonVO;
+import com.project.ogg.common.model.Common;
 import com.project.ogg.common.util.PageInfo;
 import com.project.ogg.community.model.mapper.CommunityMapper;
 import com.project.ogg.community.model.vo.Community;
@@ -18,18 +18,18 @@ public class CommunityServiceImple implements CommunityService {
 	private CommunityMapper mapper;
 
 	@Override
-	public List<Community> getBoardList(PageInfo pageInfo, CommonVO vo) {
+	public List<Community> getBoardList(PageInfo pageInfo, Common common) {
 		int offset = (pageInfo.getCurrentPage() - 1) * pageInfo.getListLimit();
 		int limit = pageInfo.getListLimit();
 		RowBounds rowBounds = new RowBounds(offset, limit);			
 		
-		return mapper.selectAll(rowBounds, vo);
+		return mapper.selectAll(rowBounds, common);
 	}
 
 	@Override
-	public int getBoardCount(CommonVO vo) {
+	public int getBoardCount(Common common) {
 
-		return mapper.selectCommunityCount(vo);
+		return mapper.selectCommunityCount(common);
 	}
 
 	@Override
