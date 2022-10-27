@@ -104,7 +104,7 @@
                 </div>
 
                 <div class="buttonBox">
-                    <button type="submit" class="button" onclick="location('')">뒤로 가기</button>
+                    <button type="button" class="button" onclick="goBack()">뒤로 가기</button>
                     <button type="button" class="button button-purple" onclick="requestPay()">결제하고 파티 시작하기</button>
                 </div>
 
@@ -143,6 +143,10 @@
 	let temp = 00000001;
 	let monthly_price = ($('#monthly_price').val()).replace(/[^\d]+/g, "");
 	let point = Math.round(monthly_price * 0.9);
+	
+	function goBack(){
+		window.history.back();
+	};
 	
 	$(document).ready(() => {
 	    let date = new Date($('#end_date').val());

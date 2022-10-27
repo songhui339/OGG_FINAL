@@ -27,8 +27,8 @@
 
     <div class="buttonContainer">
         <div class="buttonBox">
-            <button class="gotoMain">메인페이지 바로가기 <i class="bi bi-house-door"></i></button>
-            <button>리뷰 게시판 바로가기 <i class="bi bi-people"></i></button>
+            <button class="gotoMain" onclick="location.href='${path}/'">메인페이지 바로가기 <i class="bi bi-house-door"></i></button>
+            <button onclick="location.href='${ path }/film/list'">리뷰 게시판 바로가기 <i class="bi bi-people"></i></button>
         </div>
     </div>
 </section>
