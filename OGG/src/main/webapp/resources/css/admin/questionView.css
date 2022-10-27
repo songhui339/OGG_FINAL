@@ -119,6 +119,11 @@ background-color: white;
 color: black;
 }
 
+#btn1 button:hover{
+	background-color: #999;
+	color:white;
+}
+
 /* reset */
 
 * {

@@ -63,20 +63,21 @@ public class AdminController {
 	
 	@GetMapping("/admin/home")
 	public ModelAndView goAdmin(ModelAndView model,@AuthenticationPrincipal Member member) {
-		List<MemberAD> list = service.getMemberList();
 		MUser muser = new MUser();
-		muser.setMarchUser(service.getMarchUserCount());
-		muser.setJuneUser(service.getJuneUserCount());
-		muser.setSepUser(service.getSepUserCount());
-		muser.setDecUser(service.getDecUserCount());
+		muser.setFebUser(service.getFebUserCount());
+		muser.setMayUser(service.getMayUserCount());
+		muser.setAugUser(service.getAugUserCount());
+		muser.setOctUser(service.getOctUserCount());
 		
 		List<OttForPie> pielist = service.getPieList();
 		int partyCount = mapper.getPartyCount();
-		System.out.println(pielist);
+		
+		List<Ott> list2 = service2.getOttList();
+		
+		model.addObject("list2",list2);
 		model.addObject("pc",partyCount);
 		model.addObject("pielist",pielist);
 		model.addObject("muser",muser);
-		model.addObject("list", list);
 		model.setViewName("admin/ad_main");
 		
 		return model;
@@ -98,9 +99,7 @@ public class AdminController {
 	@GetMapping("/admin/OTT")
 	public ModelAndView goOTT(ModelAndView model) {
 		List<OttAdmin> list = service.getOTTList();
-		List<Ott> list2 = null;
-		
-		list2 = service2.getOttList();
+		List<Ott> list2 = service2.getOttList();
 		model.addObject("list2",list2);
 		
 		model.addObject("list",list);
@@ -177,10 +176,10 @@ public class AdminController {
 		
 		List<MemberAD> list = service.getMemberList();
 		MUser muser = new MUser();
-		muser.setMarchUser(service.getMarchUserCount());
-		muser.setJuneUser(service.getJuneUserCount());
-		muser.setSepUser(service.getSepUserCount());
-		muser.setDecUser(service.getDecUserCount());
+		muser.setFebUser(service.getFebUserCount());
+		muser.setMayUser(service.getMayUserCount());
+		muser.setAugUser(service.getAugUserCount());
+		muser.setOctUser(service.getOctUserCount());
 		
 		List<OttForPie> pielist = service.getPieList();
 		int partyCount = mapper.getPartyCount();

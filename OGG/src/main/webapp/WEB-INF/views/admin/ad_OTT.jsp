@@ -71,7 +71,7 @@
                         <br>
                         <div class="card mb-4">
                             <div class="card-header">
-                                <i class="fas fa-chart-area me-1"></i>
+                                <i class="fas fa-table me-1"></i>
                                 OTT 관리
                             </div> 
                             <div class="card-body"> 
@@ -119,7 +119,7 @@
                         <div class="col-lg-12">
                                 <div class="card mb-4">
                                     <div class="card-header">
-                                        <i class="fas fa-chart-pie me-1"></i>
+                                    <i class="fa-solid fa-tv"></i>
                                         서비스 OTT 종류
                                     </div>
                                     <div class="card-body">

@@ -47,41 +47,44 @@ from party
 </select>
 
 <select id="getPieList" resultType="OttForPie">
+select * 
+from(
 SELECT O.OTT_NAME 
     ,COUNT(*) "COUNT"
 FROM PARTY P
 JOIN OTT_INFO O ON(O.OTT_NO = P.OTT_NO)
-<![CDATA[WHERE ROWNUM <= 5 ]]>
 GROUP BY O.OTT_NAME
-ORDER BY COUNT(*) DESC
+ORDER BY COUNT(*) DESC)
+<![CDATA[WHERE ROWNUM <= 4 ]]>
 </select>
+
 
 <select id="getQuestionCount" resultType="_int">
 	SELECT COUNT(*)
 	FROM QUESTION
 </select>
-<select id="getMarchUserCount" resultType="_int">
+<select id="getFebUserCount" resultType="_int">
 		SELECT COUNT(*)
 		FROM MEMBER
-		<![CDATA[WHERE M_JOINDATE < TO_DATE(20220301)]]>
+		<![CDATA[WHERE M_JOINDATE < TO_DATE(20220228)]]>
 	</select>
 	
-	<select id="getJuneUserCount" resultType="_int">
+	<select id="getMayUserCount" resultType="_int">
 		SELECT COUNT(*)
 		FROM MEMBER
-		<![CDATA[WHERE M_JOINDATE < TO_DATE(20220601)]]>
+		<![CDATA[WHERE M_JOINDATE < TO_DATE(20220531)]]>
 	</select>
 	
-	<select id="getSepUserCount" resultType="_int">
+	<select id="getAugUserCount" resultType="_int">
 		SELECT COUNT(*)
 		FROM MEMBER
-		<![CDATA[WHERE M_JOINDATE < TO_DATE(20220901)]]>
+		<![CDATA[WHERE M_JOINDATE < TO_DATE(20220831)]]>
 	</select>
 	
-	<select id="getDecUserCount" resultType="_int">
+	<select id="getOctUserCount" resultType="_int">
 		SELECT COUNT(*)
 		FROM MEMBER
-		<![CDATA[WHERE M_JOINDATE < TO_DATE(20221201)]]>
+		<![CDATA[WHERE M_JOINDATE < TO_DATE(20221031)]]>
 	</select>
 
 <select id="selectNoticeList" resultMap="noticeListResultMap">

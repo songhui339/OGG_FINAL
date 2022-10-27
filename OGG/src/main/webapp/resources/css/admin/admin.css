@@ -11700,3 +11700,6 @@ body {
   border-radius: 0.25rem !important;
 }
 
+td a{
+	text-decoration: none;
+	}

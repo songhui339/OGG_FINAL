@@ -157,14 +157,14 @@
                                     </tfoot>
                                 </table>
                             </div>
-                             
+                    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
                         </div>
                     </div>
                      <div class="row">
                             <div class="col-lg-6">
                                 <div class="card mb-4">
                                     <div class="card-header">
-                                        <i class="fas fa-chart-bar me-1"></i>
+                                    <i class="fa-solid fa-chart-simple"></i>
                                         이용자 수 그래프
                                     </div>
                                     <div class="card-body"><canvas id="myBarChart" width="100%" height="50"></canvas></div>
@@ -199,19 +199,19 @@
             </div>
         </div>
         <script>
-        var a = ${muser.marchUser};
-        var b = ${muser.juneUser};
-        var c = ${muser.sepUser};
-        var d = ${muser.decUser};
+        var a = ${muser.febUser};
+        var b = ${muser.mayUser};
+        var c = ${muser.augUser};
+        var d = ${muser.octUser};
         
         var fn = "${pielist[0].ott_name}";
-        var fc = ${pielist[0].count}/${pc} *100;
+        var fc = Math.round(${pielist[0].count}/${pc} *100);
         var sn = "${pielist[1].ott_name}";
-        var sc = ${pielist[1].count}/${pc} *100;
+        var sc = Math.round(${pielist[1].count}/${pc} *100);
         var tn = "${pielist[2].ott_name}";
-        var tc = ${pielist[2].count}/${pc} *100;
+        var tc = Math.round(${pielist[2].count}/${pc} *100);
         var forn = "${pielist[3].ott_name}";
-        var forc = ${pielist[3].count}/${pc} *100;
+        var forc = Math.round(${pielist[3].count}/${pc} *100);
         
         var pc = 100-fc-sc-tc-forc;
         
