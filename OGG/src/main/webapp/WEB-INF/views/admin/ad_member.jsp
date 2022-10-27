@@ -83,8 +83,8 @@
                     <p class="text" id="ottmname"></p>
                 </li>
                 <li>
-                    <label for="">이용중인 OTT정보</label>
-                    <p class="text" id="ottname"></p>
+                    <label for="" style="vertical-align: top !important;">이용중인 OTT정보</label>
+                    <p class="text" id="ottname" style="margin-top: 10px;"></p>
                 </li>
 		      </div>
 		      <div class="modal-footer">
