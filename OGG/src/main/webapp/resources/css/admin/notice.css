@@ -36,6 +36,13 @@ div#pageBar{
     padding: 15px 0;
     background-color: #999;
   }
+  tbody tr:hover{
+  	background-color: #d3d3d3;
+  }
+  #pageBar button:hover{
+  	background-color: #d3d3d3;
+  }
+  
   #board-search .search-window .search-wrap {
     position: relative;
   /*   padding-right: 124px; */
@@ -67,9 +74,13 @@ div#pageBar{
   
   #goWrite{
   margin-bottom: 5px;
-  width: 60px;
-  height: 30px;
   font-size: 15px;
+  border: 1px solid;
+}
+#goWrite:hover{
+	color : white;
+	background-color: #999;
+	
 }
   
   #write{
@@ -90,9 +101,6 @@ div#pageBar{
     line-height: 1.4;
     word-break: break-all;
     vertical-align: middle;
-  }
-  .board-table a:hover {
-    text-decoration: underline;
   }
   .board-table th {
     text-align: center;
@@ -138,11 +146,6 @@ div#pageBar{
     color: #fff;
   }
   
-  .btn-dark:hover, .btn-dark:focus {
-    background: #373737;
-    border-color: #373737;
-    color: #fff;
-  }
 
   /* reset */
   
@@ -168,4 +171,8 @@ div#pageBar{
     margin: -1px;
     width: 1px;
     height: 1px;
+  }
+  
+  a{
+  	text-decoration: none;
   }

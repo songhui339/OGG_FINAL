@@ -16,6 +16,7 @@
         <title>관리자페이지 OTT</title>
 		<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="${path }/css/admin/admin.css" rel="stylesheet" />
+        <link href="${path }/css/admin/ottinfo.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>        
     </head>
     <body class="sb-nav-fixed">
@@ -67,20 +68,12 @@
                 <main>
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">OTT관리</h1>
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                Chart.js is a third party plugin that is used to generate the charts in this template. The charts below have been customized - for further customization options, please visit the official
-                                <a target="_blank" href="https://www.chartjs.org/docs/latest/">Chart.js documentation</a>
-                                .
-                            </div>
-                        </div>
-                        
+                        <br>
                         <div class="card mb-4">
                             <div class="card-header">
-                                <i class="fas fa-chart-area me-1"></i>
+                                <i class="fas fa-table me-1"></i>
                                 OTT 관리
                             </div> 
-                            
                             <div class="card-body"> 
                                 <table id="datatablesSimple2">
                                 <button type="button" class="btn btn-primary" style="float:right;" onclick="window.open('${path}/admin/addOTT','','left=500px,top=200px,width=570px,height=430px')" >OTT 추가하기</button>
@@ -123,28 +116,34 @@
                             </div>
                             <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
                         </div>
-                        <div class="row">
-                            <div class="col-lg-6">
+                        <div class="col-lg-12">
                                 <div class="card mb-4">
                                     <div class="card-header">
-                                        <i class="fas fa-chart-bar me-1"></i>
-                                        이용자 수 그래프
+                                    <i class="fa-solid fa-tv"></i>
+                                        서비스 OTT 종류
                                     </div>
-                                    <div class="card-body"><canvas id="myBarChart" width="100%" height="50"></canvas></div>
+                                    <div class="card-body" overflow : scroll !important;">
+                                    <!-- 탭 콘텐츠 부분 -->
+        <div class="createPartyTab_row_02">
+                <!-- 전체 서비스  -->
+                <section class="content_container">
+                    <div class="contentBox">
+                    	<c:if test="${ not empty list2 }">
+                    		<c:forEach var="list" items="${ list2 }">
+                    			<div class="itemBox ${ list.ott_class }" data-bs-toggle="modal" data-bs-target="#modalWindow" !hidden>
+                    				<input type=hidden value="${ list.ott_name }">
+		                            <img src="${ path }/images/party/${ list.ott_thumb }.png" alt="logoImg" class="logoImg" id="thumb_url">
+		                            <span class="serviceNameText">${ list.ott_name }</span>
+                    			</div>
+                    		</c:forEach>
+                    	</c:if>
+                    </div>
+                </section>
+        </div>
+                                    </div>
                                     <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <div class="card mb-4">
-                                    <div class="card-header">
-                                        <i class="fas fa-chart-pie me-1"></i>
-                                        OTT별 이용자 점유 수
-                                    </div>
-                                    <div class="card-body"><canvas id="myPieChart" width="100%" height="50"></canvas></div>
-                                    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </main>
                 <footer class="py-4 bg-light mt-auto">
@@ -162,10 +161,7 @@
             </div>
         </div>
          <script>
-        var a = ${muser.marchUser};
-        var b = ${muser.juneUser};
-        var c = ${muser.sepUser};
-        var d = ${muser.decUser};
+        
         
         function ottdel(e){
             if(confirm("정말로 OTT를 삭제 하시겠습니까?")) {
@@ -175,12 +171,11 @@
             
 		</script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="${path}/js/admin/script.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="${path}/js/admin/chart.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+        <script src="${path}/js/admin/script.js"></script>
+        <script src="${path}/js/admin/chart.js"></script>
         <script src="${path}/js/admin/ottTable.js"></script>
-        <script src="${path}/js/admin/bar.js"></script>
-        <script src="${path}/js/admin/pie.js"></script>
+        
     </body>
 </html>

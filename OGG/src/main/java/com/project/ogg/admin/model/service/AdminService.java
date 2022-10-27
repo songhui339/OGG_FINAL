@@ -6,6 +6,7 @@ import com.project.ogg.admin.model.vo.Answer;
 import com.project.ogg.admin.model.vo.MemberAD;
 import com.project.ogg.admin.model.vo.Notice;
 import com.project.ogg.admin.model.vo.OttAdmin;
+import com.project.ogg.admin.model.vo.OttForPie;
 import com.project.ogg.admin.model.vo.Question;
 import com.project.ogg.common.util.PageInfo;
 import com.project.ogg.member.model.vo.Member;
@@ -46,19 +47,21 @@ public interface AdminService {
 
 	List<OttAdmin> getOTTList();
 	
-	int getMarchUserCount();
+	int getFebUserCount();
 
-	int getJuneUserCount();
+	int getMayUserCount();
 
-	int getSepUserCount();
+	int getAugUserCount();
 
-	int getDecUserCount();
+	int getOctUserCount();
 
 	int addOTT(OttAdmin ott);
 
 	int deleteOtt(int ott_no);
 
 	MemberAD selectMember(String membername);
+
+	List<OttForPie> getPieList();
 	
 
 }

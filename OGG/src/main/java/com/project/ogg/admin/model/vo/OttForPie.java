@@ -5,12 +5,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class MUser {
-	private int febUser;
-	private int mayUser;
-	private int augUser;
-	private int octUser;
+@NoArgsConstructor
+public class OttForPie {
 
+	String ott_name;
+	int count;
+	
 }

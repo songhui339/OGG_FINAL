@@ -89,7 +89,7 @@
 					<c:if test="${not empty list }">
 					<c:forEach var="notice" items="${list}">
 					<tr onclick="location.href='${path}/mypage/notice/view?no=${notice.n_no}'">
-                        <th scope="row">${notice.n_no}</th>
+                        <th scope="row">${notice.n_rno}</th>
                         <td>${notice.n_title}</td>
                         <td><fmt:formatDate type="date" value="${ notice.n_Create_Date }" /></td>
                         <td>${notice.n_readcount}</td>

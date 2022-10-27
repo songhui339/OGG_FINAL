@@ -121,6 +121,10 @@ height: 50px;
 background-color: white;
 color: black;
 }
+#btn1 input:hover{
+	background-color: #999;
+	color:white;
+}
 
 /* reset */
 

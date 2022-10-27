@@ -60,6 +60,8 @@ tr{
     border-bottom: 1px solid #ccc;
 }
 #btn1{
+border-top : 1px solid #ccc;
+padding-top: 20px; 
 text-align: center;
 }
 #subBtn,#goBack{
@@ -70,11 +72,9 @@ height: 50px;
 background-color: white;
 color: black;
 }
-
-#cimg{
-margin-left: 150px;
-width: 700px;
-text-align: center;
+#btn1 input:hover{
+	background-color: #999;
+	color:white;
 }
 
 

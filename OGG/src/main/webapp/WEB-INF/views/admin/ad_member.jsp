@@ -112,13 +112,6 @@
                         <h1 class="mt-4">회원관리</h1>
                         <br>
                         <div class="card mb-4">
-                            <div class="card-body">
-                                DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the
-                                <a target="_blank" href="https://datatables.net/">official DataTables documentation</a>
-                                .
-                            </div>
-                        </div>
-                        <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
                                 회원관리
@@ -164,8 +157,32 @@
                                     </tfoot>
                                 </table>
                             </div>
+                    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
                         </div>
                     </div>
+                     <div class="row">
+                            <div class="col-lg-6">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                    <i class="fa-solid fa-chart-simple"></i>
+                                        이용자 수 그래프
+                                    </div>
+                                    <div class="card-body"><canvas id="myBarChart" width="100%" height="50"></canvas></div>
+                                    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <i class="fas fa-chart-pie me-1"></i>
+                                        OTT별 이용자 점유 수
+                                    </div>
+                                    <div class="card-body"><canvas id="myPieChart" width="100%" height="50"></canvas></div>
+                                    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                    
                 </main>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
@@ -182,6 +199,22 @@
             </div>
         </div>
         <script>
+        var a = ${muser.febUser};
+        var b = ${muser.mayUser};
+        var c = ${muser.augUser};
+        var d = ${muser.octUser};
+        
+        var fn = "${pielist[0].ott_name}";
+        var fc = Math.round(${pielist[0].count}/${pc} *100);
+        var sn = "${pielist[1].ott_name}";
+        var sc = Math.round(${pielist[1].count}/${pc} *100);
+        var tn = "${pielist[2].ott_name}";
+        var tc = Math.round(${pielist[2].count}/${pc} *100);
+        var forn = "${pielist[3].ott_name}";
+        var forc = Math.round(${pielist[3].count}/${pc} *100);
+        
+        var pc = 100-fc-sc-tc-forc;
+        
         function selectMember(ths) {
         	let memberName = $(ths).text();
         	$.ajax({
@@ -198,21 +231,20 @@
     				$('#mnick').text(member.m_nickname);
     				$('#mphone').text(member.m_phonenumber);
     				$('#memail').text(member.m_email);
-    				
-    				
     			}, 
     			error: (error) => {
     				console.log(error);
     			}
     		});
         	
-        	
         }
-            
         </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="${path}/js/admin/script.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+        <script src="${path}/js/admin/script.js"></script>
         <script src="${path}/js/admin/datatable.js"></script>
+        <script src="${path}/js/admin/bar.js"></script>
+        <script src="${path}/js/admin/pie.js"></script>
     </body>
 </html>

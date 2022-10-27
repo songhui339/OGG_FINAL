@@ -3,7 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <c:set var="path" value="${ pageContext.request.contextPath }"/>
 
 <!-- jQuery -->
@@ -27,11 +26,12 @@
                 </p>
             </div>
             <form name="fregister" id="fregister" method="POST" autocomplete="off" class="form" role="form">
-            <input type="hidden" name="accounts_count" id="accounts_count" value="${ party.accounts_count }">
             <input type="hidden" id="accounts_date" value="${ party.p_accounts }">
+            <input type="hidden" name="m_id" id="m_id" value="${ party.m_id }">
+            <input type="hidden" name="m_name" id="m_name" value="${ party.m_name }">
+            <input type="hidden" name="m_email" id="m_email" value="${ party.m_email }">
+            <input type="hidden" name="m_tel" id="m_tel" value="${ party.m_tel }">
             <input type="hidden" name="p_no" id="p_no" value="${ party.p_no }">
-            <input type="hidden" name="m_no" id="m_no" value="${ member.m_no }">
-            <input type="hidden" name="p_cur_member" id="p_cur_member" value="${ party.p_cur_member }">
                 <h3><span class="c_purple">파티 정보</span></h3>
                 <div class="form-round-box">
                     <ul class="form-list">
@@ -125,6 +125,14 @@
 	let end_month = new Date($('#end_date').val()).getTime();
 	let monthly = Math.floor((end_month - new Date().getTime()) / cMonth);
 	
+	let name = $('#m_name').val();
+	let id = $('#m_id').val();
+	let email = $('#m_email').val();
+	let tel = $('#m_tel').val();
+	let p_no = $('#p_no').val();
+	
+	let merchant_uid = "order_monthly_" + new Date().getTime();
+	
 	let date = new Date();
 	let year = date.getFullYear();
     let month = ("0" + (1 + date.getMonth())).slice(-2);
@@ -133,6 +141,8 @@
 	let accounts_date = year + "-" + month + "-" + accounts_day;
 	let accounts_unix_date = new Date(accounts_date).getTime()/1000;
 	let temp = 00000001;
+	let monthly_price = ($('#monthly_price').val()).replace(/[^\d]+/g, "");
+	let point = Math.round(monthly_price * 0.9);
 	
 	$(document).ready(() => {
 	    let date = new Date($('#end_date').val());
@@ -140,13 +150,11 @@
 	    let month = ("0" + (1 + date.getMonth())).slice(-2);
 	    let day = ("0" + date.getDate()).slice(-2);
 	    
-		let monthly_price = $('#monthly_price').val();
 	    let deposit = $('#deposit').val();
 	    let price_sum = '';
 		
 	    document.querySelector('#party_period').value = "오늘 ~ " + year + "-" + month + "-" + day;
 	    
-	    monthly_price = monthly_price.replace(/[^\d]+/g, "");
 	    monthly_amount = monthly_price;
 	    deposit = deposit.replace(/[^\d]+/g, "");
 	    
@@ -159,37 +167,48 @@
 	    document.querySelector('#price_sum').value = price_sum + "원";
 	    document.querySelector('#price_kakao').value = price_sum + "원";
 
-		
 	});
+		
 	
 	IMP.init('imp34485120');
 	
-	function requestPay() {	
-		location.href = "${path}/party/submitParty?no=${ party.p_no }";
+	function requestPay() {
+		//location.href = "${path}/party/submitParty?no=${ party.p_no }&point=" + point;
 	  	IMP.request_pay({
 	  		pg: 'kakaopay',
 	  		pay_method: 'card',
-	  		merchant_uid: "order_monthly_"+new Date().getTime(),
-	  		customer_uid: 'test025', // 카드(빌링키)와 1:1로 대응하는 값, 유저 ID값으로 설정 예정
+	  		merchant_uid: merchant_uid,
+	  		customer_uid: id, // 카드(빌링키)와 1:1로 대응하는 값, 유저 ID값으로 설정 예정
 	  		name: '최초 결제',
 	  		amount: amount,
-	  		buyer_email: 'gildong@gmail.com',
-	  		buyer_name: '홍길동',
-	  		buyer_tel: '010-4242-4242'
+	  		buyer_email: email,
+	  		buyer_name: name,
+	  		buyer_tel: tel
 	  	}, function (rsp) {
 	  		if ( rsp.success ) {
+	  			$.ajax({
+					url:"${path}/pay/firstSubpay",
+					type: 'POST',
+					dataType: "json",
+					data: {
+						customer_uid: id,
+				        amount: amount,
+				        merchant_uid: merchant_uid,
+				        p_no: p_no
+					}
+				});
+	  			
 	  			month = parseInt(month) + 1;
 		  		
 	  			for(let i = 1; i < monthly; i++){
+	  				temp += 1;
 	  				if(parseInt(month) <= 12){
 		  				accounts_date = year + "-" + month + "-" + accounts_day;
-		  				console.log(accounts_date);
 		  				accounts_unix_date = new Date(accounts_date).getTime()/1000;
 	  				} else {
 	  					year = parseInt(year) + 1;
 	  					month = 1;
 	  					accounts_date = year + "-" + month + "-" + accounts_day;
-	  					console.log(accounts_date);
 		  				accounts_unix_date = new Date(accounts_date).getTime()/1000;
 	  				}
 	  				
@@ -198,10 +217,11 @@
 						type: 'POST',
 						dataType: "json",
 						data: {
-							customer_uid: 'test025',
-					        merchant_uid: "order_monthly_0"+new Date().getTime(),
+							customer_uid: id,
+					        merchant_uid: "order_monthly_" + new Date().getTime() + temp,
 					        schedule_at: accounts_unix_date,
-					        amount: monthly_amount
+					        amount: monthly_amount,
+					        p_no: p_no
 						},
 						success: (result) => {
 							console.log(result);
@@ -210,7 +230,7 @@
 		  			month = parseInt(month) + 1;
 		  			
 	  			}
-	  			location.href = "${path}/party/submitParty?no=${ party.p_no }";
+	  			location.href = "${path}/party/submitParty?no=${ party.p_no }&point=" + point;
 	  			
 		    } else {
 		    	alert('결제 예약 실패'); 
@@ -218,7 +238,5 @@
 	  	});
 	};
 </script>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

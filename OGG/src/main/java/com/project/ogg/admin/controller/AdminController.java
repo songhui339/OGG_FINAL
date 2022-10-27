@@ -33,12 +33,15 @@ import com.project.ogg.admin.model.vo.MUser;
 import com.project.ogg.admin.model.vo.MemberAD;
 import com.project.ogg.admin.model.vo.Notice;
 import com.project.ogg.admin.model.vo.OttAdmin;
+import com.project.ogg.admin.model.vo.OttForPie;
 import com.project.ogg.admin.model.vo.PhotoVo;
 import com.project.ogg.admin.model.vo.Question;
 import com.project.ogg.common.util.MultipartFileUtil;
 import com.project.ogg.common.util.MultipartFileUtil2;
 import com.project.ogg.common.util.PageInfo;
 import com.project.ogg.member.model.vo.Member;
+import com.project.ogg.party.model.service.PartyService;
+import com.project.ogg.party.model.vo.Ott;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -55,31 +58,29 @@ public class AdminController {
 	@Autowired
 	private ResourceLoader resourceLoader;
 	
+	@Autowired
+	private PartyService service2;
+	
 	@GetMapping("/admin/home")
 	public ModelAndView goAdmin(ModelAndView model,@AuthenticationPrincipal Member member) {
-		if(member.getM_authority().equals("ROLE_ADMIN")) {
-		List<MemberAD> list = service.getMemberList();
 		MUser muser = new MUser();
-		muser.setMarchUser(service.getMarchUserCount());
-		muser.setJuneUser(service.getJuneUserCount());
-		muser.setSepUser(service.getSepUserCount());
-		muser.setDecUser(service.getDecUserCount());
+		muser.setFebUser(service.getFebUserCount());
+		muser.setMayUser(service.getMayUserCount());
+		muser.setAugUser(service.getAugUserCount());
+		muser.setOctUser(service.getOctUserCount());
 		
-		System.out.println(muser);
+		List<OttForPie> pielist = service.getPieList();
+		int partyCount = mapper.getPartyCount();
+		
+		List<Ott> list2 = service2.getOttList();
+		
+		model.addObject("list2",list2);
+		model.addObject("pc",partyCount);
+		model.addObject("pielist",pielist);
 		model.addObject("muser",muser);
-
-		model.addObject("list", list);
 		model.setViewName("admin/ad_main");
 		
 		return model;
-		}
-		else {
-			model.addObject("msg", "관리자만 접근 가능합니다..");
-			model.addObject("location", "/");
-			model.setViewName("common/msg");
-			return model;
-			
-		}
 	}
 	
 	@PostMapping("/admin/selectMember")
@@ -98,14 +99,9 @@ public class AdminController {
 	@GetMapping("/admin/OTT")
 	public ModelAndView goOTT(ModelAndView model) {
 		List<OttAdmin> list = service.getOTTList();
+		List<Ott> list2 = service2.getOttList();
+		model.addObject("list2",list2);
 		
-		MUser muser = new MUser();
-		muser.setMarchUser(service.getMarchUserCount());
-		muser.setJuneUser(service.getJuneUserCount());
-		muser.setSepUser(service.getSepUserCount());
-		muser.setDecUser(service.getDecUserCount());
-		
-		model.addObject("muser",muser);
 		model.addObject("list",list);
 		model.setViewName("admin/ad_OTT");
 		return model;
@@ -179,8 +175,22 @@ public class AdminController {
 	public ModelAndView goMember(ModelAndView model) {
 		
 		List<MemberAD> list = service.getMemberList();
+		MUser muser = new MUser();
+		muser.setFebUser(service.getFebUserCount());
+		muser.setMayUser(service.getMayUserCount());
+		muser.setAugUser(service.getAugUserCount());
+		muser.setOctUser(service.getOctUserCount());
 		
-		model.addObject("list",list);
+		List<OttForPie> pielist = service.getPieList();
+		int partyCount = mapper.getPartyCount();
+		System.out.println(pielist);
+		model.addObject("pc",partyCount);
+		model.addObject("pielist",pielist);
+		
+		model.addObject("muser",muser);
+		
+		model.addObject("list", list);
+		model.setViewName("party/createParty");
 		model.setViewName("admin/ad_member");
 		return model;
 	}

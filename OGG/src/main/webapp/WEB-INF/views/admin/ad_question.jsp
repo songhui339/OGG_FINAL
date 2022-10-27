@@ -69,9 +69,6 @@
                         <h1 class="mt-4">1:1 문의</h1>
                         <br>
                         <div class="card mb-4">
-                            
-                        </div>
-                        <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fa-sharp fa-solid fa-bell"></i>
                                 문의 게시판
