@@ -11,6 +11,7 @@ import com.project.ogg.admin.model.vo.Notice;
 import com.project.ogg.admin.model.vo.OttAdmin;
 import com.project.ogg.admin.model.vo.OttForPie;
 import com.project.ogg.admin.model.vo.Question;
+import com.project.ogg.admin.model.vo.UsingOtt;
 import com.project.ogg.member.model.vo.Member;
 
 @Mapper
@@ -71,5 +72,7 @@ public interface AdminMapper {
 	List<OttForPie> getPieList();
 
 	int getPartyCount();
+
+	List<UsingOtt> selectOtt(String memberId);
 
 }

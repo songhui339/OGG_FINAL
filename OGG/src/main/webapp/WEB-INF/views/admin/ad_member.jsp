@@ -69,6 +69,32 @@
 		</div>
 		<!-- MEMBER Modal END -->
 		
+        <!-- OTT Modal START -->
+		<div class="modal fade" id="ottModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h1 class="modal-title fs-5" id="exampleModalLabel">이용 OTT 상세 정보</h1>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      <div class="modal-body adminMemberModal">
+                <li>
+                    <label for="">이름</label>
+                    <p class="text" id="ottmname"></p>
+                </li>
+                <li>
+                    <label for="">이용중인 OTT정보</label>
+                    <p class="text" id="ottname"></p>
+                </li>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		<!-- OTT Modal END -->
+		
         <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
@@ -133,9 +159,9 @@
                                     <c:if test="${not empty list }">
                                     <c:forEach var="member" items="${list}">
                                         <tr>
-                                             <td><a href="#" id="sm" onclick='selectMember(this)' data-bs-toggle="modal" data-bs-target="#memberModal" >${member.m_id }</a></td>
+                                             <td><a href="#" id="sm" onclick='selectMember(this)' data-bs-toggle="modal" data-bs-target="#memberModal" >${member.m_id}</a></td>
                                             <td>${member.m_name}</td>
-                                            <td>넷플릭스, 디즈니 플러스</td>
+                                            <td><a href="#" id='so' onclick='selectOtt("${member.m_id}","${member.m_name}")' data-bs-toggle="modal" data-bs-target="#ottModal">${member.m_name}님의 이용중인 OTT조회</a></td>
                                             <td><fmt:formatDate type="date" value="${ member.m_joindate }" /></td>
                                             <td>${member.m_authority}</td>
                                             <td>${member.m_point}</td>
@@ -215,14 +241,14 @@
         
         var pc = 100-fc-sc-tc-forc;
         
-        function selectMember(ths) {
-        	let memberName = $(ths).text();
+        function selectMember(t) {
+        	let memberId = $(t).text();
         	$.ajax({
     			type: "POST",
     			url: "${path}/admin/selectMember",
     			dataType: "json",
     			data: {
-    				memberName // "userId": userId
+    				memberId // "userId": userId
     			},
     			success: (member) => {
     				
@@ -236,7 +262,42 @@
     				console.log(error);
     			}
     		});
-        	
+        }
+        
+        function selectOtt(ths,x) {
+        	let mid = ths
+        	let mname = x;
+         	$.ajax({
+    			type: "POST",
+    			url: "${path}/admin/selectOtt",
+    			dataType: "json",
+    			data: {
+    				mid // "userId": userId
+    			},
+    			success: (otts) => {
+    				console.log(otts);
+    				
+    				if(otts == ""){
+    					$('#ottmname').text(x);
+    					$('#ottname').text("이용중인 OTT가 없습니다.");
+    				}else{
+	    				$('#ottmname').text(otts[0].m_name);
+	    				
+	    				let ottname ='';
+	    				
+	    				for(let i = 0; i < otts.length ;i++){
+	    					ottname += otts[i].plan_name+"<br>";
+	    				}
+	    				
+	    				$('#ottname').html(ottname);
+    					
+    				}
+    			}, 
+    			error: (error) => {
+    				console.log(error);
+    			}
+    		});
+	
         }
         </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

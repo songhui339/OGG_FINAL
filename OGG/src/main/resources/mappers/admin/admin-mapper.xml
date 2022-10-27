@@ -23,6 +23,20 @@ FROM MEMBER
 WHERE M_ID = #{memberid}
 </select>
 
+<select id="selectOtt" parameterType="string" resultType="UsingOtt">
+SELECT DISTINCT
+*
+FROM(
+SELECT M_NAME, PLAN_NAME 
+FROM PARTY P
+JOIN MEMBER_PARTY Y ON(P.P_NO = Y.P_NO)
+JOIN MEMBER M ON (M.M_NO=Y.M_NO)
+JOIN OTT_INFO O ON(O.OTT_NO = P.OTT_NO)
+WHERE M.M_ID = #{memberid}
+)
+ORDER BY M_NAME
+</select>
+
 <select id="getMemberList" resultType="MemberAD">
 	SELECT ROWNUM
 	,M.*
