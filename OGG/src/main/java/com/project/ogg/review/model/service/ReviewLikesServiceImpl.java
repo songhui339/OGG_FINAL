@@ -71,8 +71,8 @@ public class ReviewLikesServiceImpl implements ReviewLikesService {
 	public ReviewLikes setLikes(ReviewLikes reviewLikes, String type) {
 		int insertLikes = 0;
 		int deleteLikes = 0;
-		Review review = new Review();
-		ReviewCmt cmt = new ReviewCmt();
+//		Review review = new Review();
+//		ReviewCmt cmt = new ReviewCmt();
 		
 		if (type.equals("INSERT")) {
 			insertLikes = insertLikes(reviewLikes);

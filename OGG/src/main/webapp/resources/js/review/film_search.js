@@ -17,7 +17,7 @@ $(document).ready(function() {
 
             if(result.results.length >= 1){
 
-                let html = "<p class='row_name' style='margin-left: 5%;'>영화</p><hr></div>";
+                let html = "<p class='row_name' style='margin-left: 5%;'>🎬 영화</p><hr></div>";
                     html += "<div id='search1' class='carousel slide' data-bs-ride='carousel'>";
                     html += "<div class='row row-cols-1 row-cols-sm-2 row-cols-md-5' id='carousel01'>";
 
@@ -57,7 +57,7 @@ $(document).ready(function() {
             console.log(result);
             if(result.results.length >= 1){
 
-                let html  = "<p class='row_name' style='margin-left: 5%;'>드라마</p><hr></div>";
+                let html  = "<p class='row_name' style='margin-left: 5%;'>📺 시리즈</p><hr></div>";
                     html += "<div id='search2' class='carousel slide' data-bs-ride='carousel'>";
                     html += "<div class='row row-cols-1 row-cols-sm-2 row-cols-md-5' id='carousel01'>";
                 
@@ -97,7 +97,7 @@ $(document).ready(function() {
             console.log(result);
             if(result.results.length >= 1){
 
-                let html  = "<p class='row_name' style='margin-left: 5%;'>인물</p><hr></div>";
+                let html  = "<p class='row_name' style='margin-left: 5%;'>👤 인물</p><hr></div>";
                     html += "<div id='search3' class='carousel slide' data-bs-ride='carousel'>";
                     html += "<div class='row row-cols-1 row-cols-sm-2 row-cols-md-5' id='carousel02'>";
 

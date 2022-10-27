@@ -9,9 +9,9 @@ $(document).ready(function() {
     // var title;
     var name;
 
-    ////////////
-    //필름 디테일//
-    ////////////
+    ////////////////////
+    //film_detail_info//
+    ////////////////////
     $.ajax({
         async: true, 
         url: url ,
@@ -19,55 +19,27 @@ $(document).ready(function() {
         timeout: 3000,
         dataType: "json", 
         success: function (result) { 
-        
-			let img = poster2 + result.backdrop_path;
-			
+            
+            // bg poster
+			let bgimg = poster2 + result.backdrop_path;
             let html = "";
                 html += "#baback { background-image: url('";
-                html += img + "'); ";
+                html += bgimg + "'); ";
                 html += "background-size : cover; ";
                 html += "background-repeat : no-repeat; ";
-                // html += "background-position : 10px; 50px; ";
                 html += "}";
 
             $("#hi").append(html);
-        },
-        error: function (error) {
-            console.log('영화포스터 가져오기 통신 오류');
-        }
-    });
-    
-    $.ajax({
-        async: true, 
-        url: url ,
-        type: "GET",
-        timeout: 3000,
-        dataType: "json", 
-        success: function (result) { 
-        
-			let img = poster + result.poster_path;
-			
-            let html = "";
-                html += "<img src='" + img + "' id='img_film3'>";
 
-            $("#filmDetail0").append(html);
-        },
-        error: function (error) {
-            console.log('영화포스터 가져오기 통신 오류');
-        }
-    });
+            // poster
+            let img = poster + result.poster_path;
+            let html2 = "";
+                html2 += "<img src='" + img + "' id='img_film3'>";
 
-    $.ajax({
-        async: false, 
-        url: url ,
-        type: "GET",
-        timeout: 3000,
-        dataType: "json", 
-        success: function (result) { 
-        
-            console.log(result)
+            $("#filmDetail0").append(html2);
 
-		    let orig_title = (ftype=='movie' ? result.original_title : result.original_name);
+            // info
+            let orig_title = (ftype=='movie' ? result.original_title : result.original_name);
 		    title = (ftype=='movie' ? result.title : result.name);
 		    let runtime = (ftype=='movie' ? result.runtime : result.episode_run_time);
 		    let date = (ftype=='movie' ? result.release_date.replace(/-/gi, ". ") : result.first_air_date.replace(/-/gi, ". "));
@@ -81,56 +53,44 @@ $(document).ready(function() {
             }
             let genre = genres.join(' ・ ');
             
-            let html = "";
-                html += "<a href='" + contextpath + "/film/detail?fcode=" + id + "&ftype=" + type1 + "'>";
-                html += "<div class='row' style='font-size: 2em; font-weight: 700; margin-top: 35px; margin-bottom: 1px; margin-left: 1px;'>";
-                html += title;
-                html += "</div>";
-                html += "</a>";
-                html += "<div class='row' style='font-size: 0.9em; color: grey; margin-bottom: 15px; margin-left: 7px;'>";
-                // html += orig_title + "<br> 장르 ・ " + genre + " " + "<br> 개봉 ・ " + date + " <br> 러닝타임 ・ " + runtime +"분 " 
-                html += orig_title + " ・ " + genre + " " + "<br> 개봉 ・ " + date + " <br> 러닝타임 ・ " + runtime +"분 " 
-                html += "</div>";
+            let html3 = "";
+                html3 += "<a href='" + contextpath + "/film/detail?fcode=" + id + "&ftype=" + type1 + "'>";
+                html3 += "<div class='row' style='font-size: 2em; font-weight: 700; margin-top: 35px; margin-bottom: 1px; margin-left: 1px;'>";
+                html3 += title;
+                html3 += "</div>";
+                html3 += "</a>";
+                html3 += "<div class='row' style='font-size: 0.9em; color: grey; margin-bottom: 15px; margin-left: 7px;'>";
+                // html3 += orig_title + "<br> 장르 ・ " + genre + " " + "<br> 개봉 ・ " + date + " <br> 러닝타임 ・ " + runtime +"분 " 
+                html3 += orig_title + " ・ " + genre + " " + "<br> 개봉 ・ " + date + " <br> 러닝타임 ・ " + runtime +"분 " 
+                html3 += "</div>";
 
-            $("#filmDetail1").append(html);
-        },
-        error: function (error) {
-            console.log('영화정보 가져오기 통신 오류');
-        }
-    })
-    
-    $.ajax({
-        async: true, 
-        url: url ,
-        type: "GET",
-        timeout: 3000,
-        dataType: "json", 
-        success: function (result) { 
-            
-            console.log(result);
+            $("#filmDetail1").append(html3);
 
-		    let overview = result.overview;
+            // logline
+            let overview = result.overview;
 		    // let production_countries = result.production_countries[0].name;
 		    let belongs_to_collection = (result.belongs_to_collection == null ? " " : result.belongs_to_collection.name);
 		    let tagline = (result.tagline == null ? " " : result.tagline);
 		    
-            let html = "";
-                html += "<p id='detail-text1'>기본 정보</p>";
-                html += "<hr>";
-                // html += "<br>";
-                html += "<p id='detail-text6'>";
-                html += belongs_to_collection + " ・ " + tagline;
-                html += "<p id='detail-text3'>";
-                html += overview;
-                html += "</p></p>";
+            let html4 = "";
+                html4 += "<p id='detail-text1'>기본 정보</p>";
+                html4 += "<hr>";
+                // html4 += "<br>";
+                html4 += "<p id='detail-text6'>";
+                html4 += belongs_to_collection + " ・ " + tagline;
+                html4 += "<p id='detail-text3'>";
+                html4 += overview;
+                html4 += "</p></p>";
                 
-            $("#filmDetail2").append(html);
+            $("#filmDetail2").append(html4);
+
         },
         error: function (error) {
-            alert("영화줄거리 가져오기 통신 오류")
+            console.log('영화 정보 가져오기 통신 오류');
         }
     });
-
+    
+    // find.dir
     $.ajax({
         url: "https://api.themoviedb.org/3/movie/" + fcode + "/credits?api_key=" + key + "&language=ko" ,
         async: false,
@@ -159,6 +119,7 @@ $(document).ready(function() {
     
     var dirname = $("#dir").val();
     
+    // from.dir
     $.ajax({
         async: true, 
 
@@ -203,9 +164,9 @@ $(document).ready(function() {
         }
     });
 
-    ////////////
-    /////키업////
-    ////////////
+    //////////////
+    ////key_up////
+    //////////////
     $("#message-text").keyup(function(e) {
 	    var content = $(this).val();
 	    $("#textLengthCheck").text("(" + content.length + " / 2000)");
@@ -226,9 +187,9 @@ $(document).ready(function() {
 	    }
 	});
 
-    ////////////
-    /////리뷰////
-    ////////////
+    ///////////////
+    /////review////
+    ///////////////
     function convertbr(){
         str = document.getElementById("message-text").value;
         str = str.replace(/\r\n|\n/g,'<br>');
