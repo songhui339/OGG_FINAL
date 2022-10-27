@@ -116,35 +116,38 @@
                             </div>
                             <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
                         </div>
-                        <div class="col-lg-12">
-                                <div class="card mb-4">
-                                    <div class="card-header">
-                                    <i class="fa-solid fa-tv"></i>
-                                        서비스 OTT 종류
-                                    </div>
-                                    <div class="card-body" overflow : scroll !important;">
-                                    <!-- 탭 콘텐츠 부분 -->
-        <div class="createPartyTab_row_02">
-                <!-- 전체 서비스  -->
-                <section class="content_container">
-                    <div class="contentBox">
-                    	<c:if test="${ not empty list2 }">
-                    		<c:forEach var="list" items="${ list2 }">
-                    			<div class="itemBox ${ list.ott_class }" data-bs-toggle="modal" data-bs-target="#modalWindow" !hidden>
-                    				<input type=hidden value="${ list.ott_name }">
-		                            <img src="${ path }/images/party/${ list.ott_thumb }.png" alt="logoImg" class="logoImg" id="thumb_url">
-		                            <span class="serviceNameText">${ list.ott_name }</span>
-                    			</div>
-                    		</c:forEach>
-                    	</c:if>
-                    </div>
-                </section>
-        </div>
-                                    </div>
-                                    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-                                </div>
-                            </div>
-                    </div>
+					<div class="col-lg-12">
+						<div class="card mb-4">
+							<div class="card-header">
+								<i class="fa-solid fa-tv"></i> 서비스 OTT 종류
+							</div>
+							<div class="card-body" style = "overflow :scroll !important;">
+								<!-- 탭 콘텐츠 부분 -->
+								<div class="createPartyTab_row_02">
+									<!-- 전체 서비스  -->
+									<section class="content_container">
+										<div class="contentBox">
+											<c:if test="${ not empty list2 }">
+												<c:forEach var="list" items="${ list2 }">
+													<div class="itemBox ${ list.ott_class }"
+														data-bs-toggle="modal" data-bs-target="#modalWindow"
+														!hidden>
+														<input type=hidden value="${ list.ott_name }"> <img
+															src="${ path }/images/party/${ list.ott_thumb }.png"
+															alt="logoImg" class="logoImg" id="thumb_url"> <span
+															class="serviceNameText">${ list.ott_name }</span>
+													</div>
+												</c:forEach>
+											</c:if>
+										</div>
+									</section>
+								</div>
+							</div>
+							<div class="card-footer small text-muted">Updated yesterday
+								at 11:59 PM</div>
+						</div>
+					</div>
+				</div>
                 </main>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
