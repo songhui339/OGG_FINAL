@@ -189,7 +189,7 @@ public class MypageController {
 		pageInfo = new PageInfo(page, 5, service.getNoticeCount(), 5);
 		
 		list = service.getNoticeList(pageInfo);
-		
+		System.out.println(list);
 		model.addObject("pageInfo",pageInfo);
 		model.addObject("list",list);
 		model.setViewName("mypage/mypage_notice");
@@ -242,7 +242,7 @@ public class MypageController {
 		}
 		
 		notice = service.getNoticeView(no);
-		
+		System.out.println(notice);
 		model.addObject("notice",notice);
 		model.setViewName("mypage/mypage_notice_detail");
 		

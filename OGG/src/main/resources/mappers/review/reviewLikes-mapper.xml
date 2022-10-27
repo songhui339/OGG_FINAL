@@ -133,6 +133,7 @@
 	            F_CODE,
 	            F_TYPE,
 	            F_STAR,
+	            L_DATE,
 	            L_TYPE
 		      )
 		      VALUES(
@@ -141,6 +142,7 @@
 		            #{fCode},
 		            'movie',
 		            #{fStar},
+		            SYSDATE,
 		            'STAR'
 		      )
 	</insert>
@@ -211,6 +213,7 @@
 				            F_LIKES,
 					    </when>
 				    </choose>
+				    L_DATE,
 		            L_TYPE
 		      )
 		      VALUES(
@@ -219,16 +222,19 @@
 					<choose>
 					    <when test="lType == 'REVIEW'">
 				            #{rvNo},
+				            SYSDATE,
 							'REVIEW'	
 						</when>
 					    <when test="lType == 'CMT'">
 				            #{cmtNo},
+				            SYSDATE,
 							'CMT'	
 					    </when>
 					    <when test="lType == 'FILM'">
 				            #{fCode},
 				            DEFAULT,
 				            1,
+				            SYSDATE,
 							'FILM'	
 					    </when>
 				    </choose>

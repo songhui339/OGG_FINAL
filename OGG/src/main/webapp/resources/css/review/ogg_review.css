@@ -1,6 +1,7 @@
-    /* 01. 매안 */
-    /* 작품 카드 이미지*/
-    #img_film{
+    /************************/
+    /****** film_main *******/
+    /***** img_for_card *****/
+    #img_film, #img_film2{
         background-color: black; 
         border-top-left-radius: 15px; 
         border-top-right-radius: 15px; 
@@ -16,58 +17,30 @@
         border-radius: 15px;
         margin-bottom: 15px;
     } 
-    /* 02. 디테일 */
-    /* 작품 카드 이미지*/
-    #img_film2{
-        background-color: black; 
-        border-top-left-radius: 15px; 
-        border-top-right-radius: 15px; 
-        width: 100%;
-        height: 265px;
-    } 
+
+    /**************************/
+    /****** film_detail *******/
+    /****** img_for_card ******/
     #card_film2{
-        /* border: 2px solid rgb(21, 182, 182); */
         width: 13rem; 
         border-radius: 15px;
         margin: auto;
     } 
 
-    /* 대표 포스터 */
+    /***** poster *****/
     #img_film3{
         background-color: black; 
         border-radius: 15px; 
-        /* border-top-right-radius: 15px;  */
         width: 12rem;
         height: 265px;
     } 
 
-    /* 전체 div 스타일 */
-    #div_review{
+    /*****************/
+    /****** div ******/
+    /*****************/
+    #div_review, #div_comment, #div_film, #filmDetail2{
         border-radius: 15px;
         border: 1px solid lightgray;
-        /* border: 1px solid #cfc9f6; */
-        height: 100%; 
-        padding: 20px;
-    }
-    #div_comment{
-        border-radius: 15px;
-        border: 1px solid lightgray;
-        /* border: 1px solid #cfc9f6; */
-        height: 100%; 
-        padding: 20px;
-    }
-    #div_film{
-        border-radius: 15px;
-        border: 1px solid lightgray;
-        /* border: 1px solid #cfc9f6; */
-        height: 100%; 
-        padding: 20px;
-    }
-    
-    #filmDetail2{
-        border-radius: 15px;
-        border: 1px solid lightgray;
-        /* border: 1px solid #cfc9f6; */
         height: 100%; 
         padding: 20px;
     }
@@ -80,7 +53,9 @@
         margin-bottom: 30px;
     }
 
-    /* 전체 텍스트 스타일 */
+    /******************/
+    /****** text ******/
+    /******************/
     #detail-text0{
         margin-left: 10px;
         margin-top: 3px;
@@ -107,10 +82,7 @@
 	    overflow: hidden;
         text-overflow: ellipsis;
     }
-    #detail-text4{
-        font-size: 0.9em;
-    }
-    #detail-text5{
+    #detail-text4, #detail-text5{
         font-size: 0.9em;
     }
     #detail-text6{
@@ -118,7 +90,7 @@
         font-size: 1em;
         line-height: 30px;
         word-break: keep-all;
-        width: 850px;
+        /* width: 850px; */
     }
     #detail-text{
         margin-top: 3px;
@@ -129,11 +101,10 @@
         font-weight: 400;
         font-size: 1em;
     }
-    a {
-        text-decoration: none;
-    }
 
-    /* 이 감독의 다른 작품 카드 텍스트 */
+    /***************************/
+    /****** film_from_dir ******/   
+    /***************************/
     #card-text1{
         font-weight: 600;
         font-size: 1em;
@@ -148,7 +119,9 @@
         color: grey;
     }
 
-    /* 리뷰 카드 */
+    /*************************/
+    /****** review_card ******/
+    /*************************/
     #card_review{
         border-radius: 15px;
         width: 16em;
@@ -177,7 +150,9 @@
         font-size: 0.85em;
     }
 
-    /* 04. 보드 디테일 패이지*/
+    /*************************/
+    /****** board_detail ******/
+    /*************************/
     #board-text1{
         margin-left: 10px;
         font-weight: 600;
@@ -196,28 +171,29 @@
     #board-text4{
         width: 13%;
         margin-left: 10px;
-        font-size: 0.9em;
+        font-size: 1em;
+        vertical-align: middle;
     }
-    #board-text5{
+    #board-text4-1{
+        padding-left: 4%;
+        width: 12%;
         font-size: 0.9em;
+        vertical-align: middle;
     }
-    #board-text5-1{
-        font-size: 0.9em;
+    #board-text5, #board-text5-1{
+        font-size: 1em;
+        vertical-align: middle;
     }
     #board-text6{
         width: 5%;
         font-size: 0.9em;
     }
-    #board-text7{
-        width: 11%;
-        font-size: 0.9em;
-    }
-    #board-text7-1{
+    #board-text7, #board-text7-1{
         width: 11%;
         font-size: 0.9em;
     }
 
-    /* 댓글 */
+    /****** comment ******/
     .row_name{
         font-weight: 600;
         font-size: 1.5em;
@@ -230,48 +206,56 @@
     .reviewbox02{
         font-size: 0.85em;
     }
-
+    
+    /********************/
+    /****** a_tag *******/
+    /********************/
+    a {
+        text-decoration: none;
+    }
     a:link{
         color: black;
     }
-
     a:visited{
         color: black;
     }
-    /* ver1 */
-    /* .btn-primary{
-        display: flex;
-        align-items:center;
-        justify-content: center;
-        font-size: 1em;
-        border: none;
-        background-color: #7e69fe; 
-        color: white; 
-        height: 30px; 
-    }
-    
-    .btn:hover{
-        font-size: 1em;
-        border: 1px solid #7e69fe;
-        background-color: white; 
-        color: #7e69fe; 
-        height: 30px; 
-        text-align: center;
-    } */
 
-    /* ver2 */
+    /********************/
+    /****** button ******/
+    /******* ver.1 ******/
     .btn-primary{
         display: flex;
         align-items:center;
         justify-content: center;
         font-size: 1em;
         border: 1px solid #7e69fe;
+        background-color: #7e69fe; 
+        color: white; 
+        height: 30px; 
+    }
+    
+    .btn:hover, .btn:checked, .btn:focus{
+        font-size: 1em;
+        border: 1px solid #7e69fe;
+        background-color: white; 
+        color: #7e69fe; 
+        height: 30px; 
+        /* text-align: center; */
+    }
+
+    /****** ver.2 ******/
+    .btn-primary2{
+        display: flex;
+        align-items:center;
+        justify-content: center;
+        font-size: 1em;
+        border: 1px solid #7e69fe;
         background-color: white; 
         color: #7e69fe; 
         height: 30px; 
     }
     
-    .btn:hover, .btn:checked, .btn:focus {
+    .btn-primary2:hover, .btn-primary2:checked, .btn-primary2:focus {
         font-size: 1em;
         border: 1px solid #7e69fe;
         background-color: #7e69fe; 
@@ -279,7 +263,8 @@
         height: 30px; 
         text-align: center;
     }
-    /******** 별점 ********/
+
+    /****** star_rating ******/
     .star-rating {
         display: flex;
         flex-direction: row-reverse;
@@ -295,7 +280,7 @@
     }
 
     .star-rating label {
-        -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
+        -webkit-text-fill-color: transparent;
         -webkit-text-stroke-width: 2.3px;
         -webkit-text-stroke-color: #7e69fe;
         cursor: pointer;
@@ -311,8 +296,9 @@
         -webkit-text-fill-color: gold;
         -webkit-text-stroke-color: gold;
     }
-
-    /* 카로셀 */
+    /**********************/
+    /****** carousel ******/
+    /**********************/
     .carousel-control-prev {
         margin-left: -40px;
         margin-top: 120px;
@@ -328,11 +314,8 @@
     .carousel-control-next{
         height: 100px;
         width: 50px;
-        /* outline: green; */
         background-size: 100%, 100%;
         border-radius: 50%;
-        /* border: 1px solid blue; */
-        /* background-color: red; */
     }
 
     .carousel-control-next,
@@ -340,14 +323,12 @@
         filter: invert(100%);
     }
 
-    #carousel01 {
-        /* border: 2px solid blue; */
+    #carousel01, #carousel02, #carousel03 {
         padding-left: 50px; 
         padding-right: 60px;
     }
 
     #carousel00 {
-       /*  border: 2px solid blue; */
 		height: 400px;
 		display: flex;
 		justify-content: center;
@@ -357,7 +338,36 @@
     #dir_film{
     	padding: 50px;
     }
+    
+    /********************/
+    /****** search ******/
+    /********************/
+    .searchdiv{
+        margin-bottom: 20px;
+    }
+    
+    /****************************/
+    /****** film_detail_bg ******/
+    /****************************/
+    #baback {
+        padding-left: 30%;
+        position:absolute;
+        height: 350px; 
+        width: 90%;
+        background-position: left center;
+        /* box-shadow: inset 0px 0px 50px 5px black; */
+    }
 
-    .c3-event-rect bar{
-        fill: #7e69fe;
+    #aback {
+        height: 230px; 
+    }
+
+    #back {
+        position: relative;
+        height: 290px; 
+    }
+
+    #fafa {
+        padding: 10px 10px 0px 15px;
+        margin-bottom: 100px;
     }

@@ -18,7 +18,7 @@
     margin-top: 10px;
     display: grid;
     gap: 20px;
-    grid-template-columns: repeat(7, 140px);
+    grid-template-columns: repeat(7, 150px);
     justify-content: center;
 }
 

@@ -1,5 +1,6 @@
 package com.project.ogg.review.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +34,8 @@ public class ReviewController {
 			@RequestParam int no) {
 		
 		int cmtCount = 0;
-		Review review = null;
-		List<ReviewCmt> reviewCmt = null;
+		Review review = new Review();
+		List<ReviewCmt> reviewCmt = new ArrayList<ReviewCmt>();
 		
 		review = service.getReviewByNo(no);
 		cmtCount = service.getCmtCountByNo(no);

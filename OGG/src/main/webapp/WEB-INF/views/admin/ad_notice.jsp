@@ -126,17 +126,17 @@
 
 											<c:if test="${not empty list }">
 												<c:forEach var="notice" items="${list}">
-
 													<tr>
 														<td>${notice.n_rno}</td>
-														<th><a
-															href="${path}/admin/notice/view?no=${notice.n_no}">
-																${notice.n_title}</a></th>
+														<th>
+															<a href="${path}/admin/notice/view?no=${notice.n_no}">
+																${notice.n_title}
+															</a>
+														</th>
 														<td>${notice.n_m_name}</td>
 														<td><fmt:formatDate type="date" value="${ notice.n_Create_Date }" /></td>
 														<td>${notice.n_readcount}</td>
 													</tr>
-
 												</c:forEach>
 											</c:if>
 

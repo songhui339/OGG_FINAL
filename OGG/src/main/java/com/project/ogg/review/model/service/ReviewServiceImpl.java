@@ -2,17 +2,14 @@ package com.project.ogg.review.model.service;
 
 import java.util.List;
 
-import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.project.ogg.common.util.PageInfo;
 import com.project.ogg.review.model.mapper.ReviewMapper;
 import com.project.ogg.review.model.vo.Film;
 import com.project.ogg.review.model.vo.Review;
 import com.project.ogg.review.model.vo.ReviewCmt;
-import com.project.ogg.review.model.vo.ReviewLikes;
 
 @Service
 public class ReviewServiceImpl implements ReviewService {
@@ -57,4 +54,5 @@ public class ReviewServiceImpl implements ReviewService {
 	public int reviewUpdate(Review review) {
 		return mapper.updateReview(review);
 	}
+
 }

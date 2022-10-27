@@ -147,23 +147,23 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	@Override
-	public int getMarchUserCount() {
-		return mapper.getMarchUserCount();
+	public int getFebUserCount() {
+		return mapper.getFebUserCount();
 	}
 
 	@Override
-	public int getJuneUserCount() {
-		return mapper.getJuneUserCount();
+	public int getMayUserCount() {
+		return mapper.getMayUserCount();
 	}
 
 	@Override
-	public int getSepUserCount() {
-		return mapper.getSepUserCount();
+	public int getAugUserCount() {
+		return mapper.getAugUserCount();
 	}
 
 	@Override
-	public int getDecUserCount() {
-		return mapper.getDecUserCount();
+	public int getOctUserCount() {
+		return mapper.getOctUserCount();
 	}
 
 	@Override

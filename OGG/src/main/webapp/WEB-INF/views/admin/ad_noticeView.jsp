@@ -115,13 +115,15 @@
                                        <!-- 
                                          <textarea name="content" id="writing" readonly="readonly">${notice.n_content}</textarea>
                                         -->
-                                        <div name="content" id="writing">${notice.n_content}</div>
-                                        
-                                        <br>
+									<div name="content" id="writing">
+										<p>${notice.n_content}</p>
+									</div>
+
+									<br>
                                         <div id="btn1">
-                                        <button type="button" id="btnUpdate" onclick = "location.href ='${path}/notice/update?no=${notice.n_no}'">수정</button>
-                                        <button type="button" id="btnDelete" >삭제</button>
-                                        <button onclick="location.href='${path}/admin/notice?page=1'" id="goBack">목록으로</button>
+	                                        <button type="button" id="btnUpdate" onclick = "location.href ='${path}/notice/update?no=${notice.n_no}'">수정</button>
+	                                        <button type="button" id="btnDelete" >삭제</button>
+	                                        <button onclick="location.href='${path}/admin/notice?page=1'" id="goBack">목록으로</button>
                                         </div>
                                     </div>
                                     </div>

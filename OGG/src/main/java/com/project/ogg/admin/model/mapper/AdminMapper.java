@@ -56,13 +56,13 @@ public interface AdminMapper {
 	
 	int addOTT(OttAdmin ott);
 
-	int getMarchUserCount();
+	int getFebUserCount();
 
-	int getJuneUserCount();
+	int getMayUserCount();
 
-	int getSepUserCount();
+	int getAugUserCount();
 
-	int getDecUserCount();
+	int getOctUserCount();
 
 	int deleteOtt(int no);
 
