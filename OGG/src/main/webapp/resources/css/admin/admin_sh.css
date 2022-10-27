@@ -13,10 +13,12 @@ OGG 관리자페이지 멤버 정보 모달창 CSS_최송희 작업
     display: inline-block;
     width: 160px;
     padding: 10px 0;
+    vertical-align: top !important;
 }
 
 .adminMemberModal li p.text {
-    display: inline;
+    display: inline-block;
+    margin-bottom : 0;
 }
 #ottname{
 	overflow: auto;
