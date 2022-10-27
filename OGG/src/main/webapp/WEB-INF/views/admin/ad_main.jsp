@@ -139,7 +139,7 @@
 							<div class="card-header">
 								<i class="fa-solid fa-tv"></i> 서비스 OTT 종류
 							</div>
-							<div class="card-body">
+							<div class="card-body" overflow : scroll !important;">
 								<!-- 탭 콘텐츠 부분 -->
 								<div class="createPartyTab_row_02">
 									<!-- 전체 서비스  -->
