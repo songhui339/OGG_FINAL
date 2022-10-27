@@ -12,7 +12,9 @@ import com.project.ogg.admin.model.vo.Answer;
 import com.project.ogg.admin.model.vo.MemberAD;
 import com.project.ogg.admin.model.vo.Notice;
 import com.project.ogg.admin.model.vo.OttAdmin;
+import com.project.ogg.admin.model.vo.OttForPie;
 import com.project.ogg.admin.model.vo.Question;
+import com.project.ogg.admin.model.vo.UsingOtt;
 import com.project.ogg.common.util.PageInfo;
 
 @Service
@@ -146,23 +148,23 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	@Override
-	public int getMarchUserCount() {
-		return mapper.getMarchUserCount();
+	public int getFebUserCount() {
+		return mapper.getFebUserCount();
 	}
 
 	@Override
-	public int getJuneUserCount() {
-		return mapper.getJuneUserCount();
+	public int getMayUserCount() {
+		return mapper.getMayUserCount();
 	}
 
 	@Override
-	public int getSepUserCount() {
-		return mapper.getSepUserCount();
+	public int getAugUserCount() {
+		return mapper.getAugUserCount();
 	}
 
 	@Override
-	public int getDecUserCount() {
-		return mapper.getDecUserCount();
+	public int getOctUserCount() {
+		return mapper.getOctUserCount();
 	}
 
 	@Override
@@ -175,6 +177,16 @@ public class AdminServiceImpl implements AdminService {
 	public MemberAD selectMember(String memberid) {
 		// TODO Auto-generated method stub
 		return mapper.selectMember(memberid);
+	}
+
+	@Override
+	public List<OttForPie> getPieList() {
+		return mapper.getPieList();
+	}
+
+	@Override
+	public List<UsingOtt> selectOtt(String memberId) {
+		return mapper.selectOtt(memberId);
 	}
 
 	

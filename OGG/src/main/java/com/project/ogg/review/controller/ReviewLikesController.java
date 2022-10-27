@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.project.ogg.member.model.vo.Member;
 import com.project.ogg.review.model.service.ReviewLikesService;
 import com.project.ogg.review.model.vo.Film;
-import com.project.ogg.review.model.vo.Review;
 import com.project.ogg.review.model.vo.ReviewLikes;
 
 @Controller
@@ -106,9 +105,9 @@ public class ReviewLikesController {
 		if(member != null) {
 			
 			reviewLikes.setMNo(member.getM_no());
+			System.out.println(reviewLikes);
 			map.put("likes", service.getLikes(reviewLikes));
 		}
-//		System.out.println("조회" + map);
 		
 		return map;
 	}
@@ -126,7 +125,6 @@ public class ReviewLikesController {
 		int insertLikes = 0;
 		Film filmCheck = null;
 		Map<String, ReviewLikes> map = new HashMap<>(); 
-		Review review = new Review();
 
 		reviewLikes.setMNo(member.getM_no());
 		fcode = Integer.parseInt(reviewLikes.getFCode());
@@ -159,7 +157,6 @@ public class ReviewLikesController {
 		
 		int deleteLikes = 0;
 		Map<String, ReviewLikes> map = new HashMap<>(); 
-		Review review = new Review();
 		if(member != null) {
 			
 			reviewLikes.setMNo(member.getM_no());
@@ -185,7 +182,8 @@ public class ReviewLikesController {
 			reviewLikes.setMNo(member.getM_no());
 			map.put("likeFilm", service.getLikes(reviewLikes));
 		}
-//		System.out.println("조회" + map);
+		
+		System.out.println(map);
 		
 		return map;
 	}
@@ -200,10 +198,8 @@ public class ReviewLikesController {
 		
 		int fcode = 0;
 		int insertFilm = 0;
-		int insertLikes = 0;
 		Film filmCheck = null;
 		Map<String, ReviewLikes> map = new HashMap<>(); 
-		Review review = new Review();
 
 		reviewLikes.setMNo(member.getM_no());
 		fcode = Integer.parseInt(reviewLikes.getFCode());
@@ -230,9 +226,7 @@ public class ReviewLikesController {
 			@RequestParam("ftype") String ftype,
 			@ModelAttribute ReviewLikes reviewLikes)  {
 		
-		int deleteLikes = 0;
 		Map<String, ReviewLikes> map = new HashMap<>(); 
-		Review review = new Review();
 
 		reviewLikes.setMNo(member.getM_no());
 		service.setTotalLikes(reviewLikes, "DELETE");

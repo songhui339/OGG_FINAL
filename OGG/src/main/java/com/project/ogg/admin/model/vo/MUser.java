@@ -8,9 +8,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MUser {
-	private int marchUser;
-	private int juneUser;
-	private int sepUser;
-	private int decUser;
+	private int febUser;
+	private int mayUser;
+	private int augUser;
+	private int octUser;
 
 }

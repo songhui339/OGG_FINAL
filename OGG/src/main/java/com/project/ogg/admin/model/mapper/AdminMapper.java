@@ -9,7 +9,9 @@ import com.project.ogg.admin.model.vo.Answer;
 import com.project.ogg.admin.model.vo.MemberAD;
 import com.project.ogg.admin.model.vo.Notice;
 import com.project.ogg.admin.model.vo.OttAdmin;
+import com.project.ogg.admin.model.vo.OttForPie;
 import com.project.ogg.admin.model.vo.Question;
+import com.project.ogg.admin.model.vo.UsingOtt;
 import com.project.ogg.member.model.vo.Member;
 
 @Mapper
@@ -55,16 +57,22 @@ public interface AdminMapper {
 	
 	int addOTT(OttAdmin ott);
 
-	int getMarchUserCount();
+	int getFebUserCount();
 
-	int getJuneUserCount();
+	int getMayUserCount();
 
-	int getSepUserCount();
+	int getAugUserCount();
 
-	int getDecUserCount();
+	int getOctUserCount();
 
 	int deleteOtt(int no);
 
 	MemberAD selectMember(String memberid);
+
+	List<OttForPie> getPieList();
+
+	int getPartyCount();
+
+	List<UsingOtt> selectOtt(String memberId);
 
 }

@@ -20,4 +20,6 @@ public interface FilmMapper {
 	int selectCmtCount(int no);
 
 	List<ReviewLikes> selectFilmLikes(int no);
+
+	Review selectReviewByMember(Review review);
 }

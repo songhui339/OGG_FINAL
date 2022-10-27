@@ -50,4 +50,9 @@ public class FilmServiceImpl implements FilmService {
 		return mapper.selectFilmLikes(no);
 	}
 
+	@Override
+	public Review getReviewByMember(Review review) {
+		return mapper.selectReviewByMember(review);
+	}
+
 }

@@ -89,7 +89,7 @@
 					<c:if test="${not empty list }">
 					<c:forEach var="notice" items="${list}">
 					<tr onclick="location.href='${path}/mypage/notice/view?no=${notice.n_no}'">
-                        <th scope="row">${notice.n_no}</th>
+                        <th scope="row">${notice.n_rno}</th>
                         <td>${notice.n_title}</td>
                         <td><fmt:formatDate type="date" value="${ notice.n_Create_Date }" /></td>
                         <td>${notice.n_readcount}</td>
@@ -98,7 +98,33 @@
 					</c:if>
                 </tbody>
             </table>
+            <!-- Page 네비게이션 -->
+            <div class="pageNav" id="pageBar">
+                <!-- 맨 처음으로 -->
+                <button class="btn arrowBtn" onclick="location.href='${path}/mypage/notice?page=1'">&lt;&lt;</button>
+    
+                <!-- 이전 페이지로 -->
+                <button class="btn arrowBtn" onclick="location.href='${path}/mypage/notice?page=${pageInfo.prevPage }'">&lt;</button>
+    
+                <!--  10개 페이지 목록 -->
+                <c:forEach begin="${pageInfo.startPage }" end="${pageInfo.endPage }"
+                                    varStatus="status">
+                <c:if test="${status.current == pageInfo.currentPage }">
+                    <button class="btn" disabled>${ status.current }</button>
+                </c:if>
+                <c:if test="${status.current != pageInfo.currentPage }">
+                    <button class="btn pageNoBtn" onclick="location.href='${path}/mypage/notice?page=${status.current }'">${status.current }</button>
+                </c:if>
+                </c:forEach>
+    
+                <!-- 다음 페이지로 -->
+                <button class="btn arrowBtn" onclick="location.href='${path}/mypage/notice?page=${pageInfo.nextPage }'">&gt;</button>
+    
+                <!-- 맨 끝으로 -->
+                <button class="btn arrowBtn" onclick="location.href='${path}/mypage/notice?page=${pageInfo.maxPage }'">&gt;&gt;</button>
+            </div>
            </div>
+           
 
 
         <!-- 배너 영역 -->

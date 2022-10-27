@@ -1,31 +1,23 @@
 package com.project.ogg.review.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.project.ogg.common.util.PageInfo;
 import com.project.ogg.member.model.vo.Member;
 import com.project.ogg.review.model.service.ReviewCmtService;
-import com.project.ogg.review.model.vo.Film;
-import com.project.ogg.review.model.vo.Review;
 import com.project.ogg.review.model.vo.ReviewCmt;
-import com.project.ogg.review.model.vo.ReviewLikes;
 
 @Controller
 @RequestMapping("/review")
@@ -53,7 +45,7 @@ public class ReviewCmtController {
 			if(cmtWrite > 0) {
 				reviewCountUpdate = service.updateCmtCount(cmt.getRvNo());
 				if(reviewCountUpdate > 0) {
-					map.put("cmt", service.getCmtByCmtNo(cmt.getCmtNo()));
+					map.put("cmt", service.getCmt(cmt));
 					System.out.println("댓글 등록 성공");
 				}
 			}else {
@@ -91,5 +83,30 @@ public class ReviewCmtController {
 		model.setViewName("common/msg");
 		
 		return model;
+	}
+	
+	@PostMapping("/recmt_write")
+	@ResponseBody
+	public List<ReviewCmt> recmtWrite(
+			@AuthenticationPrincipal Member member,
+			@RequestParam("fCode") String fCode,
+			@RequestParam("ftype") String ftype,
+			@ModelAttribute ReviewCmt cmt) {
+		
+		int cmtWrite = 0;
+		List<ReviewCmt> list = new ArrayList<ReviewCmt>();
+		if(member != null) {
+
+			cmt.setCmtWriterNo(member.getM_no());
+			cmtWrite = service.cmtWrite(cmt);
+	
+			if(cmtWrite > 0) {
+					list = service.getReCmt(cmt);
+					System.out.println("대댓글 등록 성공");
+			}else {
+				System.out.println("대댓글 등록 실패");
+			}
+		}
+		return list;
 	}
 }

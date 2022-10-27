@@ -19,4 +19,6 @@ public interface FilmService {
 
 	List<ReviewLikes> getFilmLikes(int no);
 
+	Review getReviewByMember(Review review);
+
 }

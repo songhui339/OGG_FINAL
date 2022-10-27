@@ -16,7 +16,7 @@
         <title>관리자 페이지</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="${path }/css/admin/admin.css" rel="stylesheet" />
-        <link href="${path }/css/admin/admin_sh.css" rel="stylesheet" />
+        <link href="${path }/css/admin/ottinfo.css" rel="stylesheet" />
         <script src="${ path }/js/jquery-3.6.0.min.js"></script>
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     </head>
@@ -28,45 +28,6 @@
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar-->
         </nav>
-        
-        <!-- MEMBER Modal START -->
-		<div class="modal fade" id="memberModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		  <div class="modal-dialog">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <h1 class="modal-title fs-5" id="exampleModalLabel">회원 상세 정보</h1>
-		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-		      </div>
-		      <div class="modal-body adminMemberModal">
-		        <li> 
-                    <label for="">아이디</label>
-                    <p class="text" id="mid"></p>
-                </li>
-                <li>
-                    <label for="">이름</label>
-                    <p class="text" id="mname"></p>
-                </li>
-                <li>
-                    <label for="">닉네임</label>
-                    <p class="text" id="mnick"></p>
-                </li>
-                <li>
-                    <label for="">이메일</label>
-                    <p class="text" id="memail"></p>
-                </li>
-                <li>
-                    <label for="">휴대폰 번호</label>
-                    <p class="text" id="mphone"></p>
-                </li>
-		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-		      </div>
-		    </div>
-		  </div>
-		</div>
-		<!-- MEMBER Modal END -->
-		
         <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
@@ -114,71 +75,58 @@
                             <div class="col-xl-6">
                                 <div class="card mb-4">
                                     <div class="card-header">
-                                        <i class="fa-solid fa-signal"></i>
+                                    <i class="fa-solid fa-chart-simple"></i>
                                         이용자 수 그래프
                                     </div>
-                                    <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
-                                    
+                                    <div class="card-body"><canvas id="myBarChart" width="100%" height="50"></canvas></div>
+                                    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
                                 </div>
                             </div>
                             <div class="col-xl-6">
                                 <div class="card mb-4">
                                     <div class="card-header">
-                                        <i class="fas fa-chart-bar me-1"></i>
+                                    <i class="fas fa-chart-pie me-1"></i>
                                         OTT별 이용자 점유 수
                                     </div>
                                     <div class="card-body"><canvas id="myPieChart" width="100%" height="50"></canvas></div>
+                                <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
                                 </div>
                             </div>
                         </div>
-                         <div class="card mb-4">
-                            <div class="card-header">
-                                <i class="fas fa-table me-1"></i>
-                                회원관리
-                            </div>
-                            <div class="card-body">
-                                <table id="datatablesSimple">
-                                    <thead>
-                                        <tr>
-                                            <th>아이디</th>
-                                            <th>이름</th>
-                                            <th>이용 OTT 종류</th>
-                                            <th>가입일</th>
-                                            <th>권한</th>
-                                            <th>포인트</th>
-                                            <th>상태</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    <c:if test="${not empty list }">
-                                    <c:forEach var="member" items="${list}">
-                                        <tr>
-                                            <td><a href="#" id="sm" onclick='selectMember(this)' data-bs-toggle="modal" data-bs-target="#memberModal" >${member.m_id }</a></td>
-                                            <td>${member.m_name}</td>
-                                            <td>넷플릭스, 디즈니 플러스</td>
-                                            <td><fmt:formatDate type="date" value="${ member.m_joindate }" /></td>
-                                            <td>${member.m_authority}</td>
-                                            <td>${member.m_point}</td>
-                                            <td>${member.m_status}</td>
-                                        </tr>
-                                    </c:forEach>
-                                    </c:if>
-                                    </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th>아이디</th>
-                                            <th>이름</th>
-                                            <th>이용 OTT 종류</th>
-                                            <th>가입일</th>
-                                            <th>권한</th>
-                                            <th>포인트</th>
-                                            <th>상태</th>
-                                        </tr>
-                                    </tfoot>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+                        <div class="row">
+					<div class="col-xl-12">
+						<div class="card mb-4">
+							<div class="card-header">
+								<i class="fa-solid fa-tv"></i> 서비스 OTT 종류
+							</div>
+							<div class="card-body" style = "overflow :scroll !important;">
+								<!-- 탭 콘텐츠 부분 -->
+								<div class="createPartyTab_row_02">
+									<!-- 전체 서비스  -->
+									<section class="content_container">
+										<div class="contentBox">
+											<c:if test="${ not empty list2 }">
+												<c:forEach var="list" items="${ list2 }">
+													<div class="itemBox ${ list.ott_class }"
+														data-bs-toggle="modal" data-bs-target="#modalWindow"
+														!hidden>
+														<input type=hidden value="${ list.ott_name }"> <img
+															src="${ path }/images/party/${ list.ott_thumb }.png"
+															alt="logoImg" class="logoImg" id="thumb_url"> <span
+															class="serviceNameText">${ list.ott_name }</span>
+													</div>
+												</c:forEach>
+											</c:if>
+										</div>
+									</section>
+								</div>
+							</div>
+							<div class="card-footer small text-muted">Updated yesterday
+								at 11:59 PM</div>
+						</div>
+					</div>
+				</div>					
+				</div>
                 </main>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
@@ -195,37 +143,20 @@
             </div>
         </div>
          <script>
-        var a = ${muser.marchUser};
-        var b = ${muser.juneUser};
-        var c = ${muser.sepUser};
-        var d = ${muser.decUser};
-        	
-        function selectMember(ths) {
-        	let memberName = $(ths).text();
-        	$.ajax({
-    			type: "POST",
-    			url: "${path}/admin/selectMember",
-    			dataType: "json",
-    			data: {
-    				memberName // "userId": userId
-    			},
-    			success: (member) => {
-    				
-    				$('#mid').text(member.m_id);
-    				$('#mname').text(member.m_name);
-    				$('#mnick').text(member.m_nickname);
-    				$('#mphone').text(member.m_phonenumber);
-    				$('#memail').text(member.m_email);
-    				
-    				
-    			}, 
-    			error: (error) => {
-    				console.log(error);
-    			}
-    		});
-        	
-        	
-        }
+        var a = ${muser.febUser};
+        var b = ${muser.mayUser};
+        var c = ${muser.augUser};
+        var d = ${muser.octUser};
+        
+	        var fn = "${pielist[0].ott_name}";
+	        var fc = Math.round(${pielist[0].count}/${pc} *100);
+	        var sn = "${pielist[1].ott_name}";
+	        var sc = Math.round(${pielist[1].count}/${pc} *100);
+	        var tn = "${pielist[2].ott_name}";
+	        var tc = Math.round(${pielist[2].count}/${pc} *100);
+	        var forn = "${pielist[3].ott_name}";
+	        var forc = Math.round(${pielist[3].count}/${pc} *100);
+        var pc = 100-fc-sc-tc-forc;
         
 		</script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

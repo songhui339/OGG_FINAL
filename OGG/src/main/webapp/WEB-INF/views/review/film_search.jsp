@@ -5,52 +5,63 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <c:set var="path" value="${ pageContext.request.contextPath }"/>
 
-	<!-- header -->
-	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
-	
-    <!-- my CSS -->
-    <link rel="stylesheet" href="${path}/css/review/ogg_review.css">
-    
-    <!-- my JS -->
-    <script defer src="${path}/js/review/film_search.js"></script>
-    
-    <!-- 내용 전체 컨테이너 -->
-    <div class="container" style="margin-bottom: 100px; margin-top: 40px;">
+<!-- header -->
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
-        <div class="row">
-            <div class="col" style="margin-left: 5%;">
-                <p class="row_name">검색 결과</p>
-            </div>
-            <div class="col">
-            </div>
-            <div class="col">
-                <input type="text" id="searchInput" style="margin-left: 35%; margin-top:5px; 
-                        height: 34px; width:140px; border: 1px solid lightgray">
-                <button class="btn btn-primary" type="button" style="display: inline; height: 35px; margin-bottom: 5px;"
-                		id="searchBtn">검색</button>
-            </div>
-            <hr>
-        </div>
-        
-        <!-- 1st row -->
-        <div id="search1" class="carousel slide" data-bs-ride="carousel">
-            
-        </div>
-        <!-- 1st row 끝 -->
+<!-- my CSS -->
+<link rel="stylesheet" href="${path}/css/review/ogg_review.css">
 
+<!-- my JS -->
+<script defer src="${path}/js/review/film_search.js"></script>
+
+<!-- start -->
+<div class="container" style="margin-bottom: 100px; margin-top: 40px;">
+
+    <div class="row" style="maring-bottom: 20px;">
+        <div class="col" style="margin-left: 5%;"></div>
+        <div class="col"></div>
+        <div class="col">
+            <input type="text" class="form-control" id="searchInput" style="width:140px; margin-left: 35%; margin-top:5px; display: inline-block; border: 1px solid lightgray;">
+            <button class="btn btn-primary" type="button" style="display: inline; height: 36px; margin-bottom: 5px;"id="searchBtn">검색</button>
+        </div>
     </div>
-    <!-- 내용 전체 컨테이너 끝 -->
+        
+    <!-- 1st row -->
+    <div class="searchdiv" id="searchdiv1">
     
-    <script>
-		$("#searchBtn").on("click", () => {
-			var keyword = $("#searchInput").val();
-			
-		    location.href="${path}/film/search?keyword=" + keyword;
-		});
+    </div>
+    <!-- 2nd row -->
+    <div class="searchdiv" id="searchdiv2">
+    
+    </div>
+    <!-- 3rd row -->
+    <div class="searchdiv" id="searchdiv3">
+    
+    </div>
+</div>
+<!-- end -->
+
+<script>
+	$("#searchBtn").on("click", () => {
+		var keyword = $("#searchInput").val();
+		var type = $("#searchType").val();
+		
+        console.log(keyword);
+
+        if(!keyword){
+            alert('검색어를 입력해주세요');
+        }else{
+            location.href="${path}/film/search?type=" + type + "&keyword=" + keyword;
+        }
+
+	    // location.href="${path}/film/search?type=" + type + "&keyword=" + keyword;
+	    location.href="${path}/film/search?keyword=" + keyword;
+	});
 	
-		let searchkeyword = "[[${searchkeyword}]]";
-		var contextpath = "${ pageContext.request.contextPath }";
-	</script>
-	
-    <!-- footer -->
-	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+	let searchkeyword = "[[${searchkeyword}]]";
+	let searchtype = "[[${searchtype}]]";
+	var contextpath = "${ pageContext.request.contextPath }";
+</script>
+
+<!-- footer -->
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

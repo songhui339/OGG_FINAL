@@ -77,18 +77,28 @@ public class FilmController {
 			@RequestParam("ftype") String ftype)  {
 		
 	    String requestUrl = null;
-		List<Review> list = null;
+		List<Review> list = new ArrayList<Review>();
 		PageInfo pageInfo = null;
 		int fcode = 0;
+		Review review = new Review();
 		
 		fcode = Integer.parseInt(fcodes);
 		requestUrl = (String)request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
 		pageInfo = new PageInfo(page, 10, service.getReviewCount(fcode), 10);
 		list = service.getReviewListByFilm(pageInfo, fcode);
 		
+		if(member != null) {
+			review.setFCode(fcodes);
+			review.setRvWriterNo(member.getM_no());
+			review = service.getReviewByMember(review);
+		}
+		
+		System.out.println(review);
+		
 		model.addAttribute("list", list); 
 		model.addAttribute("fcode", fcode);
 		model.addAttribute("ftype", ftype);
+		model.addAttribute("review", review);
 		model.addAttribute("pageInfo", pageInfo);
 		model.addAttribute("loginMember", member);
 		

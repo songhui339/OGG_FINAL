@@ -7,7 +7,12 @@ table {
     
     padding: 80px 0;
   }
-  
+  tbody tr:hover{
+  	background-color: #d3d3d3;
+  }
+  #pageBar button:hover{
+  	background-color: #d3d3d3;
+  }
 div#pageBar{
 	margin-top:10px; text-align:center;
 }
@@ -89,9 +94,6 @@ div#pageBar{
     word-break: break-all;
     vertical-align: middle;
   }
-  .board-table a:hover {
-    text-decoration: underline;
-  }
   .board-table th {
     text-align: center;
   }
@@ -166,4 +168,7 @@ div#pageBar{
     margin: -1px;
     width: 1px;
     height: 1px;
+  }
+  a{
+  	text-decoration: none;
   }

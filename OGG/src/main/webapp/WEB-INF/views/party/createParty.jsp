@@ -17,9 +17,6 @@
 
 <script src="${ path }/js/party/ott_menu.js"></script>
 
-
-<!-- <div style="height: 100px;"></div> -->
-
     <!-- 모달 div -->
     <!-- 첫번째 모달 div -->
     <div class="modal" id="modalWindow" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
@@ -162,6 +159,10 @@
         </div>
     </section>
  
+
+
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+
 <script>
 $(document).ready(() => {
 	
@@ -202,8 +203,22 @@ $(document).ready(() => {
 					html += "<li>파티 기간에 따라 종료 시 최대 " + Math.round((item.plan_price * 0.04) * 12) + "원 추가 적립!</li>"                            
 	                html += "<li>⚠️ 원단위 절삭으로 5원 이내 차이가 있을 수 있어요.</li></ul></div>";
 				
-			    });		
-				
+			    });
+				/*
+				<p>
+					<a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+						Link with href
+					</a>
+					<button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+						Button with data-bs-target
+					</button>
+				</p>
+				<div class="collapse" id="collapseExample">
+					<div class="card card-body">
+						Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
+					</div>
+				</div>
+				*/
 				//document.getElementById('serviceText').innerHTML = obj[0].ott_name;
 				//document.getElementById('titleText').innerHTML = "꼭 '한국' " + obj[0].ott_name + " 계정을 사용해 주세요.";
 				//document.getElementById('infoText').innerHTML =  "🇰🇷 " + obj[0].ott_name + " 정책상 거주/이용중인 국가에 따라 재생 가능한 콘텐츠가 다르기 때문에 꼭 한국 넷플릭스 계정을 공유해 주셔야 해요.";
@@ -222,7 +237,11 @@ $(document).ready(() => {
 		document.querySelector('#modal_submit').disabled = true;
 	});
 	
-	$(document).on("click",".serviceName_gray", (e) =>{
+	$(document).on("click","#plan_select", (e) =>{
+		let classname = document.querySelectorAll(".serviceName_purple");
+		for(let i = 0; i < classname.length; i++){
+			classname[i].className = 'serviceName_gray';
+		}
 		
 		let ottNo = () => {
 			if($(e.target).find('input').val() != null) {
@@ -231,6 +250,7 @@ $(document).ready(() => {
 				return $(e.target).siblings('input').val();
 			}
 		};
+		
 		
 		$.ajax({
 			type: "POST",
@@ -250,7 +270,8 @@ $(document).ready(() => {
 			}
 		});
 		
-		document.querySelector('.serviceName_gray').className = "serviceName_purple";
+		$(e.target).closest('div').removeClass('serviceName_gray');
+		$(e.target).closest('div').addClass('serviceName_purple');
 		document.querySelector('#modal_next').disabled = false;
 	});
 	
@@ -266,6 +287,14 @@ $(document).ready(() => {
 		}
 	});
 });
+
+
+
+
+
+
+
+
 /*
 	let subToggle=true;
 	
@@ -282,4 +311,5 @@ $(document).ready(() => {
 				
 </script>
 
-<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+</body>
+</html>

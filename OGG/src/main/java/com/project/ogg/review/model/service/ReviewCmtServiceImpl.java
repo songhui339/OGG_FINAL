@@ -1,5 +1,7 @@
 package com.project.ogg.review.model.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,8 +16,8 @@ public class ReviewCmtServiceImpl implements ReviewCmtService {
 	private ReviewCmtMapper mapper;
 
 	@Override
-	public ReviewCmt getCmtByCmtNo(int cmtNo) {
-		return mapper.selectCmtByCmtNo(cmtNo);
+	public ReviewCmt getCmt(ReviewCmt cmt) {
+			return mapper.selectCmt(cmt);
 	}
 	
 	@Override
@@ -33,6 +35,17 @@ public class ReviewCmtServiceImpl implements ReviewCmtService {
 	@Override
 	@Transactional
 	public int cmtUpdate(ReviewCmt cmt) {
-		return mapper.updateCmt(cmt);
+		
+		if(cmt.getCmtDepth() == 0) {
+			return mapper.updateCmt(cmt);
+		}else {
+			return mapper.updateReCmt(cmt);
+		}
 	}
+
+	@Override
+	public List<ReviewCmt> getReCmt(ReviewCmt cmt) {
+		return mapper.selectReCmt(cmt);
+	}
+	
 }

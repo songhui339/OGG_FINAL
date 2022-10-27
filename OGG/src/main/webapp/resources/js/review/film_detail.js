@@ -5,12 +5,13 @@ $(document).ready(function() {
 	const type1 = "movie";
     const type2 = "tv";
 	let poster = 'https://image.tmdb.org/t/p/w500/';
+	let poster2 = 'https://image.tmdb.org/t/p/original/';
     // var title;
     var name;
 
-    ////////////
-    //필름 디테일//
-    ////////////
+    ////////////////////
+    //film_detail_info//
+    ////////////////////
     $.ajax({
         async: true, 
         url: url ,
@@ -18,76 +19,78 @@ $(document).ready(function() {
         timeout: 3000,
         dataType: "json", 
         success: function (result) { 
-        
-			let img = poster + result.poster_path;
-			
+            
+            // bg poster
+			let bgimg = poster2 + result.backdrop_path;
             let html = "";
-                html += "<img src='" + img + "' id='img_film3'>";
+                html += "#baback { background-image: url('";
+                html += bgimg + "'); ";
+                html += "background-size : cover; ";
+                html += "background-repeat : no-repeat; ";
+                html += "}";
 
-            $("#filmDetail0").append(html);
-        },
-        error: function (error) {
-            console.log('영화포스터 가져오기 통신 오류');
-        }
-    });
-    
-    $.ajax({
-        async: false, 
-        url: url ,
-        type: "GET",
-        timeout: 3000,
-        dataType: "json", 
-        success: function (result) { 
-        
-		    let orig_title = (ftype=='movie' ? result.original_title : result.original_name);
+            $("#hi").append(html);
+
+            // poster
+            let img = poster + result.poster_path;
+            let html2 = "";
+                html2 += "<img src='" + img + "' id='img_film3'>";
+
+            $("#filmDetail0").append(html2);
+
+            // info
+            let orig_title = (ftype=='movie' ? result.original_title : result.original_name);
 		    title = (ftype=='movie' ? result.title : result.name);
 		    let runtime = (ftype=='movie' ? result.runtime : result.episode_run_time);
-		    let date = (ftype=='movie' ? result.release_date : result.first_air_date);
+		    let date = (ftype=='movie' ? result.release_date.replace(/-/gi, ". ") : result.first_air_date.replace(/-/gi, ". "));
+		    // let date = (ftype=='movie' ? result.release_date.replace(/-/gi, ".").slice(0,-4) : result.first_air_date);
+		    // let date = (ftype=='movie' ? result.release_date : result.first_air_date);
 		    let vote_average = result.vote_average;
 		    let id = result.id;
+            let genres = [];
+            for(let i = 0; i < result.genres.length; i++){
+                genres[i] = result.genres[i].name;
+            }
+            let genre = genres.join(' ・ ');
+            
+            let html3 = "";
+                html3 += "<a href='" + contextpath + "/film/detail?fcode=" + id + "&ftype=" + type1 + "'>";
+                html3 += "<div class='row' style='font-size: 2em; font-weight: 700; margin-top: 35px; margin-bottom: 1px; margin-left: 1px;'>";
+                html3 += title;
+                html3 += "</div>";
+                html3 += "</a>";
+                html3 += "<div class='row' style='font-size: 0.9em; color: grey; margin-bottom: 15px; margin-left: 7px;'>";
+                // html3 += orig_title + "<br> 장르 ・ " + genre + " " + "<br> 개봉 ・ " + date + " <br> 러닝타임 ・ " + runtime +"분 " 
+                html3 += orig_title + " ・ " + genre + " " + "<br> 개봉 ・ " + date + " <br> 러닝타임 ・ " + runtime +"분 " 
+                html3 += "</div>";
 
-            let html = "";
-                html += "<a href='" + contextpath + "/film/detail?fcode=" + id + "&ftype=" + type1 + "'>";
-                html += "<div class='row' style='font-size: 2em; font-weight: 700; margin-top: 35px; margin-bottom: 1px; margin-left: 1px;'>";
-                html += title;
-                html += "</div>";
-                html += "</a>";
-                html += "<div class='row' style='font-size: 1em; color: grey; margin-bottom: 15px; margin-left: 1px;'>";
-                html += orig_title + " " + date + "<br>" + "평점 : " + vote_average 
-                html += "</div>";
+            $("#filmDetail1").append(html3);
 
-            $("#filmDetail1").append(html);
-        },
-        error: function (error) {
-            console.log('영화정보 가져오기 통신 오류');
-        }
-    })
-    
-    $.ajax({
-        async: true, 
-        url: url ,
-        type: "GET",
-        timeout: 3000,
-        dataType: "json", 
-        success: function (result) { 
-        
-		    let overview = result.overview;
+            // logline
+            let overview = result.overview;
+		    // let production_countries = result.production_countries[0].name;
+		    let belongs_to_collection = (result.belongs_to_collection == null ? " " : result.belongs_to_collection.name);
+		    let tagline = (result.tagline == null ? " " : result.tagline);
 		    
-            let html = "";
-                html += "<p id='detail-text1'>기본 정보</p>";
-                html += "<hr>";
-                html += "<br>";
-                html += "<p id='detail-text6'>";
-                html += overview;
-                html += "</p></p>";
+            let html4 = "";
+                html4 += "<p id='detail-text1'>기본 정보</p>";
+                html4 += "<hr>";
+                // html4 += "<br>";
+                html4 += "<p id='detail-text6'>";
+                html4 += belongs_to_collection + " ・ " + tagline;
+                html4 += "<p id='detail-text3'>";
+                html4 += overview;
+                html4 += "</p></p>";
                 
-            $("#filmDetail2").append(html);
+            $("#filmDetail2").append(html4);
+
         },
         error: function (error) {
-            alert("영화줄거리 가져오기 통신 오류")
+            console.log('영화 정보 가져오기 통신 오류');
         }
     });
-
+    
+    // find.dir
     $.ajax({
         url: "https://api.themoviedb.org/3/movie/" + fcode + "/credits?api_key=" + key + "&language=ko" ,
         async: false,
@@ -116,6 +119,7 @@ $(document).ready(function() {
     
     var dirname = $("#dir").val();
     
+    // from.dir
     $.ajax({
         async: true, 
 
@@ -160,10 +164,9 @@ $(document).ready(function() {
         }
     });
 
-    ////////////
-    /////키업////
-    ////////////
-    
+    //////////////
+    ////key_up////
+    //////////////
     $("#message-text").keyup(function(e) {
 	    var content = $(this).val();
 	    $("#textLengthCheck").text("(" + content.length + " / 2000)");
@@ -173,11 +176,27 @@ $(document).ready(function() {
 	        $('#textLengthCheck').text("(2000 / 2000");
 	    }
 	});
-
-    ////////////
-    /////리뷰////
-    ////////////
     
+    $("#message-text2").keyup(function(e) {
+	    var content = $(this).val();
+	    $("#textLengthCheck2").text("(" + content.length + " / 2000)");
+	    if (content.length > 2000) {
+	        alert("최대 2000자까지 입력 가능합니다.");
+	        $(this).val(content.substring(0, 2000));
+	        $('#textLengthCheck2').text("(2000 / 2000");
+	    }
+	});
+
+    ///////////////
+    /////review////
+    ///////////////
+    function convertbr(){
+        str = document.getElementById("message-text").value;
+        str = str.replace(/\r\n|\n/g,'<br>');
+        console.log(str);
+        document.getElementById('html5').value = str;
+    }
+
     $('#writeReview').on("click", function() {
         let rvContent = document.getElementById('message-text').value;
         
@@ -203,7 +222,7 @@ $(document).ready(function() {
     });
 
     $('#updateReview').on("click", function() {
-        let rvContent = document.getElementById('message-text').value;
+        let rvContent = document.getElementById('message-text2').value;
         let rvNo = document.getElementById('rvNo').value;
 
 		$.ajax({
@@ -252,138 +271,8 @@ $(document).ready(function() {
         }
     });
 
-    //////////////
-    //게시글 좋아요//
-    //////////////
-    // $.ajax({
-    //     async: true,
-    //     type : 'POST',
-    //     url : contextpath + '/review/get_likes',
-    //     data : {
-    //         'rvNo' : rvNo,
-    //         'fCode' : fcode,
-    //         'ftype' : ftype
-    //     },
-    //     success : (data) => {
-
-    //         console.log(data);
-
-    //         if(data.likes.rvNo != 0){
-    //             $('#reviewLikes').hide();
-    //             $('#reviewDisLikes').show();
-    //         }
-    //     },
-    //     error: function (error) {
-    //         console.log('좋아요 하지 않음');
-    //     }
-    // });
-
-    // $('#reviewLikes').on("click", function() {
-	// 	$.ajax({
-	// 		async: true,
-	// 		type : 'POST',
-	// 		url : contextpath + '/review/insert_likes',
-	// 		data : {
-	// 			'rvNo' : rvNo,
-	// 			'lType' : 'REVIEW',
-	// 			'fCode' : fcode,
-	// 			'ftype' : ftype
-	// 		},
-	// 		success : (data) => {
-	// 			let no = document.getElementById('rvLikes').innerHTML;
-	// 			no = Number(no) + 1;
-
-	// 			$('#reviewLikes').hide();
-	// 			$('#reviewDisLikes').show();
-	// 			$('#rvLikes').html(no);
-	// 		},
-	// 		error : (error) => {
-	// 			alert('로그인 후 가능합니다');
-	// 		}
-	// 	});
-	// });
-
-    // $('#reviewDisLikes').on("click", function() {
-	// 	$.ajax({
-	// 		async: true,
-	// 		type : 'POST',
-	// 		url : contextpath + '/review/delete_likes',
-	// 		data : {
-	// 			'rvNo' : rvNo,
-	// 			'lType' : 'REVIEW',
-	// 			'fCode' : fcode,
-	// 			'ftype' : ftype
-	// 		},
-	// 		success : (data) => {
-	// 			let no = document.getElementById('rvLikes').innerHTML;
-	// 			no = Number(no) - 1;
-				
-	// 			$('#reviewDisLikes').hide();
-	// 			$('#reviewLikes').show();
-	// 			$('#rvLikes').html(no);
-
-	// 			console.log('unlike it');
-	// 		},
-	// 		error : (error) => {
-	// 			alert('로그인 후 가능합니다');
-	// 		}
-	// 	});
-	// });
-
-    ////////////
-    /////댓글////
-    ////////////
-    $('#writeCmt').on("click", function() {
-        let cmtContent = document.getElementById('message-cmt').value;
-        let rvNo = document.getElementById('rvNo').value;
-
-		if(cmtContent.trim()==""){
-			alert("내용을 입력해주세요");
-        }else{
-            $.ajax({
-                async: true,
-                type : 'POST',
-                url : contextpath + '/review/cmt_write',
-                data : {
-                    'rvNo' : rvNo,
-                    'cmtContent' : cmtContent, 
-                    'fCode' : fcode,
-                    'ftype' : ftype
-                },
-                success : (data) => {
-                    let html = "<tr id='cmtlist'>";
-                        html += "<input id='cmtNo' type='hidden' value='"+ data.cmt.cmtNo +"'>";
-                        html += "<input id='cmtWriterNo' type='hidden' value='"+ data.cmt.cmtWriterNo +"'>";
-                        html += "<td id='board-text4'>" + data.cmt.cmtNickname + "</td>";
-                        html += "<td id='board-text5'>" + data.cmt.cmtContent + "</td>";
-                        html += "<td id='board-text7'>";
-                        html += "<div class='btn-group' role='group' aria-label='Basic mixed styles example'>";
-                        html += "<button class='btn btn-primary' type='button' onclick='showUpdateCmt(event)'>수정</button>";
-                        html += "<button class='btn btn-primary' type='button' onclick='deleteCmt(event)'>삭제</button>";
-                        html += "</div></td></tr>";
-                        html += "<tr id='cmtlist2' style='display: none;'>";
-                        html += "<td id='board-text4'>" + data.cmt.cmtNickname + "</td>";
-                        html += "<td id='board-text5-1'>";
-                        html += "<textarea id='message-cmt-2' style='border: 1px solid lightgrey; resize: none; width: 100%;'>${ reviewCmt.cmtContent }</textarea>";
-                        html += "</td><td id='board-text7-1'>";
-                        html += "<div class='btn-group' role='group' aria-label='Basic mixed styles example'>";
-                        html += "<button class='btn btn-primary' type='button' onclick='updateCmt(event)' >수정</button>";
-                        html += "<button class='btn btn-primary' type='button' onclick='updateCommentsCancel(event)'>취소</button>";
-                        html += "</div></td></tr>";
-
-                        $("#cmtTbody").append(html);
-                        $("#message-cmt").val('');
-                },
-                error : (error) => {
-                    alert('댓글 등록에 실패하였습니다');
-                }
-            });
-        }
+    $('#tolist').on("click", function() {
+        location.href = contextpath + "/film/review_list?fcode=" + fcode + "&ftype=" + ftype;
     });
-
-
-
-
-
 
 });

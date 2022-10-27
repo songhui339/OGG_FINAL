@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.project.ogg.main.model.mapper.MainMapper">
+
+	<resultMap type="Party" id="partyResultMap">
+		<id property="p_no" column="P_NO"/>
+		<result property="p_max_member" column="P_MAX_MEMBER"/>
+		<result property="p_cur_member" column="P_CUR_MEMBER"/>
+		<result property="p_comment" column="P_COMMENT"/>
+		<result property="p_status" column="P_STATUS"/>
+		<result property="ott_name" column="OTT_NAME"/>
+		<result property="ott_thumb" column="OTT_THUMB"/>
+		<result property="plan_name" column="PLAN_NAME"/>
+		<result property="p_entry_price_output" column="P_ENTRY_PRICE_OUTPUT"/>
+		<result property="p_end_date_output" column="P_END_DATE_OUTPUT"/>
+		<result property="p_period_day" column="P_PERIOD_DAY"/>
+	</resultMap>
+	
+	<resultMap type="Ott" id="ottResultMap">
+		<id property="ott_no" column="OTT_NO"/>
+		<result property="ott_name" column="OTT_NAME"/>
+		<result property="ott_thumb" column="OTT_THUMB"/>
+		<result property="ott_class" column="OTT_CLASS"/>
+		<result property="ott_max_member" column="OTT_MAX_MEMBER"/>
+		<result property="plan_price" column="PLAN_PRICE"/>
+		<result property="plan_price_output" column="PLAN_PRICE_OUTPUT"/>
+		<result property="ott_status" column="OTT_STATUS"/>
+		<result property="plan_name" column="PLAN_NAME"/>
+		<result property="plan_each_price" column="PLAN_EACH_PRICE"/>
+	</resultMap>
+	
+	
+	
+	<select id="getPartyList" resultMap="partyResultMap">
+		SELECT P.P_NO,
+		       P.P_MAX_MEMBER,
+		       P.P_CUR_MEMBER,
+		       P.P_PERIOD,
+		       P.P_END_DATE,
+		       P.P_COMMENT,
+		       TO_CHAR(P.P_ENTRY_PRICE,'999,999') AS P_ENTRY_PRICE_OUTPUT,
+		       TO_CHAR(P.P_END_DATE,'YYYY-MM-DD') AS P_END_DATE_OUTPUT,
+		       (TO_DATE(P.P_END_DATE) - TO_DATE(SYSDATE)) AS P_PERIOD_DAY,
+		       P.P_STATUS,
+		       O.OTT_NAME,
+		       O.OTT_THUMB,
+		       O.PLAN_NAME
+		FROM PARTY P
+		JOIN OTT_INFO O ON(P.OTT_NO = O.OTT_NO)
+		WHERE P_STATUS = 'Y' AND P.P_CUR_MEMBER != P.P_MAX_MEMBER
+		ORDER BY P.P_NO 
+	</select>
+
+</mapper>
