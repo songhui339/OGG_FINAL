@@ -66,7 +66,9 @@
 			 
 				<ul class="dropdown-menu" style="z-index: 80;">
 					<li><a class="dropdown-item hover_purple" href="${ path }/mypage/main">마이페이지</a></li>
-					<li><a class="dropdown-item hover_purple" href="${ path }/admin/home">관리페이지</a></li>
+					<security:authorize access="hasRole('ROLE_ADMIN')">
+						<li><a class="dropdown-item hover_purple" href="${ path }/admin/home">관리페이지</a></li>
+					</security:authorize>
 					<li><hr class="dropdown-divider"></li>
 					
 					<!-- 로그아웃 -->
