@@ -2,15 +2,15 @@ package com.project.ogg.community.model.service;
 
 import java.util.List;
 
-import com.project.ogg.common.model.CommonVO;
+import com.project.ogg.common.model.Common;
 import com.project.ogg.common.util.PageInfo;
 import com.project.ogg.community.model.vo.Community;
 
 public interface CommunityService {
 	
-	int getBoardCount(CommonVO vo);
+	int getBoardCount(Common common);
 
-	List<Community> getBoardList(PageInfo pageInfo, CommonVO vo);
+	List<Community> getBoardList(PageInfo pageInfo, Common common);
 
 	Community findCommunityByNo(int c_no);
 

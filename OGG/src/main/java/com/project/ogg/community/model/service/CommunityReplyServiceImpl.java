@@ -10,7 +10,7 @@ import com.project.ogg.community.model.vo.Community;
 import com.project.ogg.community.model.vo.CommunityReply;
 
 @Service
-public class CommunityReplyServiceImple implements CommunityReplyService {
+public class CommunityReplyServiceImpl implements CommunityReplyService {
 	
 	@Autowired
 	private CommunityReplyMapper mapper;

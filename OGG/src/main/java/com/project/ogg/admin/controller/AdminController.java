@@ -36,6 +36,7 @@ import com.project.ogg.admin.model.vo.OttAdmin;
 import com.project.ogg.admin.model.vo.OttForPie;
 import com.project.ogg.admin.model.vo.PhotoVo;
 import com.project.ogg.admin.model.vo.Question;
+import com.project.ogg.admin.model.vo.UsingOtt;
 import com.project.ogg.common.util.MultipartFileUtil;
 import com.project.ogg.common.util.MultipartFileUtil2;
 import com.project.ogg.common.util.PageInfo;
@@ -85,14 +86,25 @@ public class AdminController {
 	
 	@PostMapping("/admin/selectMember")
 	@ResponseBody
-	public MemberAD selectMember( @RequestParam("memberName") String membername, 
+	public MemberAD selectMember( @RequestParam("memberId") String memberId, 
 			ModelAndView model) {
 		MemberAD member = null;
-		member = service.selectMember(membername);
+		member = service.selectMember(memberId);
 		
 		model.addObject("member",member);
 		System.out.println(member);
 		return member;
+	}
+	
+	@PostMapping("/admin/selectOtt")
+	@ResponseBody
+	public List<UsingOtt> selectOtt( @RequestParam("mid") String memberId, 
+			ModelAndView model) {
+		List<UsingOtt> otts = service.selectOtt(memberId);
+		
+		model.addObject("otts",otts);
+		System.out.println(otts);
+		return otts;
 	}
 	
 	

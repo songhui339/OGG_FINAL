@@ -19,7 +19,7 @@
 	</resultMap>
 	
 	<!-- 게시글 목록 조회 -->
-	<select id="selectCommunityCount" resultType="_int" parameterType="com.project.ogg.common.model.CommonVO">
+	<select id="selectCommunityCount" resultType="_int" parameterType="com.project.ogg.common.model.Common">
 		SELECT COUNT(C_NO) FROM COMMUNITY WHERE C_STATUS='Y'
 		<if test='sValue != null and sValue != ""'>
 			<if test="sType == 'subject'">
@@ -31,7 +31,7 @@
 		</if>
 	</select>
 	
-	<select id="selectAll" resultMap="CommunityResultMap" parameterType="com.project.ogg.common.model.CommonVO">
+	<select id="selectAll" resultMap="CommunityResultMap" parameterType="com.project.ogg.common.model.Common">
 		SELECT C_WRITERNO,
 			   C_NO,
 			   C_TITLE,

@@ -7,7 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CommonVO {
+public class Common {
 	private String sType; // 검색 Type
 	private String sValue; // 검색 Value
 }
+
+
+

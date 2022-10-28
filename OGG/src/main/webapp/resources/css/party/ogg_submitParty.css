@@ -184,7 +184,7 @@ OGG Party Page CSS
 .submitParty_section .itemListWrap .itemBoxWrap {
     width: calc(100% + 26px);
     margin-top: -13px;
-    margin-left: -13px;
+    /* margin-left: -13px; */
     font-size: 0;
     position: relative;
     /* height: 1567.94px; */
@@ -280,7 +280,8 @@ OGG Party Page CSS
 
 .submitParty_section .bannerWrap .bannerBox {
     background-color: #ffffff;
-    width: calc(100% + 26px);
+    /* width: calc(100% + 26px); */
+   width : 50%;
     margin: 0 auto;
     border-radius: 20px;
     padding: 30px 0;

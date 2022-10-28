@@ -101,10 +101,10 @@
             <!-- Page 네비게이션 -->
             <div class="pageNav" id="pageBar">
                 <!-- 맨 처음으로 -->
-                <button class="btn arrowBtn" onclick="location.href='${path}/mypage/ask?page=1'">&lt;&lt;</button>
+                <button class="btn arrowBtn" onclick="location.href='${path}/mypage/notice?page=1'">&lt;&lt;</button>
     
                 <!-- 이전 페이지로 -->
-                <button class="btn arrowBtn" onclick="location.href='${path}/mypage/ask?page=${pageInfo.prevPage }'">&lt;</button>
+                <button class="btn arrowBtn" onclick="location.href='${path}/mypage/notice?page=${pageInfo.prevPage }'">&lt;</button>
     
                 <!--  10개 페이지 목록 -->
                 <c:forEach begin="${pageInfo.startPage }" end="${pageInfo.endPage }"
@@ -113,15 +113,15 @@
                     <button class="btn" disabled>${ status.current }</button>
                 </c:if>
                 <c:if test="${status.current != pageInfo.currentPage }">
-                    <button class="btn pageNoBtn" onclick="location.href='${path}/mypage/ask?page=${status.current }'">${status.current }</button>
+                    <button class="btn pageNoBtn" onclick="location.href='${path}/mypage/notice?page=${status.current }'">${status.current }</button>
                 </c:if>
                 </c:forEach>
     
                 <!-- 다음 페이지로 -->
-                <button class="btn arrowBtn" onclick="location.href='${path}/mypage/ask?page=${pageInfo.nextPage }'">&gt;</button>
+                <button class="btn arrowBtn" onclick="location.href='${path}/mypage/notice?page=${pageInfo.nextPage }'">&gt;</button>
     
                 <!-- 맨 끝으로 -->
-                <button class="btn arrowBtn" onclick="location.href='${path}/mypage/ask?page=${pageInfo.maxPage }'">&gt;&gt;</button>
+                <button class="btn arrowBtn" onclick="location.href='${path}/mypage/notice?page=${pageInfo.maxPage }'">&gt;&gt;</button>
             </div>
            </div>
            

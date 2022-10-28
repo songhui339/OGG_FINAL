@@ -14,6 +14,7 @@ import com.project.ogg.admin.model.vo.Notice;
 import com.project.ogg.admin.model.vo.OttAdmin;
 import com.project.ogg.admin.model.vo.OttForPie;
 import com.project.ogg.admin.model.vo.Question;
+import com.project.ogg.admin.model.vo.UsingOtt;
 import com.project.ogg.common.util.PageInfo;
 
 @Service
@@ -181,6 +182,11 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public List<OttForPie> getPieList() {
 		return mapper.getPieList();
+	}
+
+	@Override
+	public List<UsingOtt> selectOtt(String memberId) {
+		return mapper.selectOtt(memberId);
 	}
 
 	
