@@ -36,14 +36,22 @@ public class PartyController {
 	private PartyService service;
 	
 	@GetMapping("/ottlist_create")
-	public ModelAndView ottlist_create(ModelAndView model) {
+	public ModelAndView ottlist_create(ModelAndView model,
+			@AuthenticationPrincipal Member member) {
 		
-		List<Ott> list = null;
+		if(member != null) {
+			List<Ott> list = null;
+			
+			list = service.getOttList();
 		
-		list = service.getOttList();
-		
-		model.addObject("list", list);
-		model.setViewName("party/createParty");
+			model.addObject("list", list);
+			model.setViewName("party/createParty");	
+		} else {			
+			model.addObject("msg", "로그인 후 이용할 수 있습니다.");
+			model.addObject("location", "/");
+			model.setViewName("common/msg");
+		}
+	
 		
 		return model;
 	}
@@ -62,14 +70,25 @@ public class PartyController {
 	}
 	
 	@GetMapping("/findPartyList")
-	public ModelAndView findPartyList(ModelAndView model, @RequestParam String ottName) {
+	public ModelAndView findPartyList(ModelAndView model, @RequestParam String ottName,
+			@AuthenticationPrincipal Member member) {
 		
-		List<Party> list = null;
+		if(member != null) {
+			List<Party> list = null;
+			Party party = new Party();
+			party.setM_no(member.getM_no());
+			party.setOtt_name(ottName);
+			
+			list = service.getPartyList(party);
+			
+			model.addObject("list", list);
+			model.setViewName("party/submitParty_list");
+		} else {
+			model.addObject("msg", "로그인 후 이용할 수 있습니다.");
+			model.addObject("location", "/");
+			model.setViewName("common/msg");
+		}
 		
-		list = service.getPartyList(ottName);
-		
-		model.addObject("list", list);
-		model.setViewName("party/submitParty_list");
 		
 		return model;
 	}
@@ -115,7 +134,6 @@ public class PartyController {
 	
 	@PostMapping("/modalCheck")
 	public ModelAndView modalCheck(ModelAndView model, @RequestParam int modal_ott_no) {
-		System.out.println(modal_ott_no);
 		
 		Ott ott = null;
 		
@@ -141,10 +159,11 @@ public class PartyController {
 		result = service.insertPartyMemeber(party);
 		
 		if(result > 0) {
-			model.addObject("msg", "파티 등록을 성공하였습니다.");
 			model.setViewName("party/createPartyThxPage");			
 		} else {
 			model.addObject("msg", "파티 등록을 실패하였습니다.");
+			model.addObject("location", "/party/modalCheck");
+			model.setViewName("common/msg");
 		}
 		
 		return model;
@@ -184,7 +203,9 @@ public class PartyController {
 			service.insertPartyMemeber(party);
 			model.setViewName("party/submitPartyThxPage");			
 		} else {
-			model.addObject("msg", "파티 등록을 실패하였습니다.");		
+			model.addObject("msg", "파티 등록을 실패하였습니다.");	
+			model.addObject("location", "/party/partyDetail");
+			model.setViewName("common/msg");
 		}
 				
 		return model;
