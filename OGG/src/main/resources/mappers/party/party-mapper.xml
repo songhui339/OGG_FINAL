@@ -173,10 +173,36 @@
 		       O.OTT_THUMB,
 		       O.PLAN_NAME,
 		       O.PLAN_PRICE
-		FROM PARTY P
+		FROM MEMBER_PARTY MP
+		JOIN PARTY P ON(MP.P_NO = P.P_NO)
 		JOIN OTT_INFO O ON(P.OTT_NO = O.OTT_NO)
-		WHERE O.OTT_NAME=#{ottName} AND P.P_CUR_MEMBER != P.P_MAX_MEMBER
-		ORDER BY P.P_NO
+		WHERE O.OTT_NAME = #{ott_name} AND P.P_CUR_MEMBER != P.P_MAX_MEMBER
+		
+		MINUS
+		
+		SELECT P.P_NO,
+		       P.OTT_NO,
+		       P.P_SHARE_ID,
+		       P.P_SHARE_PWD,
+		       P.P_MAX_MEMBER,
+		       P.P_CUR_MEMBER,
+		       P.P_START_DATE,
+		       P.P_PERIOD,
+		       P.P_END_DATE,
+		       P.P_COMMENT,
+		       P.P_ENTRY_PRICE,
+		       TO_CHAR(P.P_ENTRY_PRICE,'999,999') AS P_ENTRY_PRICE_OUTPUT,
+		       TO_CHAR(P.P_END_DATE,'YYYY-MM-DD') AS P_END_DATE_OUTPUT,
+		       (TO_DATE(P.P_END_DATE) - TO_DATE(SYSDATE)) AS P_PERIOD_DAY,
+		       P.P_STATUS,
+		       O.OTT_NAME,
+		       O.OTT_THUMB,
+		       O.PLAN_NAME,
+		       O.PLAN_PRICE
+		FROM MEMBER_PARTY MP
+		JOIN PARTY P ON(MP.P_NO = P.P_NO)
+		JOIN OTT_INFO O ON(P.OTT_NO = O.OTT_NO)
+		WHERE MP.M_NO = #{m_no}
 	</select>
 	
 	<select id="selectParty" resultMap="partyResultMap">

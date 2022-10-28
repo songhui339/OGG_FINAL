@@ -87,7 +87,7 @@
                     <h3><span class="c_purple">파티 규칙</span> 확인</h3>
                     <div class="form-round-box">
                             <div class="ruleBox" style="margin-bottom: 20px;">
-                            <div style="display:none"><input type="checkbox" id="check1"></div>
+                            <div style="display:none"><input type="checkbox" id="check1" class="checkBoxs"></div>
                                 <p class="titleText"><i id="checkimg1" class="bi bi-check-lg checkIcon" style="color: #7e69fe;"></i> ${ ott.plan_name }의 로그인 정보를 정확하게 입력/관리하겠습니다.</p>
                                     <p id="id_output">- 아이디 : 
                                     <p id="pwd_output">- 비밀번호 : 
@@ -98,7 +98,7 @@
                             </div>
 
                             <div class="ruleBox">
-                            <div style="display:none"><input type="checkbox" id="check2"></div>
+                            <div style="display:none"><input type="checkbox" id="check2" class="checkBoxs"></div>
                                 <p class="titleText" id="date_text"><i id="checkimg2" class="bi bi-check-lg checkIcon" style="color: #7e69fe;"></i> 파티 기간은 0000-00-00 ~ 0000-00-00 약 0개월 입니다.</p>
                                 <p class="ruleText">
                                     파티 기간은 파티 시작 이후 변경할 수 없습니다. <br>
@@ -170,6 +170,8 @@
 		$('#p_max_member').change(() => {
 			document.querySelector('#p_entry_price').value = Math.floor($('#plan_price').val() / $('#p_max_member').val());
 		})
+		
+
 	});
 </script>
 

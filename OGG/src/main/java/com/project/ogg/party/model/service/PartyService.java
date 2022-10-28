@@ -22,7 +22,7 @@ public interface PartyService {
 
 	int partyCreate(Party party, int m_no);
 
-	List<Party> getPartyList(String ottName);
+	List<Party> getPartyList(Party party);
 
 	Party selectParty(int no);
 

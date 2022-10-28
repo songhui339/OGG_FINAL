@@ -27,7 +27,7 @@ public interface PartyMapper {
 
 	int insertParty(Party party);
 
-	List<Party> getPartyList(String ottName);
+	List<Party> getPartyList(Party party);
 
 	Party selectParty(int no);
 
