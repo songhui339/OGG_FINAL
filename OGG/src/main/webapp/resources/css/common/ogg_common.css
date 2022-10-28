@@ -3,6 +3,11 @@
 OGG Common CSS
 ====================================================
 */
+::selection {
+	background-color : #ffed99;
+	color : #7e69fe;
+}
+
 
 /* 모든 체크박스 체크 시 박스 배경 색 보라색으로 세팅 */
 input[type="checkbox"]:checked{
