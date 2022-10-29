@@ -75,7 +75,7 @@
                         <th scope="col">No</th>
                         <th scope="col">제목</th>
                         <th scope="col">작성 날짜</th>
-                        <th scope="col">조회수</th>
+                        <th scope="col">답변 여부</th>
                     </tr>
                 </thead>
 				<tbody class="partyitem">
