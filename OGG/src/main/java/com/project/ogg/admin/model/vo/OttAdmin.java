@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class OttAdmin {
 	private int ott_no;
+	private int ott_rnum;
 	
 	private String ott_name;
 	
